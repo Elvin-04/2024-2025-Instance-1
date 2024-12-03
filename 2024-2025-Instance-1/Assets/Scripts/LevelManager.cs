@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
 
     public void Retry()
     {
-
+        Debug.Log("Retry Level");
     }
 
     public void Win()
