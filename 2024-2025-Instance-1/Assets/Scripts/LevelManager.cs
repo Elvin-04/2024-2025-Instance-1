@@ -9,14 +9,17 @@ public class LevelManager : MonoBehaviour
 
     public int currentDeath = 0;
 
-    private void Awake()
+    private void Start()
     {
         if (_instance)
         {
             Destroy(gameObject);
             return;
         } 
+
         _instance = this;
+
+        EventManager.Instance.UpdateTimer.AddListener(UpdateTimer);
     }
 
     public void Retry()
@@ -39,7 +42,7 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public void UpdateTimer()
+    public void UpdateTimer(float currentTime)
     {
 
     }
