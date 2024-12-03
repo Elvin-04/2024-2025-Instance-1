@@ -14,7 +14,8 @@ public class EventManager : MonoBehaviour
     public static EventManager Instance {  get { return _instance; } }
 
     public UnityEvent<GameObject> AddRuneToInventory; // TODO Rune
-    public UnityEvent<Vector2> OnMove;
+    public UnityEvent<Vector2> OnMoveStarted;
+    public UnityEvent OnMoveCanceled;
     public UnityEvent OnInteract;
     public UnityEvent OnPause;
     public UnityEvent<float> UpdateTimer;
