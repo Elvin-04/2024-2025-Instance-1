@@ -1,7 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private TMP_Text _lifeText;
+    [SerializeField] private string _lifeTextFormat = "{0}";
+
     private void Start()
     {
         EventManager manager = EventManager.Instance;
@@ -20,7 +24,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLife(int currentLife)
     {
-        
+        _lifeText.text = string.Format(_lifeTextFormat, currentLife.ToString());
     }
 
     public void UpdateRune(GameObject rune)
