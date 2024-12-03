@@ -6,6 +6,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text _lifeText;
     [SerializeField] private string _lifeTextFormat = "{0}";
 
+
+    [SerializeField] private TMP_Text _runeText;
+    [SerializeField] private string _runeTextFormat = "Rune Name: {0}";
+
     private void Start()
     {
         EventManager manager = EventManager.Instance;
@@ -29,7 +33,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateRune(GameObject rune)
     {
-        
+        _runeText.text = string.Format(_runeTextFormat, rune.name);
     }
     
     public void UpdateDeath()
