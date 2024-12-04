@@ -13,16 +13,16 @@ public class EventManager : MonoBehaviour
     private static EventManager _instance;
     public static EventManager Instance {  get { return _instance; } }
 
-    public UnityEvent<GameObject> AddRuneToInventory; // TODO Rune
+    public UnityEvent<Rune> AddRuneToInventory;
     public UnityEvent<Vector2> OnMove;
     public UnityEvent OnInteract;
     public UnityEvent OnPause;
     public UnityEvent<float> UpdateTimer;
     public UnityEvent<int> UpdateLife;
-    public UnityEvent<GameObject> UpdateRune;
+    public UnityEvent<Rune> UpdateRune;
     public UnityEvent UpdateDeath;
     public UnityEvent OnDeath;
-    private void Start()
+    private void Awake()
     {
         if (_instance == null) 
         {
