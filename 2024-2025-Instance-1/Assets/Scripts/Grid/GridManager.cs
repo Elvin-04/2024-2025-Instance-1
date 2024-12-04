@@ -10,7 +10,7 @@ namespace Grid
         [SerializeField] private Tilemap _tilemap;
         public Cell[,] Cells { get; private set; }
 
-        private void Awake()
+        private void Start()
         {
             Cells = new Cell[_tilemap.size.x, _tilemap.size.y];
             
@@ -21,8 +21,12 @@ namespace Grid
                 for (int y = 0; y < _tilemap.size.y; y++)
                 {
                     Vector3Int tilePosition = new(x, y, 0);
-                    Debug.Log(_tilemap.);
-                    //Cells[x, y] = _tilemap.GetInstantiatedObject(tilePosition).GetComponent<Cell>();
+                    if (!_tilemap.HasTile(tilePosition))
+                        return;
+
+                    TileBase a = _tilemap.GetTile(tilePosition);
+                    Cell b = a as Cell;
+                    Debug.Log("New Cell :: " + b.ObjectOnCell.IsSolid );
                 }
             }
         }
