@@ -9,8 +9,9 @@ public class InputManager : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         Vector2 input = ctx.ReadValue<Vector2>();
-        if (ctx.started)
+        if (ctx.performed)
         {
+            //TODO: retirer la diagonale
             EventManager.Instance.OnMoveStarted?.Invoke(input);
         }
     
