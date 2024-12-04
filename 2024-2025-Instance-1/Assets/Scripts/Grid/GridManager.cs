@@ -26,8 +26,7 @@ namespace Grid
 
                     TileBase a = _tilemap.GetTile(tilePosition);
                     Cell b = a as Cell;
-                    Debug.Log("New Cell :: " + b.ObjectOnCell.IsUnbeatable );
-                    //Cells[x, y] = _tilemap.GetInstantiatedObject(tilePosition).GetComponent<Cell>();
+                    Debug.Log("New Cell :: " + b.ObjectOnCell.IsSolid );
                 }
             }
         }

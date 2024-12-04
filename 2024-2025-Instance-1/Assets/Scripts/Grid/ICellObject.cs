@@ -6,10 +6,6 @@ namespace Grid
     [Serializable]
     public class CellObject 
     {
-        public bool IsUnbeatable = false;
-        public CellObject()
-        {
-            Debug.Log("Si je m'affiche c'est bon");
-        }
+        public bool IsSolid = false;
     }
 }
