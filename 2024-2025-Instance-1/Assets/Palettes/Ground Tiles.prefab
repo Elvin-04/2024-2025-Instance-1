@@ -167,6 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5063585347600435231}
   - component: {fileID: 3409318348270508490}
+  - component: {fileID: 5201939748718334057}
   m_Layer: 0
   m_Name: Ground Tiles
   m_TagString: Untagged
@@ -202,6 +203,19 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &5201939748718334057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3591184844636346366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectOnCell: {fileID: 0}
 --- !u!114 &6558900838761500916
 MonoBehaviour:
   m_ObjectHideFlags: 0
