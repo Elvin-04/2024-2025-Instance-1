@@ -79,19 +79,19 @@ public static class Utils
         return (float) Math.Round((decimal) value / (decimal) multipleOf, MidpointRounding.AwayFromZero) * multipleOf;
     }
 
-    public static IEnumerable<WaitForSeconds> InvokeAfter(Action callback, float time)
+    public static IEnumerator<WaitForSeconds> InvokeAfter(Action callback, float time)
     {
         yield return new WaitForSeconds(time);
         callback();
     }
 
-    public static IEnumerable<WaitForSecondsRealtime> InvokeAfterUnscaled(Action callback, float time)
+    public static IEnumerator<WaitForSecondsRealtime> InvokeAfterUnscaled(Action callback, float time)
     {
         yield return new WaitForSecondsRealtime(time);
         callback();
     }
 
-    public static IEnumerable<WaitForEndOfFrame> InvokeAfterFrame(Action callback)
+    public static IEnumerator<WaitForEndOfFrame> InvokeAfterFrame(Action callback)
     {
         yield return new WaitForEndOfFrame();
         callback();
