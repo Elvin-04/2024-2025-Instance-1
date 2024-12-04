@@ -34,7 +34,7 @@ public static class Utils
         return list[new random().Next(list.Count)];
     }
 
-    public static IEnumerable<float> Range(float start, float stop, float step)
+    public static IEnumerator<float> Range(float start, float stop, float step)
     {
         float x = start;
 
@@ -47,12 +47,12 @@ public static class Utils
         }
     }
 
-    public static IEnumerable<float> Range(float start, float stop)
+    public static IEnumerator<float> Range(float start, float stop)
     {
         return Range(start, stop, 1);
     }
 
-    public static IEnumerable<float> Range(float stop)
+    public static IEnumerator<float> Range(float stop)
     {
         return Range(0, stop, 1);
     }
@@ -79,19 +79,19 @@ public static class Utils
         return (float) Math.Round((decimal) value / (decimal) multipleOf, MidpointRounding.AwayFromZero) * multipleOf;
     }
 
-    public static IEnumerable<WaitForSeconds> InvokeAfter(Action callback, float time)
+    public static IEnumerator<WaitForSeconds> InvokeAfter(Action callback, float time)
     {
         yield return new WaitForSeconds(time);
         callback();
     }
 
-    public static IEnumerable<WaitForSecondsRealtime> InvokeAfterUnscaled(Action callback, float time)
+    public static IEnumerator<WaitForSecondsRealtime> InvokeAfterUnscaled(Action callback, float time)
     {
         yield return new WaitForSecondsRealtime(time);
         callback();
     }
 
-    public static IEnumerable<WaitForEndOfFrame> InvokeAfterFrame(Action callback)
+    public static IEnumerator<WaitForEndOfFrame> InvokeAfterFrame(Action callback)
     {
         yield return new WaitForEndOfFrame();
         callback();
