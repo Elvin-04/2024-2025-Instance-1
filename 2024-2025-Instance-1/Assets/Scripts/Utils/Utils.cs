@@ -34,7 +34,7 @@ public static class Utils
         return list[new random().Next(list.Count)];
     }
 
-    public static IEnumerator<float> Range(float start, float stop, float step)
+    public static IEnumerable<float> Range(float start, float stop, float step)
     {
         float x = start;
 
@@ -47,12 +47,12 @@ public static class Utils
         }
     }
 
-    public static IEnumerator<float> Range(float start, float stop)
+    public static IEnumerable<float> Range(float start, float stop)
     {
         return Range(start, stop, 1);
     }
 
-    public static IEnumerator<float> Range(float stop)
+    public static IEnumerable<float> Range(float stop)
     {
         return Range(0, stop, 1);
     }
