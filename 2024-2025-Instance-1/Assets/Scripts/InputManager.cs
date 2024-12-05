@@ -1,76 +1,69 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-        //Actions
-        //Move
-        private Action<Vector3> _onMovePerformed;
-        private Action<Vector3> _onMoveCanceled;
-        
-        //Interactions
-        private Action _onInteractPerformed;
-        private Action _onInteractCanceled;
-        
-        //Retry
-        private Action _onRetryPerformed;
-        private Action _onRetryCanceled;
-        
-        //Pause
-        private Action _onPausePerformed;
-        private Action _onPauseCanceled;
-
-        public void OnMove(InputAction.CallbackContext ctx)
+    public void OnMove(InputAction.CallbackContext ctx)
+    {
+        Vector2 input = ctx.ReadValue<Vector2>();
+        if (ctx.performed)
         {
-            Vector2 input = ctx.ReadValue<Vector2>();
-            if (ctx.performed)
+            if (input.x != 0 && input.y != 0)
             {
-                _onMovePerformed?.Invoke(input);
+                if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+                {
+                    input.y = 0;
+                }
+                else
+                {
+                    input.x = 0;
+                }
             }
+            EventManager.Instance.OnMoveStarted?.Invoke(input);
+        }
     
-            if (ctx.canceled)
-            {
-                _onMoveCanceled?.Invoke(Vector3.zero);
-            }
+        if (ctx.canceled)
+        {
+            EventManager.Instance.OnMoveCanceled?.Invoke();
         }
+    }
         
-        public void OnInteract(InputAction.CallbackContext ctx)
+    public void OnInteract(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
         {
-            if (ctx.performed)
-            {
-                _onInteractPerformed?.Invoke();
-            }
-
-            if (ctx.canceled)
-            {
-                _onInteractCanceled?.Invoke();
-            }
+            EventManager.Instance.OnInteract.Invoke();
         }
 
-        public void OnRetry(InputAction.CallbackContext ctx)
+        if (ctx.canceled)
         {
-            if (ctx.performed)
-            {
-                _onRetryPerformed?.Invoke();
-            }
+            //_onInteractCanceled?.Invoke();
+        }
+    }
 
-            if (ctx.canceled)
-            {
-                _onRetryCanceled?.Invoke();
-            }
+    public void OnRetry(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+                
         }
 
-        public void OnPause(InputAction.CallbackContext ctx)
+        if (ctx.canceled)
         {
-            if (ctx.performed)
-            {
-                _onPausePerformed?.Invoke();
-            }
-
-            if (ctx.canceled)
-            {
-                _onPauseCanceled?.Invoke();
-            }
+            //_onRetryCanceled?.Invoke();
         }
+    }
+
+    public void OnPause(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            EventManager.Instance.OnPause.Invoke();
+        }
+
+        if (ctx.canceled)
+        {
+            //_onPauseCanceled?.Invoke();
+        }
+    }
 }
