@@ -13,7 +13,7 @@ namespace Player
 
         //Properties
         [SerializeField] private GridManager _gridManager;
-        [SerializeField] private float _speed;
+        [SerializeField] private float _movementTime;
         private Vector2 _moveDirection;
         private bool _canMove;
         private bool _reachedTargetCell = true;
@@ -121,9 +121,11 @@ namespace Player
         
             _transform.DOMove(
                 position,
-                1 / _speed).SetEase(Ease.Linear).OnComplete(() => 
+                _movementTime).SetEase(Ease.Linear).OnComplete(() => 
                 { 
                     _reachedTargetCell = true;
+                    GetInteractableFrontOfMe(_moveDirection);
+
                     CheckInteraction(_moveDirection);
                 });
         }
