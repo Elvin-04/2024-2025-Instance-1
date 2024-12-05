@@ -10,25 +10,26 @@ using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
-    private static EventManager _instance;
-    public static EventManager Instance {  get { return _instance; } }
+    public static EventManager Instance { get; private set; }
+    public UnityEvent<GameObject> AddRuneToInventory { get; private set; } // TODO Rune
+    public UnityEvent<Vector2> OnMoveStarted  { get; private set; }
+    public UnityEvent OnMoveCanceled { get; private set; }
+    public UnityEvent OnInteract { get; private set; }
+    public UnityEvent OnPause { get; private set; }
 
-    public UnityEvent<GameObject> AddRuneToInventory; // TODO Rune
-    public UnityEvent<Vector2> OnMoveStarted;
-    public UnityEvent OnMoveCanceled;
-    public UnityEvent OnInteract;
-    public UnityEvent OnPause;
+    public UnityEvent<int> UpdateLife { get; private set; }
+    public UnityEvent<GameObject> UpdateRune { get; private set; }
+    public UnityEvent UpdateDeath { get; private set; }
+    public UnityEvent OnDeath { get; private set; }
+    public UnityEvent UpdateClock { get; private set; }
+    public UnityEvent OnClockUpdated { get; private set; }
 
-    public UnityEvent<int> UpdateLife;
-    public UnityEvent<GameObject> UpdateRune;
-    public UnityEvent UpdateDeath;
-    public UnityEvent OnDeath;
 
-    private void Start()
+    private void Awake()
     {
-        if (_instance == null) 
+        if (Instance == null) 
         {
-            _instance = this;
+            Instance = this;
             return;
         }
         Destroy(this);
