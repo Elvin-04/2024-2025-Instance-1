@@ -16,6 +16,7 @@ namespace Player
         private Vector2 _moveDirection;
         private bool _canMove;
         private bool _reachedTargetCell = true;
+        private IInteractable _interactable;
         public PlayerDirection CurrentDirection { get; private set; }
 
 
@@ -32,6 +33,7 @@ namespace Player
         {
             EventManager.Instance.OnMoveStarted?.AddListener(StartMove);
             EventManager.Instance.OnMoveCanceled?.AddListener(StopMove);
+            EventManager.Instance.OnInteract?.AddListener(Interact);
         }
 
         private void Update()
@@ -57,23 +59,17 @@ namespace Player
             _moveDirection = direction;
         }
 
+        private void GetInteractableFrontOfMe(Vector3 dir)
+        {
+            Vector3 nextPos = _transform.position + dir;
+            _interactable = _gridManager.GetCell(nextPos).ObjectOnCell as IInteractable;
+            Debug.Log(_interactable);
+        }
+
         private void Move()
         {
             Vector3 nextPos = _transform.position + (Vector3)_moveDirection;
             Cell nextCell = _gridManager.GetCell(nextPos);
-            if (nextCell == null)
-            {
-                StopMove();
-                return;
-            }
-        
-            CellObjectBase nextCellObject = nextCell.ObjectOnCell;
-        
-            if (nextCellObject is Wall)
-            {
-                StopMove();
-                return;
-            }
             
             CurrentDirection = _moveDirection.x switch
             {
@@ -86,14 +82,36 @@ namespace Player
                     _ => CurrentDirection
                 }
             };
+            
+            if (nextCell == null)
+            {
+                StopMove();
+                return;
+            }
+        
+            CellObjectBase nextCellObject = nextCell.ObjectOnCell;
+        
+            if (nextCellObject is ICollisionObject)
+            {
+                StopMove();
+                GetInteractableFrontOfMe(_moveDirection);
+                return;
+            }
+            
+            
         
             _reachedTargetCell = false;
+            EventManager.Instance.UpdateClock?.Invoke();
         
             Vector3 position = _gridManager.GetTilePosition(nextPos);
         
             _transform.DOMove(
                 position,
-                1 / _speed).SetEase(Ease.Linear).OnComplete(() => { _reachedTargetCell = true; });
+                1 / _speed).SetEase(Ease.Linear).OnComplete(() => 
+                { 
+                    _reachedTargetCell = true;
+                    GetInteractableFrontOfMe(_moveDirection);
+                });
         }
 
         private void StopMove()
@@ -103,6 +121,8 @@ namespace Player
 
         private void Interact()
         {
+            if(_interactable==null) return;
+            _interactable.Interact();
         }
 
 

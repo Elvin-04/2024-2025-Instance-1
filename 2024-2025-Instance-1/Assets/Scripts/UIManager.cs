@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void UpdateRune(GameObject rune)
+    public void UpdateRune(Rune rune)
     {
         _runeText.text = string.Format(_runeTextFormat, rune.name);
     }
