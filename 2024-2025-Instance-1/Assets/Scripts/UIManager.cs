@@ -9,10 +9,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private string _runeTextFormat = "Rune Name: {0}";
 
     [Space]
-    [SerializeField] private TMP_Text _timeText;
-    [SerializeField] private string _timeTextFormat = @"mm\:ss\:ms";
-
-    [Space]
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _losePanel;
 
@@ -21,7 +17,6 @@ public class UIManager : MonoBehaviour
         EventManager manager = EventManager.Instance;
 
         manager.OnPause.AddListener(Pause);
-        manager.UpdateTimer.AddListener(UpdateTimer);
         manager.UpdateRune.AddListener(UpdateRune);
         manager.UpdateDeath.AddListener(UpdateDeath);
     }
@@ -40,13 +35,6 @@ public class UIManager : MonoBehaviour
     {
         
     }
-
-    public void UpdateTimer(float currentTime)
-    {
-        _timeText.text = TimeSpan.FromMilliseconds(currentTime).ToString(_timeTextFormat);
-    }
-
-
 
 
 
