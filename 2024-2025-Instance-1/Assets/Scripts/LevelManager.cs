@@ -18,8 +18,6 @@ public class LevelManager : MonoBehaviour
         } 
 
         _instance = this;
-
-        EventManager.Instance.UpdateTimer.AddListener(UpdateTimer);
     }
 
     public void Retry()
@@ -37,11 +35,6 @@ public class LevelManager : MonoBehaviour
     public void Lose()
     {
         onLose.Invoke();
-    }
-
-    public void UpdateTimer(float currentTime)
-    {
-
     }
 
     public void OnDeath()
