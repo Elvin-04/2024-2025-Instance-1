@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Grid;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -59,11 +60,24 @@ namespace Player
             _moveDirection = direction;
         }
 
+        private void CheckInteraction(Vector3 dir)
+        {
+            GetInteractableFrontOfMe(dir);
+            GetInteractableUnderMe();
+        }
+
+        private void GetInteractableUnderMe()
+        {
+            _interactable = _gridManager.GetCell(_transform.position).ObjectOnCell as IInteractable;
+            _interactable?.Interact();
+            Debug.Log(_interactable);
+        }
+
         private void GetInteractableFrontOfMe(Vector3 dir)
         {
             Vector3 nextPos = _transform.position + dir;
-            _interactable = _gridManager.GetCell(nextPos).ObjectOnCell as IInteractable;
-            Debug.Log(_interactable);
+            _interactable = _gridManager.GetCell(nextPos).ObjectOnCell as IInteractableCallable;
+            EventManager.Instance.CanInteract.Invoke(_interactable != null);
         }
 
         private void Move()
@@ -94,7 +108,7 @@ namespace Player
             if (nextCellObject is ICollisionObject)
             {
                 StopMove();
-                GetInteractableFrontOfMe(_moveDirection);
+                CheckInteraction(_moveDirection);
                 return;
             }
             
@@ -112,7 +126,7 @@ namespace Player
                     _reachedTargetCell = true;
                     GetInteractableFrontOfMe(_moveDirection);
 
-                    EventManager.Instance.OnClockTickEnds?.Invoke();
+                    CheckInteraction(_moveDirection);
                 });
         }
 

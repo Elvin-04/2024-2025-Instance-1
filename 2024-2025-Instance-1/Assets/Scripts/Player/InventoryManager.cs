@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    private Rune currentRune;
+    private Rune _currentRune;
 
     private void Start()
     {
@@ -11,8 +11,8 @@ public class InventoryManager : MonoBehaviour
     }
     public void TakeRune(Rune rune)
     {
-        if (currentRune == rune || rune == null)
+        if (_currentRune == rune || rune == null)
             return;
-        currentRune = rune;
+        _currentRune = rune;
     }
 }
