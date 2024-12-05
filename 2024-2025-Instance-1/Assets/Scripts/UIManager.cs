@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [Space]
     [SerializeField] private GameObject _winPanel;
 
+    [SerializeField] private GameObject _popUpInteractible;
+
     private void Start()
     {
         EventManager manager = EventManager.Instance;
@@ -18,6 +20,12 @@ public class UIManager : MonoBehaviour
         manager.OnPause.AddListener(Pause);
         manager.UpdateRune.AddListener(UpdateRune);
         manager.UpdateDeath.AddListener(UpdateDeath);
+        manager.CanInteract.AddListener(PopUpInteract);
+    }
+
+    private void PopUpInteract(bool canInteract)
+    {
+        _popUpInteractible.SetActive(canInteract);
     }
 
     public void Pause()

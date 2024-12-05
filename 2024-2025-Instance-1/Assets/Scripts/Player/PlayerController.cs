@@ -63,6 +63,7 @@ namespace Player
         {
             Vector3 nextPos = _transform.position + dir;
             _interactable = _gridManager.GetCell(nextPos).ObjectOnCell as IInteractable;
+            EventManager.Instance.CanInteract.Invoke(_interactable != null);
             Debug.Log(_interactable);
         }
 
