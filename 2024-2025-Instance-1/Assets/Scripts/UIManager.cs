@@ -25,7 +25,8 @@ public class UIManager : MonoBehaviour
 
     private void PopUpInteract(bool canInteract)
     {
-        _popUpInteractible.SetActive(canInteract);
+        if (_popUpInteractible)
+            _popUpInteractible.SetActive(canInteract);
     }
 
     public void Pause()

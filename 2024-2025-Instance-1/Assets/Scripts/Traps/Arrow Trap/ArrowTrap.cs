@@ -56,10 +56,7 @@ public class ArrowTrap : MonoBehaviour
         arrowTransform.rotation = Quaternion.Euler(0, 0, (int) _direction * 90);
 
         Arrow arrow = arrowObject.GetComponent<Arrow>();
-        arrow.trap = this;
         arrow.gridManager = _gridManager;
         arrow.direction = arrowTransform.rotation * Vector2.up;
-
-        // _arrows.Add(arrow);
     }
 }

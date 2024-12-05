@@ -5,7 +5,6 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     [HideInInspector] public Vector2 direction;
-    [HideInInspector] public ArrowTrap trap;
     [HideInInspector] public GridManager gridManager;
 
     private Transform _transform;
@@ -20,9 +19,6 @@ public class Arrow : MonoBehaviour
     public void UpdateClock()
     {
         Cell nextCell = gridManager.GetCell(_transform.position + (Vector3) direction);
-
-        // Vector3 trapCellPos = gridManager.WorldToCell(trap.transform.position);
-
 
         if (nextCell.objectOnCell is Wall)
         {
