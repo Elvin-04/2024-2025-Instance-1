@@ -6,7 +6,9 @@ public class LevelManager : MonoBehaviour
 {
     private static LevelManager _instance;
 
-    public UnityEvent onWin;
+    [field: SerializeField] public Transform spawnPoint { get; private set; }
+
+    public UnityEvent onWin { get; private set; }
 
     private void Start()
     {
@@ -29,10 +31,5 @@ public class LevelManager : MonoBehaviour
     public void Win()
     {
         onWin.Invoke();
-    }
-
-    public void OnDeath()
-    {
-
     }
 }

@@ -10,19 +10,18 @@ namespace Player
         private Transform _transform;
 
         //Properties
-        [SerializeField] private GridManager _gridManager;
+        private GridManager _gridManager;
         [SerializeField] private float _speed;
         private Vector2 _moveDirection;
         private bool _canMove;
         private bool _reachedTargetCell = true;
         private IInteractable _interactable;
-        public PlayerDirection CurrentDirection { get; private set; }
+        public PlayerDirection currentDirection { get; private set; }
+        private Tween _currentMoveAnim;
 
         private void Awake()
         {
             _transform = transform;
-            Vector3 position = _gridManager.GetTilePosition(_transform.position);
-            _transform.position = position;
         }
 
         private void Start()
@@ -37,6 +36,19 @@ namespace Player
             TryMove();
         }
 
+        //Has to be called when new player is spawned
+        public void SetGridManager(GridManager gridManager)
+        {
+            _gridManager = gridManager;
+        }
+
+        public void StopMoveAnim()
+        {
+            _currentMoveAnim?.Kill();
+            _reachedTargetCell = true;
+            GetInteractableFrontOfMe(_moveDirection);
+        }
+
         private void TryMove()
         {
             if (!_canMove || !_reachedTargetCell)
@@ -49,8 +61,6 @@ namespace Player
 
         private void StartMove(Vector2 direction)
         {
-            
-            
             _canMove = true;
             _moveDirection = direction;
         }
@@ -58,8 +68,11 @@ namespace Player
         private void GetInteractableFrontOfMe(Vector3 dir)
         {
             Vector3 nextPos = _transform.position + dir;
-            _interactable = _gridManager.GetCell(nextPos).ObjectOnCell as IInteractable;
-            Debug.Log(_interactable);
+            Cell nextCell = _gridManager.GetCell(nextPos);
+            if (nextCell != null)
+            {
+                _interactable = nextCell.objectOnCell as IInteractable;
+            }
         }
 
         private void Move()
@@ -67,7 +80,7 @@ namespace Player
             Vector3 nextPos = _transform.position + (Vector3)_moveDirection;
             Cell nextCell = _gridManager.GetCell(nextPos);
             
-            CurrentDirection = _moveDirection.x switch
+            currentDirection = _moveDirection.x switch
             {
                 > 0 => PlayerDirection.Right,
                 < 0 => PlayerDirection.Left,
@@ -75,7 +88,7 @@ namespace Player
                 {
                     > 0 => PlayerDirection.Up,
                     < 0 => PlayerDirection.Down,
-                    _ => CurrentDirection
+                    _ => currentDirection
                 }
             };
             
@@ -85,7 +98,7 @@ namespace Player
                 return;
             }
         
-            CellObjectBase nextCellObject = nextCell.ObjectOnCell;
+            CellObjectBase nextCellObject = nextCell.objectOnCell;
         
             if (nextCellObject is ICollisionObject)
             {
@@ -101,7 +114,7 @@ namespace Player
         
             Vector3 position = _gridManager.GetTilePosition(nextPos);
         
-            _transform.DOMove(
+            _currentMoveAnim = _transform.DOMove(
                 position,
                 1 / _speed).SetEase(Ease.Linear).OnComplete(() => 
                 { 

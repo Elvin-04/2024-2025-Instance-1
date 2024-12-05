@@ -1,18 +1,21 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+namespace Player
 {
-    private Rune currentRune;
+    public class InventoryManager : MonoBehaviour
+    {
+        public Rune currentRune { get; private set; }
 
-    private void Start()
-    {
-        EventManager.Instance.AddRuneToInventory.AddListener(TakeRune);
-    }
-    public void TakeRune(Rune rune)
-    {
-        if (currentRune == rune || rune == null)
-            return;
-        currentRune = rune;
+        private void Start()
+        {
+            EventManager.Instance.AddRuneToInventory.AddListener(TakeRune);
+        }
+    
+        public void TakeRune(Rune rune)
+        {
+            if (currentRune == rune || rune == null)
+                return;
+            currentRune = rune;
+        }
     }
 }

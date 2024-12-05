@@ -11,7 +11,7 @@ namespace Grid
         private void Start()
         {
             Cells = new Cell[_tilemap.size.x, _tilemap.size.y];
-            
+
             Debug.Log("size : " + _tilemap.size);
 
             for (int x = 0; x < _tilemap.size.x; x++)
@@ -23,10 +23,21 @@ namespace Grid
             }
         }
 
+        public Vector3Int WorldToCell(Vector3 position)
+        {
+            return _tilemap.WorldToCell(position);
+        }
+
         public Cell GetCell(Vector3 position)
         {
             return GetCell(_tilemap.WorldToCell(position));
         }
+
+        public void SetTile(Vector3Int position, TileBase tile)
+        {
+            _tilemap.SetTile(position, tile);
+        }
+
 
         public Vector3 GetTilePosition(Vector3 position)
         {
@@ -35,7 +46,6 @@ namespace Grid
 
         public Cell GetCell(Vector3Int position)
         {
-            
             if (!_tilemap.HasTile(position))
                 return null;
 
@@ -43,5 +53,5 @@ namespace Grid
             Cell cell = tile as Cell;
             return cell;
         }
-    } 
+    }
 }

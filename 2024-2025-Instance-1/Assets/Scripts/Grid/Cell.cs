@@ -7,7 +7,11 @@ namespace Grid
 {
     public class Cell : Tile
     {
-        [field:SerializeField] public CellObjectBase ObjectOnCell { get; private set; }
+        [field:SerializeField] public CellObjectBase objectOnCell { get; private set; }
+        public void SetObjectOnCell(CellObjectBase objectOnCell)
+        {
+            this.objectOnCell = objectOnCell;
+        }
     }
 }
 

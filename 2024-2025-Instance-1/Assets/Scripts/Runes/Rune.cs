@@ -15,6 +15,5 @@ public abstract class Rune : CellObjectBase, IInteractable, ICollisionObject
     public void Interact()
     {
         EventManager.Instance.AddRuneToInventory.Invoke(this);
-
     }
 }
