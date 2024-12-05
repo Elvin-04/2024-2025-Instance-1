@@ -41,7 +41,9 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void UpdateTimer(float currentTime)
+
+
+    public void Win()
     {
         _timeText.text = TimeSpan.FromMilliseconds(currentTime).ToString(_timeTextFormat);
     }

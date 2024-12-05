@@ -18,11 +18,12 @@ public class EventManager : MonoBehaviour
     public UnityEvent OnMoveCanceled;
     public UnityEvent OnInteract;
     public UnityEvent OnPause;
-    public UnityEvent<float> UpdateTimer;
+
     public UnityEvent<int> UpdateLife;
     public UnityEvent<GameObject> UpdateRune;
     public UnityEvent UpdateDeath;
     public UnityEvent OnDeath;
+
     private void Start()
     {
         if (_instance == null) 
