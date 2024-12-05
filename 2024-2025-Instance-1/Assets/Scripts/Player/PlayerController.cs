@@ -12,7 +12,7 @@ namespace Player
         private Transform _transform;
 
         //Properties
-        [SerializeField] private GridManager _gridManager;
+        private GridManager _gridManager;
         [SerializeField] private float _movementTime;
 
         private Vector2 _moveDirection;
