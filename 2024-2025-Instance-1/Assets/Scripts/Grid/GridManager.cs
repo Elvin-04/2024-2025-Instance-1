@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -21,14 +19,29 @@ namespace Grid
                 for (int y = 0; y < _tilemap.size.y; y++)
                 {
                     Vector3Int tilePosition = new(x, y, 0);
-                    if (!_tilemap.HasTile(tilePosition))
-                        return;
-
-                    TileBase a = _tilemap.GetTile(tilePosition);
-                    Cell b = a as Cell;
-                    Debug.Log("New Cell :: " + b.ObjectOnCell.IsSolid );
                 }
             }
+        }
+
+        public Cell GetCell(Vector3 position)
+        {
+            return GetCell(_tilemap.WorldToCell(position));
+        }
+
+        public Vector3 GetTilePosition(Vector3 position)
+        {
+            return _tilemap.GetCellCenterWorld(_tilemap.WorldToCell(position));
+        }
+
+        public Cell GetCell(Vector3Int position)
+        {
+            
+            if (!_tilemap.HasTile(position))
+                return null;
+
+            TileBase tile = _tilemap.GetTile(position);
+            Cell cell = tile as Cell;
+            return cell;
         }
     } 
 }

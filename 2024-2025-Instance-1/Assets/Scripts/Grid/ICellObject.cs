@@ -3,9 +3,7 @@ using UnityEngine;
 
 namespace Grid
 {
-    [Serializable]
-    public class CellObject 
+    public interface ICellObject 
     {
-        public bool IsSolid = false;
     }
 }

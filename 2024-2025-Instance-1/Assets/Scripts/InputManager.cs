@@ -1,15 +1,12 @@
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 public class InputManager : MonoBehaviour
 {
     public void OnMove(InputAction.CallbackContext ctx)
     {
         Vector2 input = ctx.ReadValue<Vector2>();
-        if (ctx.started)
+        if (ctx.performed)
         {
             if (input.x != 0 && input.y != 0)
             {

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
-  m_Name: NewCell
+  m_Name: GroundCell
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: ac608d42f04bf534e8cfa90f769c87e8, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 2165207380547012588, guid: 5af90ce062b185548a8914ae03dbd2b3, type: 3}
   m_Flags: 1
   m_ColliderType: 1
-  _objectOnCell: {fileID: 0}
+  <ObjectOnCell>k__BackingField: {fileID: 0}

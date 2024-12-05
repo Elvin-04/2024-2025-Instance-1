@@ -6,6 +6,7 @@ namespace Grid
     [Serializable]
     public abstract class CellObjectBase : MonoBehaviour, ICellObject
     {
+        
     }
 
     
