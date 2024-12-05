@@ -57,6 +57,19 @@ namespace Player
         {
             Vector3 nextPos = _transform.position + (Vector3)_moveDirection;
             Cell nextCell = _gridManager.GetCell(nextPos);
+            
+            CurrentDirection = _moveDirection.x switch
+            {
+                > 0 => PlayerDirection.Right,
+                < 0 => PlayerDirection.Left,
+                _ => _moveDirection.y switch
+                {
+                    > 0 => PlayerDirection.Up,
+                    < 0 => PlayerDirection.Down,
+                    _ => CurrentDirection
+                }
+            };
+            
             if (nextCell == null)
             {
                 StopMove();
@@ -71,19 +84,10 @@ namespace Player
                 return;
             }
             
-            CurrentDirection = _moveDirection.x switch
-            {
-                > 0 => PlayerDirection.Right,
-                < 0 => PlayerDirection.Left,
-                _ => _moveDirection.y switch
-                {
-                    > 0 => PlayerDirection.Up,
-                    < 0 => PlayerDirection.Down,
-                    _ => CurrentDirection
-                }
-            };
+            
         
             _reachedTargetCell = false;
+            EventManager.Instance.UpdateClock?.Invoke();
         
             Vector3 position = _gridManager.GetTilePosition(nextPos);
         
