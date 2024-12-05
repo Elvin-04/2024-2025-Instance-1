@@ -11,7 +11,7 @@ public abstract class Rune : CellObjectBase, IInteractableCallable, ICollisionOb
         set => _canPickUp = value;
     }
 
-    public virtual void ApplyEffect() { }
+    public abstract void ApplyEffect(Vector3 position, GridManager gridManager);
     public void Interact()
     {
         EventManager.Instance.AddRuneToInventory.Invoke(this);

@@ -40,11 +40,22 @@ namespace Player
             EventManager.Instance.OnMoveStarted?.AddListener(StartMove);
             EventManager.Instance.OnMoveCanceled?.AddListener(StopMove);
             EventManager.Instance.OnInteract?.AddListener(Interact);
+
+            ////////////
+            GetComponent<InventoryManager>().TakeRune(new ExplosionRune(1));
         }
 
         private void Update()
         {
             TryMove();
+
+            //////////////////////////////////////////////////////////////////
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                
+                GetComponent<InventoryManager>().currentRune.ApplyEffect(transform.position, _gridManager);
+            }
+            ///////////////////////////////////////////////////////////////////
         }
 
         //Has to be called when new player is spawned

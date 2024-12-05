@@ -3,6 +3,8 @@ using Player;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 namespace DeathSystem
 {
@@ -55,7 +57,7 @@ namespace DeathSystem
             }
             else
             {
-                _inventoryManager.currentRune.ApplyEffect();
+                _inventoryManager.currentRune.ApplyEffect(transform.position, _gridManager);
             }
             onPlayerDeath?.Invoke(gameObject);
         }

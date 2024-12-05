@@ -13,8 +13,8 @@ namespace Player
     
         public void TakeRune(Rune rune)
         {
-            if (currentRune == rune || rune == null)
-                return;
+            //if (currentRune == rune || rune == null)
+            //    return;
             currentRune = rune;
         }
     }
