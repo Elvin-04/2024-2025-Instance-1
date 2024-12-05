@@ -1,7 +1,11 @@
+using System;
+using UnityEngine;
+
 namespace Grid
 {
-    public interface ICellObject
+    [Serializable]
+    public class CellObject 
     {
-        
+        public bool IsSolid = false;
     }
 }

@@ -1,13 +1,13 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
     private static LevelManager _instance;
 
-    [Tooltip("Maximum number of deaths allowed. 0 means unlimited deaths.")]
-    [Range(0, 100)] public int maxDeath = 0;
-
-    public int currentDeath = 0;
+    public UnityEvent onWin;
+    public UnityEvent onLose;
 
     private void Start()
     {
@@ -24,22 +24,19 @@ public class LevelManager : MonoBehaviour
 
     public void Retry()
     {
-
+        Debug.Log("Retry Level");
     }
+
+
 
     public void Win()
     {
-
+        onWin.Invoke();
     }
 
     public void Lose()
     {
-
-    }
-
-    public void Pause()
-    {
-
+        onLose.Invoke();
     }
 
     public void UpdateTimer(float currentTime)
@@ -49,12 +46,6 @@ public class LevelManager : MonoBehaviour
 
     public void OnDeath()
     {
-        if (maxDeath != 0)
-        {
-            if (++currentDeath == maxDeath)
-            {
-                Debug.Log("TODO maximum number of deaths reached");
-            }
-        }
+
     }
 }
