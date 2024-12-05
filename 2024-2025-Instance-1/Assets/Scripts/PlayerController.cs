@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Grid;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Transform _transform;
 
     //Properties
-    [SerializeField] private Tilemap _tileMap;
+    [SerializeField] private GridManager _gridManager;
     [SerializeField] private float _speed;
     private Vector2 _moveDirection;
     private bool _canMove;
@@ -17,8 +18,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _transform = transform;
-        Vector3Int position = _tileMap.WorldToCell(_transform.position);
-        _transform.position = _tileMap.GetCellCenterWorld(position);
+        Vector3 position = _gridManager.GetTilePosition(_transform.position);
+        _transform.position = position;
     }
 
     private void Start()
@@ -50,9 +51,28 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        Vector3 nextPos = _transform.position + (Vector3)_moveDirection;
+        Cell nextCell = _gridManager.GetCell(nextPos);
+        if (nextCell == null)
+        {
+            StopMove();
+            return;
+        }
+        
+        CellObjectBase nextCellObject = nextCell.CellObjectBase;
+        
+        if (nextCellObject is Wall)
+        {
+            StopMove();
+            return;
+        }
+        
         _reachedTargetCell = false;
+        
+        Vector3 position = _gridManager.GetTilePosition(nextPos);
+        
         _transform.DOMove(
-            _tileMap.GetCellCenterWorld(_tileMap.WorldToCell(_transform.position + (Vector3)_moveDirection)),
+            position,
             1 / _speed).SetEase(Ease.Linear).OnComplete(() => { _reachedTargetCell = true; });
     }
 

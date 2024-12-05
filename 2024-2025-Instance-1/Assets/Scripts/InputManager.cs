@@ -1,8 +1,5 @@
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 public class InputManager : MonoBehaviour
 {
@@ -11,6 +8,17 @@ public class InputManager : MonoBehaviour
         Vector2 input = ctx.ReadValue<Vector2>();
         if (ctx.started)
         {
+            if (input.x != 0 && input.y != 0)
+            {
+                if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+                {
+                    input.y = 0;
+                }
+                else
+                {
+                    input.x = 0;
+                }
+            }
             EventManager.Instance.OnMoveStarted?.Invoke(input);
         }
     
