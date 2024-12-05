@@ -10,7 +10,6 @@ public class UIManager : MonoBehaviour
 
     [Space]
     [SerializeField] private GameObject _winPanel;
-    [SerializeField] private GameObject _losePanel;
 
     private void Start()
     {
@@ -40,22 +39,12 @@ public class UIManager : MonoBehaviour
 
     public void Win()
     {
-        if (_winPanel.activeSelf || _losePanel.activeSelf)
+        if (_winPanel.activeSelf)
             return;
 
         Debug.Log("W");
         _winPanel.SetActive(true);
         StartCoroutine(DisableAfter(_winPanel, 1.0f));
-    }
-
-    public void Lose()
-    {
-        if (_winPanel.activeSelf || _losePanel.activeSelf)
-            return;
-
-        Debug.Log("L");
-        _losePanel.SetActive(true);
-        StartCoroutine(DisableAfter(_losePanel, 1.0f));
     }
 
     private IEnumerator DisableAfter(GameObject obj, float t)
