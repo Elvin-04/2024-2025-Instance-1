@@ -11,7 +11,6 @@ using UnityEngine.Events;
 public class EventManager : MonoBehaviour
 {
     public static EventManager Instance { get; private set; }
-
     public UnityEvent<GameObject> AddRuneToInventory { get; private set; } // TODO Rune
     public UnityEvent<Vector2> OnMoveStarted  { get; private set; }
     public UnityEvent OnMoveCanceled { get; private set; }
@@ -24,6 +23,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent OnDeath { get; private set; }
     public UnityEvent UpdateClock { get; private set; }
     public UnityEvent OnClockUpdated { get; private set; }
+
 
     private void Awake()
     {
