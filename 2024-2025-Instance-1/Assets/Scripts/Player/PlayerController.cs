@@ -155,31 +155,5 @@ namespace Player
             if(_interactable==null) return;
             _interactable.Interact();
         }
-
-
-
-
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        CellObjectBase cellObject = _gridManager.GetCell(_transform.position + (Vector3)_moveDirection).objectOnCell;
-
-        Debug.Log(cellObject);
-
-        if (cellObject is EnterNewRoomCell)
-        {
-            Vector2Int moveCamTo = ((EnterNewRoomCell) cellObject).nextCamPos;
-            Camera.main.transform.DOMove(new Vector3(moveCamTo.x, moveCamTo.y, Camera.main.transform.position.z), 0.5f).SetEase(Ease.OutCubic);
-        }
-        else if (cellObject is WinCell)
-        {
-            onWin.Invoke();
-        }
-
-    }
-
-
-
-
     }
 }

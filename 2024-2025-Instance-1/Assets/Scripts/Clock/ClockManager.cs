@@ -35,7 +35,6 @@ namespace Clock
         public void UpdateClock()
         {
             EventManager.Instance.OnClockUpdated?.Invoke();
-            Debug.Log("clock updated");
         }
     }
 }
