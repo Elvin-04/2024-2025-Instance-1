@@ -2,7 +2,7 @@ using UnityEngine.Tilemaps;
 
 namespace Grid
 {
-    public class Wall : CellObjectBase
+    public class Wall : CellObjectBase, ICollisionObject
     {
         
     }

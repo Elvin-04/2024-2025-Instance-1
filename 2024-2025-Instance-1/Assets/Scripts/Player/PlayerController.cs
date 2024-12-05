@@ -65,7 +65,7 @@ namespace Player
         
             CellObjectBase nextCellObject = nextCell.ObjectOnCell;
         
-            if (nextCellObject is Wall)
+            if (nextCellObject is ICollisionObject)
             {
                 StopMove();
                 return;
