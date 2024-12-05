@@ -10,19 +10,21 @@ using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
-    public static EventManager Instance { get; private set; }
-    public UnityEvent<Rune> AddRuneToInventory { get; private set; } // TODO Rune
-    public UnityEvent<Vector2> OnMoveStarted  { get; private set; }
-    public UnityEvent OnMoveCanceled { get; private set; }
-    public UnityEvent OnInteract { get; private set; }
-    public UnityEvent OnPause { get; private set; }
+    public static EventManager Instance { get; private set; } = null;
+    public UnityEvent<Rune> AddRuneToInventory { get; private set; } = new UnityEvent<Rune>();
+    public UnityEvent<Vector2> OnMoveStarted  { get; private set; } = new UnityEvent<Vector2>();
+    public UnityEvent OnMoveCanceled { get; private set; } = new UnityEvent();
+    public UnityEvent OnInteract { get; private set; } = new UnityEvent();
+    public UnityEvent OnPause { get; private set; } = new UnityEvent();
 
-    public UnityEvent<int> UpdateLife { get; private set; }
-    public UnityEvent<Rune> UpdateRune { get; private set; }
-    public UnityEvent UpdateDeath { get; private set; }
-    public UnityEvent OnDeath { get; private set; }
-    public UnityEvent UpdateClock { get; private set; }
-    public UnityEvent OnClockUpdated { get; private set; }
+    public UnityEvent<int> UpdateLife { get; private set; } = new UnityEvent<int>();
+    public UnityEvent<Rune> UpdateRune { get; private set; } = new UnityEvent<Rune>();
+    public UnityEvent UpdateDeath { get; private set; } = new UnityEvent();
+    public UnityEvent OnDeath { get; private set; } = new UnityEvent();
+    public UnityEvent UpdateClock { get; private set; } = new UnityEvent();
+    public UnityEvent OnClockUpdated { get; private set; } = new UnityEvent();
+
+    public UnityEvent OnClockTickEnds { get; private set; } = new UnityEvent();
 
 
     private void Awake()
