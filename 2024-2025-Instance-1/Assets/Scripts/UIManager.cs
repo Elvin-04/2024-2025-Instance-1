@@ -9,10 +9,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private string _runeTextFormat = "Rune Name: {0}";
 
     [Space]
-    [SerializeField] private TMP_Text _timeText;
-    [SerializeField] private string _timeTextFormat = @"mm\:ss\:ms";
-
-    [Space]
     [SerializeField] private GameObject _winPanel;
 
     private void Start()
@@ -47,13 +43,8 @@ public class UIManager : MonoBehaviour
             return;
 
         Debug.Log("W");
+        
         _winPanel.SetActive(true);
-        StartCoroutine(DisableAfter(_winPanel, 1.0f));
-    }
-
-    private IEnumerator DisableAfter(GameObject obj, float t)
-    {
-        yield return new WaitForSecondsRealtime(t);
-        obj.SetActive(false);
+        StartCoroutine(Utils.InvokeAfter(() => _winPanel.SetActive(false), 1.0f));
     }
 }

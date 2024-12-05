@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Grid;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -17,6 +18,9 @@ namespace Player
         private bool _reachedTargetCell = true;
         private IInteractable _interactable;
         public PlayerDirection CurrentDirection { get; private set; }
+
+
+        public UnityEvent onWin;
 
         private void Awake()
         {
@@ -120,5 +124,31 @@ namespace Player
             if(_interactable==null) return;
             _interactable.Interact();
         }
+
+
+
+
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        CellObjectBase cellObject = _gridManager.GetCell(_transform.position + (Vector3)_moveDirection).ObjectOnCell;
+
+        Debug.Log(cellObject);
+
+        if (cellObject is EnterNewRoomCell)
+        {
+            Vector2Int moveCamTo = ((EnterNewRoomCell) cellObject).nextCamPos;
+            Camera.main.transform.DOMove(new Vector3(moveCamTo.x, moveCamTo.y, Camera.main.transform.position.z), 0.5f).SetEase(Ease.OutCubic);
+        }
+        else if (cellObject is WinCell)
+        {
+            onWin.Invoke();
+        }
+
+    }
+
+
+
+
     }
 }
