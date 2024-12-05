@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour
         EventManager manager = EventManager.Instance;
 
         manager.OnPause.AddListener(Pause);
-        manager.UpdateTimer.AddListener(UpdateTimer);
         manager.UpdateRune.AddListener(UpdateRune);
         manager.UpdateDeath.AddListener(UpdateDeath);
     }
