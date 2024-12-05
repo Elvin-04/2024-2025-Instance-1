@@ -1,8 +1,8 @@
+using Grid;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class Spike : MonoBehaviour
+public class Spike : CellObjectBase, IInteractable
 {
     [SerializeField] private Sprite _spriteActive;
     [SerializeField] private Sprite _spriteInactive;
@@ -31,6 +31,16 @@ public class Spike : MonoBehaviour
         _spriteRenderer.sprite = GetSprite(_isActive);
     }
 
+    public void Interact()
+    {
+        Debug.Log("Spike :: " + _isActive);
+        if (!_isActive)
+            return;
+        Debug.Log("Kill Player");
+        
+    }
+
     public bool IsActive => _isActive;
 
+    public bool CanPickUp { get => false; set{} }
 }

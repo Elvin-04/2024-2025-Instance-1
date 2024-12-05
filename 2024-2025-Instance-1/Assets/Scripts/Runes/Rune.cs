@@ -1,7 +1,7 @@
 using Grid;
 using UnityEngine;
 
-public abstract class Rune : CellObjectBase, IInteractable, ICollisionObject
+public abstract class Rune : CellObjectBase, IInteractableCallable, ICollisionObject
 {
     protected bool _canPickUp = true;
     protected Color _color;

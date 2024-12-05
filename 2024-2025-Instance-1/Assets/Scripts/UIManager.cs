@@ -9,11 +9,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private string _runeTextFormat = "Rune Name: {0}";
 
     [Space]
-    [SerializeField] private TMP_Text _timeText;
-    [SerializeField] private string _timeTextFormat = @"mm\:ss\:ms";
-
-    [Space]
     [SerializeField] private GameObject _winPanel;
+
+    [SerializeField] private GameObject _popUpInteractible;
 
     private void Start()
     {
@@ -22,6 +20,12 @@ public class UIManager : MonoBehaviour
         manager.OnPause.AddListener(Pause);
         manager.UpdateRune.AddListener(UpdateRune);
         manager.UpdateDeath.AddListener(UpdateDeath);
+        manager.CanInteract.AddListener(PopUpInteract);
+    }
+
+    private void PopUpInteract(bool canInteract)
+    {
+        _popUpInteractible.SetActive(canInteract);
     }
 
     public void Pause()
@@ -47,13 +51,8 @@ public class UIManager : MonoBehaviour
             return;
 
         Debug.Log("W");
+        
         _winPanel.SetActive(true);
-        StartCoroutine(DisableAfter(_winPanel, 1.0f));
-    }
-
-    private IEnumerator DisableAfter(GameObject obj, float t)
-    {
-        yield return new WaitForSecondsRealtime(t);
-        obj.SetActive(false);
+        StartCoroutine(Utils.InvokeAfter(() => _winPanel.SetActive(false), 1.0f));
     }
 }

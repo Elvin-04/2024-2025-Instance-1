@@ -10,19 +10,19 @@ using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
-    public static EventManager Instance { get; private set; } = new();
-    public UnityEvent<Rune> AddRuneToInventory { get; private set; }  = new();
-    public UnityEvent<Vector2> OnMoveStarted  { get; private set; }  = new();
-    public UnityEvent OnMoveCanceled { get; private set; }  = new();
-    public UnityEvent OnInteract { get; private set; }  = new();
-    public UnityEvent OnPause { get; private set; }  = new();
-
-    public UnityEvent<int> UpdateLife { get; private set; }  = new();
-    public UnityEvent<Rune> UpdateRune { get; private set; }  = new();
-    public UnityEvent UpdateDeath { get; private set; }  = new();
-    public UnityEvent OnDeath { get; private set; }  = new();
-    public UnityEvent UpdateClock { get; private set; }  = new();
-    public UnityEvent OnClockUpdated { get; private set; }  = new();
+    public static EventManager Instance { get; private set; }
+    public UnityEvent<Rune> AddRuneToInventory  { get; private set; } = new UnityEvent<Rune>();
+    public UnityEvent<Vector2> OnMoveStarted  { get; private set; } = new UnityEvent<Vector2>();
+    public UnityEvent OnMoveCanceled { get; private set; } = new UnityEvent();
+    public UnityEvent OnInteract { get; private set; } = new UnityEvent();
+    public UnityEvent<bool> CanInteract { get; private set; } = new UnityEvent<bool>();
+    public UnityEvent OnPause { get; private set; } = new UnityEvent();
+    public UnityEvent<int> UpdateLife { get; private set; } = new UnityEvent<int>();
+    public UnityEvent<Rune> UpdateRune { get; private set; } = new UnityEvent<Rune>();
+    public UnityEvent UpdateDeath { get; private set; } = new UnityEvent();
+    public UnityEvent OnDeath { get; private set; } = new UnityEvent();
+    public UnityEvent UpdateClock { get; private set; } = new UnityEvent();
+    public UnityEvent OnClockUpdated { get; private set; } = new UnityEvent();
 
 
     private void Awake()
