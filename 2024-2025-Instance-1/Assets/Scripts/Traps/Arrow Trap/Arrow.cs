@@ -24,7 +24,7 @@ public class Arrow : MonoBehaviour
         // Vector3 trapCellPos = gridManager.WorldToCell(trap.transform.position);
 
 
-        if (nextCell.ObjectOnCell is Wall)
+        if (nextCell.objectOnCell is Wall)
         {
             EventManager.Instance.UpdateClock.RemoveListener(UpdateClock);
             Destroy(gameObject);

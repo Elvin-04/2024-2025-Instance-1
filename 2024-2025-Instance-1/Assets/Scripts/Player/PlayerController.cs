@@ -79,7 +79,7 @@ namespace Player
 
         private void GetInteractableUnderMe()
         {
-            _interactable = _gridManager.GetCell(_transform.position).ObjectOnCell as IInteractable;
+            _interactable = _gridManager.GetCell(_transform.position).objectOnCell as IInteractable;
             _interactable?.Interact();
             Debug.Log(_interactable);
         }
@@ -162,7 +162,7 @@ namespace Player
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        CellObjectBase cellObject = _gridManager.GetCell(_transform.position + (Vector3)_moveDirection).ObjectOnCell;
+        CellObjectBase cellObject = _gridManager.GetCell(_transform.position + (Vector3)_moveDirection).objectOnCell;
 
         Debug.Log(cellObject);
 
