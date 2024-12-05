@@ -7,7 +7,6 @@ public class LevelManager : MonoBehaviour
     private static LevelManager _instance;
 
     public UnityEvent onWin;
-    public UnityEvent onLose;
 
     private void Start()
     {
@@ -30,16 +29,6 @@ public class LevelManager : MonoBehaviour
     public void Win()
     {
         onWin.Invoke();
-    }
-
-    public void Lose()
-    {
-        onLose.Invoke();
-    }
-
-    public void Lose()
-    {
-        onLose.Invoke();
     }
 
     public void OnDeath()
