@@ -6,8 +6,8 @@ namespace Grid
 {
     public class EnterNewRoomCell : CellObjectBase, IInteractable
     {
-        [SerializeField] private Vector2Int _previousCamPos;
-        [SerializeField] private Vector2Int _nextCamPos;
+        public Vector2Int previousCamPos;
+        public Vector2Int nextCamPos;
 
         private bool _posIsNext = true;
 
@@ -15,10 +15,19 @@ namespace Grid
 
         public void Interact()
         {
-            Vector2Int nextCamPos = _posIsNext ? _nextCamPos : _previousCamPos;
+            Vector2Int newPos = _posIsNext ? nextCamPos : previousCamPos;
             _posIsNext = !_posIsNext;
 
-            Camera.main.transform.DOMove(new Vector3(nextCamPos.x, nextCamPos.y, Camera.main.transform.position.z), 0.5f).SetEase(Ease.OutCubic);
+            Camera.main.transform.DOMove(new Vector3(newPos.x, newPos.y, Camera.main.transform.position.z), 0.5f).SetEase(Ease.OutCubic);
+        }
+
+        public override bool IsEqual(CellObjectBase other)
+        {            
+            if (other is not EnterNewRoomCell)
+                return false;
+            
+            EnterNewRoomCell otherAsCorrectType = other as EnterNewRoomCell;
+            return previousCamPos == otherAsCorrectType.previousCamPos && nextCamPos == otherAsCorrectType.nextCamPos;
         }
     }
 }

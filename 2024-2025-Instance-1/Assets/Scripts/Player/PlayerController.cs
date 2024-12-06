@@ -79,9 +79,8 @@ namespace Player
 
         private void GetInteractableUnderMe()
         {
-            _interactable = _gridManager.GetCell(_transform.position).objectOnCell as IInteractable;
-            Debug.Log(_interactable);
-            _interactable?.Interact();
+            if (SetInteractable(_gridManager.GetCell(_transform.position).objectOnCell))
+                _interactable?.Interact();
         }
 
         private void GetInteractableFrontOfMe(Vector3 dir)
@@ -90,18 +89,24 @@ namespace Player
             Cell nextCell = _gridManager.GetCell(nextPos);
 
             if (nextCell != null)
-            {
-                _interactable = nextCell.objectOnCell as IInteractable;
-            }
+                SetInteractable(nextCell.objectOnCell);
 
             EventManager.Instance.CanInteract.Invoke(_interactable != null);
+        }
+
+        // returns true if the object set is considered "the same" as the previous one
+        private bool SetInteractable(CellObjectBase cellObject)
+        {
+            bool rv = !cellObject || !cellObject.IsEqual(_interactable as CellObjectBase);
+            _interactable = cellObject as IInteractable;
+            return rv;
         }
 
         private void Move()
         {
             Vector3 nextPos = _transform.position + (Vector3)_moveDirection;
             Cell nextCell = _gridManager.GetCell(nextPos);
-            
+
             currentDirection = _moveDirection.x switch
             {
                 > 0 => PlayerDirection.Right,
@@ -140,8 +145,9 @@ namespace Player
                 position,
                 _movementTime).SetEase(Ease.Linear).OnComplete(() => 
                 { 
-                    _reachedTargetCell = true;
                     CheckInteraction(_moveDirection);
+                    // wait one frame. this is to allow interactions to actually happen
+                    StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
                 });
         }
 
