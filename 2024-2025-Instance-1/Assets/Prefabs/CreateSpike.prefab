@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8787461131697450684}
   - component: {fileID: 4813272817418653357}
-  - component: {fileID: 5364630748659772866}
   m_Layer: 0
   m_Name: CreateSpike
   m_TagString: Untagged
@@ -43,20 +42,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 343c0ffbc9f2717449155aa2c0ab48df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gridManager: {fileID: 0}
-  _spike: {fileID: 11400000, guid: e90ab72f47a763d46a10d9ba74e51cb3, type: 2}
---- !u!114 &5364630748659772866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4655686628597108675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8556bb83e5dc8104e9522cd6abfde81c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gridManager: {fileID: 0}

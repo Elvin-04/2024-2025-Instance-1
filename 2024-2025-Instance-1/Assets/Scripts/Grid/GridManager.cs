@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
@@ -22,6 +23,11 @@ namespace Grid
             //Asserts
             Assert.IsNotNull(tilemap, "tilemap is null in GridManager");
             Assert.IsNotNull(_groundCell, "the ground cell prefab is null in GridManager");
+            
+            //Create a copy of the tilemap DONT REMOVE !!!
+            tilemap.gameObject.SetActive(false);
+            tilemap = Instantiate(tilemap, tilemap.transform.parent);
+            tilemap.gameObject.SetActive(true);
 
             for (int x = 0; x < tilemap.size.x; x++)
             {
@@ -39,10 +45,27 @@ namespace Grid
                     }
 
                     Vector3 cellPos = tilemap.GetCellCenterWorld(pos);
-                    
+                    //CreateCellAt(cellPos).name = "x : " + x + " y : " + y;
                     _cells[(x, y)] = (cell, cellPos);
                 }
             }
+        }
+
+        private GameObject CreateCellAt(Vector3 pos)
+        {
+            GameObject cell = new()
+            {
+                transform =
+                {
+                    position = pos
+                }
+            };
+            return cell;
+        }
+        
+        public GameObject GetInstantiatedObject(Vector3 pos)
+        {
+            return tilemap.GetInstantiatedObject(tilemap.WorldToCell(pos));
         }
         
         public Vector2Int GetCellIndex(Vector3 position)
@@ -159,7 +182,9 @@ namespace Grid
         
         public void ChangeCell((int, int) indexes, Cell toCell)
         {
-            tilemap.SetTile(tilemap.WorldToCell(_cells[indexes].Item2), toCell);
+            Vector3Int pos = tilemap.WorldToCell(_cells[indexes].Item2);
+            tilemap.SetTile(pos, toCell);
+            _cells[indexes] = (toCell, _cells[indexes].Item2);
         }
 
         //Overload
@@ -177,7 +202,6 @@ namespace Grid
         //Overload
         public void ChangeCell(Vector3 position, Cell toCell)
         {
-            Debug.Log(GetCellIndex(position));
             ChangeCell(GetCellIndex(position), toCell);
         }
 

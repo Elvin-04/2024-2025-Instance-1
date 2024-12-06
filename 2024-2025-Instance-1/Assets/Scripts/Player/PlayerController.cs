@@ -82,16 +82,21 @@ namespace Player
 
         private void GetInteractableUnderMe()
         {
-            IInteractable interact = _gridManager.GetCell(_transform.position).objectOnCell as IInteractable;
-            Debug.Log(_transform.position + "  :: Position");
-            Debug.Log(_gridManager.GetCell(_transform.position).objectOnCell + "  :: Object");
-            
-
+            IInteractable interact =
+                _gridManager.GetInstantiatedObject(_transform.position)
+                    ?.GetComponent<CellObjectBase>() as IInteractable;
             if (interact != _interactableUnder)
             {
                 _interactableUnder?.StopInteract();
             }
+
+            if (interact == null)
+            {
+                return;
+            }
+
             _interactableUnder = interact;
+
             _interactableUnder?.Interact();
         }
 
@@ -105,6 +110,7 @@ namespace Player
             {
                 _interactableInFront = nextCell.objectOnCell as IInteractable;
             }
+
             EventManager.Instance.CanInteract.Invoke(_interactableInFront != null);
         }
 
@@ -114,7 +120,7 @@ namespace Player
             int yMoveDir = Mathf.CeilToInt(Mathf.Abs(_moveDirection.y)) * (int)Mathf.Sign(_moveDirection.y);
             int xMoveDir = Mathf.CeilToInt(Mathf.Abs(_moveDirection.x)) * (int)Mathf.Sign(_moveDirection.x);
             (int, int) nextIndex = (cellIndex.x + xMoveDir, cellIndex.y + yMoveDir);
-            
+
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
             currentDirection = _moveDirection.x switch
@@ -151,12 +157,12 @@ namespace Player
 
             _currentMoveAnim = _transform.DOMove(
                 position,
-                _movementTime).SetEase(Ease.Linear).OnComplete(() => 
-                { 
-                    CheckInteraction(_moveDirection);
-                    // wait one frame. this is to allow interactions to actually happen
-                    StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
-                });
+                _movementTime).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                CheckInteraction(_moveDirection);
+                // wait one frame. this is to allow interactions to actually happen
+                StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
+            });
         }
 
         private void StopMove()
@@ -169,6 +175,5 @@ namespace Player
             if (_interactableInFront == null) return;
             _interactableInFront.Interact();
         }
-
     }
 }

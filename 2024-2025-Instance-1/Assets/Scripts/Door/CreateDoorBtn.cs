@@ -1,7 +1,6 @@
-using Grid;
 using System.Collections.Generic;
+using Grid;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class CreateDoorBtn : ObjectCreator
 {
@@ -12,15 +11,10 @@ public class CreateDoorBtn : ObjectCreator
 
     private void Start()
     {
-        CreatCellObject(_gridManager, _btn, _btnTransform);
-        CreatCellObjects(_gridManager, _door, _doorTransforms);
+        CreateCell(_gridManager, _btn, _btnTransform);
+        _gridManager.GetInstantiatedObject(_btnTransform.position)
+            .GetComponent<DoorButton>().SetDoorTransforms(_doorTransforms);
 
-        Cell cell = _gridManager.GetCell(_btnTransform.position);
-        GameObject go = _gridManager.tilemap.GetInstantiatedObject(_gridManager.tilemap.WorldToCell(_btnTransform.position));
-        cell.UpdateCellRef(go);
-        DoorButton btn = cell.objectOnCell?.GetComponent<DoorButton>();
-
-        btn.doorTransforms = _doorTransforms;
-        cell.gridManager = _gridManager;
+        CreateCells(_gridManager, _door, _doorTransforms);
     }
 }
