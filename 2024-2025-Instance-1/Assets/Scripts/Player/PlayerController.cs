@@ -101,11 +101,9 @@ namespace Player
 
             if (nextCell != null)
             {
-                _interactable = nextCell.objectOnCell as IInteractable;
+                _interactableInFront = nextCell.objectOnCell as IInteractable;
             }
-
-            _interactableInFront = _gridManager.GetCell(nextPos).objectOnCell as IInteractableCallable;
-            EventManager.Instance.CanInteract.Invoke(_interactable != null);
+            EventManager.Instance.CanInteract.Invoke(_interactableInFront != null);
         }
 
         private void Move()
@@ -166,8 +164,8 @@ namespace Player
 
         private void Interact()
         {
-            if (_interactable == null) return;
-            _interactable.Interact();
+            if (_interactableInFront == null) return;
+            _interactableInFront.Interact();
         }
 
     }
