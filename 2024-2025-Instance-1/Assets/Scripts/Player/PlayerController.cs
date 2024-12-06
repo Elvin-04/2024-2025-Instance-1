@@ -80,7 +80,6 @@ namespace Player
         private void GetInteractableUnderMe()
         {
             _interactable = _gridManager.GetCell(_transform.position).objectOnCell as IInteractable;
-            Debug.Log(_interactable);
             _interactable?.Interact();
         }
 
@@ -101,7 +100,7 @@ namespace Player
         {
             Vector3 nextPos = _transform.position + (Vector3)_moveDirection;
             Cell nextCell = _gridManager.GetCell(nextPos);
-            
+
             currentDirection = _moveDirection.x switch
             {
                 > 0 => PlayerDirection.Right,
