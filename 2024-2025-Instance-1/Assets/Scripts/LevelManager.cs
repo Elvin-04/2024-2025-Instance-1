@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class LevelManager : MonoBehaviour
         } 
 
         _instance = this;
+        EventManager.Instance.OnRetry.AddListener(ReloadScene);
     }
 
     public void Retry()
@@ -38,5 +40,10 @@ public class LevelManager : MonoBehaviour
     public void Win()
     {
         onWin.Invoke();
+    }
+    public void ReloadScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadSceneAsync(scene.name);
     }
 }
