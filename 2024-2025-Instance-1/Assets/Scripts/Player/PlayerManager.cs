@@ -21,6 +21,8 @@ namespace Player
 
         private void Awake()
         {
+            Assert.IsNotNull(_playerPrefab, "player prefab is null in PlayerManager");
+            
             _levelManager = GetComponent<LevelManager>();
             _gridManager = GetComponent<GridManager>();
         }

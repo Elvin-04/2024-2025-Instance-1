@@ -1,55 +1,60 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
 
 namespace Grid
 {
     public class GridManager : MonoBehaviour
     {
-        [SerializeField] private Tilemap _tilemap;
-        public Cell[,] Cells { get; private set; }
+        [SerializeField] private Cell _groundCell;
+        [field: SerializeField] public Tilemap tilemap { get; private set; }
 
         private void Start()
         {
-            Cells = new Cell[_tilemap.size.x, _tilemap.size.y];
+            //Asserts
+            Assert.IsNotNull(tilemap, "tilemap is null in GridManager");
+            Assert.IsNotNull(_groundCell, "the ground cell prefab is null in GridManager");
+            
+            EventManager.Instance.OnChangeCell?.AddListener(ChangeCell);
+            EventManager.Instance.OnResetCell?.AddListener(ResetCell);
+        }
 
-            Debug.Log("size : " + _tilemap.size);
+        private void ResetCell(Vector3 pos)
+        {
+            ChangeCell(pos, _groundCell);
+        }
 
-            for (int x = 0; x < _tilemap.size.x; x++)
-            {
-                for (int y = 0; y < _tilemap.size.y; y++)
-                {
-                    Vector3Int tilePosition = new(x, y, 0);
-                }
-            }
+        private void ChangeCell(Vector3 position, Cell toCell)
+        {
+            SetTile(WorldToCell(position), toCell);
         }
 
         public Vector3Int WorldToCell(Vector3 position)
         {
-            return _tilemap.WorldToCell(position);
+            return tilemap.WorldToCell(position);
         }
 
         public Cell GetCell(Vector3 position)
         {
-            return GetCell(_tilemap.WorldToCell(position));
+            return GetCell(tilemap.WorldToCell(position));
         }
 
         public void SetTile(Vector3Int position, TileBase tile)
         {
-            _tilemap.SetTile(position, tile);
+            tilemap.SetTile(position, tile);
         }
-
 
         public Vector3 GetTilePosition(Vector3 position)
         {
-            return _tilemap.GetCellCenterWorld(_tilemap.WorldToCell(position));
+            return tilemap.GetCellCenterWorld(tilemap.WorldToCell(position));
         }
 
         public Cell GetCell(Vector3Int position)
         {
-            if (!_tilemap.HasTile(position))
+            if (!tilemap.HasTile(position))
                 return null;
 
-            TileBase tile = _tilemap.GetTile(position);
+            TileBase tile = tilemap.GetTile(position);
             Cell cell = tile as Cell;
             return cell;
         }

@@ -1,16 +1,18 @@
-using System;
-using UnityEditor;
-using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace Grid
 {
     public class Cell : Tile
     {
-        [field:SerializeField] public CellObjectBase objectOnCell { get; private set; }
-        public void SetObjectOnCell(CellObjectBase objectOnCell)
+        public CellObjectBase objectOnCell { get; private set; }
+
+        private void OnEnable()
         {
-            this.objectOnCell = objectOnCell;
+            if (gameObject == null)
+            {
+                return;
+            }
+            objectOnCell = gameObject.GetComponent<CellObjectBase>();
         }
     }
 }

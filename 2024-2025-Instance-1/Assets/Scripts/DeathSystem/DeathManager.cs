@@ -22,6 +22,7 @@ namespace DeathSystem
 
         private void Awake()
         {
+            Assert.IsNotNull(_playerCorpseCell, "player corpse cell prefab is null in DeathManager");
             _inventoryManager = GetComponent<InventoryManager>();
             _transform = transform;
         }
@@ -29,6 +30,15 @@ namespace DeathSystem
         private void Start()
         {
             EventManager.Instance.OnDeath?.AddListener(Death);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                Death();
+                
+            }
         }
 
         //To be called when player is instantiated

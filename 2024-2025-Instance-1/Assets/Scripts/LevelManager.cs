@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
@@ -9,6 +11,11 @@ public class LevelManager : MonoBehaviour
     [field: SerializeField] public Transform spawnPoint { get; private set; }
 
     public UnityEvent onWin { get; private set; }
+
+    private void Awake()
+    {
+        Assert.IsNotNull(spawnPoint, "spawnPoint is null in LevelManager");
+    }
 
     private void Start()
     {
