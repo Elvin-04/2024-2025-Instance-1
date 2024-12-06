@@ -21,12 +21,12 @@ public class DoorButton : CellObjectBase, IInteractable
 
     private void Open()
     {
-        _cell.gridManager.tilemap.SetTile(_cell.gridManager.tilemap.WorldToCell(doorTransform.position), doorOpen);
+        _cell?.gridManager.tilemap.SetTile(_cell.gridManager.tilemap.WorldToCell(doorTransform.position), doorOpen);
     }
 
     private void Close()
     {
-        _cell.gridManager.tilemap.SetTile(_cell.gridManager.tilemap.WorldToCell(doorTransform.position), doorClose);
+        _cell?.gridManager.tilemap.SetTile(_cell.gridManager.tilemap.WorldToCell(doorTransform.position), doorClose);
     }
 
 }
