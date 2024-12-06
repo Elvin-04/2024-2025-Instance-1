@@ -1,4 +1,5 @@
 using Grid;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,7 +12,19 @@ public class ObjectCreator : MonoBehaviour
         tilemap.SetTile(tilemap.WorldToCell(transform.position), tile);
         GameObject go = tilemap.GetInstantiatedObject(tilemap.WorldToCell(transform.position));
         Cell cell = gridManager.GetCell(transform.position);
-        cell.UpdateCellRef(go);
+        cell?.UpdateCellRef(go);
         return cell;
+    }
+
+    protected List<Cell> CreatCellObjects(GridManager gridManager, TileBase tile, List<Transform> transforms)
+    {
+        List<Cell> cells = new List<Cell>();
+        for(int i = 0; i < transforms.Count; i++) 
+        {
+            Cell cell = CreatCellObject(gridManager, tile, transforms[i]);
+            if(cell != null)
+                cells.Add(cell);
+        }
+        return cells;
     }
 }
