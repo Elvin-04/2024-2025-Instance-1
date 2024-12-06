@@ -10,7 +10,7 @@ namespace DeathSystem
     [RequireComponent(typeof(InventoryManager))]
     public class DeathManager : MonoBehaviour
     {
-        [SerializeField] private TileBase _playerCorpseCell;
+        [SerializeField] private Cell _playerCorpseCell;
         
         //Components
         private InventoryManager _inventoryManager;
@@ -52,7 +52,7 @@ namespace DeathSystem
             Assert.IsNotNull(_inventoryManager);
             if (_inventoryManager.currentRune == null)
             {
-                _gridManager.SetTile(_gridManager.WorldToCell(_transform.position), _playerCorpseCell);
+                _gridManager.ChangeCell(_transform.position, _playerCorpseCell);
             }
             else
             {
