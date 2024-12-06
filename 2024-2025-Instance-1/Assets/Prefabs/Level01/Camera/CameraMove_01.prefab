@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7840770273a7b94294ccfaf30ece2a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _previousCamPos: {x: 0, y: 0}
-  _nextCamPos: {x: 0, y: 9}
+  previousCamPos: {x: 0, y: 0}
+  nextCamPos: {x: 0, y: 9}
