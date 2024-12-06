@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -176,7 +177,12 @@ namespace Grid
         {
             ResetCell(GetCellIndex(position));
         }
-        
+
+        internal Vector3 GetTileSize()
+        {
+            return tilemap.cellSize;
+        }
+
 
         #endregion
     }

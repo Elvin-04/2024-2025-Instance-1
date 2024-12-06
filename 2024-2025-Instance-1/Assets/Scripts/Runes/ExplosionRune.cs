@@ -13,19 +13,19 @@ public class ExplosionRune : Rune
 
     public override void ApplyEffect(Vector3 position, GridManager gridManager)
     {
-        Vector2 checkPos = new();
-
         int offsetX = (int)gridManager.GetTileSize().x;
         int offsetY = (int)gridManager.GetTileSize().y;
+
+        Vector2Int positionIndexes = gridManager.GetCellIndex(position);
+
         print(position.x - _radius * offsetX);
 
-        for (int x = (int)position.x  - _radius * offsetX; x < (int)position.x  + _radius * offsetX; x += offsetX)
+        for (int x = positionIndexes.x - _radius * offsetX; x < positionIndexes.x + _radius * offsetX; x += offsetX)
         {
-            for (int y = (int)position.y  - _radius * offsetY; y < (int)position.y  + _radius * offsetY; y += offsetY) 
+            for (int y = positionIndexes.y  - _radius * offsetY; y < positionIndexes.y  + _radius * offsetY; y += offsetY) 
             {
-                checkPos.Set(x, y);
-                print(checkPos);
-                if (gridManager.GetCell(checkPos).objectOnCell is IExplosable explosableCell)
+                print(positionIndexes);
+                if (gridManager.GetCell(x, y).objectOnCell is IExplosable explosableCell)
                 {
                     explosableCell.Explose();
                 }
