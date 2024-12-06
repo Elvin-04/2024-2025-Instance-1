@@ -13,12 +13,14 @@ namespace Grid
 
         private void Start()
         {
+            EventManager.Instance.OnChangeCell?.AddListener(ChangeCell);
+            EventManager.Instance.OnResetCell?.AddListener(ResetCell);
+        }
+        private void Awake()
+        {
             //Asserts
             Assert.IsNotNull(tilemap, "tilemap is null in GridManager");
             Assert.IsNotNull(_groundCell, "the ground cell prefab is null in GridManager");
-
-            EventManager.Instance.OnChangeCell?.AddListener(ChangeCell);
-            EventManager.Instance.OnResetCell?.AddListener(ResetCell);
 
             for (int x = 0; x < tilemap.size.x; x++)
             {

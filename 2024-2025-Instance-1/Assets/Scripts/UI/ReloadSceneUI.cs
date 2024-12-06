@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ReloadSceneUI : MonoBehaviour

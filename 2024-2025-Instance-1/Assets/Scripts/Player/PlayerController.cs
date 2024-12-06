@@ -1,6 +1,5 @@
 using DG.Tweening;
 using Grid;
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -84,6 +83,9 @@ namespace Player
         private void GetInteractableUnderMe()
         {
             IInteractable interact = _gridManager.GetCell(_transform.position).objectOnCell as IInteractable;
+            Debug.Log(_transform.position + "  :: Position");
+            Debug.Log(_gridManager.GetCell(_transform.position).objectOnCell + "  :: Object");
+            
 
             if (interact != _interactableUnder)
             {

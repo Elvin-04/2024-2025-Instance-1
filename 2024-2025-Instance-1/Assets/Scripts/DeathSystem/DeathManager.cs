@@ -1,9 +1,8 @@
-using System;
 using Grid;
 using Player;
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Tilemaps;
 
 namespace DeathSystem
 {

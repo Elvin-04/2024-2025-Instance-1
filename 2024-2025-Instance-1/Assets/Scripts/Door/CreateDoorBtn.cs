@@ -1,24 +1,26 @@
 using Grid;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class CreateDoorBtn : ObjectCreator
 {
-    [SerializeField] private TileBase _door;
-    [SerializeField] private TileBase _btn;
+    [SerializeField] private Cell _door;
+    [SerializeField] private Cell _btn;
     [SerializeField] private List<Transform> _doorTransforms;
     [SerializeField] private Transform _btnTransform;
 
     private void Start()
     {
-        Cell btnCell = CreatCellObject(_gridManager, _btn, _btnTransform);
+        CreatCellObject(_gridManager, _btn, _btnTransform);
         CreatCellObjects(_gridManager, _door, _doorTransforms);
 
-        DoorButton btn = btnCell.objectOnCell.GetComponent<DoorButton>();
+        Cell cell = _gridManager.GetCell(_btnTransform.position);
+        GameObject go = _gridManager.tilemap.GetInstantiatedObject(_gridManager.tilemap.WorldToCell(_btnTransform.position));
+        cell.UpdateCellRef(go);
+        DoorButton btn = cell.objectOnCell?.GetComponent<DoorButton>();
 
         btn.doorTransforms = _doorTransforms;
-        btnCell.gridManager = _gridManager;
+        cell.gridManager = _gridManager;
     }
 }

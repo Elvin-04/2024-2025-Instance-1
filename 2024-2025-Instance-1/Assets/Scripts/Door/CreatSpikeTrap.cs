@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(Spike))]
 public class CreatSpikeTrap : ObjectCreator
 {
-    [SerializeField] private TileBase _spike;
+    [SerializeField] private Cell _spike;
 
     private void Start()
     {

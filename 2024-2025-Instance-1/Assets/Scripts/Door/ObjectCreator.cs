@@ -6,17 +6,15 @@ using UnityEngine.Tilemaps;
 public class ObjectCreator : MonoBehaviour
 {
     [SerializeField] protected GridManager _gridManager;
-    protected Cell CreatCellObject(GridManager gridManager, TileBase tile, Transform transform)
+    protected Cell CreatCellObject(GridManager gridManager, Cell tile, Transform transform)
     {
-        Tilemap tilemap = gridManager.tilemap;
-        tilemap.SetTile(tilemap.WorldToCell(transform.position), tile);
-        GameObject go = tilemap.GetInstantiatedObject(tilemap.WorldToCell(transform.position));
-        Cell cell = gridManager.GetCell(transform.position);
-        cell?.UpdateCellRef(go);
+        gridManager.ChangeCell(transform.position, tile);
+        Cell cell = _gridManager.GetCell(transform.position);
+        cell?.UpdateCellRef(cell.gameObject);
         return cell;
     }
 
-    protected List<Cell> CreatCellObjects(GridManager gridManager, TileBase tile, List<Transform> transforms)
+    protected List<Cell> CreatCellObjects(GridManager gridManager, Cell tile, List<Transform> transforms)
     {
         List<Cell> cells = new List<Cell>();
         for(int i = 0; i < transforms.Count; i++) 

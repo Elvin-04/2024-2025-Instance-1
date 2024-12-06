@@ -26,6 +26,6 @@ namespace Grid
                 objectOnCell.SetCell(this);
             }
         }
-    }
+    }   
 }
 
