@@ -21,13 +21,13 @@ public class InputManager : MonoBehaviour
             }
             EventManager.Instance.OnMoveStarted?.Invoke(input);
         }
-    
+
         if (ctx.canceled)
         {
             EventManager.Instance.OnMoveCanceled?.Invoke();
         }
     }
-        
+
     public void OnInteract(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -43,14 +43,19 @@ public class InputManager : MonoBehaviour
 
     public void OnRetry(InputAction.CallbackContext ctx)
     {
+        if (ctx.started)
+        {
+            EventManager.Instance.OnReloadUIRetry?.Invoke();
+        }
+
         if (ctx.performed)
         {
-                
+            EventManager.Instance.OnRetry?.Invoke();
         }
 
         if (ctx.canceled)
         {
-            //_onRetryCanceled?.Invoke();
+            EventManager.Instance.OnStopHoldingReload?.Invoke();
         }
     }
 

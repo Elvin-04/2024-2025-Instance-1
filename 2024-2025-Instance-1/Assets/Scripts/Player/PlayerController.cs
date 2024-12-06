@@ -113,7 +113,6 @@ namespace Player
             {
                 _interactableInFront = nextCell.objectOnCell as IInteractable;
             }
-
             EventManager.Instance.CanInteract.Invoke(_interactableInFront != null);
         }
 
