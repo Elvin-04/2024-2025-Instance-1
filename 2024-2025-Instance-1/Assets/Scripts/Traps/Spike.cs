@@ -1,34 +1,37 @@
+using Clock;
 using Grid;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Spike : CellObjectBase, IInteractable
 {
-    [SerializeField] private Sprite _spriteActive;
-    [SerializeField] private Sprite _spriteInactive;
-    private SpriteRenderer _spriteRenderer;
+    [SerializeField] private GridManager _gridManager;
+    [SerializeField] private TileBase _Active;
+    [SerializeField] private TileBase _Inactive;
 
     private bool _isActive = false;
 
     private void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        SetSprite(_isActive);
+        SetTile(_isActive);
+        EventManager.Instance.OnClockUpdated.AddListener(UpdateSpike);
     }
     public void UpdateSpike()
     {
+        Debug.Log("Update");
         _isActive = !_isActive;
-        SetSprite(_isActive);
+        SetTile(_isActive);
     }
 
-    private Sprite GetSprite(bool isActive)
+    private TileBase GetTile(bool isActive)
     {
-        return isActive ? _spriteActive : _spriteInactive;
+        return isActive ? _Active : _Inactive;
     }
 
-    private void SetSprite(bool isActive)
+    private void SetTile(bool isActive)
     {
-        _spriteRenderer.sprite = GetSprite(_isActive);
+        _gridManager.tilemap.SetTile(_gridManager.tilemap.WorldToCell(transform.position) , GetTile(_isActive));
     }
 
     public void Interact()
@@ -36,7 +39,7 @@ public class Spike : CellObjectBase, IInteractable
         Debug.Log("Spike :: " + _isActive);
         if (!_isActive)
             return;
-        Debug.Log("Kill Player");
+        EventManager.Instance.OnDeath?.Invoke();
         
     }
 
@@ -48,4 +51,6 @@ public class Spike : CellObjectBase, IInteractable
     public bool IsActive => _isActive;
 
     public bool CanPickUp { get => false; set{} }
+
+    public void SetGridManager(GridManager value) => _gridManager = value;
 }
