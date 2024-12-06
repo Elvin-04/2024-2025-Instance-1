@@ -129,7 +129,7 @@ namespace Grid
         
         public void ChangeCell((int, int) indexes, Cell toCell)
         {
-            tilemap.SetTile(tilemap.WorldToCell(GetCell(indexes).transform.GetPosition()), toCell);
+            tilemap.SetTile(tilemap.WorldToCell(_cells[indexes].Item2), toCell);
         }
 
         //Overload
@@ -147,6 +147,7 @@ namespace Grid
         //Overload
         public void ChangeCell(Vector3 position, Cell toCell)
         {
+            Debug.Log(GetCellIndex(position));
             ChangeCell(GetCellIndex(position), toCell);
         }
 
@@ -177,7 +178,6 @@ namespace Grid
             ResetCell(GetCellIndex(position));
         }
         
-
         #endregion
     }
 }
