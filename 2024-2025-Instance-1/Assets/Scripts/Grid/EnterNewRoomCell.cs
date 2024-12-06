@@ -29,5 +29,9 @@ namespace Grid
             EnterNewRoomCell otherAsCorrectType = other as EnterNewRoomCell;
             return previousCamPos == otherAsCorrectType.previousCamPos && nextCamPos == otherAsCorrectType.nextCamPos;
         }
+
+        public void StopInteract()
+        {
+        }
     }
 }

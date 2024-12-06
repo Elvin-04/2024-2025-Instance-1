@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0889bba663a40cd8f2b1ab5a9c70a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _groundCell: {fileID: 11400000, guid: af5f64e5816715e41bdb76c4dab6ee3b, type: 2}
   <tilemap>k__BackingField: {fileID: 1558359886}
 --- !u!4 &462852193
 Transform:
@@ -3496,8 +3497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78489ee65a45e9b4720e736b6a7fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridManager: {fileID: 462852192}
-  _speed: 5
+  _movementTime: 0
   onWin:
     m_PersistentCalls:
       m_Calls: []
