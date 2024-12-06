@@ -43,5 +43,6 @@ public class ReloadSceneUI : MonoBehaviour
     private void CancelReload()
     {
        _isHolding = false;
+
     }
 }
