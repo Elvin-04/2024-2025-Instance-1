@@ -10,5 +10,9 @@ namespace Grid
         {
             Debug.Log("W");
         }
+
+        public void StopInteract()
+        {
+        }
     }
 }

@@ -18,9 +18,13 @@ namespace Player
         private Vector2 _moveDirection;
         private bool _canMove;
         private bool _reachedTargetCell = true;
-        private IInteractable _interactable;
         public PlayerDirection currentDirection { get; private set; }
         private Tween _currentMoveAnim;
+
+        private IInteractable _interactableInFront;
+        private IInteractable _interactableUnder;
+
+        public PlayerDirection CurrentDirection { get; private set; }
 
 
         public UnityEvent onWin;
@@ -79,8 +83,14 @@ namespace Player
 
         private void GetInteractableUnderMe()
         {
-            _interactable = _gridManager.GetCell(_transform.position).objectOnCell as IInteractable;
-            _interactable?.Interact();
+            IInteractable interact = _gridManager.GetCell(_transform.position).objectOnCell as IInteractable;
+
+            if (interact != _interactableUnder)
+            {
+                _interactableUnder?.StopInteract();
+            }
+            _interactableUnder = interact;
+            _interactableUnder?.Interact();
         }
 
         private void GetInteractableFrontOfMe(Vector3 dir)
@@ -94,6 +104,7 @@ namespace Player
                 _interactable = nextCell.objectOnCell as IInteractable;
             }
 
+            _interactableInFront = _gridManager.GetCell(nextPos).objectOnCell as IInteractableCallable;
             EventManager.Instance.CanInteract.Invoke(_interactable != null);
         }
 
@@ -140,11 +151,12 @@ namespace Player
 
             _currentMoveAnim = _transform.DOMove(
                 position,
-                _movementTime).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                _reachedTargetCell = true;
-                CheckInteraction(_moveDirection);
-            });
+                _movementTime).SetEase(Ease.Linear).OnComplete(() => 
+                { 
+                    CheckInteraction(_moveDirection);
+                    // wait one frame. this is to allow interactions to actually happen
+                    StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
+                });
         }
 
         private void StopMove()
@@ -157,5 +169,6 @@ namespace Player
             if (_interactable == null) return;
             _interactable.Interact();
         }
+
     }
 }
