@@ -12,8 +12,7 @@ public class CreateDoorBtn : ObjectCreator
     private void Start()
     {
         CreateCell(_gridManager, _btn, _btnTransform);
-        _gridManager.GetInstantiatedObject(_btnTransform.position)
-            .GetComponent<DoorButton>().SetDoorTransforms(_doorTransforms);
+        (_gridManager.GetInstantiatedObject(_btnTransform.position) as DoorButton)?.SetDoorTransforms(_doorTransforms);
 
         CreateCells(_gridManager, _door, _doorTransforms);
     }

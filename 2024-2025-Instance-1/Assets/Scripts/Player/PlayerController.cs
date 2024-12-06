@@ -7,26 +7,28 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        //Components
-        private Transform _transform;
+        [SerializeField] private float _movementTime;
+
+
+        public UnityEvent onWin;
+        private bool _canMove;
+        private Tween _currentMoveAnim;
 
         //Properties
         private GridManager _gridManager;
-        [SerializeField] private float _movementTime;
-
-        private Vector2 _moveDirection;
-        private bool _canMove;
-        private bool _reachedTargetCell = true;
-        public PlayerDirection currentDirection { get; private set; }
-        private Tween _currentMoveAnim;
 
         private IInteractable _interactableInFront;
         private IInteractable _interactableUnder;
 
+        private Vector2 _moveDirection;
+
+        private bool _reachedTargetCell = true;
+
+        //Components
+        private Transform _transform;
+        public PlayerDirection currentDirection { get; private set; }
+
         public PlayerDirection CurrentDirection { get; private set; }
-
-
-        public UnityEvent onWin;
 
         private void Awake()
         {
@@ -60,10 +62,7 @@ namespace Player
 
         private void TryMove()
         {
-            if (!_canMove || !_reachedTargetCell)
-            {
-                return;
-            }
+            if (!_canMove || !_reachedTargetCell) return;
 
             Move();
         }
@@ -83,17 +82,10 @@ namespace Player
         private void GetInteractableUnderMe()
         {
             IInteractable interact =
-                _gridManager.GetInstantiatedObject(_transform.position)
-                    ?.GetComponent<CellObjectBase>() as IInteractable;
-            if (interact != _interactableUnder)
-            {
-                _interactableUnder?.StopInteract();
-            }
+                _gridManager.GetInstantiatedObject(_transform.position) as IInteractable;
+            if (interact != _interactableUnder) _interactableUnder?.StopInteract();
 
-            if (interact == null)
-            {
-                return;
-            }
+            if (interact == null) return;
 
             _interactableUnder = interact;
 
@@ -107,9 +99,8 @@ namespace Player
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
             if (nextCell != null)
-            {
-                _interactableInFront = nextCell.objectOnCell as IInteractable;
-            }
+                _interactableInFront =
+                    _gridManager.GetInstantiatedObject(_gridManager.GetCellPos(nextIndex)) as IInteractable;
 
             EventManager.Instance.CanInteract.Invoke(_interactableInFront != null);
         }
@@ -141,7 +132,7 @@ namespace Player
                 return;
             }
 
-            CellObjectBase nextCellObject = nextCell.objectOnCell;
+            CellObjectBase nextCellObject = _gridManager.GetInstantiatedObject(_gridManager.GetCellPos(nextIndex));
 
             if (nextCellObject is ICollisionObject)
             {

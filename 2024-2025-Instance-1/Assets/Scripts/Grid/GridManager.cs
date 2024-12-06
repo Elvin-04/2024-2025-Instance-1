@@ -63,9 +63,9 @@ namespace Grid
             return cell;
         }
         
-        public GameObject GetInstantiatedObject(Vector3 pos)
+        public CellObjectBase GetInstantiatedObject(Vector3 pos)
         {
-            return tilemap.GetInstantiatedObject(tilemap.WorldToCell(pos));
+            return tilemap.GetInstantiatedObject(tilemap.WorldToCell(pos))?.GetComponent<CellObjectBase>();
         }
         
         public Vector2Int GetCellIndex(Vector3 position)
