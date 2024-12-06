@@ -6,10 +6,10 @@ namespace Grid
     public class Wall : CellObjectBase, ICollisionObject, IExplosable
     {
         //////////////////////////////////////
-        public void Explose(GridManager gridManager)
+        public void Explose()
         {
-            print("je vais bientot devenir completement fou help");
-            gridManager.SetTile(gridManager.WorldToCell(transform.position), null);
+            EventManager.Instance.OnResetCell?.Invoke(transform.position);
+
         }
         //////////////////////////////////////
     }
