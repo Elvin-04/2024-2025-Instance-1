@@ -13,22 +13,21 @@ public class ExplosionRune : Rune
 
     public override void ApplyEffect(Vector3 position, GridManager gridManager)
     {
-        print("Test 1");
         Vector2 checkPos = new();
 
         int offsetX = (int)gridManager.GetTileSize().x;
         int offsetY = (int)gridManager.GetTileSize().y;
+        print(position.x - _radius * offsetX);
 
-        for (int x = (int)position.x  - _radius * offsetX; x < (int)position.x  + _radius * offsetY; x += offsetX)
+        for (int x = (int)position.x  - _radius * offsetX; x < (int)position.x  + _radius * offsetX; x += offsetX)
         {
-            print("Test 2");
             for (int y = (int)position.y  - _radius * offsetY; y < (int)position.y  + _radius * offsetY; y += offsetY) 
             {
-                checkPos.Set(x * gridManager.GetTileSize().x, y * gridManager.GetTileSize().y);
+                checkPos.Set(x, y);
                 print(checkPos);
                 if (gridManager.GetCell(checkPos).objectOnCell is IExplosable explosableCell)
                 {
-                    explosableCell.Explose(gridManager);
+                    explosableCell.Explose();
                 }
             }
         }

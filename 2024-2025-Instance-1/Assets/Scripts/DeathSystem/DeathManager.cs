@@ -33,15 +33,6 @@ namespace DeathSystem
             EventManager.Instance.OnDeath?.AddListener(Death);
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                Death();
-                
-            }
-        }
-
         //To be called when player is instantiated
         public void SetGridManager(GridManager gridManager)
         {
