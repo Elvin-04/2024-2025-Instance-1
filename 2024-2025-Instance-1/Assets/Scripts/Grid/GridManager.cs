@@ -11,6 +11,7 @@ namespace Grid
         [field: SerializeField] public Tilemap tilemap { get; private set; }
         private Dictionary<(int, int), (Cell, Vector3)> _cells = new();
 
+
         private void Start()
         {
             EventManager.Instance.OnChangeCell?.AddListener(ChangeCell);
