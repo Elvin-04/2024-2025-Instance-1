@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class LevelManager : MonoBehaviour
         } 
 
         _instance = this;
+        EventManager.Instance.OnRetry.AddListener(ReloadScene);
     }
 
     public void Retry()
@@ -39,4 +41,26 @@ public class LevelManager : MonoBehaviour
     {
         onWin.Invoke();
     }
+    private void ReloadScene()
+    {
+        //print("Reloadddddding !!!!!!");
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadSceneAsync(scene.name);
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //private void ReloadScene()
+    //{
+    //    StartCoroutine(LoadAsyncScene());
+    //}
+    //IEnumerator LoadAsyncScene()
+    //{
+    //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+
+    //    while (!asyncLoad.isDone)
+    //    {
+    //        yield return null;
+    //    }
+    //}
+    /////////////////////////////////////////////////////////////////////
 }

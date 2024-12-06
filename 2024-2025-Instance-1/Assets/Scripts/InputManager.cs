@@ -45,12 +45,12 @@ public class InputManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-                
+            EventManager.Instance.OnRetry?.Invoke();
         }
 
         if (ctx.canceled)
         {
-            //_onRetryCanceled?.Invoke();
+          
         }
     }
 

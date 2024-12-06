@@ -12,8 +12,8 @@ using UnityEngine.Events;
 public class EventManager : MonoBehaviour
 {
     public static EventManager Instance { get; private set; }
-    public UnityEvent<Rune> AddRuneToInventory  { get; private set; } = new UnityEvent<Rune>();
-    public UnityEvent<Vector2> OnMoveStarted  { get; private set; } = new UnityEvent<Vector2>();
+    public UnityEvent<Rune> AddRuneToInventory { get; private set; } = new UnityEvent<Rune>();
+    public UnityEvent<Vector2> OnMoveStarted { get; private set; } = new UnityEvent<Vector2>();
     public UnityEvent OnMoveCanceled { get; private set; } = new UnityEvent();
     public UnityEvent OnInteract { get; private set; } = new UnityEvent();
     public UnityEvent<bool> CanInteract { get; private set; } = new UnityEvent<bool>();
@@ -26,11 +26,11 @@ public class EventManager : MonoBehaviour
     public UnityEvent OnClockUpdated { get; private set; } = new UnityEvent();
     public UnityEvent<Vector3, Cell> OnChangeCell { get; private set; } = new(); //=> position of the cell, tile to set 
     public UnityEvent<Vector3> OnResetCell { get; private set; } = new(); //=> position of the cell to change
-
+    public UnityEvent OnRetry { get; private set; } = new UnityEvent();
 
     private void Awake()
     {
-        if (Instance == null) 
+        if (Instance == null)
         {
             Instance = this;
             return;
@@ -38,3 +38,4 @@ public class EventManager : MonoBehaviour
         Destroy(this);
     }
 }
+
