@@ -31,7 +31,7 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 556254037043233457, guid: 4979740ca928cfc47b6fa8d2b2d77f90, type: 3}
+  m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  <ObjectOnCell>k__BackingField: {fileID: -7061452110801777948, guid: 4979740ca928cfc47b6fa8d2b2d77f90, type: 3}
+  <objectOnCell>k__BackingField: {fileID: -7061452110801777948, guid: 4979740ca928cfc47b6fa8d2b2d77f90, type: 3}

@@ -12,13 +12,15 @@ namespace Player
         private Transform _transform;
 
         //Properties
-        [SerializeField] private GridManager _gridManager;
-        [SerializeField] private float _speed;
+        private GridManager _gridManager;
+        [SerializeField] private float _movementTime;
+
         private Vector2 _moveDirection;
         private bool _canMove;
         private bool _reachedTargetCell = true;
         private IInteractable _interactable;
-        public PlayerDirection CurrentDirection { get; private set; }
+        public PlayerDirection currentDirection { get; private set; }
+        private Tween _currentMoveAnim;
 
 
         public UnityEvent onWin;
@@ -26,8 +28,6 @@ namespace Player
         private void Awake()
         {
             _transform = transform;
-            Vector3 position = _gridManager.GetTilePosition(_transform.position);
-            _transform.position = position;
         }
 
         private void Start()
@@ -42,6 +42,19 @@ namespace Player
             TryMove();
         }
 
+        //Has to be called when new player is spawned
+        public void SetGridManager(GridManager gridManager)
+        {
+            _gridManager = gridManager;
+        }
+
+        public void StopMoveAnim()
+        {
+            _currentMoveAnim?.Kill();
+            _reachedTargetCell = true;
+            GetInteractableFrontOfMe(_moveDirection);
+        }
+
         private void TryMove()
         {
             if (!_canMove || !_reachedTargetCell)
@@ -54,8 +67,6 @@ namespace Player
 
         private void StartMove(Vector2 direction)
         {
-            
-            
             _canMove = true;
             _moveDirection = direction;
         }
@@ -68,15 +79,21 @@ namespace Player
 
         private void GetInteractableUnderMe()
         {
-            _interactable = _gridManager.GetCell(_transform.position).ObjectOnCell as IInteractable;
-            _interactable?.Interact();
+            _interactable = _gridManager.GetCell(_transform.position).objectOnCell as IInteractable;
             Debug.Log(_interactable);
+            _interactable?.Interact();
         }
 
         private void GetInteractableFrontOfMe(Vector3 dir)
         {
             Vector3 nextPos = _transform.position + dir;
-            _interactable = _gridManager.GetCell(nextPos).ObjectOnCell as IInteractableCallable;
+            Cell nextCell = _gridManager.GetCell(nextPos);
+
+            if (nextCell != null)
+            {
+                _interactable = nextCell.objectOnCell as IInteractable;
+            }
+
             EventManager.Instance.CanInteract.Invoke(_interactable != null);
         }
 
@@ -85,7 +102,7 @@ namespace Player
             Vector3 nextPos = _transform.position + (Vector3)_moveDirection;
             Cell nextCell = _gridManager.GetCell(nextPos);
             
-            CurrentDirection = _moveDirection.x switch
+            currentDirection = _moveDirection.x switch
             {
                 > 0 => PlayerDirection.Right,
                 < 0 => PlayerDirection.Left,
@@ -93,7 +110,7 @@ namespace Player
                 {
                     > 0 => PlayerDirection.Up,
                     < 0 => PlayerDirection.Down,
-                    _ => CurrentDirection
+                    _ => currentDirection
                 }
             };
             
@@ -103,7 +120,7 @@ namespace Player
                 return;
             }
         
-            CellObjectBase nextCellObject = nextCell.ObjectOnCell;
+            CellObjectBase nextCellObject = nextCell.objectOnCell;
         
             if (nextCellObject is ICollisionObject)
             {
@@ -119,9 +136,9 @@ namespace Player
         
             Vector3 position = _gridManager.GetTilePosition(nextPos);
         
-            _transform.DOMove(
+            _currentMoveAnim = _transform.DOMove(
                 position,
-                1 / _speed).SetEase(Ease.Linear).OnComplete(() => 
+                _movementTime).SetEase(Ease.Linear).OnComplete(() => 
                 { 
                     _reachedTargetCell = true;
                     CheckInteraction(_moveDirection);
@@ -138,31 +155,5 @@ namespace Player
             if(_interactable==null) return;
             _interactable.Interact();
         }
-
-
-
-
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        CellObjectBase cellObject = _gridManager.GetCell(_transform.position + (Vector3)_moveDirection).ObjectOnCell;
-
-        Debug.Log(cellObject);
-
-        if (cellObject is EnterNewRoomCell)
-        {
-            Vector2Int moveCamTo = ((EnterNewRoomCell) cellObject).nextCamPos;
-            Camera.main.transform.DOMove(new Vector3(moveCamTo.x, moveCamTo.y, Camera.main.transform.position.z), 0.5f).SetEase(Ease.OutCubic);
-        }
-        else if (cellObject is WinCell)
-        {
-            onWin.Invoke();
-        }
-
-    }
-
-
-
-
     }
 }

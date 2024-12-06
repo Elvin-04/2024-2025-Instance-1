@@ -1,3 +1,4 @@
+using Grid;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,6 +24,8 @@ public class EventManager : MonoBehaviour
     public UnityEvent OnDeath { get; private set; } = new UnityEvent();
     public UnityEvent UpdateClock { get; private set; } = new UnityEvent();
     public UnityEvent OnClockUpdated { get; private set; } = new UnityEvent();
+    public UnityEvent<Vector3, Cell> OnChangeCell { get; private set; } = new(); //=> position of the cell, tile to set 
+    public UnityEvent<Vector3> OnResetCell { get; private set; } = new(); //=> position of the cell to change
 
 
     private void Awake()
