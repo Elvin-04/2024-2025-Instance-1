@@ -40,6 +40,11 @@ public class Spike : CellObjectBase, IInteractable
         
     }
 
+    public void StopInteract()
+    {
+        
+    }
+
     public bool IsActive => _isActive;
 
     public bool CanPickUp { get => false; set{} }
