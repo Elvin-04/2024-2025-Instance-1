@@ -48,10 +48,9 @@ namespace Player
 
         private Vector3 GetCellPos(Vector3 pos)
         {
-            Vector3 cellPos = _gridManager.GetTilePosition(pos);
-            return cellPos;
+            Vector3 position = _gridManager.GetCellPos(_gridManager.GetCellIndex(pos));
+            return position;
         }
-
         private void OnDeath(GameObject player)
         {
             player.transform.position = GetCellPos(_levelManager.spawnPoint.position);
