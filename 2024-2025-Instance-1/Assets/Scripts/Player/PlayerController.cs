@@ -80,18 +80,20 @@ namespace Player
         private void GetInteractableUnderMe()
         {
             _interactable = _gridManager.GetCell(_transform.position).objectOnCell as IInteractable;
-            _interactable?.Interact();
             Debug.Log(_interactable);
+            _interactable?.Interact();
         }
 
         private void GetInteractableFrontOfMe(Vector3 dir)
         {
             Vector3 nextPos = _transform.position + dir;
             Cell nextCell = _gridManager.GetCell(nextPos);
+
             if (nextCell != null)
             {
                 _interactable = nextCell.objectOnCell as IInteractable;
             }
+
             EventManager.Instance.CanInteract.Invoke(_interactable != null);
         }
 
@@ -139,8 +141,6 @@ namespace Player
                 _movementTime).SetEase(Ease.Linear).OnComplete(() => 
                 { 
                     _reachedTargetCell = true;
-                    GetInteractableFrontOfMe(_moveDirection);
-
                     CheckInteraction(_moveDirection);
                 });
         }
@@ -155,31 +155,5 @@ namespace Player
             if(_interactable==null) return;
             _interactable.Interact();
         }
-
-
-
-
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        CellObjectBase cellObject = _gridManager.GetCell(_transform.position + (Vector3)_moveDirection).objectOnCell;
-
-        Debug.Log(cellObject);
-
-        if (cellObject is EnterNewRoomCell)
-        {
-            Vector2Int moveCamTo = ((EnterNewRoomCell) cellObject).nextCamPos;
-            Camera.main.transform.DOMove(new Vector3(moveCamTo.x, moveCamTo.y, Camera.main.transform.position.z), 0.5f).SetEase(Ease.OutCubic);
-        }
-        else if (cellObject is WinCell)
-        {
-            onWin.Invoke();
-        }
-
-    }
-
-
-
-
     }
 }
