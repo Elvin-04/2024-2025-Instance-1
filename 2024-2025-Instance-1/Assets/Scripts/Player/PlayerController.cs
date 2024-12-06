@@ -18,9 +18,13 @@ namespace Player
         private Vector2 _moveDirection;
         private bool _canMove;
         private bool _reachedTargetCell = true;
-        private IInteractable _interactable;
         public PlayerDirection currentDirection { get; private set; }
         private Tween _currentMoveAnim;
+
+        private IInteractable _interactableInFront;
+        private IInteractable _interactableUnder;
+
+        public PlayerDirection CurrentDirection { get; private set; }
 
 
         public UnityEvent onWin;
@@ -79,27 +83,23 @@ namespace Player
 
         private void GetInteractableUnderMe()
         {
-            if (SetInteractable(_gridManager.GetCell(_transform.position).objectOnCell))
-                _interactable?.Interact();
+            IInteractable interact = _gridManager.GetCell(_transform.position).objectOnCell as IInteractable;
+
+            if (interact != _interactableUnder)
+            {
+                _interactableUnder?.StopInteract();
+            }
+            _interactableUnder = interact;
+            _interactableUnder?.Interact();
+
         }
 
         private void GetInteractableFrontOfMe(Vector3 dir)
         {
             Vector3 nextPos = _transform.position + dir;
             Cell nextCell = _gridManager.GetCell(nextPos);
-
-            if (nextCell != null)
-                SetInteractable(nextCell.objectOnCell);
-
-            EventManager.Instance.CanInteract.Invoke(_interactable != null);
-        }
-
-        // returns true if the object set is considered "the same" as the previous one
-        private bool SetInteractable(CellObjectBase cellObject)
-        {
-            bool rv = !cellObject || !cellObject.IsEqual(_interactable as CellObjectBase);
-            _interactable = cellObject as IInteractable;
-            return rv;
+            _interactableInFront = _gridManager.GetCell(nextPos).objectOnCell as IInteractableCallable;
+            EventManager.Instance.CanInteract.Invoke(_interactableInFront != null);
         }
 
         private void Move()
@@ -158,8 +158,10 @@ namespace Player
 
         private void Interact()
         {
-            if(_interactable==null) return;
-            _interactable.Interact();
+            if(_interactableInFront !=null) 
+                _interactableInFront.Interact();
+
         }
+
     }
 }
