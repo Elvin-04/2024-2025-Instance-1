@@ -27,6 +27,8 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector3, Cell> OnChangeCell { get; private set; } = new(); //=> position of the cell, tile to set 
     public UnityEvent<Vector3> OnResetCell { get; private set; } = new(); //=> position of the cell to change
     public UnityEvent OnRetry { get; private set; } = new UnityEvent();
+    public UnityEvent OnReloadUIRetry { get; private set; } = new UnityEvent();
+    public UnityEvent OnStopHoldingReload { get; private set; } = new UnityEvent();
 
     private void Awake()
     {

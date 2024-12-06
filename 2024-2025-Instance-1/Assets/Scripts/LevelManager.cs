@@ -41,26 +41,9 @@ public class LevelManager : MonoBehaviour
     {
         onWin.Invoke();
     }
-    private void ReloadScene()
+    public void ReloadScene()
     {
-        //print("Reloadddddding !!!!!!");
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadSceneAsync(scene.name);
     }
-
-    ///////////////////////////////////////////////////////////////////
-    //private void ReloadScene()
-    //{
-    //    StartCoroutine(LoadAsyncScene());
-    //}
-    //IEnumerator LoadAsyncScene()
-    //{
-    //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
-
-    //    while (!asyncLoad.isDone)
-    //    {
-    //        yield return null;
-    //    }
-    //}
-    /////////////////////////////////////////////////////////////////////
 }
