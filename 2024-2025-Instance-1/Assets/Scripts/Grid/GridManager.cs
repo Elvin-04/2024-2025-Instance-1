@@ -272,6 +272,7 @@ namespace Grid
 
         public void ResetCell((int, int) indexes)
         {
+            Debug.Log(indexes);
             ChangeCell(indexes, _groundCell);
         }
 
