@@ -58,6 +58,33 @@ namespace Grid
 
             return Vector2Int.zero;
         }
+
+        #region AddCell
+
+        public void AddCell((int, int) indexes, Cell cell, Vector3 cellPos)
+        {
+            _cells[(indexes.Item1, indexes.Item2)] = (cell, cellPos);
+        }
+        
+        //Overload
+        public void AddCell(int x, int y, Cell cell, Vector3 cellPos)
+        {
+            AddCell((x, y), cell, cellPos);
+        }
+        
+        //Overload
+        public void AddCell(Vector2Int indexes, Cell cell, Vector3 cellPos)
+        {
+            AddCell((indexes.x, indexes.y), cell, cellPos);
+        }
+        
+        //Overload
+        public void AddCell(Vector3 position, Cell cell, Vector3 cellPos)
+        {
+            AddCell(GetCellIndex(position), cell, cellPos);
+        }
+
+        #endregion
         
         #region GetCell
 
