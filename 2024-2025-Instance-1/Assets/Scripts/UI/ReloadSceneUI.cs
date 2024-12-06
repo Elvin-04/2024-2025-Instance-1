@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class ReloadSceneUI : MonoBehaviour
 {
-    [SerializeField] private Image fillAmountImage;
+    [SerializeField] private Image _fillAmountImage;
 
-    private float holdDuration = 1f;
-    private float holdTimer = 0f;
+    private float _holdDuration = 1f;
+    private float _holdTimer = 0f;
 
-    private bool isHolding = false;
+    private bool _isHolding = false;
 
     private void Start()
     {
@@ -20,28 +20,28 @@ public class ReloadSceneUI : MonoBehaviour
     }
     private void Update()
     {
-        if (isHolding)
+        if (_isHolding)
         {
-            holdTimer += Time.deltaTime;
-            fillAmountImage.fillAmount = holdTimer / holdDuration;
-            if (holdTimer >= holdDuration)
+            _holdTimer += Time.deltaTime;
+            _fillAmountImage.fillAmount = _holdTimer / _holdDuration;
+            if (_holdTimer >= _holdDuration)
             {
-                isHolding = false;
+                _isHolding = false;
             }
         }
         else 
         { 
-            holdTimer = 0;
-            fillAmountImage.fillAmount = holdTimer / holdDuration;
+            _holdTimer = 0;
+            _fillAmountImage.fillAmount = _holdTimer / _holdDuration;
         }
     }
-    public void UpdateUIReloadScene( )
+    private void UpdateUIReloadScene( )
     {
-        isHolding = true;
+        _isHolding = true;
     }
 
     private void CancelReload()
     {
-       isHolding = false;
+       _isHolding = false;
     }
 }

@@ -47,11 +47,10 @@ public class InputManager : MonoBehaviour
         {
             EventManager.Instance.OnReloadUIRetry?.Invoke();
         }
+
         if (ctx.performed)
         {
-           
             EventManager.Instance.OnRetry?.Invoke();
-
         }
 
         if (ctx.canceled)
