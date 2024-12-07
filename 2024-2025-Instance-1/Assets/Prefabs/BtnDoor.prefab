@@ -44,6 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8906f833bb2f804494f6c8f894f81f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorTransform: {fileID: 0}
   doorOpen: {fileID: 11400000, guid: 4a56e72d23f0fab418952def43f67bf4, type: 2}
   doorClose: {fileID: 11400000, guid: 66cf7941f935142429723a83caefeaac, type: 2}
