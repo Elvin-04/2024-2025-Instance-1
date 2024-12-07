@@ -1,6 +1,6 @@
+using System.Linq;
 using DG.Tweening;
 using Grid;
-using TMPro;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -24,12 +24,14 @@ public class Arrow : MonoBehaviour
         int xMoveDir = Mathf.CeilToInt(Mathf.Abs(direction.x)) * (int)Mathf.Sign(direction.x);
         (int, int) nextIndex = (cellIndex.x + xMoveDir, cellIndex.y + yMoveDir);
 
-        if (gridManager.GetInstantiatedObject(gridManager.GetCellPos(nextIndex)) is Wall)
+        if (gridManager.GetObjectsOnCell(gridManager.GetCellPos(nextIndex))
+            .Select(cellObjectBase => cellObjectBase is Wall).Any())
         {
             EventManager.Instance.UpdateClock.RemoveListener(UpdateClock);
             Destroy(gameObject);
             return;
         }
+
         _transform.DOMove(_transform.position + direction, 0.2f);
     }
 }

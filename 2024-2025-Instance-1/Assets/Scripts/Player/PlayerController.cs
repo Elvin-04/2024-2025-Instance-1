@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using Grid;
 using UnityEngine;
@@ -17,8 +19,8 @@ namespace Player
         //Properties
         private GridManager _gridManager;
 
-        private IInteractable _interactableInFront;
-        private IInteractable _interactableUnder;
+        private List<IInteractable> _interactablesInFront = new();
+        private List<IInteractable> _interactablesUnder = new();
 
         private Vector2 _moveDirection;
 
@@ -27,8 +29,6 @@ namespace Player
         //Components
         private Transform _transform;
         public PlayerDirection currentDirection { get; private set; }
-
-        public PlayerDirection CurrentDirection { get; private set; }
 
         private void Awake()
         {
@@ -81,15 +81,22 @@ namespace Player
 
         private void GetInteractableUnderMe()
         {
-            IInteractable interact =
-                _gridManager.GetInstantiatedObject(_transform.position) as IInteractable;
-            if (interact != _interactableUnder) _interactableUnder?.StopInteract();
+            List<IInteractable> interacts =
+                _gridManager.GetObjectsOnCell(_transform.position)
+                    .Select(cellObject => cellObject as IInteractable).Where(interactable => interactable != null)
+                    .ToList();
 
-            if (interact == null) return;
+            Debug.Log(interacts.Count);
 
-            _interactableUnder = interact;
 
-            _interactableUnder?.Interact();
+            List<IInteractable> commonInteracts = interacts.Intersect(_interactablesUnder).ToList();
+
+            _interactablesUnder.Except(commonInteracts).ToList()
+                .ForEach(interact => interact?.StopInteract());
+
+            _interactablesUnder = interacts;
+
+            _interactablesUnder.ForEach(interactable => interactable?.Interact());
         }
 
         private void GetInteractableFrontOfMe(Vector3 dir)
@@ -98,11 +105,14 @@ namespace Player
 
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
-            if (nextCell != null)
-                _interactableInFront =
-                    _gridManager.GetInstantiatedObject(_gridManager.GetCellPos(nextIndex)) as IInteractable;
+            if (nextCell == null) return;
 
-            EventManager.Instance.CanInteract.Invoke(_interactableInFront != null);
+            _interactablesInFront =
+                _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex))
+                    .Select(objectOnCell => objectOnCell as IInteractable).Where(interactable => interactable != null)
+                    .ToList();
+
+            EventManager.Instance.CanInteract.Invoke(_interactablesInFront.Count > 0);
         }
 
         private void Move()
@@ -128,14 +138,16 @@ namespace Player
 
             if (nextCell == null)
             {
+                Debug.Log("next cell is null");
                 StopMove();
                 return;
             }
 
-            CellObjectBase nextCellObject = _gridManager.GetInstantiatedObject(_gridManager.GetCellPos(nextIndex));
+            List<CellObjectBase> nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
-            if (nextCellObject is ICollisionObject)
+            if (nextCellObjects.Any(objectOnCell => objectOnCell != null && objectOnCell is ICollisionObject))
             {
+                Debug.Log("Collision");
                 StopMove();
                 CheckInteraction(_moveDirection);
                 return;
@@ -163,8 +175,8 @@ namespace Player
 
         private void Interact()
         {
-            if (_interactableInFront == null) return;
-            _interactableInFront.Interact();
+            if (_interactablesInFront.Count == 0) return;
+            _interactablesInFront.ForEach(objectInFront => objectInFront.Interact());
         }
     }
 }
