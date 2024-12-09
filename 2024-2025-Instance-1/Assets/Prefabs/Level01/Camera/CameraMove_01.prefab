@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   previousCamPos: {x: 0, y: 0}
-  nextCamPos: {x: 0, y: 9}
+  nextCamPos: {x: 0, y: 8}
