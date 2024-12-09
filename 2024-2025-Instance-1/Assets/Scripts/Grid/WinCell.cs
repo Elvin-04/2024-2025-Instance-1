@@ -10,6 +10,7 @@ namespace Grid
         public void Interact(PlayerController controller)
         {
             Debug.Log("W");
+            EventManager.Instance.OnWin.Invoke();
         }
 
         public void StopInteract()

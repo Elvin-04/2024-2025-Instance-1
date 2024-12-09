@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
         manager.UpdateRune.AddListener(UpdateRune);
         manager.UpdateDeath.AddListener(UpdateDeath);
         manager.CanInteract.AddListener(PopUpInteract);
+
+        manager.OnWin.AddListener(OnWin);
     }
 
     private void PopUpInteract(bool canInteract)
@@ -40,6 +42,11 @@ public class UIManager : MonoBehaviour
     public void UpdateDeath()
     {
         
+    }
+
+    private void OnWin()
+    {
+        _winPanel.SetActive(true);
     }
 
 
