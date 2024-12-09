@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 116387089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -3.5, z: 0}
+  m_LocalPosition: {x: 1.33, y: -0.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -292,7 +292,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundCell: {fileID: 11400000, guid: af5f64e5816715e41bdb76c4dab6ee3b, type: 2}
-  <tilemap>k__BackingField: {fileID: 1558359886}
+  <staticTilemap>k__BackingField: {fileID: 1558359886}
+  <movingTilemap>k__BackingField: {fileID: 1558359886}
 --- !u!114 &1075084692
 MonoBehaviour:
   m_ObjectHideFlags: 0

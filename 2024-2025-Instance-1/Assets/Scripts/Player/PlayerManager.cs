@@ -12,17 +12,17 @@ namespace Player
         //Prefabs
         [Header("Prefabs")] [SerializeField] private GameObject _playerPrefab;
 
-        //Components
-        private LevelManager _levelManager;
-        private GridManager _gridManager;
-
         //Properties
         private GameObject _currentPlayer;
+        private GridManager _gridManager;
+
+        //Components
+        private LevelManager _levelManager;
 
         private void Awake()
         {
             Assert.IsNotNull(_playerPrefab, "player prefab is null in PlayerManager");
-            
+
             _levelManager = GetComponent<LevelManager>();
             _gridManager = GetComponent<GridManager>();
         }
@@ -51,11 +51,10 @@ namespace Player
             Vector3 position = _gridManager.GetCellPos(_gridManager.GetCellIndex(pos));
             return position;
         }
+
         private void OnDeath(GameObject player)
         {
             player.transform.position = GetCellPos(_levelManager.spawnPoint.position);
-            PlayerController playerController = player.GetComponent<PlayerController>();
-            playerController.StopMoveAnim();
         }
     }
 }

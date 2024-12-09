@@ -1,19 +1,16 @@
 using Grid;
-using System;
 using UnityEngine;
 
 public enum Direction
 {
     North = 0,
-    West  = 1,
+    West = 1,
     South = 2,
-    East  = 3,
+    East = 3
 }
 
 public class ArrowTrap : MonoBehaviour
 {
-    private Transform _transform;
-
     [SerializeField] public GridManager _gridManager;
 
     [SerializeField] private Direction _direction;
@@ -23,11 +20,13 @@ public class ArrowTrap : MonoBehaviour
 
     // private List<Arrow> _arrows = new List<Arrow>();
 
-    private int _currentTick = 0;
+    private int _currentTick;
+    private Transform _transform;
 
     private void Start()
     {
         _transform = transform;
+        _transform.position = _gridManager.GetCellPos(_transform.position);
 
         EventManager.Instance.UpdateClock.AddListener(UpdateClock);
     }
@@ -46,16 +45,16 @@ public class ArrowTrap : MonoBehaviour
 
     private void ShootArrow()
     {
-        GameObject arrowObject = Instantiate(_arrowPrefab);
+        GameObject arrowObject =
+            Instantiate(_arrowPrefab, _gridManager.GetCellPos(_transform.position), Quaternion.identity);
         arrowObject.SetActive(true);
-        
+
         Transform arrowTransform = arrowObject.transform;
 
         arrowTransform.position = _transform.position;
-        arrowTransform.rotation = Quaternion.Euler(0, 0, (int) _direction * 90);
 
         Arrow arrow = arrowObject.GetComponent<Arrow>();
+        arrow.SetDirection(_direction);
         arrow.gridManager = _gridManager;
-        arrow.direction = arrowTransform.rotation * Vector2.up;
     }
 }
