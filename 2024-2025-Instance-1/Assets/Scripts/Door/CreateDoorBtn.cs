@@ -17,4 +17,17 @@ public class CreateDoorBtn : ObjectCreator
 
         CreateCells(_gridManager, _door, _doorTransforms);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawCube(_btnTransform.position, Vector3.one * 0.5f);
+        foreach(Transform t in _doorTransforms)
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawCube(t.position, Vector3.one);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(t.position, _btnTransform.position);
+        }
+    }
 }
