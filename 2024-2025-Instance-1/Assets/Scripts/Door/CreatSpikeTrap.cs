@@ -1,15 +1,33 @@
 using Grid;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(Spike))]
 public class CreatSpikeTrap : ObjectCreator
 {
-    [SerializeField] private Cell _spike;
+    [SerializeField] private Cell _Active;
+    [SerializeField] private Cell _Inactive;
+
+    private bool _isActive;
 
     private void Start()
     {
-        Cell cell = CreatCellObject(_gridManager, _spike, transform);
-        cell.UpdateCellRef(gameObject);
+        CreateCell(_gridManager, _Inactive, transform);
+        SetTile(_isActive);
+        EventManager.Instance.OnClockUpdated.AddListener(UpdateSpike);
+    }
+
+    public void UpdateSpike()
+    {
+        _isActive = !_isActive;
+        SetTile(_isActive);
+    }
+
+    private Cell GetTile(bool isActive)
+    {
+        return isActive ? _Active : _Inactive;
+    }
+
+    private void SetTile(bool isActive)
+    {
+        EventManager.Instance.OnChangeCell?.Invoke(transform.position, GetTile(isActive));
     }
 }

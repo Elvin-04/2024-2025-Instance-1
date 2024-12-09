@@ -1,18 +1,22 @@
 using Grid;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class DoorButton : CellObjectBase, IInteractable
 {
-    public List<Transform> doorTransforms;
-    public TileBase doorOpen;
-    public TileBase doorClose;
+    private List<Transform> _doorTransforms = new();
+    public Cell doorOpen;
+    public Cell doorClose;
     public bool CanPickUp { get => false; set{} }
 
     public void Interact()
     {
         OpenDoors();
+    }
+
+    public void SetDoorTransforms(List<Transform> transforms)
+    {
+        _doorTransforms = transforms;
     }
 
     public void StopInteract() 
@@ -22,27 +26,32 @@ public class DoorButton : CellObjectBase, IInteractable
 
     private void OpenDoors()
     {
-        for(int i = 0; i < doorTransforms.Count; i++)
+        if (_doorTransforms == null)
         {
-            Open(doorTransforms[i]);
+            return;
+        }
+        
+        foreach (Transform t in _doorTransforms)
+        {
+            Open(t);
         }
     }
 
     private void CloseDoors()
     {
-        for (int i = 0; i < doorTransforms.Count; i++)
+        foreach (Transform t in _doorTransforms)
         {
-            Close(doorTransforms[i]);
+            Close(t);
         }
     }
     private void Open(Transform transform)
     {
-        _cell?.gridManager.tilemap.SetTile(_cell.gridManager.tilemap.WorldToCell(transform.position), doorOpen);
+        EventManager.Instance.OnChangeCell?.Invoke(transform.position, doorOpen);
     }
 
     private void Close(Transform transform)
     {
-        _cell?.gridManager.tilemap.SetTile(_cell.gridManager.tilemap.WorldToCell(transform.position), doorClose);
+        EventManager.Instance.OnChangeCell?.Invoke(transform.position, doorClose);
     }
 
 }
