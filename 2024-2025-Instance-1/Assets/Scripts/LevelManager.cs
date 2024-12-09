@@ -48,6 +48,6 @@ public class LevelManager : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.grey;
-        Gizmos.DrawCube(spawnPoint.position, Vector3.one);
+        Gizmos.DrawCube(spawnPoint.position, Vector3.one * 0.5f);
     }
 }
