@@ -157,6 +157,8 @@ namespace Grid
 
         public bool GetCellObjectsByType<T>((int, int) indexes, out List<T> cellObjects)
         {
+            cellObjects = null;
+            if (!_cellsContainers.TryGetValue(indexes, out CellContainer cellInfo)) return false;
             cellObjects = _cellsContainers[indexes].objectsOnCell.OfType<T>().ToList();
             return cellObjects.Any();
         }

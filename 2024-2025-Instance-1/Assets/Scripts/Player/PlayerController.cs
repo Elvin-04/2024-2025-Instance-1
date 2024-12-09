@@ -52,8 +52,8 @@ namespace Player
             //////////////////////////////////////////////////////////////////
             if (Input.GetKeyDown(KeyCode.K))
             {
-                
-                GetComponent<InventoryManager>().currentRune.ApplyEffect(transform.position, _gridManager);
+
+                EventManager.Instance.OnDeath.Invoke();
             }
             ///////////////////////////////////////////////////////////////////
         }

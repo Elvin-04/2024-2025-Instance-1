@@ -11,7 +11,7 @@ namespace Grid
         public void Explose()
         {
             EventManager.Instance.OnResetCell?.Invoke(transform.position);
-            Debug.Log(transform.position);
+
         }
         //////////////////////////////////////
     }
