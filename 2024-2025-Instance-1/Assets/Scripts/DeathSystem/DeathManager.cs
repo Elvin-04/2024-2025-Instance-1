@@ -3,6 +3,8 @@ using Player;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 namespace DeathSystem
 {
@@ -31,15 +33,6 @@ namespace DeathSystem
             EventManager.Instance.OnDeath?.AddListener(Death);
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                Death();
-                
-            }
-        }
-
         //To be called when player is instantiated
         public void SetGridManager(GridManager gridManager)
         {
@@ -55,7 +48,7 @@ namespace DeathSystem
             }
             else
             {
-                _inventoryManager.currentRune.ApplyEffect();
+                _inventoryManager.currentRune.ApplyEffect(transform.position, _gridManager);
             }
             onPlayerDeath?.Invoke(gameObject);
         }

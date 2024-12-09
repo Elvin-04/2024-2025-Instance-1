@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,35 +10,45 @@ namespace Grid
     public class GridManager : MonoBehaviour
     {
         [SerializeField] private Cell _groundCell;
-        [field: SerializeField] public Tilemap tilemap { get; private set; }
+        [field: SerializeField] public Tilemap staticTilemap { get; private set; }
         private readonly Dictionary<(int, int), CellContainer> _cellsContainers = new();
 
         private void Awake()
         {
             //Asserts
-            Assert.IsNotNull(tilemap, "tilemap is null in GridManager");
+            Assert.IsNotNull(staticTilemap, "tilemap is null in GridManager");
             Assert.IsNotNull(_groundCell, "the ground cell prefab is null in GridManager");
 
             //Create a copy of the tilemap DONT REMOVE !!!
-            tilemap.gameObject.SetActive(false);
-            tilemap = Instantiate(tilemap, tilemap.transform.parent);
-            tilemap.gameObject.SetActive(true);
+            staticTilemap.gameObject.SetActive(false);
+            staticTilemap = Instantiate(staticTilemap, staticTilemap.transform.parent);
+            staticTilemap.gameObject.SetActive(true);
 
-            for (int x = 0; x < tilemap.size.x; x++)
-            for (int y = 0; y < tilemap.size.y; y++)
+            int indexX = 0;
+            int indexY = 0;
+
+            for (int x = staticTilemap.origin.x; x < staticTilemap.origin.x + staticTilemap.size.x; x++)
             {
-                int xPos = x - tilemap.size.x / 2;
-                int yPos = y - tilemap.size.y / 2;
-                Vector3Int pos = Vector3Int.zero;
-                pos.Set(xPos, yPos, 0);
-                Cell cell = tilemap.GetTile<Cell>(pos);
+                for (int y = staticTilemap.origin.y; y < staticTilemap.origin.y + staticTilemap.size.y; y++)
+                {
+                    Vector3Int pos = Vector3Int.zero;
+                    pos.Set(x, y, 0);
+                    Cell cell = staticTilemap.GetTile<Cell>(pos);
 
-                if (cell == null) continue;
+                    if (cell == null)
+                    {
+                        indexY++;
+                        continue;
+                    }
 
-                Vector3 cellPos = tilemap.GetCellCenterWorld(pos);
-                //CreateCellAt(cellPos).name = "x : " + x + " y : " + y;
-                _cellsContainers[(x, y)] = new CellContainer(cell, cellPos);
-                _cellsContainers[(x, y)].AddObject(GetInstantiatedObject(cellPos));
+                    Vector3 cellPos = staticTilemap.GetCellCenterWorld(pos);
+                    CreateCellAt(cellPos).name = "x : " + indexX + " y : " + indexY;
+                    _cellsContainers[(indexX, indexY)] = new CellContainer(cell, cellPos);
+                    _cellsContainers[(indexX, indexY)].AddObject(GetInstantiatedObject(cellPos));
+                    indexY++;
+                }
+                indexX++;
+                indexY = 0;
             }
         }
 
@@ -62,19 +73,52 @@ namespace Grid
 
         private CellObjectBase GetInstantiatedObject(Vector3 pos)
         {
-            return tilemap.GetInstantiatedObject(tilemap.WorldToCell(pos))?.GetComponent<CellObjectBase>();
+
+             CellObjectBase instantiatedObject = staticTilemap.GetInstantiatedObject(staticTilemap.WorldToCell(pos))
+                ?.GetComponent<CellObjectBase>();
+
+            return instantiatedObject;
         }
 
         public Vector2Int GetCellIndex(Vector3 position)
         {
-            for (int x = 0; x < tilemap.size.x; x++)
-            for (int y = 0; y < tilemap.size.y; y++)
+            for (int x = 0; x < staticTilemap.size.x; x++)
+            for (int y = 0; y < staticTilemap.size.y; y++)
                 if (_cellsContainers.ContainsKey((x, y)) &&
-                    tilemap.WorldToCell(_cellsContainers[(x, y)].cellPos) == tilemap.WorldToCell(position))
+                    staticTilemap.WorldToCell(_cellsContainers[(x, y)].cellPos) == staticTilemap.WorldToCell(position))
                     return new Vector2Int(x, y);
 
             return Vector2Int.zero;
         }
+
+        #region GetNextIndex
+
+        public Vector2Int GetNextIndex((int, int) indexes, Vector2 direction)
+        {
+            int yMoveDir = Mathf.CeilToInt(Mathf.Abs(direction.y)) * (int)Mathf.Sign(direction.y);
+            int xMoveDir = Mathf.CeilToInt(Mathf.Abs(direction.x)) * (int)Mathf.Sign(direction.x);
+
+            (int, int) nextIndex = (indexes.Item1 + xMoveDir, indexes.Item2 + yMoveDir);
+            Vector2Int nextIndexVector = new(nextIndex.Item1, nextIndex.Item2);
+            return nextIndexVector;
+        }
+
+        public Vector2Int GetNextIndex(int x, int y, Vector2 direction)
+        {
+            return GetNextIndex((x, y), direction);
+        }
+
+        public Vector2Int GetNextIndex(Vector2Int indexes, Vector2 direction)
+        {
+            return GetNextIndex((indexes.x, indexes.y), direction);
+        }
+
+        public Vector2Int GetNextIndex(Vector3 pos, Vector2 direction)
+        {
+            return GetNextIndex(GetCellIndex(pos), direction);
+        }
+
+        #endregion
 
         #region RemoveObjectOnCell
 
@@ -156,6 +200,8 @@ namespace Grid
 
         public bool GetCellObjectsByType<T>((int, int) indexes, out List<T> cellObjects)
         {
+            cellObjects = null;
+            if (!_cellsContainers.TryGetValue(indexes, out CellContainer cellInfo)) return false;
             cellObjects = _cellsContainers[indexes].objectsOnCell.OfType<T>().ToList();
             return cellObjects.Any();
         }
@@ -241,8 +287,8 @@ namespace Grid
 
         public void ChangeCell((int, int) indexes, Cell toCell)
         {
-            Vector3Int pos = tilemap.WorldToCell(_cellsContainers[indexes].cellPos);
-            tilemap.SetTile(pos, toCell);
+            Vector3Int pos = staticTilemap.WorldToCell(_cellsContainers[indexes].cellPos);
+            staticTilemap.SetTile(pos, toCell);
             _cellsContainers[indexes] = new CellContainer(toCell, _cellsContainers[indexes].cellPos);
             _cellsContainers[indexes].AddObject(GetInstantiatedObject(pos));
         }
@@ -271,6 +317,7 @@ namespace Grid
 
         public void ResetCell((int, int) indexes)
         {
+            Debug.Log(indexes);
             ChangeCell(indexes, _groundCell);
         }
 
@@ -291,6 +338,7 @@ namespace Grid
         {
             ResetCell(GetCellIndex(position));
         }
+
 
         #endregion
     }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4235197221650875418}
   - component: {fileID: 8121179530381066035}
   - component: {fileID: 4633414997124130403}
+  - component: {fileID: 6568031821600676876}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -102,7 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78489ee65a45e9b4720e736b6a7fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridManager: {fileID: 0}
   _movementTime: 0.2
   onWin:
     m_PersistentCalls:
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761353960857f75418c37fa0bf6917f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosiveRune: {fileID: 6568031821600676876}
 --- !u!114 &4633414997124130403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,3 +133,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCorpseCell: {fileID: 11400000, guid: 077b5f4bca3cad14b83a724daca9ec46, type: 2}
+--- !u!114 &6568031821600676876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2806801040940657499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87fbc40954791824aafcec1517db0f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 2
+  _explosiveCell: {fileID: 11400000, guid: 48c618072a93a0b4ba0febdfe3afc463, type: 2}
