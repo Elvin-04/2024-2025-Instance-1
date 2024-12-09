@@ -18,8 +18,6 @@ public class ArrowTrap : MonoBehaviour
 
     [SerializeField] [Range(1, 10)] private int _fireEveryTicks = 2;
 
-    // private List<Arrow> _arrows = new List<Arrow>();
-
     private int _currentTick;
     private Transform _transform;
 
@@ -33,9 +31,6 @@ public class ArrowTrap : MonoBehaviour
 
     private void UpdateClock()
     {
-        // foreach (Arrow arrow in _arrows)
-        //     arrow.EnableMovement();
-
         if (++_currentTick == _fireEveryTicks)
         {
             _currentTick = 0;
