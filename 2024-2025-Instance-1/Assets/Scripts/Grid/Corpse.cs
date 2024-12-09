@@ -26,7 +26,7 @@ namespace Grid
             _currentLifeTime--;
             if (_currentLifeTime <= 0)
             {
-                EventManager.Instance?.OnResetCell.Invoke(_transform.position);   
+                Destroy(gameObject);
             }
         }
     }

@@ -3,6 +3,7 @@ using Player;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
@@ -11,7 +12,7 @@ namespace DeathSystem
     [RequireComponent(typeof(InventoryManager))]
     public class DeathManager : MonoBehaviour
     {
-        [SerializeField] private Cell _playerCorpseCell;
+        [SerializeField] private GameObject _playerCorpse;
         
         //Components
         private InventoryManager _inventoryManager;
@@ -23,7 +24,7 @@ namespace DeathSystem
 
         private void Awake()
         {
-            Assert.IsNotNull(_playerCorpseCell, "player corpse cell prefab is null in DeathManager");
+            Assert.IsNotNull(_playerCorpse, "player corpse cell prefab is null in DeathManager");
             _inventoryManager = GetComponent<InventoryManager>();
             _transform = transform;
         }
@@ -44,7 +45,8 @@ namespace DeathSystem
             Assert.IsNotNull(_inventoryManager);
             if (_inventoryManager.currentRune == null)
             {
-                _gridManager.ChangeCell(_transform.position, _playerCorpseCell);
+                Instantiate(_playerCorpse, _transform.position, Quaternion.identity);
+                _gridManager.AddObjectOnCell(_transform.position, _playerCorpse.GetComponent<Corpse>());
             }
             else
             {

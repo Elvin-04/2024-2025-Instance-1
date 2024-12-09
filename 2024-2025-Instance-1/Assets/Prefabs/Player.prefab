@@ -119,7 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761353960857f75418c37fa0bf6917f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosiveRune: {fileID: 6568031821600676876}
 --- !u!114 &4633414997124130403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52e5bc042e366544f8aa1be6c6928718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCorpseCell: {fileID: 11400000, guid: 077b5f4bca3cad14b83a724daca9ec46, type: 2}
+  _playerCorpse: {fileID: 4924481270131399554, guid: 6c9cb14c7a0b3dc44b2c2b11c59c401f, type: 3}
 --- !u!114 &6568031821600676876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,4 +145,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 2
-  _explosiveCell: {fileID: 11400000, guid: 48c618072a93a0b4ba0febdfe3afc463, type: 2}
