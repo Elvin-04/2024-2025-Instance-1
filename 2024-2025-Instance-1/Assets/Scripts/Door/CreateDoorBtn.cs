@@ -21,13 +21,13 @@ public class CreateDoorBtn : ObjectCreator
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawCube(new Vector3(_btnTransform.position.x, _btnTransform.position.y, 0), Vector3.one * 0.5f);
+        Gizmos.DrawCube(_btnTransform.position, Vector3.one * 0.5f);
         foreach(Transform t in _doorTransforms)
         {
             Gizmos.color = Color.white;
-            Gizmos.DrawCube(new Vector3(t.position.x, t.position.y, 0), Vector3.one);
+            Gizmos.DrawCube(t.position, Vector3.one);
             Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(new Vector3(t.position.x, t.position.y, 0), new Vector3(_btnTransform.position.x, _btnTransform.position.y, 0));
+            Gizmos.DrawLine(t.position, _btnTransform.position);
         }
     }
 }
