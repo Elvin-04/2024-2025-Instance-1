@@ -57,6 +57,26 @@ namespace Grid
         {
             EventManager.Instance.OnChangeCell?.AddListener(ChangeCell);
             EventManager.Instance.OnResetCell?.AddListener(ResetCell);
+            EventManager.Instance.OnRemoveObjectOnCell.AddListener(OnRemoveObjectOnCell);
+            EventManager.Instance.StopInteract.AddListener(OnStopInteract);
+            
+        }
+
+        private void OnRemoveObjectOnCell(Vector3 pos, CellObjectBase cellObject)
+        {
+            RemoveObjectOnCell(pos, cellObject);
+        }
+
+        private void OnStopInteract(Vector3 pos)
+        {
+            Debug.Log("stopping interaction");
+            List<CellObjectBase> objectsOnCell = GetObjectsOnCell(pos);
+            if (!objectsOnCell.OfType<IWeight>().Any())
+            {
+                objectsOnCell.OfType<IInteractable>().ToList()
+                    .ForEach(objectOnCell => objectOnCell.StopInteract());
+            }
+            
         }
 
         private GameObject CreateCellAt(Vector3 pos)

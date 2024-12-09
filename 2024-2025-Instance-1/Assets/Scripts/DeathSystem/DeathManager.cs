@@ -1,11 +1,8 @@
+using System;
 using Grid;
 using Player;
-using System;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
-using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 namespace DeathSystem
 {
@@ -13,10 +10,10 @@ namespace DeathSystem
     public class DeathManager : MonoBehaviour
     {
         [SerializeField] private GameObject _playerCorpse;
-        
+        private GridManager _gridManager;
+
         //Components
         private InventoryManager _inventoryManager;
-        private GridManager _gridManager;
         private Transform _transform;
 
         //Actions
@@ -45,15 +42,16 @@ namespace DeathSystem
             Assert.IsNotNull(_inventoryManager);
             if (_inventoryManager.currentRune == null)
             {
-                Instantiate(_playerCorpse, _transform.position, Quaternion.identity);
-                _gridManager.AddObjectOnCell(_transform.position, _playerCorpse.GetComponent<Corpse>());
+                GameObject playerCorpse = Instantiate(_playerCorpse, _transform.position, Quaternion.identity);
+                Corpse corpse = playerCorpse.GetComponent<Corpse>();
+                _gridManager.AddObjectOnCell(_transform.position, corpse);
             }
             else
             {
                 _inventoryManager.currentRune.ApplyEffect(transform.position, _gridManager);
             }
+
             onPlayerDeath?.Invoke(gameObject);
         }
-        
     }
 }

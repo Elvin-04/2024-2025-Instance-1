@@ -29,6 +29,8 @@ public class EventManager : MonoBehaviour
     public UnityEvent OnReloadUIRetry { get; private set; } = new UnityEvent();
     public UnityEvent OnStopHoldingReload { get; private set; } = new UnityEvent();
     public UnityEvent OnWin { get; private set; } = new UnityEvent();
+    public UnityEvent<Vector3> StopInteract { get; private set; } = new UnityEvent<Vector3>();
+    public UnityEvent<Vector3, CellObjectBase> OnRemoveObjectOnCell { get; private set; } = new UnityEvent<Vector3, CellObjectBase>();
 
     private void Awake()
     {

@@ -28,9 +28,9 @@ namespace Player
 
         //Components
         private Transform _transform;
-        public PlayerDirection currentDirection { get; private set; }
 
-        public PlayerDirection? bannedDirection = null;
+        public PlayerDirection? bannedDirection;
+        public PlayerDirection currentDirection { get; private set; }
 
         private void Awake()
         {
@@ -50,11 +50,7 @@ namespace Player
             TryMove();
 
             //////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-
-                EventManager.Instance.OnDeath.Invoke();
-            }
+            if (Input.GetKeyDown(KeyCode.K)) EventManager.Instance.OnDeath.Invoke();
             ///////////////////////////////////////////////////////////////////
         }
 
@@ -66,6 +62,8 @@ namespace Player
 
         public void StopMoveAnim()
         {
+            _interactablesUnder.Clear();
+            _interactablesInFront.Clear();
             _currentMoveAnim?.Kill();
             _canMove = false;
             _reachedTargetCell = true;
@@ -109,16 +107,13 @@ namespace Player
 
         private void GetInteractableFrontOfMe(Vector3 dir)
         {
-
             Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, dir);
-
 
 
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
             if (nextCell == null) return;
 
-            
 
             _interactablesInFront =
                 _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex))
@@ -140,7 +135,7 @@ namespace Player
         private void Move()
         {
             Vector2Int cellIndex = _gridManager.GetCellIndex(_transform.position);
-            (int, int) nextIndex = (cellIndex.x + (int) _moveDirection.x, cellIndex.y + (int) _moveDirection.y);
+            (int, int) nextIndex = (cellIndex.x + (int)_moveDirection.x, cellIndex.y + (int)_moveDirection.y);
 
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
