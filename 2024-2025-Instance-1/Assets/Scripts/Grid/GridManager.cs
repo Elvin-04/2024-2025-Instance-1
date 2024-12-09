@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
@@ -76,11 +77,12 @@ namespace Grid
         }
 
         #region RemoveObjectOnCell
+
         public void RemoveObjectOnCell((int, int) indexes, CellObjectBase cellObject)
         {
             _cellsContainers[indexes].RemoveObject(cellObject);
         }
-        
+
         //Overload
         public void RemoveObjectOnCell(int x, int y, CellObjectBase cellObject)
         {
@@ -102,11 +104,12 @@ namespace Grid
         #endregion
 
         #region AddObjectOnCell
+
         public void AddObjectOnCell((int, int) indexes, CellObjectBase cellObject)
         {
             _cellsContainers[indexes].AddObject(cellObject);
         }
-        
+
         public void AddObjectOnCell(int x, int y, CellObjectBase cellObject)
         {
             AddObjectOnCell((x, y), cellObject);
@@ -121,7 +124,7 @@ namespace Grid
         {
             AddObjectOnCell(GetCellIndex(pos), cellObject);
         }
-        
+
         #endregion
 
         #region GetObjectsOnCell
@@ -145,6 +148,33 @@ namespace Grid
         {
             Vector2Int indexes = GetCellIndex(position);
             return _cellsContainers[(indexes.x, indexes.y)].objectsOnCell;
+        }
+
+        #endregion
+
+        #region IsType
+
+        public bool GetCellObjectsByType<T>((int, int) indexes, out List<CellObjectBase> cellObjects)
+            where T : CellObjectBase
+        {
+            cellObjects = _cellsContainers[indexes].objectsOnCell.Where(cellObject => cellObject is T).ToList();
+            return cellObjects.Any();
+        }
+
+        public bool GetCellObjectsByType<T>(int x, int y, out List<CellObjectBase> cellObjects) where T : CellObjectBase
+        {
+            return GetCellObjectsByType<T>((x, y), out cellObjects);
+        }
+
+        public bool GetCellObjectsByType<T>(Vector2Int indexes, out List<CellObjectBase> cellObjects)
+            where T : CellObjectBase
+        {
+            return GetCellObjectsByType<T>((indexes.x, indexes.y), out cellObjects);
+        }
+
+        public bool GetCellObjectsByType<T>(Vector3 pos, out List<CellObjectBase> cellObjects) where T : CellObjectBase
+        {
+            return GetCellObjectsByType<T>(GetCellIndex(pos), out cellObjects);
         }
 
         #endregion
