@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
   m_Name: EnterNewRoomCell
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 0512310ac8aba3f448f3e7223bdf66fe, type: 3}
+  m_Sprite: {fileID: -5877004946697828585, guid: 4bf81d17fe14c1542acd3f36853cd5dd, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Transform:
     e00: 1
@@ -34,4 +34,3 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  <objectOnCell>k__BackingField: {fileID: -7061452110801777948, guid: 4979740ca928cfc47b6fa8d2b2d77f90, type: 3}
