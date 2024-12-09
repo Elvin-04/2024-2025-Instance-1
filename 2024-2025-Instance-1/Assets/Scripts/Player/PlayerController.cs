@@ -82,9 +82,9 @@ namespace Player
             _moveDirection = direction;
         }
 
-        private void CheckInteraction(Vector3 dir)
+        private void CheckInteraction<T>(Vector3 dir) where T : IInteractable
         {
-            GetInteractableFrontOfMe(dir);
+            GetInteractableFrontOfMe<T>(dir);
             GetInteractableUnderMe();
         }
 
@@ -102,10 +102,13 @@ namespace Player
 
             _interactablesUnder = interacts;
 
-            _interactablesUnder.ForEach(interactable => interactable?.Interact());
+            foreach (IInteractable interactable in _interactablesUnder.ToList())
+            {
+                interactable?.Interact();
+            }
         }
 
-        private void GetInteractableFrontOfMe(Vector3 dir)
+        private void GetInteractableFrontOfMe<T>(Vector3 dir) where T : IInteractable
         {
             Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, dir);
 
@@ -119,13 +122,12 @@ namespace Player
                 _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex))
                     .Select(objectOnCell => objectOnCell as IInteractable).Where(interactable => interactable != null)
                     .ToList();
-            _interactablesInFront.ForEach(Debug.Log);
 
             List<IMoving> movingObjectsInFront = _interactablesInFront.OfType<IMoving>().ToList();
             movingObjectsInFront.ForEach(movingObjectInFront =>
             {
                 if (dir.Equals(-movingObjectInFront.direction))
-                    movingObjectsInFront.OfType<IInteractable>().ToList()
+                    movingObjectsInFront.OfType<T>().ToList()
                         .ForEach(interactable => interactable.Interact());
             });
 
@@ -179,7 +181,7 @@ namespace Player
 
             if (nextCellObjects.Any(objectOnCell => objectOnCell != null && objectOnCell is ICollisionObject))
             {
-                CheckInteraction(_moveDirection);
+                CheckInteraction<IInteractable>(_moveDirection);
                 StopMove();
                 return;
             }
@@ -193,11 +195,11 @@ namespace Player
                 position,
                 _movementTime).SetEase(Ease.Linear).OnComplete(() =>
             {
-                CheckInteraction(_moveDirection);
+                CheckInteraction<IInteractableCallable>(_moveDirection);
                 // wait one frame. this is to allow interactions to actually happen
                 StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
             });
-            GetInteractableFrontOfMe(_moveDirection);
+            GetInteractableFrontOfMe<IInteractable>(_moveDirection);
         }
 
         private void ReachTarget()

@@ -62,8 +62,8 @@ public class Arrow : CellObjectBase, IInteractable, IMoving
 
         _transform.DOMove(gridManager.GetCellPos(nextIndex), 0.2f).OnComplete(() =>
         {
+            gridManager.AddObjectOnCell(nextIndex, this);
             gridManager.RemoveObjectOnCell(cellIndex, this);
         });
-        gridManager.AddObjectOnCell(nextIndex, this);
     }
 }
