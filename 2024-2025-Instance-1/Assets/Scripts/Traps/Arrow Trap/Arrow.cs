@@ -20,16 +20,16 @@ public class Arrow : MonoBehaviour
     public void UpdateClock()
     {
         Vector2Int cellIndex = gridManager.GetCellIndex(_transform.position);
-        int yMoveDir = Mathf.CeilToInt(Mathf.Abs(direction.y)) * (int)Mathf.Sign(direction.y);
-        int xMoveDir = Mathf.CeilToInt(Mathf.Abs(direction.x)) * (int)Mathf.Sign(direction.x);
-        (int, int) nextIndex = (cellIndex.x + xMoveDir, cellIndex.y + yMoveDir);
+        (int, int) nextIndex = (cellIndex.x + (int) direction.x, cellIndex.y + (int) direction.y);
 
-        if (gridManager.GetObjectsOnCell(gridManager.GetCellPos(nextIndex))
-            .Select(cellObjectBase => cellObjectBase is Wall).Any())
+        foreach (CellObjectBase cellObjectBase in gridManager.GetObjectsOnCell(gridManager.GetCellPos(nextIndex)))
         {
-            EventManager.Instance.UpdateClock.RemoveListener(UpdateClock);
-            Destroy(gameObject);
-            return;
+            if (cellObjectBase is Wall)
+            {
+                EventManager.Instance.UpdateClock.RemoveListener(UpdateClock);
+                Destroy(gameObject);
+                return;
+            }
         }
 
         _transform.DOMove(_transform.position + direction, 0.2f);
