@@ -9,22 +9,14 @@ namespace Grid
         public Vector2Int nextCamPos;
         public bool CanPickUp {get; set;} = false;
 
-        private bool _canMove = true;
-
         public void Interact(PlayerController controller)
         {
-            if (!_canMove)
-                return;
-            
             Vector3 newPos = new Vector3(nextCamPos.x, nextCamPos.y, Camera.main.transform.position.z);
 
             if (newPos == Camera.main.transform.position)
                 return;
 
-            _canMove = false;
-
-            controller.BanDirection(controller.currentDirection.GetOpposite());
-            Camera.main.transform.DOMove(newPos, 0.5f).SetEase(Ease.OutCubic).OnComplete(() => _canMove = true);
+            Camera.main.transform.DOMove(newPos, 0.5f).SetEase(Ease.OutCubic);
         }
 
         public override bool IsEqual(CellObjectBase other)

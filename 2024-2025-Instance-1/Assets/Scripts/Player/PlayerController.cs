@@ -138,19 +138,19 @@ namespace Player
                 }
             };
 
-            if (bannedDirection != null)
-            {
-                if (currentDirection == bannedDirection)
-                {
-                    currentDirection = oldDiretion;
-                    StopMove();
+            // if (bannedDirection != null)
+            // {
+            //     if (currentDirection == bannedDirection)
+            //     {
+            //         currentDirection = oldDiretion;
+            //         StopMove();
 
-                    Debug.Log("can't move that way");
-                    return;
-                }
-                else if (currentDirection == ((PlayerDirection) bannedDirection).GetOpposite())
-                    bannedDirection = null;
-            }
+            //         Debug.Log("can't move that way");
+            //         return;
+            //     }
+            //     else if (currentDirection == ((PlayerDirection) bannedDirection).GetOpposite())
+            //         bannedDirection = null;
+            // }
 
             if (nextCell == null)
             {
