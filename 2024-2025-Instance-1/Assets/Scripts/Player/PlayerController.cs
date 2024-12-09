@@ -30,6 +30,8 @@ namespace Player
         private Transform _transform;
         public PlayerDirection currentDirection { get; private set; }
 
+        public PlayerDirection? bannedDirection = null;
+
         private void Awake()
         {
             _transform = transform;
@@ -96,7 +98,7 @@ namespace Player
 
             _interactablesUnder = interacts;
 
-            _interactablesUnder.ForEach(interactable => interactable?.Interact());
+            _interactablesUnder.ForEach(interactable => interactable?.Interact(this));
         }
 
         private void GetInteractableFrontOfMe(Vector3 dir)
@@ -118,11 +120,11 @@ namespace Player
         private void Move()
         {
             Vector2Int cellIndex = _gridManager.GetCellIndex(_transform.position);
-            int yMoveDir = Mathf.CeilToInt(Mathf.Abs(_moveDirection.y)) * (int)Mathf.Sign(_moveDirection.y);
-            int xMoveDir = Mathf.CeilToInt(Mathf.Abs(_moveDirection.x)) * (int)Mathf.Sign(_moveDirection.x);
-            (int, int) nextIndex = (cellIndex.x + xMoveDir, cellIndex.y + yMoveDir);
+            (int, int) nextIndex = (cellIndex.x + (int) _moveDirection.x, cellIndex.y + (int) _moveDirection.y);
 
             Cell nextCell = _gridManager.GetCell(nextIndex);
+
+            PlayerDirection oldDiretion = currentDirection;
 
             currentDirection = _moveDirection.x switch
             {
@@ -135,6 +137,20 @@ namespace Player
                     _ => currentDirection
                 }
             };
+
+            if (bannedDirection != null)
+            {
+                if (currentDirection == bannedDirection)
+                {
+                    currentDirection = oldDiretion;
+                    StopMove();
+
+                    Debug.Log("can't move that way");
+                    return;
+                }
+                else if (currentDirection == ((PlayerDirection) bannedDirection).GetOpposite())
+                    bannedDirection = null;
+            }
 
             if (nextCell == null)
             {
@@ -168,6 +184,11 @@ namespace Player
             });
         }
 
+        public void BanDirection(PlayerDirection direction)
+        {
+            bannedDirection ??= direction;
+        }
+
         private void StopMove()
         {
             _canMove = false;
@@ -176,7 +197,7 @@ namespace Player
         private void Interact()
         {
             if (_interactablesInFront.Count == 0) return;
-            _interactablesInFront.ForEach(objectInFront => objectInFront.Interact());
+            _interactablesInFront.ForEach(objectInFront => objectInFront.Interact(this));
         }
     }
 }
