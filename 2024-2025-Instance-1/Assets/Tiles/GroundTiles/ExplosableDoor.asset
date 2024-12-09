@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
-  m_Name: TestInteractable
+  m_Name: ExplosableDoor
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 0512310ac8aba3f448f3e7223bdf66fe, type: 3}
-  m_Color: {r: 0.21995485, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.6926372, g: 0, b: 0.70980394, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -31,6 +31,6 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 6610866179624033917, guid: 0ae72618880e1bf429406d8d628654d7, type: 3}
+  m_InstancedGameObject: {fileID: 5865327171793496441, guid: 6d11d59682c3e5046a519e05fc6a0669, type: 3}
   m_Flags: 1
   m_ColliderType: 1

@@ -42,11 +42,20 @@ namespace Player
             EventManager.Instance.OnMoveStarted?.AddListener(StartMove);
             EventManager.Instance.OnMoveCanceled?.AddListener(StopMove);
             EventManager.Instance.OnInteract?.AddListener(Interact);
+            EventManager.Instance.OnDeath?.AddListener(StopMoveAnim);
         }
 
         private void Update()
         {
             TryMove();
+
+            //////////////////////////////////////////////////////////////////
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+
+                EventManager.Instance.OnDeath.Invoke();
+            }
+            ///////////////////////////////////////////////////////////////////
         }
 
         //Has to be called when new player is spawned
@@ -58,8 +67,8 @@ namespace Player
         public void StopMoveAnim()
         {
             _currentMoveAnim?.Kill();
+            _canMove = false;
             _reachedTargetCell = true;
-            GetInteractableFrontOfMe(_moveDirection);
         }
 
         private void TryMove()
@@ -88,9 +97,6 @@ namespace Player
                     .Select(cellObject => cellObject as IInteractable).Where(interactable => interactable != null)
                     .ToList();
 
-            Debug.Log(interacts.Count);
-
-
             List<IInteractable> commonInteracts = interacts.Intersect(_interactablesUnder).ToList();
 
             _interactablesUnder.Except(commonInteracts).ToList()
@@ -103,16 +109,31 @@ namespace Player
 
         private void GetInteractableFrontOfMe(Vector3 dir)
         {
-            (int, int) nextIndex = ((int)(_transform.position + dir).x, (int)(_transform.position + dir).y);
+
+            Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, dir);
+
+
 
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
             if (nextCell == null) return;
 
+            
+
             _interactablesInFront =
                 _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex))
                     .Select(objectOnCell => objectOnCell as IInteractable).Where(interactable => interactable != null)
                     .ToList();
+            _interactablesInFront.ForEach(Debug.Log);
+
+            List<IMoving> movingObjectsInFront = _interactablesInFront.OfType<IMoving>().ToList();
+            movingObjectsInFront.ForEach(movingObjectInFront =>
+            {
+                if (dir.Equals(movingObjectInFront.direction) ||
+                    dir.Equals(-movingObjectInFront.direction))
+                    movingObjectsInFront.OfType<IInteractable>().ToList()
+                        .ForEach(interactable => interactable.Interact());
+            });
 
             EventManager.Instance.CanInteract.Invoke(_interactablesInFront.Count > 0);
         }
@@ -161,11 +182,11 @@ namespace Player
 
             List<CellObjectBase> nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
+
             if (nextCellObjects.Any(objectOnCell => objectOnCell != null && objectOnCell is ICollisionObject))
             {
-                Debug.Log("Collision");
-                StopMove();
                 CheckInteraction(_moveDirection);
+                StopMove();
                 return;
             }
 
@@ -182,6 +203,12 @@ namespace Player
                 // wait one frame. this is to allow interactions to actually happen
                 StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
             });
+            GetInteractableFrontOfMe(_moveDirection);
+        }
+
+        private void ReachTarget()
+        {
+            _reachedTargetCell = true;
         }
 
         public void BanDirection(PlayerDirection direction)
