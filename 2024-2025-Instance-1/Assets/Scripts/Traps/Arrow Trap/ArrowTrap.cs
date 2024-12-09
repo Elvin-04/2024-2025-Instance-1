@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
 using Grid;
+using System;
+using UnityEngine;
 
 public enum Direction
 {

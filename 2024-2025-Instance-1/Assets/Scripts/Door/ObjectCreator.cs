@@ -1,17 +1,28 @@
+using System.Collections.Generic;
 using Grid;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class ObjectCreator : MonoBehaviour
 {
     [SerializeField] protected GridManager _gridManager;
-    protected Cell CreatCellObject(GridManager gridManager, TileBase tile, Transform transform)
+
+    protected Cell CreateCell(GridManager gridManager, Cell tile, Transform spawnTransform)
     {
-        Tilemap tilemap = gridManager.tilemap;
-        tilemap.SetTile(tilemap.WorldToCell(transform.position), tile);
-        GameObject go = tilemap.GetInstantiatedObject(tilemap.WorldToCell(transform.position));
-        Cell cell = gridManager.GetCell(transform.position);
-        cell.UpdateCellRef(go);
+        gridManager.ChangeCell(spawnTransform.position, tile);
+        Cell cell = gridManager.GetCell(spawnTransform.position);
         return cell;
+    }
+
+    protected List<Cell> CreateCells(GridManager gridManager, Cell tile, List<Transform> transforms)
+    {
+        List<Cell> cells = new();
+        for (int i = 0; i < transforms.Count; i++)
+        {
+            Cell cell = CreateCell(gridManager, tile, transforms[i]);
+            if (cell != null)
+                cells.Add(cell);
+        }
+
+        return cells;
     }
 }
