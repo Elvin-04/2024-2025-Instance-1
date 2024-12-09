@@ -9,7 +9,7 @@ namespace Grid
     {
         [SerializeField] private Cell _groundCell;
         [field: SerializeField] public Tilemap tilemap { get; private set; }
-        private readonly Dictionary<(int, int), CellContainer> _cells = new();
+        private readonly Dictionary<(int, int), CellContainer> _cellsContainers = new();
 
         private void Awake()
         {
@@ -35,8 +35,8 @@ namespace Grid
 
                 Vector3 cellPos = tilemap.GetCellCenterWorld(pos);
                 //CreateCellAt(cellPos).name = "x : " + x + " y : " + y;
-                _cells[(x, y)] = new CellContainer(cell, cellPos);
-                _cells[(x, y)].AddObject(GetInstantiatedObject(cellPos));
+                _cellsContainers[(x, y)] = new CellContainer(cell, cellPos);
+                _cellsContainers[(x, y)].AddObject(GetInstantiatedObject(cellPos));
             }
         }
 
@@ -68,18 +68,67 @@ namespace Grid
         {
             for (int x = 0; x < tilemap.size.x; x++)
             for (int y = 0; y < tilemap.size.y; y++)
-                if (_cells.ContainsKey((x, y)) &&
-                    tilemap.WorldToCell(_cells[(x, y)].cellPos) == tilemap.WorldToCell(position))
+                if (_cellsContainers.ContainsKey((x, y)) &&
+                    tilemap.WorldToCell(_cellsContainers[(x, y)].cellPos) == tilemap.WorldToCell(position))
                     return new Vector2Int(x, y);
 
             return Vector2Int.zero;
         }
 
-        #region GetCellContainer
+        #region RemoveObjectOnCell
+        public void RemoveObjectOnCell((int, int) indexes, CellObjectBase cellObject)
+        {
+            _cellsContainers[indexes].RemoveObject(cellObject);
+        }
+        
+        //Overload
+        public void RemoveObjectOnCell(int x, int y, CellObjectBase cellObject)
+        {
+            RemoveObjectOnCell((x, y), cellObject);
+        }
+
+        //Overload
+        public void RemoveObjectOnCell(Vector2Int indexes, CellObjectBase cellObject)
+        {
+            RemoveObjectOnCell((indexes.x, indexes.y), cellObject);
+        }
+
+        //Overload
+        public void RemoveObjectOnCell(Vector3 pos, CellObjectBase cellObject)
+        {
+            RemoveObjectOnCell(GetCellIndex(pos), cellObject);
+        }
+
+        #endregion
+
+        #region AddObjectOnCell
+        public void AddObjectOnCell((int, int) indexes, CellObjectBase cellObject)
+        {
+            _cellsContainers[indexes].AddObject(cellObject);
+        }
+        
+        public void AddObjectOnCell(int x, int y, CellObjectBase cellObject)
+        {
+            AddObjectOnCell((x, y), cellObject);
+        }
+
+        public void AddObjectOnCell(Vector2Int indexes, CellObjectBase cellObject)
+        {
+            AddObjectOnCell((indexes.x, indexes.y), cellObject);
+        }
+
+        public void AddObjectOnCell(Vector3 pos, CellObjectBase cellObject)
+        {
+            AddObjectOnCell(GetCellIndex(pos), cellObject);
+        }
+        
+        #endregion
+
+        #region GetObjectsOnCell
 
         public List<CellObjectBase> GetObjectsOnCell((int, int) indexes)
         {
-            return _cells[indexes].objectsOnCell;
+            return _cellsContainers[indexes].objectsOnCell;
         }
 
         public List<CellObjectBase> GetObjectsOnCell(int x, int y)
@@ -89,13 +138,13 @@ namespace Grid
 
         public List<CellObjectBase> GetObjectsOnCell(Vector2Int indexes)
         {
-            return _cells[(indexes.x, indexes.y)].objectsOnCell;
+            return _cellsContainers[(indexes.x, indexes.y)].objectsOnCell;
         }
 
         public List<CellObjectBase> GetObjectsOnCell(Vector3 position)
         {
             Vector2Int indexes = GetCellIndex(position);
-            return _cells[(indexes.x, indexes.y)].objectsOnCell;
+            return _cellsContainers[(indexes.x, indexes.y)].objectsOnCell;
         }
 
         #endregion
@@ -104,7 +153,7 @@ namespace Grid
 
         public Cell GetCell((int, int) indexes)
         {
-            if (!_cells.TryGetValue(indexes, out CellContainer cellInfo)) return null;
+            if (!_cellsContainers.TryGetValue(indexes, out CellContainer cellInfo)) return null;
 
             Cell cell = cellInfo.cell;
             return cell;
@@ -135,7 +184,7 @@ namespace Grid
 
         public Vector3 GetCellPos((int, int) indexes)
         {
-            if (!_cells.TryGetValue(indexes, out CellContainer cellInfo)) return Vector3.zero;
+            if (!_cellsContainers.TryGetValue(indexes, out CellContainer cellInfo)) return Vector3.zero;
             Vector3 cellPos = cellInfo.cellPos;
             return cellPos;
         }
@@ -164,10 +213,10 @@ namespace Grid
 
         public void ChangeCell((int, int) indexes, Cell toCell)
         {
-            Vector3Int pos = tilemap.WorldToCell(_cells[indexes].cellPos);
+            Vector3Int pos = tilemap.WorldToCell(_cellsContainers[indexes].cellPos);
             tilemap.SetTile(pos, toCell);
-            _cells[indexes] = new CellContainer(toCell, _cells[indexes].cellPos);
-            _cells[indexes].AddObject(GetInstantiatedObject(pos));
+            _cellsContainers[indexes] = new CellContainer(toCell, _cellsContainers[indexes].cellPos);
+            _cellsContainers[indexes].AddObject(GetInstantiatedObject(pos));
         }
 
         //Overload
