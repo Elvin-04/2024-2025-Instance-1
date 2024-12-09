@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
-  m_Name: CamMocement
+  m_Name: 02_to_01 1
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: ac608d42f04bf534e8cfa90f769c87e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -31,6 +31,6 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 6441155145412033094, guid: d12bdd37dd3cfee47951254a3f1d8f2b, type: 3}
+  m_InstancedGameObject: {fileID: 6441155145412033094, guid: 381f5b11afd840c468780d093f53c59c, type: 3}
   m_Flags: 1
   m_ColliderType: 1

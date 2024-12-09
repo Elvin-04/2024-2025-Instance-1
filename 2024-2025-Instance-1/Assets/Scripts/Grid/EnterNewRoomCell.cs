@@ -6,20 +6,25 @@ namespace Grid
 {
     public class EnterNewRoomCell : CellObjectBase, IInteractable
     {
-        public Vector2Int previousCamPos;
         public Vector2Int nextCamPos;
+        public bool CanPickUp {get; set;} = false;
 
-        private bool _posIsNext = true;
-
-        public bool CanPickUp {get; set;} = false;        
+        private bool _canMove = true;
 
         public void Interact(PlayerController controller)
         {
-            Vector2Int newPos = _posIsNext ? nextCamPos : previousCamPos;
-            _posIsNext = !_posIsNext;
+            if (!_canMove)
+                return;
+            
+            Vector3 newPos = new Vector3(nextCamPos.x, nextCamPos.y, Camera.main.transform.position.z);
+
+            if (newPos == Camera.main.transform.position)
+                return;
+
+            _canMove = false;
 
             controller.BanDirection(controller.currentDirection.GetOpposite());
-            Camera.main.transform.DOMove(new Vector3(newPos.x, newPos.y, Camera.main.transform.position.z), 0.5f).SetEase(Ease.OutCubic);
+            Camera.main.transform.DOMove(newPos, 0.5f).SetEase(Ease.OutCubic).OnComplete(() => _canMove = true);
         }
 
         public override bool IsEqual(CellObjectBase other)
@@ -28,7 +33,7 @@ namespace Grid
                 return false;
             
             EnterNewRoomCell otherAsCorrectType = other as EnterNewRoomCell;
-            return previousCamPos == otherAsCorrectType.previousCamPos && nextCamPos == otherAsCorrectType.nextCamPos;
+            return nextCamPos == otherAsCorrectType.nextCamPos;
         }
 
         public void StopInteract()
