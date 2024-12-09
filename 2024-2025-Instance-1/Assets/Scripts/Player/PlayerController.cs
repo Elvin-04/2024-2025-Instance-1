@@ -104,7 +104,7 @@ namespace Player
 
             _interactablesUnder = interacts;
 
-            _interactablesUnder.ForEach(interactable => interactable?.Interact(this));
+            _interactablesUnder.ForEach(interactable => interactable?.Interact());
         }
 
         private void GetInteractableFrontOfMe(Vector3 dir)
@@ -129,8 +129,7 @@ namespace Player
             List<IMoving> movingObjectsInFront = _interactablesInFront.OfType<IMoving>().ToList();
             movingObjectsInFront.ForEach(movingObjectInFront =>
             {
-                if (dir.Equals(movingObjectInFront.direction) ||
-                    dir.Equals(-movingObjectInFront.direction))
+                if (dir.Equals(-movingObjectInFront.direction))
                     movingObjectsInFront.OfType<IInteractable>().ToList()
                         .ForEach(interactable => interactable.Interact());
             });
@@ -224,7 +223,7 @@ namespace Player
         private void Interact()
         {
             if (_interactablesInFront.Count == 0) return;
-            _interactablesInFront.ForEach(objectInFront => objectInFront.Interact(this));
+            _interactablesInFront.ForEach(objectInFront => objectInFront.Interact());
         }
     }
 }

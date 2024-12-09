@@ -7,9 +7,8 @@ namespace Grid
     {
         public bool CanPickUp {get; set;} = false;
 
-        public void Interact(PlayerController controller)
+        public void Interact()
         {
-            Debug.Log("W");
             EventManager.Instance.OnWin.Invoke();
         }
 

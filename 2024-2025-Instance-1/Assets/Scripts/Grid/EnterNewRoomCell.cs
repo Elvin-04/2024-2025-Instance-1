@@ -9,7 +9,7 @@ namespace Grid
         public Vector2Int nextCamPos;
         public bool CanPickUp {get; set;} = false;
 
-        public void Interact(PlayerController controller)
+        public void Interact()
         {
             Vector3 newPos = new Vector3(nextCamPos.x, nextCamPos.y, Camera.main.transform.position.z);
 

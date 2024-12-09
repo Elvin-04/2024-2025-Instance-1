@@ -42,7 +42,7 @@ namespace Grid
                     }
 
                     Vector3 cellPos = staticTilemap.GetCellCenterWorld(pos);
-                    CreateCellAt(cellPos).name = "x : " + indexX + " y : " + indexY;
+                    //CreateCellAt(cellPos).name = "x : " + indexX + " y : " + indexY;
                     _cellsContainers[(indexX, indexY)] = new CellContainer(cell, cellPos);
                     _cellsContainers[(indexX, indexY)].AddObject(GetInstantiatedObject(cellPos));
                     indexY++;

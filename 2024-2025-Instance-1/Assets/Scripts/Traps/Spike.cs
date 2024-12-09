@@ -3,7 +3,7 @@ using Player;
 
 public class Spike : CellObjectBase, IInteractable
 {
-    public void Interact(PlayerController controller)
+    public void Interact()
     {
         EventManager.Instance.OnDeath?.Invoke();
     }

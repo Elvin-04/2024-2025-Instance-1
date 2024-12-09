@@ -10,7 +10,7 @@ public class DoorButton : CellObjectBase, IInteractable
     public Cell doorClose;
     public bool CanPickUp { get => false; set{} }
 
-    public void Interact(PlayerController controller)
+    public void Interact()
     {
         OpenDoors();
     }
