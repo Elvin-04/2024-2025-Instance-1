@@ -134,7 +134,7 @@ namespace Player
                         .ForEach(interactable => interactable.Interact());
             });
 
-            EventManager.Instance.CanInteract.Invoke(_interactablesInFront.Count > 0);
+            EventManager.Instance.CanInteract.Invoke(_interactablesInFront.OfType<IInteractableCallable>().Count() > 0);
         }
 
         private void Move()
