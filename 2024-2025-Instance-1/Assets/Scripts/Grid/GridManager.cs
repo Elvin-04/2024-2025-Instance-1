@@ -154,27 +154,25 @@ namespace Grid
 
         #region IsType
 
-        public bool GetCellObjectsByType<T>((int, int) indexes, out List<CellObjectBase> cellObjects)
-            where T : CellObjectBase
+        public bool GetCellObjectsByType<T>((int, int) indexes, out List<T> cellObjects)
         {
-            cellObjects = _cellsContainers[indexes].objectsOnCell.Where(cellObject => cellObject is T).ToList();
+            cellObjects = _cellsContainers[indexes].objectsOnCell.OfType<T>().ToList();
             return cellObjects.Any();
         }
 
-        public bool GetCellObjectsByType<T>(int x, int y, out List<CellObjectBase> cellObjects) where T : CellObjectBase
+        public bool GetCellObjectsByType<T>(int x, int y, out List<T> cellObjects)
         {
-            return GetCellObjectsByType<T>((x, y), out cellObjects);
+            return GetCellObjectsByType((x, y), out cellObjects);
         }
 
-        public bool GetCellObjectsByType<T>(Vector2Int indexes, out List<CellObjectBase> cellObjects)
-            where T : CellObjectBase
+        public bool GetCellObjectsByType<T>(Vector2Int indexes, out List<T> cellObjects)
         {
-            return GetCellObjectsByType<T>((indexes.x, indexes.y), out cellObjects);
+            return GetCellObjectsByType((indexes.x, indexes.y), out cellObjects);
         }
 
-        public bool GetCellObjectsByType<T>(Vector3 pos, out List<CellObjectBase> cellObjects) where T : CellObjectBase
+        public bool GetCellObjectsByType<T>(Vector3 pos, out List<T> cellObjects)
         {
-            return GetCellObjectsByType<T>(GetCellIndex(pos), out cellObjects);
+            return GetCellObjectsByType(GetCellIndex(pos), out cellObjects);
         }
 
         #endregion
