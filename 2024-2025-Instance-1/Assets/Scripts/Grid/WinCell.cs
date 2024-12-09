@@ -1,4 +1,5 @@
 using UnityEngine;
+using Player;
 
 namespace Grid
 {
@@ -6,7 +7,7 @@ namespace Grid
     {
         public bool CanPickUp {get; set;} = false;
 
-        public void Interact()
+        public void Interact(PlayerController controller)
         {
             Debug.Log("W");
         }

@@ -1,7 +1,9 @@
+using Player;
+
 public interface IInteractable
 {
     bool CanPickUp { get; set; }
-    void Interact();
+    void Interact(PlayerController controller);
     void StopInteract();
 }
 

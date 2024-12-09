@@ -1,5 +1,6 @@
 using Grid;
 using UnityEngine;
+using Player;
 
 public abstract class Rune : CellObjectBase, IInteractableCallable, ICollisionObject
 {
@@ -12,7 +13,7 @@ public abstract class Rune : CellObjectBase, IInteractableCallable, ICollisionOb
     }
 
     public virtual void ApplyEffect() { }
-    public void Interact()
+    public void Interact(PlayerController controller)
     {
         EventManager.Instance.AddRuneToInventory.Invoke(this);
     }

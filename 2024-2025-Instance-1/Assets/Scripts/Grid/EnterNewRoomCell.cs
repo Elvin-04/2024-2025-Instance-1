@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Player;
 using UnityEngine;
 
 namespace Grid
@@ -12,11 +13,12 @@ namespace Grid
 
         public bool CanPickUp {get; set;} = false;        
 
-        public void Interact()
+        public void Interact(PlayerController controller)
         {
             Vector2Int newPos = _posIsNext ? nextCamPos : previousCamPos;
             _posIsNext = !_posIsNext;
 
+            controller.BanDirection(controller.currentDirection.GetOpposite());
             Camera.main.transform.DOMove(new Vector3(newPos.x, newPos.y, Camera.main.transform.position.z), 0.5f).SetEase(Ease.OutCubic);
         }
 

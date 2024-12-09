@@ -1,6 +1,7 @@
 using Grid;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 public class DoorButton : CellObjectBase, IInteractable
 {
@@ -9,7 +10,7 @@ public class DoorButton : CellObjectBase, IInteractable
     public Cell doorClose;
     public bool CanPickUp { get => false; set{} }
 
-    public void Interact()
+    public void Interact(PlayerController controller)
     {
         OpenDoors();
     }

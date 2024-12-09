@@ -1,8 +1,9 @@
 using Grid;
+using Player;
 
 public class Spike : CellObjectBase, IInteractable
 {
-    public void Interact()
+    public void Interact(PlayerController controller)
     {
         EventManager.Instance.OnDeath?.Invoke();
     }
