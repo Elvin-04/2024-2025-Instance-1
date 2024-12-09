@@ -5,14 +5,8 @@ using UnityEngine.Tilemaps;
 
 namespace Grid
 {
-    public class Wall : CellObjectBase, ICollisionObject, IExplosable
-    {
-        //////////////////////////////////////
-        public void Explose()
-        {
-            EventManager.Instance.OnResetCell?.Invoke(transform.position);
+    public class Wall : CellObjectBase, ICollisionObject
+    { 
 
-        }
-        //////////////////////////////////////
     }
 }

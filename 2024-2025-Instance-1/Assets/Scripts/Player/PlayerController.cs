@@ -107,7 +107,11 @@ namespace Player
 
         private void GetInteractableFrontOfMe(Vector3 dir)
         {
+
             Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, dir);
+
+
+
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
             if (nextCell == null) return;

@@ -15,20 +15,16 @@ public class ExplosionRune : Rune
 
     public override void ApplyEffect(Vector3 position, GridManager gridManager)
     {
-        int offsetX = (int)gridManager.GetTileSize().x;
-        int offsetY = (int)gridManager.GetTileSize().y;
-
         Vector2Int positionIndexes = gridManager.GetCellIndex(position);
-
-        print(position.x - _radius * offsetX);
 
         for (int x = positionIndexes.x - _radius; x <= positionIndexes.x + _radius; x ++)
         {
             for (int y = positionIndexes.y  - _radius ; y <= positionIndexes.y  + _radius ; y ++) 
             {
-                print(positionIndexes);
+                gridManager.GetObjectsOnCell(x, y).ForEach(Debug.Log);
                 if (gridManager.GetCellObjectsByType(x, y, out List<IExplosable> cellObjects))
                 {
+                    Debug.Log(cellObjects);
                     for (int i = 0; i < cellObjects.Count; i++) {
                         cellObjects[i].Explose();
                     }

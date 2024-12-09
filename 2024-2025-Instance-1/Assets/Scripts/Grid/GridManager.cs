@@ -339,11 +339,6 @@ namespace Grid
             ResetCell(GetCellIndex(position));
         }
 
-        internal Vector3 GetTileSize()
-        {
-            return tilemap.cellSize;
-        }
-
 
         #endregion
     }
