@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
-using static UnityEngine.Rendering.VolumeComponent;
 
 namespace Grid
 {
@@ -45,13 +43,17 @@ namespace Grid
                     Vector3 cellPos = staticTilemap.GetCellCenterWorld(pos);
                     //CreateCellAt(cellPos).name = "x : " + indexX + " y : " + indexY;
                     _cellsContainers[(indexX, indexY)] = new CellContainer(cell, cellPos);
-                    if(cell.Getprefab)
+                    if (cell.Getprefab)
                     {
-                        GameObject goInstance = Instantiate<GameObject>(cell.Getprefab, pos, Quaternion.identity, staticTilemap.transform);
+                        GameObject goInstance = Instantiate<GameObject>(cell.Getprefab, pos, Quaternion.identity,
+                            staticTilemap.transform);
+                        cell.SetInstancedObject(goInstance);
                         _cellsContainers[(indexX, indexY)].AddObject(goInstance.GetComponent<CellObjectBase>());
                     }
+
                     indexY++;
                 }
+
                 indexX++;
                 indexY = 0;
             }
@@ -64,7 +66,6 @@ namespace Grid
             EventManager.Instance.OnResetCell?.AddListener(ResetCell);
             EventManager.Instance.OnRemoveObjectOnCell.AddListener(OnRemoveObjectOnCell);
             EventManager.Instance.StopInteract.AddListener(OnStopInteract);
-            
         }
 
         private void OnRemoveObjectOnCell(Vector3 pos, CellObjectBase cellObject)
@@ -81,7 +82,6 @@ namespace Grid
                 objectsOnCell.OfType<IInteractable>().ToList()
                     .ForEach(objectOnCell => objectOnCell.StopInteract());
             }
-            
         }
 
         private GameObject CreateCellAt(Vector3 pos)
@@ -98,8 +98,7 @@ namespace Grid
 
         private CellObjectBase GetInstantiatedObject(Vector3 pos)
         {
-
-             CellObjectBase instantiatedObject = staticTilemap.GetInstantiatedObject(staticTilemap.WorldToCell(pos))
+            CellObjectBase instantiatedObject = staticTilemap.GetInstantiatedObject(staticTilemap.WorldToCell(pos))
                 ?.GetComponent<CellObjectBase>();
 
             return instantiatedObject;
@@ -314,13 +313,15 @@ namespace Grid
         {
             Vector3Int pos = staticTilemap.WorldToCell(_cellsContainers[indexes].cellPos);
             staticTilemap.SetTile(pos, toCell);
-            _cellsContainers[indexes].objectsOnCell.Select(obj=>obj.gameObject).ToList().ForEach(Destroy);
+            Destroy(_cellsContainers[indexes].cell.instancedObject);
             _cellsContainers[indexes] = new CellContainer(toCell, _cellsContainers[indexes].cellPos);
-            if(toCell.Getprefab != null)
+            if (toCell.Getprefab == null)
             {
-                GameObject goInstance = Instantiate<GameObject>(toCell.Getprefab, pos, Quaternion.identity, staticTilemap.transform);
-                _cellsContainers[indexes].AddObject(goInstance.GetComponent<CellObjectBase>());
+                return;
             }
+
+            GameObject goInstance = Instantiate(toCell.Getprefab, pos, Quaternion.identity, staticTilemap.transform);
+            _cellsContainers[indexes].AddObject(goInstance.GetComponent<CellObjectBase>());
         }
 
         //Overload
@@ -368,7 +369,6 @@ namespace Grid
         {
             ResetCell(GetCellIndex(position));
         }
-
 
         #endregion
     }

@@ -5,10 +5,6 @@ using UnityEngine;
 public class ExplosionRune : Rune
 {
     [SerializeField] private int _radius;
-    public ExplosionRune(int radius)
-    {
-        this._radius = radius;
-    }
 
     public override void ApplyEffect(Vector3 position, GridManager gridManager)
     {

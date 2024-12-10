@@ -11,6 +11,9 @@ namespace Grid
     {
         [SerializeField] private GameObject _prefab;
 
+        public GameObject instancedObject { get; private set; }
+        public void SetInstancedObject(GameObject obj) => instancedObject = obj;
+
         public GameObject Getprefab => _prefab;
 
     }
