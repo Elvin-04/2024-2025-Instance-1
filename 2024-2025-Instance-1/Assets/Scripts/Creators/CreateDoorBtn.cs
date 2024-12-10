@@ -50,7 +50,7 @@ namespace Creators
             Assert.IsNotNull(_doorTransforms, "door transforms is null in CreateDoorBtn");
             base.OnDrawGizmos();
             Gizmos.color = Color.blue;
-            foreach(Transform t in _doorTransforms)
+            foreach (Transform t in _doorTransforms)
             {
                 Gizmos.color = Color.white;
                 Gizmos.DrawCube(t.position, Vector3.one);
