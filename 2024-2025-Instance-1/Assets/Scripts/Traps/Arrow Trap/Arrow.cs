@@ -34,7 +34,7 @@ public class Arrow : CellObjectBase, IInteractable, IMoving
 
     public void SetDirection(Direction direction)
     {
-        transform.rotation = Quaternion.Euler(0, 0, (int)direction * 90);
+        transform.rotation = Quaternion.Euler(0, 0, (int) (direction + 1) * 90);
         directionEnum = direction;
     }
 
