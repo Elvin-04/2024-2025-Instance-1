@@ -112,16 +112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c53ed98629d6d74aafb08c9fea4c3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridManager: {fileID: 0}
-  _door: {fileID: 11400000, guid: 66cf7941f935142429723a83caefeaac, type: 2}
-  _btn: {fileID: 11400000, guid: 48c618072a93a0b4ba0febdfe3afc463, type: 2}
+  _cellToSpawn: {fileID: 11400000, guid: 8a53f206bb8445949845058d834d9fa7, type: 2}
+  _gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  _door: {fileID: 11400000, guid: 9b9d0d63e1399ec48b51b0a5e2ed11fe, type: 2}
   _doorTransforms:
   - {fileID: 1080367878510791621}
-  - {fileID: 4968623019888332279}
-  - {fileID: 3159309877606045025}
-  - {fileID: 9172453037229471653}
-  - {fileID: 2220267020826811316}
-  _btnTransform: {fileID: 5392300412953642610}
+  _gridManager: {fileID: 0}
 --- !u!1 &5804614330491325229
 GameObject:
   m_ObjectHideFlags: 0
