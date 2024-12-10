@@ -3049,11 +3049,11 @@ Tilemap:
   - first: {x: 5, y: 6, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 1
+      m_TileIndex: 6
       m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
+      m_TileColorIndex: 4
+      m_TileObjectToInstantiateIndex: 5
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: 6, y: 6, z: 0}
@@ -4350,7 +4350,7 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 112
     m_Data: {fileID: 11400000, guid: aa8c389ef942ca64da4708c7c72029ce, type: 2}
-  - m_RefCount: 224
+  - m_RefCount: 223
     m_Data: {fileID: 11400000, guid: af5f64e5816715e41bdb76c4dab6ee3b, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 2ad7d6c9e2a31ea4890489d94ba738de, type: 2}
@@ -4360,6 +4360,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 439478a25520de5438ff577378c79796, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 1774eaea9cfc4994089aca15c1885f58, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 5f04e9579656415448e1886788ac394c, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 112
     m_Data: {fileID: 21300000, guid: 0512310ac8aba3f448f3e7223bdf66fe, type: 3}
@@ -4391,12 +4393,14 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 112
     m_Data: {r: 0, g: 0, b: 0, a: 1}
-  - m_RefCount: 228
+  - m_RefCount: 227
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 1
     m_Data: {r: 0.1967782, g: 0.25305286, b: 0.6226415, a: 1}
   - m_RefCount: 1
     m_Data: {r: 0.6926372, g: 0, b: 0.70980394, a: 1}
+  - m_RefCount: 1
+    m_Data: {r: 0.21995485, g: 1, b: 0, a: 1}
   m_TileObjectToInstantiateArray:
   - m_RefCount: 112
     m_Data: {fileID: 2165207380547012588, guid: 5af90ce062b185548a8914ae03dbd2b3, type: 3}
@@ -4408,6 +4412,8 @@ Tilemap:
     m_Data: {fileID: 556254037043233457, guid: f259050258643c7409773af4641a373b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 5865327171793496441, guid: 6d11d59682c3e5046a519e05fc6a0669, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 6610866179624033917, guid: 0ae72618880e1bf429406d8d628654d7, type: 3}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -10, y: -6, z: 0}
