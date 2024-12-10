@@ -354,6 +354,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 128339987290299051, guid: 29a3e81b21461c24bac771a1814efc55, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 422622934348514451, guid: 29a3e81b21461c24bac771a1814efc55, type: 3}
+      propertyPath: m_SortingOrder
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2317867155412939752, guid: 29a3e81b21461c24bac771a1814efc55, type: 3}
       propertyPath: _gridManager
       value: 
