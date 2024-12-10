@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Grid;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -49,8 +51,18 @@ namespace DeathSystem
             else
             {
                 _inventoryManager.currentRune.ApplyEffect(transform.position, _gridManager);
+                if (_gridManager.GetCellObjectsByType(_transform.position, out List<IInteractable> interactables))
+                {
+                    foreach (IInteractable objectOnCell in interactables)
+                    {
+                        objectOnCell.StopInteract();
+                    }
+                }
+                
             }
 
+            _inventoryManager.TakeRune(null);
+            
             onPlayerDeath?.Invoke(gameObject);
         }
     }
