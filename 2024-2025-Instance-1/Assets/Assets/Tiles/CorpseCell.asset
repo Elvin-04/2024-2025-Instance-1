@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
   m_Name: CorpseCell
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: ac608d42f04bf534e8cfa90f769c87e8, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -1443484304176910436, guid: 20a841a4caa5ae14bb9f6b42cddea8fb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -34,5 +34,3 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 3872018736821942520, guid: 3c48810a5de9b20488b71bed6f325254, type: 3}
   m_Flags: 1
   m_ColliderType: 1
-  gridManager: {fileID: 0}
-  <objectOnCell>k__BackingField: {fileID: 5395478300860402993, guid: 3c48810a5de9b20488b71bed6f325254, type: 3}
