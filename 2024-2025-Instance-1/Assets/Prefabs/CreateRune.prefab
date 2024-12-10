@@ -45,5 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellToSpawn: {fileID: 11400000, guid: e9af3235a53ecfb46bb3c65625f5699d, type: 2}
+  _gizmoColor: {r: 1, g: 1, b: 1, a: 1}
   _inactive: {fileID: 11400000, guid: 587a8b152e75ff5459d0a466b906c5b3, type: 2}
   _gridManager: {fileID: 0}
+  _runeToSpawn: {fileID: 4558655405851064084, guid: 0ae72618880e1bf429406d8d628654d7, type: 3}

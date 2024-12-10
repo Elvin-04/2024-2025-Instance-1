@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Grid;
-using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Creators
 {
@@ -48,7 +48,6 @@ namespace Creators
         protected override void OnDrawGizmos()
         {
             Assert.IsNotNull(_doorTransforms, "door transforms is null in CreateDoorBtn");
-            Assert.IsNotEmpty(_doorTransforms, "door transforms is empty in CreateDoorBtn");
             base.OnDrawGizmos();
             Gizmos.color = Color.blue;
             foreach(Transform t in _doorTransforms)
