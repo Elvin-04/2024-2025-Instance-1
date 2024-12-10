@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6e964a86fbaba8749988d6fb7af6578b
+guid: 304c36d75993b7844897174c18a17488
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1355084598973649067
-    second: piegeaflechedemur 1_0
+      213: 7776186826667819666
+    second: angleduba_san_pers_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: piegeaflechedemur 1_0
+      name: angleduba_san_pers_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 55fa29d9cb5c13de0800000000000000
-      internalID: -1355084598973649067
+      spriteID: 2928b9608b09aeb60800000000000000
+      internalID: 7776186826667819666
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      piegeaflechedemur 1_0: -1355084598973649067
+      angleduba_san_pers_0: 7776186826667819666
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

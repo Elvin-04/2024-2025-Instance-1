@@ -47,4 +47,4 @@ MonoBehaviour:
   _cellToSpawn: {fileID: 11400000, guid: 45e82b0e1260b4444a0ea5131af2d846, type: 2}
   _gizmoColor: {r: 1, g: 1, b: 1, a: 1}
   _inactive: {fileID: 11400000, guid: bae2e11e3f6be6f43a6e84afc386fcf8, type: 2}
-  _tick: 0
+  _tick: 1

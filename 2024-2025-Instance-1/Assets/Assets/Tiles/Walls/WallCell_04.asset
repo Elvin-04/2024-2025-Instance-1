@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WallCell_04
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -3705065890056707439, guid: 37db1b20b883d294f96c619b98e4b103, type: 3}
+  - {fileID: -4714939171631255691, guid: c32eba27369b03e49bdf8383509cbe99, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0

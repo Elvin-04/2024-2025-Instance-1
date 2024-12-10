@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GroundCell
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -5877004946697828585, guid: 4bf81d17fe14c1542acd3f36853cd5dd, type: 3}
+  - {fileID: 3514223523984640118, guid: edd15ed95ebc2b840802c6abfa087407, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0
