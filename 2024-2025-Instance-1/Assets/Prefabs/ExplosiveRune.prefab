@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4070539314744215532}
   - component: {fileID: 4558655405851064084}
   m_Layer: 0
-  m_Name: TestExplosiveRune
+  m_Name: ExplosiveRune
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
