@@ -1,19 +1,13 @@
-using Grid;
-using UnityEngine;
-
 namespace Creators
 {
     public class CreateSpikeTrap : SwitchableCellCreator
     {
-        [SerializeField, Range(0,10)] private int _tick ;
-        private int _numberOfTick;
-
         private bool _isActive;
 
         protected override void Start()
         {
             base.Start();
-            EventManager.Instance.OnClockUpdated.AddListener(UpdateSpike);
+            EventManager.instance.onClockUpdated.AddListener(UpdateSpike);
         }
 
         public void UpdateSpike()
@@ -23,17 +17,20 @@ namespace Creators
             {
                 _isActive = true;
                 _numberOfTick = 0;
+                EventManager.instance.onChangeCell?.Invoke(transform.position, GetTileBasedOnState(_isActive));
+                return;
             }
-            else
-            {
-                _isActive = false;
-            }
-            SetTile(_isActive);
+
+            if (!_isActive)
+                return;
+
+            _isActive = false;
+            EventManager.instance.onChangeCell?.Invoke(transform.position, GetTileBasedOnState(_isActive));
         }
 
         private void SetTile(bool isActive)
         {
-            EventManager.Instance.OnChangeCell?.Invoke(transform.position, GetTileBasedOnState(isActive));
+            EventManager.instance.onChangeCell?.Invoke(transform.position, GetTileBasedOnState(isActive));
         }
     }
 }

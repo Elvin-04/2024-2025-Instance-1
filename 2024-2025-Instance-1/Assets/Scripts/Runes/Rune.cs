@@ -2,35 +2,36 @@ using System;
 using Grid;
 using UnityEngine;
 
-public abstract class Rune : CellObjectBase, IInteractableCallable, ICollisionObject
+namespace Runes
 {
-    protected bool _canPickUp = true;
-    protected Color _color;
-    
-    public Action onDrop;
-    public Action onTake;
-    
-    public bool CanPickUp
+    public abstract class Rune : CellObjectBase, IInteractableCallable, ICollisionObject
     {
-        get => _canPickUp;
-        set => _canPickUp = value;
-    }
+        protected bool _canPickUp = true;
 
-    public abstract void ApplyEffect(Vector3 position, GridManager gridManager);
-    public void Interact()
-    {
-        Debug.Log("interacted with rune");
-        onTake?.Invoke();
-        EventManager.Instance.AddRuneToInventory.Invoke(this);
-    }
+        public Action onDrop;
+        public Action onTake;
 
-    public void DropRune()
-    {
-        onDrop?.Invoke();
-    }
+        public bool canPickUp
+        {
+            get => _canPickUp;
+            set => _canPickUp = value;
+        }
 
-    public void StopInteract()
-    {
-       
+        public void Interact()
+        {
+            onTake?.Invoke();
+            EventManager.instance.addRuneToInventory.Invoke(this);
+        }
+
+        public void StopInteract()
+        {
+        }
+
+        public abstract void ApplyEffect(Vector3 position, GridManager gridManager);
+
+        public void DropRune()
+        {
+            onDrop?.Invoke();
+        }
     }
 }

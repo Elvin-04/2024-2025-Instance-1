@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Grid;
 using Player;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -30,7 +29,7 @@ namespace DeathSystem
 
         private void Start()
         {
-            EventManager.Instance.OnDeath?.AddListener(Death);
+            EventManager.instance.onDeath?.AddListener(Death);
         }
 
         //To be called when player is instantiated
@@ -41,7 +40,6 @@ namespace DeathSystem
 
         private void Death()
         {
-            Assert.IsNotNull(_inventoryManager);
             if (_inventoryManager.currentRune == null)
             {
                 GameObject playerCorpse = Instantiate(_playerCorpse, _transform.position, Quaternion.identity);
@@ -52,19 +50,14 @@ namespace DeathSystem
             {
                 _inventoryManager.currentRune.ApplyEffect(transform.position, _gridManager);
                 if (_gridManager.GetCellObjectsByType(_transform.position, out List<IInteractable> interactables))
-                {
                     foreach (IInteractable objectOnCell in interactables)
-                    {
                         objectOnCell.StopInteract();
-                    }
-                }
-                
             }
-            
+
             _inventoryManager.currentRune?.DropRune();
 
             _inventoryManager.TakeRune(null);
-            
+
             onPlayerDeath?.Invoke(gameObject);
         }
     }

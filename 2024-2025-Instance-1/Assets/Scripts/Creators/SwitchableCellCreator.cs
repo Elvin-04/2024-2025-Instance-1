@@ -5,8 +5,10 @@ namespace Creators
 {
     public class SwitchableCellCreator : CellCreator
     {
-        protected Cell activeCell => _cellToSpawn;
         [SerializeField] protected Cell _inactive;
+        [SerializeField] [Range(1, 10)] protected int _tick;
+        protected int _numberOfTick;
+        protected Cell activeCell => _cellToSpawn;
 
         protected Cell GetTileBasedOnState(bool isActive)
         {

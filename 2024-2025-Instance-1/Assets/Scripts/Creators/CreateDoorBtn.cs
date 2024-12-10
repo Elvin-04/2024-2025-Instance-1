@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Grid;
+using Traps;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -11,38 +12,12 @@ namespace Creators
         [SerializeField] private List<Transform> _doorTransforms;
         [SerializeField] protected GridManager _gridManager;
 
-        #region CreateCell
-
-        private Cell CreateCell(Cell tile, Transform spawnTransform)
+        protected override void Start()
         {
-            _gridManager.ChangeCell(spawnTransform.position, tile);
-            Cell cell = _gridManager.GetCell(spawnTransform.position);
-            return cell;
-        }
-
-        private List<Cell> CreateCells(Cell tile, List<Transform> spawnTransforms)
-        {
-            List<Cell> cells = new();
-            foreach (Transform spawnTransform in spawnTransforms)
-            {
-                Cell cell = CreateCell(tile, spawnTransform);
-                if (cell != null)
-                    cells.Add(cell);
-            }
-
-            return cells;
-        }
-
-        #endregion
-
-        protected override void LateStart()
-        {
-            base.LateStart();
-            
-            _gridManager.GetObjectsOnCell(cellCreatorTransform.position).ForEach(objectOnCell =>
-                (objectOnCell as DoorButton)?.SetDoorTransforms(_doorTransforms));
-
-            CreateCells(_door, _doorTransforms);
+            Assert.IsNotNull(_door, "door is null in CreateDoorBtn");
+            Assert.IsNotNull(_doorTransforms, "doors transform is null in CreateDoorBtn");
+            Assert.IsNotNull(_gridManager, "grid manager is null in CreateDoorBtn");
+            base.Start();
         }
 
         protected override void OnDrawGizmos()
@@ -58,5 +33,30 @@ namespace Creators
                 Gizmos.DrawLine(t.position, cellCreatorTransform.position);
             }
         }
+
+        protected override void LateStart()
+        {
+            base.LateStart();
+
+            _gridManager.GetObjectsOnCell(cellCreatorTransform.position).ForEach(objectOnCell =>
+                (objectOnCell as DoorButton)?.SetDoorTransforms(_doorTransforms));
+
+            CreateCells(_door, _doorTransforms);
+        }
+
+        #region CreateCell
+
+        private void CreateCell(Cell tile, Transform spawnTransform)
+        {
+            _gridManager.ChangeCell(spawnTransform.position, tile);
+            _gridManager.GetCell(spawnTransform.position);
+        }
+
+        private void CreateCells(Cell tile, List<Transform> spawnTransforms)
+        {
+            foreach (Transform spawnTransform in spawnTransforms) CreateCell(tile, spawnTransform);
+        }
+
+        #endregion
     }
 }

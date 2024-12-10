@@ -27,14 +27,14 @@ namespace Grid
             objectsOnCell.AddRange(cellObjectBase);
         }
 
-        public void RemoveObject(CellObjectBase cellObjectBase)
+        public void RemoveObject(CellObjectBase cellObject)
         {
-            objectsOnCell.Remove(cellObjectBase);
+            if (objectsOnCell.Contains(cellObject)) objectsOnCell.Remove(cellObject);
         }
 
-        public void RemoveObjects(List<CellObjectBase> cellObjectBase)
+        public void RemoveObjects(List<CellObjectBase> cellObjects)
         {
-            foreach (CellObjectBase cellObject in cellObjectBase) objectsOnCell.Remove(cellObject);
+            foreach (CellObjectBase cellObject in cellObjects) RemoveObject(cellObject);
         }
     }
 }

@@ -1,34 +1,53 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class Settings : MonoBehaviour
+namespace Menu
 {
-    [SerializeField] private TMP_Dropdown graphicsDropdown;
-    [SerializeField] private Slider masterVol, musicVol, sfxVol;
-    [SerializeField] private AudioMixer mainAudioMixer;
-    [SerializeField] private GameObject panelSettings;
-    public void ChangeGraphicsQuality()
+    public class Settings : MonoBehaviour
     {
-        QualitySettings.SetQualityLevel(graphicsDropdown.value);
-    }
+        [SerializeField] private TMP_Dropdown _graphicsDropdown;
+        [SerializeField] private Slider _masterVol;
+        [SerializeField] private Slider _musicVol;
+        [SerializeField] private Slider _sfxVol;
+        [SerializeField] private AudioMixer _mainAudioMixer;
+        [SerializeField] private GameObject _panelSettings;
 
-    public void ChangeMasterVolume()
-    {
-        mainAudioMixer.SetFloat("Master", Mathf.Log10(masterVol.value) * 20);
-    }
-    public void ChangeMusicVolume()
-    {
-        mainAudioMixer.SetFloat("Music", Mathf.Log10(musicVol.value) * 20);
-    }
-    public void ChangeSFXVolume()
-    {
-        mainAudioMixer.SetFloat("SFX", Mathf.Log10(sfxVol.value) * 20);
-    }
+        private void Start()
+        {
+            Assert.IsNotNull(_graphicsDropdown, "graphics dropdown is null in Settings");
+            Assert.IsNotNull(_masterVol, "master volume slider is null in Settings");
+            Assert.IsNotNull(_musicVol, "music volume slider is null in Settings");
+            Assert.IsNotNull(_sfxVol, "sfx volume slider is null in Settings");
+            Assert.IsNotNull(_mainAudioMixer, "main audio mixer is null in Settings");
+            Assert.IsNotNull(_panelSettings, "panel settings is null in Settings");
+        }
 
-    public void ClosePanel()
-    {
-        gameObject.SetActive(false);
+        public void ChangeGraphicsQuality()
+        {
+            QualitySettings.SetQualityLevel(_graphicsDropdown.value);
+        }
+
+        public void ChangeMasterVolume()
+        {
+            _mainAudioMixer.SetFloat("Master", Mathf.Log10(_masterVol.value) * 20);
+        }
+
+        public void ChangeMusicVolume()
+        {
+            _mainAudioMixer.SetFloat("Music", Mathf.Log10(_musicVol.value) * 20);
+        }
+
+        public void ChangeSfxVolume()
+        {
+            _mainAudioMixer.SetFloat("SFX", Mathf.Log10(_sfxVol.value) * 20);
+        }
+
+        public void ClosePanel()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

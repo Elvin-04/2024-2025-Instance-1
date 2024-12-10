@@ -1,6 +1,6 @@
-using System;
 using Grid;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Creators
 {
@@ -15,17 +15,21 @@ namespace Creators
         {
             get
             {
-                if (_cellCreatorTransform == null)
-                {
-                    _cellCreatorTransform = transform;
-                }
+                if (_cellCreatorTransform == null) _cellCreatorTransform = transform;
                 return _cellCreatorTransform;
             }
         }
 
         protected virtual void Start()
         {
+            Assert.IsNotNull(_cellToSpawn, "cell to spawn is null in CellCreator");
             Invoke(nameof(LateStart), 0);
+        }
+
+        protected virtual void OnDrawGizmos()
+        {
+            Gizmos.color = _gizmoColor;
+            Gizmos.DrawCube(cellCreatorTransform.position, Vector3.one * 0.5f);
         }
 
         protected virtual void LateStart()
@@ -35,13 +39,7 @@ namespace Creators
 
         protected virtual void SetTile(Cell cell)
         {
-            EventManager.Instance.OnChangeCell?.Invoke(cellCreatorTransform.position, cell);
-        }
-
-        protected virtual void OnDrawGizmos()
-        {
-            Gizmos.color = _gizmoColor;
-            Gizmos.DrawCube(cellCreatorTransform.position, Vector3.one * 0.5f);
+            EventManager.instance.onChangeCell?.Invoke(cellCreatorTransform.position, cell);
         }
     }
 }

@@ -34,9 +34,6 @@ namespace Player
 
         private void SpawnPlayer()
         {
-            Assert.IsNotNull(_levelManager);
-            Assert.IsNotNull(_levelManager.spawnPoint);
-            Assert.IsNotNull(_playerPrefab);
             GameObject player = Instantiate(_playerPrefab, GetCellPos(_levelManager.spawnPoint.position),
                 Quaternion.identity);
             DeathManager playerDeathManager = player.GetComponent<DeathManager>();
@@ -55,7 +52,7 @@ namespace Player
         private void OnDeath(GameObject player)
         {
             player.transform.position = GetCellPos(_levelManager.spawnPoint.position);
-            EventManager.Instance.OnPlayerMoved?.Invoke(player.transform.position);
+            EventManager.instance.onPlayerMoved?.Invoke(player.transform.position);
         }
     }
 }

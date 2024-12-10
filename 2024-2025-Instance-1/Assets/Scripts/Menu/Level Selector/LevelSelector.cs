@@ -1,36 +1,38 @@
 using UnityEngine;
-using System;
 using UnityEngine.SceneManagement;
 
-public class LevelSelector : MonoBehaviour
+namespace Menu.Level_Selector
 {
-    public static LevelSelector instance {get; private set;}
-    private LevelInfo _currentLevel;
-
-    private void Start()
+    public class LevelSelector : MonoBehaviour
     {
-        if (instance)
+        private LevelInfo _currentLevel;
+        public static LevelSelector instance { get; private set; }
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (instance == null)
+                instance = this;
+            else
+                Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
 
-        LevelInfo.completedLevels.Clear();
+        private void Start()
+        {
+            LevelInfo.completedLevels.Clear();
+        }
 
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+        public void StartLevel(LevelInfo level)
+        {
+            _currentLevel = level;
+            SceneManager.LoadScene(level.levelScene);
 
-    public void StartLevel(LevelInfo level)
-    {
-        _currentLevel = level;
-        SceneManager.LoadScene(level.levelScene);
+            StartCoroutine(Utils.InvokeAfterUnscaled(() => EventManager.instance.onWin.AddListener(OnWin), 1.0f));
+        }
 
-        StartCoroutine(Utils.InvokeAfterUnscaled(() => EventManager.Instance.OnWin.AddListener(OnWin), 1.0f));
-    }
-
-    private void OnWin()
-    {
-        _currentLevel.MarkComplete();
+        private void OnWin()
+        {
+            _currentLevel.MarkComplete();
+        }
     }
 }

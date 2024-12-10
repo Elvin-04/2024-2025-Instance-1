@@ -1,11 +1,12 @@
 using Grid;
-using UnityEngine;
 
-public class ExplodeDoor : CellObjectBase, IExplosable, ICollisionObject
+namespace Door
 {
-    public void Explose()
+    public class ExplodeDoor : CellObjectBase, IExplosive, ICollisionObject
     {
-        Debug.Log("Normalement je dois fonctionner");
-        EventManager.Instance.OnResetCell?.Invoke(transform.position);
+        public void Explode()
+        {
+            EventManager.instance.onResetCell?.Invoke(transform.position);
+        }
     }
 }

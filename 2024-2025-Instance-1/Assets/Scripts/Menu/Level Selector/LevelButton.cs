@@ -1,17 +1,25 @@
 using UnityEngine;
-using System;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
-[RequireComponent(typeof (Button))]
-public class LevelButton : MonoBehaviour
+namespace Menu.Level_Selector
 {
-    [SerializeField] private LevelInfo _level;
-
-    private Button _btn;
-
-    private void Start()
+    [RequireComponent(typeof(Button))]
+    public class LevelButton : MonoBehaviour
     {
-        _btn = GetComponent<Button>();
-        _btn.interactable = _level.IsUnlocked();
+        [SerializeField] private LevelInfo _level;
+
+        private Button _btn;
+
+        private void Awake()
+        {
+            _btn = GetComponent<Button>();
+        }
+
+        private void Start()
+        {
+            Assert.IsNotNull(_level, "level is null in LevelButton");
+            _btn.interactable = _level.IsUnlocked();
+        }
     }
 }

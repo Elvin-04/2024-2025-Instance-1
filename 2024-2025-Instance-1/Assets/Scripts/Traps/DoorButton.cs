@@ -1,67 +1,77 @@
-using Grid;
 using System.Collections.Generic;
+using Grid;
 using UnityEngine;
-using Player;
+using UnityEngine.Assertions;
 
-public class DoorButton : CellObjectBase, IInteractable
+namespace Traps
 {
-    private List<Transform> _doorTransforms = new();
-    public Cell doorOpen;
-    public Cell doorClose;
-
-    public Cell wallCloseToDoorOpened;
-
-    public Cell wallCloseToDoorClosedLeft;
-    public Cell wallCloseToDoorClosedRight;
-    public bool CanPickUp { get => false; set{} }
-
-    public void Interact()
+    public class DoorButton : CellObjectBase, IInteractable
     {
-        OpenDoors();
-    }
+        [SerializeField] private Cell _doorOpen;
+        [SerializeField] private Cell _doorClose;
 
-    public void SetDoorTransforms(List<Transform> transforms)
-    {
-        _doorTransforms = transforms;
-    }
+        [SerializeField] private Cell _wallCloseToDoorOpened;
 
-    public void StopInteract() 
-    {
-        CloseDoors();
-    }
+        [SerializeField] private Cell _wallCloseToDoorClosedLeft;
+        [SerializeField] private Cell _wallCloseToDoorClosedRight;
+        private List<Transform> _doorTransforms = new();
 
-    private void OpenDoors()
-    {
-        if (_doorTransforms == null)
+        private void Start()
         {
-            return;
+            Assert.IsNotNull(_doorOpen, "door open is null in DoorButton");
+            Assert.IsNotNull(_doorClose, "door close is null in DoorButton");
+            Assert.IsNotNull(_wallCloseToDoorOpened, "wall close to door opened is null in DoorButton");
+            Assert.IsNotNull(_wallCloseToDoorClosedLeft, "wall close to door closed left is null in DoorButton");
+            Assert.IsNotNull(_wallCloseToDoorClosedRight, "wall close to door closed right is null in DoorButton");
         }
-        
-        foreach (Transform t in _doorTransforms)
+
+        public bool canPickUp
         {
-            Open(t);
+            get => false;
+            set { }
         }
-    }
 
-    private void CloseDoors()
-    {
-        foreach (Transform t in _doorTransforms)
+        public void Interact()
         {
-            Close(t);
+            OpenDoors();
+        }
+
+        public void StopInteract()
+        {
+            CloseDoors();
+        }
+
+        public void SetDoorTransforms(List<Transform> transforms)
+        {
+            _doorTransforms = transforms;
+        }
+
+        private void OpenDoors()
+        {
+            if (_doorTransforms == null) return;
+
+            foreach (Transform doorTransform in _doorTransforms) Open(doorTransform);
+        }
+
+        private void CloseDoors()
+        {
+            foreach (Transform doorTransform in _doorTransforms) Close(doorTransform);
+        }
+
+        private void Open(Transform doorTransform)
+        {
+            EventManager.instance.onChangeCell?.Invoke(doorTransform.position, _doorOpen);
+            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right, _wallCloseToDoorOpened);
+            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left, _wallCloseToDoorOpened);
+        }
+
+        private void Close(Transform doorTransform)
+        {
+            EventManager.instance.onChangeCell?.Invoke(doorTransform.position, _doorClose);
+            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right,
+                _wallCloseToDoorClosedLeft);
+            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left,
+                _wallCloseToDoorClosedRight);
         }
     }
-    private void Open(Transform transform)
-    {
-        EventManager.Instance.OnChangeCell?.Invoke(transform.position, doorOpen);
-        EventManager.Instance.OnChangeCell?.Invoke(transform.position + Vector3.right, wallCloseToDoorOpened);
-        EventManager.Instance.OnChangeCell?.Invoke(transform.position + Vector3.left, wallCloseToDoorOpened);
-    }
-
-    private void Close(Transform transform)
-    {
-        EventManager.Instance.OnChangeCell?.Invoke(transform.position, doorClose);
-        EventManager.Instance.OnChangeCell?.Invoke(transform.position + Vector3.right, wallCloseToDoorClosedLeft);
-        EventManager.Instance.OnChangeCell?.Invoke(transform.position + Vector3.left, wallCloseToDoorClosedRight);
-    }
-
 }

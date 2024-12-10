@@ -17,7 +17,7 @@ namespace Grid
         private void Start()
         {
             _currentLifeTime = _lifeTime;
-            EventManager.Instance.OnClockUpdated?.AddListener(UpdateTime);
+            EventManager.instance.onClockUpdated?.AddListener(UpdateTime);
         }
 
         private void UpdateTime()
@@ -25,8 +25,8 @@ namespace Grid
             _currentLifeTime--;
             if (_currentLifeTime > 0) return;
 
-            EventManager.Instance.OnRemoveObjectOnCell?.Invoke(_transform.position, this);
-            EventManager.Instance.StopInteract?.Invoke(_transform.position);
+            EventManager.instance.onRemoveObjectOnCell?.Invoke(_transform.position, this);
+            EventManager.instance.stopInteract?.Invoke(_transform.position);
             Destroy(gameObject);
         }
     }

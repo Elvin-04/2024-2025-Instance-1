@@ -3,7 +3,6 @@ using System.Linq;
 using DG.Tweening;
 using Grid;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Player
 {
@@ -11,8 +10,6 @@ namespace Player
     {
         [SerializeField] private float _movementTime;
 
-
-        public UnityEvent onWin;
         private bool _canMove;
         private Tween _currentMoveAnim;
 
@@ -29,8 +26,6 @@ namespace Player
 
         //Components
         private Transform _transform;
-
-        public PlayerDirection? bannedDirection;
         public PlayerDirection currentDirection { get; private set; }
 
         private void Awake()
@@ -40,10 +35,10 @@ namespace Player
 
         private void Start()
         {
-            EventManager.Instance.OnMoveStarted?.AddListener(StartMove);
-            EventManager.Instance.OnMoveCanceled?.AddListener(StopMove);
-            EventManager.Instance.OnInteract?.AddListener(Interact);
-            EventManager.Instance.OnDeath?.AddListener(StopMoveAnim);
+            EventManager.instance.onMoveStarted?.AddListener(StartMove);
+            EventManager.instance.onMoveCanceled?.AddListener(StopMove);
+            EventManager.instance.onInteract?.AddListener(Interact);
+            EventManager.instance.onDeath?.AddListener(StopMoveAnim);
         }
 
         private void Update()
@@ -51,7 +46,7 @@ namespace Player
             TryMove();
 
             //////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.K)) EventManager.Instance.OnDeath.Invoke();
+            if (Input.GetKeyDown(KeyCode.K)) EventManager.instance.onDeath.Invoke();
             ///////////////////////////////////////////////////////////////////
         }
 
@@ -101,20 +96,14 @@ namespace Player
             _interactablesUnder.Except(commonInteracts).ToList()
                 .ForEach(interact =>
                 {
-                    if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> weights))
-                    {
-                        return;
-                    }
+                    if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> _)) return;
                     interact?.StopInteract();
                 });
 
             _interactablesUnder = interacts;
             _interactablesUnderPosition = _transform.position;
 
-            foreach (IInteractable interactable in _interactablesUnder.ToList())
-            {
-                interactable?.Interact();
-            }
+            foreach (IInteractable interactable in _interactablesUnder.ToList()) interactable?.Interact();
         }
 
         private void GetInteractableFrontOfMe<T>(Vector3 dir) where T : IInteractable
@@ -140,7 +129,7 @@ namespace Player
                         .ForEach(interactable => interactable.Interact());
             });
 
-            EventManager.Instance.CanInteract.Invoke(_interactablesInFront.OfType<IInteractableCallable>().Count() > 0);
+            EventManager.instance.canInteract.Invoke(_interactablesInFront.OfType<IInteractableCallable>().Any());
         }
 
         private void Move()
@@ -181,7 +170,7 @@ namespace Player
 
 
             _reachedTargetCell = false;
-            EventManager.Instance.UpdateClock?.Invoke();
+            EventManager.instance.updateClock?.Invoke();
             Vector3 position = _gridManager.GetCellPos(nextIndex);
 
             _currentMoveAnim = _transform.DOMove(
@@ -189,21 +178,11 @@ namespace Player
                 _movementTime).SetEase(Ease.Linear).OnComplete(() =>
             {
                 CheckInteraction<IInteractableCallable>(_moveDirection);
-                EventManager.Instance.OnPlayerMoved?.Invoke(_transform.position);
+                EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
                 // wait one frame. this is to allow interactions to actually happen
                 StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
             });
             GetInteractableFrontOfMe<IInteractable>(_moveDirection);
-        }
-
-        private void ReachTarget()
-        {
-            _reachedTargetCell = true;
-        }
-
-        public void BanDirection(PlayerDirection direction)
-        {
-            bannedDirection ??= direction;
         }
 
         private void StopMove()

@@ -1,18 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+namespace Menu
 {
-
-    public void Play()
+    public class MainMenu : MonoBehaviour
     {
-        //SceneManager.LoadScene("Nom de la scene");
-        Debug.Log("Scene Play Load");
-    }
+        public void Play()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
 
-    public void Quit()
-    {
-        Debug.Log("Quitting");
-        Application.Quit();
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }

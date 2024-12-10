@@ -5,32 +5,18 @@ public class CameraManager : MonoBehaviour
 {
     private Camera _camera;
     private Vector3 _cameraPos;
-    private bool _reachedEnd;
     private Tween _moveAnim;
+    private bool _reachedEnd;
 
     private void Awake()
     {
         _camera = Camera.main;
     }
 
-    public void IsReachedEnd(bool state)
-    {
-        _reachedEnd = state;
-        if (_reachedEnd)
-        {
-            _moveAnim?.Kill();
-        }
-    }
-
     private void Start()
     {
-        EventManager.Instance.OnPlayerMoved?.AddListener(OnPlayerMoved);
+        EventManager.instance.onPlayerMoved?.AddListener(OnPlayerMoved);
         Invoke(nameof(LateStart), 0);
-    }
-
-    private void LateStart()
-    {
-        EventManager.Instance.OnWin.AddListener(() => IsReachedEnd(true));
     }
 
     private void OnDrawGizmos()
@@ -49,12 +35,20 @@ public class CameraManager : MonoBehaviour
         Gizmos.DrawWireCube(cameraPos, screenSize);
     }
 
+    public void IsReachedEnd(bool state)
+    {
+        _reachedEnd = state;
+        if (_reachedEnd) _moveAnim?.Kill();
+    }
+
+    private void LateStart()
+    {
+        EventManager.instance.onWin.AddListener(() => IsReachedEnd(true));
+    }
+
     private void OnPlayerMoved(Vector3 pos)
     {
-        if (_reachedEnd)
-        {
-            return;
-        }
+        if (_reachedEnd) return;
 
         float height = 2f * _camera.orthographicSize;
         float width = height * _camera.aspect;

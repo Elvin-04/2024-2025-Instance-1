@@ -1,26 +1,29 @@
-using UnityEngine;
-using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class LevelInfo : MonoBehaviour
+namespace Menu.Level_Selector
 {
-    public static HashSet<string> completedLevels = new HashSet<string>();
-
-    public string levelName  = "LEVEL NAME";
-    public string levelScene = "LEVEL SCENE";
-
-    public LevelInfo previousLevel;
-
-    public bool IsUnlocked()
+    public class LevelInfo : MonoBehaviour
     {
-        if (previousLevel == null)
-            return true;
-        
-        return completedLevels.Contains(previousLevel.levelScene);
-    }
+        public static HashSet<string> completedLevels = new();
 
-    public void MarkComplete()
-    {
-        completedLevels.Add(levelScene);
+        //TODO: A refaire avec des ids
+        public string levelName = "LEVEL NAME";
+        public string levelScene = "LEVEL SCENE";
+
+        public LevelInfo previousLevel;
+
+        public bool IsUnlocked()
+        {
+            if (previousLevel == null)
+                return true;
+
+            return completedLevels.Contains(previousLevel.levelScene);
+        }
+
+        public void MarkComplete()
+        {
+            completedLevels.Add(levelScene);
+        }
     }
 }
