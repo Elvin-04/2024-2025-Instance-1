@@ -57,6 +57,7 @@ public class Arrow : CellObjectBase, IInteractable, IMoving
         {
             EventManager.Instance.UpdateClock.RemoveListener(UpdateClock);
             Destroy(gameObject);
+            gridManager.RemoveObjectOnCell(cellIndex, this);
             return;
         }
 
