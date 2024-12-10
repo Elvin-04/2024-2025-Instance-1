@@ -1,23 +1,38 @@
 using Grid;
 using UnityEngine;
 
-public class CreatSpikeTrap : ObjectCreator
+public class CreateSpikeTrap : MonoBehaviour
 {
     [SerializeField] private Cell _Active;
     [SerializeField] private Cell _Inactive;
+    [SerializeField, Range(0,10)] private int _tick ;
+    private int _numberOfTick = 0;
 
     private bool _isActive;
 
     private void Start()
     {
-        CreateCell(_gridManager, _Inactive, transform);
-        SetTile(_isActive);
+        Invoke(nameof(LateStart),0);
         EventManager.Instance.OnClockUpdated.AddListener(UpdateSpike);
+    }
+
+    private void LateStart()
+    {
+        SetTile(_isActive);
     }
 
     public void UpdateSpike()
     {
-        _isActive = !_isActive;
+        _numberOfTick++;
+        if (_tick <= _numberOfTick)
+        {
+            _isActive = true;
+            _numberOfTick = 0;
+        }
+        else
+        {
+            _isActive = false;
+        }
         SetTile(_isActive);
     }
 
