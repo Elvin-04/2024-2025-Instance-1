@@ -1,4 +1,5 @@
 using Grid;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -31,6 +32,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent OnWin { get; private set; } = new UnityEvent();
     public UnityEvent<Vector3> StopInteract { get; private set; } = new UnityEvent<Vector3>();
     public UnityEvent<Vector3, CellObjectBase> OnRemoveObjectOnCell { get; private set; } = new UnityEvent<Vector3, CellObjectBase>();
+    public UnityEvent<Vector3> OnPlayerMoved { get; private set; } = new UnityEvent<Vector3>();
 
     private void Awake()
     {

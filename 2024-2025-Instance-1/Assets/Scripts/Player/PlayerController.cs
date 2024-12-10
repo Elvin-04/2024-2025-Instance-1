@@ -141,8 +141,6 @@ namespace Player
 
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
-            PlayerDirection oldDiretion = currentDirection;
-
             currentDirection = _moveDirection.x switch
             {
                 > 0 => PlayerDirection.Right,
@@ -154,20 +152,6 @@ namespace Player
                     _ => currentDirection
                 }
             };
-
-            // if (bannedDirection != null)
-            // {
-            //     if (currentDirection == bannedDirection)
-            //     {
-            //         currentDirection = oldDiretion;
-            //         StopMove();
-
-            //         Debug.Log("can't move that way");
-            //         return;
-            //     }
-            //     else if (currentDirection == ((PlayerDirection) bannedDirection).GetOpposite())
-            //         bannedDirection = null;
-            // }
 
             if (nextCell == null)
             {
@@ -196,6 +180,7 @@ namespace Player
                 _movementTime).SetEase(Ease.Linear).OnComplete(() =>
             {
                 CheckInteraction<IInteractableCallable>(_moveDirection);
+                EventManager.Instance.OnPlayerMoved?.Invoke(_transform.position);
                 // wait one frame. this is to allow interactions to actually happen
                 StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
             });
