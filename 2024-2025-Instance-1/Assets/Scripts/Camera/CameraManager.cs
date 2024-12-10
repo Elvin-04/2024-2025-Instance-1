@@ -5,15 +5,32 @@ public class CameraManager : MonoBehaviour
 {
     private Camera _camera;
     private Vector3 _cameraPos;
+    private bool _reachedEnd;
+    private Tween _moveAnim;
 
     private void Awake()
     {
         _camera = Camera.main;
     }
 
+    public void IsReachedEnd(bool state)
+    {
+        _reachedEnd = state;
+        if (_reachedEnd)
+        {
+            _moveAnim?.Kill();
+        }
+    }
+
     private void Start()
     {
         EventManager.Instance.OnPlayerMoved?.AddListener(OnPlayerMoved);
+        Invoke(nameof(LateStart), 0);
+    }
+
+    private void LateStart()
+    {
+        EventManager.Instance.OnWin.AddListener(() => IsReachedEnd(true));
     }
 
     private void OnDrawGizmos()
@@ -34,6 +51,11 @@ public class CameraManager : MonoBehaviour
 
     private void OnPlayerMoved(Vector3 pos)
     {
+        if (_reachedEnd)
+        {
+            return;
+        }
+
         float height = 2f * _camera.orthographicSize;
         float width = height * _camera.aspect;
         Vector3 screenSize = Vector3.zero;
@@ -51,6 +73,6 @@ public class CameraManager : MonoBehaviour
             Mathf.Abs(direction.x) > Mathf.Abs(direction.y) ? 0f : direction.y, 0f);
         direction = directionVector.normalized;
         Vector3 targetPosition = _camera.transform.position + Utils.Multiply(direction, screenSize);
-        _camera.transform.DOMove(targetPosition, 0.1f);
+        _moveAnim = _camera.transform.DOMove(targetPosition, 0.1f);
     }
 }
