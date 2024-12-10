@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Grid
 {
-    public class Corpse : CellObjectBase
+    public class Corpse : CellObjectBase, IWeight
     {
         //Components
-        [SerializeField] private float _lifeTime = 10f;
-        private float _currentLifeTime;
+        [SerializeField] private int _lifeTime = 10;
+        private int _currentLifeTime;
         private Transform _transform;
 
         private void Awake()
@@ -17,15 +17,17 @@ namespace Grid
         private void Start()
         {
             _currentLifeTime = _lifeTime;
+            EventManager.Instance.OnClockUpdated?.AddListener(UpdateTime);
         }
 
-        private void Update()
+        private void UpdateTime()
         {
-            _currentLifeTime -= Time.deltaTime;
-            if (_currentLifeTime <= 0f)
-            {
-                EventManager.Instance?.OnResetCell.Invoke(_transform.position);   
-            }
+            _currentLifeTime--;
+            if (_currentLifeTime > 0) return;
+
+            EventManager.Instance.OnRemoveObjectOnCell?.Invoke(_transform.position, this);
+            EventManager.Instance.StopInteract?.Invoke(_transform.position);
+            Destroy(gameObject);
         }
     }
 }

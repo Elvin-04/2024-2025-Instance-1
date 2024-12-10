@@ -34,7 +34,7 @@ public class Arrow : CellObjectBase, IInteractable, IMoving
 
     public void SetDirection(Direction direction)
     {
-        transform.rotation = Quaternion.Euler(0, 0, (int)direction * 90);
+        transform.rotation = Quaternion.Euler(0, 0, (int) (direction + 1) * 90);
         directionEnum = direction;
     }
 
@@ -62,8 +62,8 @@ public class Arrow : CellObjectBase, IInteractable, IMoving
 
         _transform.DOMove(gridManager.GetCellPos(nextIndex), 0.2f).OnComplete(() =>
         {
+            gridManager.AddObjectOnCell(nextIndex, this);
             gridManager.RemoveObjectOnCell(cellIndex, this);
         });
-        gridManager.AddObjectOnCell(nextIndex, this);
     }
 }

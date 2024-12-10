@@ -55,6 +55,7 @@ namespace Player
         private void OnDeath(GameObject player)
         {
             player.transform.position = GetCellPos(_levelManager.spawnPoint.position);
+            EventManager.Instance.OnPlayerMoved?.Invoke(player.transform.position);
         }
     }
 }

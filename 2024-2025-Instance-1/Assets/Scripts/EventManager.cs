@@ -1,4 +1,5 @@
 using Grid;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,7 +19,6 @@ public class EventManager : MonoBehaviour
     public UnityEvent OnInteract { get; private set; } = new UnityEvent();
     public UnityEvent<bool> CanInteract { get; private set; } = new UnityEvent<bool>();
     public UnityEvent OnPause { get; private set; } = new UnityEvent();
-    public UnityEvent<int> UpdateLife { get; private set; } = new UnityEvent<int>();
     public UnityEvent<Rune> UpdateRune { get; private set; } = new UnityEvent<Rune>();
     public UnityEvent UpdateDeath { get; private set; } = new UnityEvent();
     public UnityEvent OnDeath { get; private set; } = new UnityEvent();
@@ -29,6 +29,10 @@ public class EventManager : MonoBehaviour
     public UnityEvent OnRetry { get; private set; } = new UnityEvent();
     public UnityEvent OnReloadUIRetry { get; private set; } = new UnityEvent();
     public UnityEvent OnStopHoldingReload { get; private set; } = new UnityEvent();
+    public UnityEvent OnWin { get; private set; } = new UnityEvent();
+    public UnityEvent<Vector3> StopInteract { get; private set; } = new UnityEvent<Vector3>();
+    public UnityEvent<Vector3, CellObjectBase> OnRemoveObjectOnCell { get; private set; } = new UnityEvent<Vector3, CellObjectBase>();
+    public UnityEvent<Vector3> OnPlayerMoved { get; private set; } = new UnityEvent<Vector3>();
 
     private void Awake()
     {
@@ -37,7 +41,7 @@ public class EventManager : MonoBehaviour
             Instance = this;
             return;
         }
-        Destroy(this);
+        Destroy(gameObject);
     }
 }
 

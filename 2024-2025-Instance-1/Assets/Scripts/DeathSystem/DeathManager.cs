@@ -1,21 +1,21 @@
+using System;
+using System.Collections.Generic;
 using Grid;
 using Player;
-using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 namespace DeathSystem
 {
     [RequireComponent(typeof(InventoryManager))]
     public class DeathManager : MonoBehaviour
     {
-        [SerializeField] private Cell _playerCorpseCell;
-        
+        [SerializeField] private GameObject _playerCorpse;
+        private GridManager _gridManager;
+
         //Components
         private InventoryManager _inventoryManager;
-        private GridManager _gridManager;
         private Transform _transform;
 
         //Actions
@@ -23,7 +23,7 @@ namespace DeathSystem
 
         private void Awake()
         {
-            Assert.IsNotNull(_playerCorpseCell, "player corpse cell prefab is null in DeathManager");
+            Assert.IsNotNull(_playerCorpse, "player corpse cell prefab is null in DeathManager");
             _inventoryManager = GetComponent<InventoryManager>();
             _transform = transform;
         }
@@ -44,14 +44,28 @@ namespace DeathSystem
             Assert.IsNotNull(_inventoryManager);
             if (_inventoryManager.currentRune == null)
             {
-                _gridManager.ChangeCell(_transform.position, _playerCorpseCell);
+                GameObject playerCorpse = Instantiate(_playerCorpse, _transform.position, Quaternion.identity);
+                Corpse corpse = playerCorpse.GetComponent<Corpse>();
+                _gridManager.AddObjectOnCell(_transform.position, corpse);
             }
             else
             {
                 _inventoryManager.currentRune.ApplyEffect(transform.position, _gridManager);
+                if (_gridManager.GetCellObjectsByType(_transform.position, out List<IInteractable> interactables))
+                {
+                    foreach (IInteractable objectOnCell in interactables)
+                    {
+                        objectOnCell.StopInteract();
+                    }
+                }
+                
             }
+            
+            _inventoryManager.currentRune?.DropRune();
+
+            _inventoryManager.TakeRune(null);
+            
             onPlayerDeath?.Invoke(gameObject);
         }
-        
     }
 }

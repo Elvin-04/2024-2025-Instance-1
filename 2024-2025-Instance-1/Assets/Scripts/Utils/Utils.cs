@@ -96,4 +96,11 @@ public static class Utils
         yield return new WaitForEndOfFrame();
         callback();
     }
+
+    public static Vector3 Multiply(Vector3 vector1, Vector3 vector2)
+    {
+        Vector3 multipliedVector = Vector3.zero;
+        multipliedVector.Set(vector1.x * vector2.x, vector1.y * vector2.y, vector1.z * vector2.z);
+        return multipliedVector;
+    }
 }

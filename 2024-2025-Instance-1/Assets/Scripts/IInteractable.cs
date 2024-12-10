@@ -3,7 +3,7 @@ using Player;
 public interface IInteractable
 {
     bool CanPickUp { get; set; }
-    void Interact(PlayerController controller);
+    void Interact();
     void StopInteract();
 }
 

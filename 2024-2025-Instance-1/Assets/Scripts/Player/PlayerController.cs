@@ -21,6 +21,7 @@ namespace Player
 
         private List<IInteractable> _interactablesInFront = new();
         private List<IInteractable> _interactablesUnder = new();
+        private Vector3 _interactablesUnderPosition;
 
         private Vector2 _moveDirection;
 
@@ -28,9 +29,9 @@ namespace Player
 
         //Components
         private Transform _transform;
-        public PlayerDirection currentDirection { get; private set; }
 
-        public PlayerDirection? bannedDirection = null;
+        public PlayerDirection? bannedDirection;
+        public PlayerDirection currentDirection { get; private set; }
 
         private void Awake()
         {
@@ -50,11 +51,7 @@ namespace Player
             TryMove();
 
             //////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-
-                EventManager.Instance.OnDeath.Invoke();
-            }
+            if (Input.GetKeyDown(KeyCode.K)) EventManager.Instance.OnDeath.Invoke();
             ///////////////////////////////////////////////////////////////////
         }
 
@@ -66,6 +63,8 @@ namespace Player
 
         public void StopMoveAnim()
         {
+            _interactablesUnder.Clear();
+            _interactablesInFront.Clear();
             _currentMoveAnim?.Kill();
             _canMove = false;
             _reachedTargetCell = true;
@@ -84,9 +83,9 @@ namespace Player
             _moveDirection = direction;
         }
 
-        private void CheckInteraction(Vector3 dir)
+        private void CheckInteraction<T>(Vector3 dir) where T : IInteractable
         {
-            GetInteractableFrontOfMe(dir);
+            GetInteractableFrontOfMe<T>(dir);
             GetInteractableUnderMe();
         }
 
@@ -100,52 +99,56 @@ namespace Player
             List<IInteractable> commonInteracts = interacts.Intersect(_interactablesUnder).ToList();
 
             _interactablesUnder.Except(commonInteracts).ToList()
-                .ForEach(interact => interact?.StopInteract());
+                .ForEach(interact =>
+                {
+                    if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> weights))
+                    {
+                        return;
+                    }
+                    interact?.StopInteract();
+                });
 
             _interactablesUnder = interacts;
+            _interactablesUnderPosition = _transform.position;
 
-            _interactablesUnder.ForEach(interactable => interactable?.Interact(this));
+            foreach (IInteractable interactable in _interactablesUnder.ToList())
+            {
+                interactable?.Interact();
+            }
         }
 
-        private void GetInteractableFrontOfMe(Vector3 dir)
+        private void GetInteractableFrontOfMe<T>(Vector3 dir) where T : IInteractable
         {
-
             Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, dir);
-
 
 
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
             if (nextCell == null) return;
 
-            
 
             _interactablesInFront =
                 _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex))
                     .Select(objectOnCell => objectOnCell as IInteractable).Where(interactable => interactable != null)
                     .ToList();
-            _interactablesInFront.ForEach(Debug.Log);
 
             List<IMoving> movingObjectsInFront = _interactablesInFront.OfType<IMoving>().ToList();
             movingObjectsInFront.ForEach(movingObjectInFront =>
             {
-                if (dir.Equals(movingObjectInFront.direction) ||
-                    dir.Equals(-movingObjectInFront.direction))
-                    movingObjectsInFront.OfType<IInteractable>().ToList()
+                if (dir.Equals(-movingObjectInFront.direction))
+                    movingObjectsInFront.OfType<T>().ToList()
                         .ForEach(interactable => interactable.Interact());
             });
 
-            EventManager.Instance.CanInteract.Invoke(_interactablesInFront.Count > 0);
+            EventManager.Instance.CanInteract.Invoke(_interactablesInFront.OfType<IInteractableCallable>().Count() > 0);
         }
 
         private void Move()
         {
             Vector2Int cellIndex = _gridManager.GetCellIndex(_transform.position);
-            (int, int) nextIndex = (cellIndex.x + (int) _moveDirection.x, cellIndex.y + (int) _moveDirection.y);
+            (int, int) nextIndex = (cellIndex.x + (int)_moveDirection.x, cellIndex.y + (int)_moveDirection.y);
 
             Cell nextCell = _gridManager.GetCell(nextIndex);
-
-            PlayerDirection oldDiretion = currentDirection;
 
             currentDirection = _moveDirection.x switch
             {
@@ -159,20 +162,6 @@ namespace Player
                 }
             };
 
-            if (bannedDirection != null)
-            {
-                if (currentDirection == bannedDirection)
-                {
-                    currentDirection = oldDiretion;
-                    StopMove();
-
-                    Debug.Log("can't move that way");
-                    return;
-                }
-                else if (currentDirection == ((PlayerDirection) bannedDirection).GetOpposite())
-                    bannedDirection = null;
-            }
-
             if (nextCell == null)
             {
                 Debug.Log("next cell is null");
@@ -185,7 +174,7 @@ namespace Player
 
             if (nextCellObjects.Any(objectOnCell => objectOnCell != null && objectOnCell is ICollisionObject))
             {
-                CheckInteraction(_moveDirection);
+                CheckInteraction<IInteractable>(_moveDirection);
                 StopMove();
                 return;
             }
@@ -199,11 +188,12 @@ namespace Player
                 position,
                 _movementTime).SetEase(Ease.Linear).OnComplete(() =>
             {
-                CheckInteraction(_moveDirection);
+                CheckInteraction<IInteractableCallable>(_moveDirection);
+                EventManager.Instance.OnPlayerMoved?.Invoke(_transform.position);
                 // wait one frame. this is to allow interactions to actually happen
                 StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
             });
-            GetInteractableFrontOfMe(_moveDirection);
+            GetInteractableFrontOfMe<IInteractable>(_moveDirection);
         }
 
         private void ReachTarget()
@@ -224,7 +214,7 @@ namespace Player
         private void Interact()
         {
             if (_interactablesInFront.Count == 0) return;
-            _interactablesInFront.ForEach(objectInFront => objectInFront.Interact(this));
+            _interactablesInFront.ForEach(objectInFront => objectInFront.Interact());
         }
     }
 }

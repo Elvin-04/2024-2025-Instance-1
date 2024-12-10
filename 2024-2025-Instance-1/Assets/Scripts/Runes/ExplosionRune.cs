@@ -1,9 +1,6 @@
 using Grid;
-using NUnit.Framework;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class ExplosionRune : Rune
 {
@@ -21,7 +18,6 @@ public class ExplosionRune : Rune
         {
             for (int y = positionIndexes.y  - _radius ; y <= positionIndexes.y  + _radius ; y ++) 
             {
-                gridManager.GetObjectsOnCell(x, y).ForEach(Debug.Log);
                 if (gridManager.GetCellObjectsByType(x, y, out List<IExplosable> cellObjects))
                 {
                     Debug.Log(cellObjects);

@@ -44,4 +44,10 @@ public class LevelManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadSceneAsync(scene.name);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.grey;
+        Gizmos.DrawCube(spawnPoint.position, Vector3.one * 0.5f);
+    }
 }

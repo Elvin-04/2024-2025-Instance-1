@@ -14,7 +14,8 @@ namespace Clock
             }
             else
             {
-                Destroy(this);
+                Destroy(gameObject);
+                return;
             }
         }
 

@@ -8,9 +8,14 @@ public class DoorButton : CellObjectBase, IInteractable
     private List<Transform> _doorTransforms = new();
     public Cell doorOpen;
     public Cell doorClose;
+
+    public Cell wallCloseToDoorOpened;
+
+    public Cell wallCloseToDoorClosedLeft;
+    public Cell wallCloseToDoorClosedRight;
     public bool CanPickUp { get => false; set{} }
 
-    public void Interact(PlayerController controller)
+    public void Interact()
     {
         OpenDoors();
     }
@@ -48,11 +53,15 @@ public class DoorButton : CellObjectBase, IInteractable
     private void Open(Transform transform)
     {
         EventManager.Instance.OnChangeCell?.Invoke(transform.position, doorOpen);
+        EventManager.Instance.OnChangeCell?.Invoke(transform.position + Vector3.right, wallCloseToDoorOpened);
+        EventManager.Instance.OnChangeCell?.Invoke(transform.position + Vector3.left, wallCloseToDoorOpened);
     }
 
     private void Close(Transform transform)
     {
         EventManager.Instance.OnChangeCell?.Invoke(transform.position, doorClose);
+        EventManager.Instance.OnChangeCell?.Invoke(transform.position + Vector3.right, wallCloseToDoorClosedLeft);
+        EventManager.Instance.OnChangeCell?.Invoke(transform.position + Vector3.left, wallCloseToDoorClosedRight);
     }
 
 }
