@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
-  m_Name: WallCell
+  m_Name: WallCell_09
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 0512310ac8aba3f448f3e7223bdf66fe, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 2999458782295388009, guid: 0cf3126f8e30e1942a889717e5c13cce, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0
