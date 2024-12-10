@@ -41,7 +41,7 @@ public class EventManager : MonoBehaviour
             Instance = this;
             return;
         }
-        Destroy(this);
+        Destroy(gameObject);
     }
 }
 
