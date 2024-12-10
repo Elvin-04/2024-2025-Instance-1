@@ -21,6 +21,7 @@ namespace Player
 
         private List<IInteractable> _interactablesInFront = new();
         private List<IInteractable> _interactablesUnder = new();
+        private Vector3 _interactablesUnderPosition;
 
         private Vector2 _moveDirection;
 
@@ -98,9 +99,17 @@ namespace Player
             List<IInteractable> commonInteracts = interacts.Intersect(_interactablesUnder).ToList();
 
             _interactablesUnder.Except(commonInteracts).ToList()
-                .ForEach(interact => interact?.StopInteract());
+                .ForEach(interact =>
+                {
+                    if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> weights))
+                    {
+                        return;
+                    }
+                    interact?.StopInteract();
+                });
 
             _interactablesUnder = interacts;
+            _interactablesUnderPosition = _transform.position;
 
             foreach (IInteractable interactable in _interactablesUnder.ToList())
             {

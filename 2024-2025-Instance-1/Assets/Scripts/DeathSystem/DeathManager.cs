@@ -60,6 +60,8 @@ namespace DeathSystem
                 }
                 
             }
+            
+            _inventoryManager.currentRune?.DropRune();
 
             _inventoryManager.TakeRune(null);
             
