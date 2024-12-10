@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
-  m_Name: DoorOpened
+  m_Name: NoSpike
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -5877004946697828585, guid: 4bf81d17fe14c1542acd3f36853cd5dd, type: 3}
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  - {fileID: -5114081426966336428, guid: 1452740807af736418ea7ab580489afc, type: 3}
+  - {fileID: -2176814737140710465, guid: 50c0947ea50ae4c419fb050dafe453e6, type: 3}
+  - {fileID: 1488298040757088760, guid: ef1badeb33d916241b9b5ba796719ba6, type: 3}
+  - {fileID: -8747837213120768591, guid: 8154c20f5f2759e4a9b93db9b2fcbeaf, type: 3}
+  m_MinSpeed: 10
+  m_MaxSpeed: 10
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0
-  m_TileAnimationFlags: 0
+  m_TileAnimationFlags: 1
   _prefab: {fileID: 0}
