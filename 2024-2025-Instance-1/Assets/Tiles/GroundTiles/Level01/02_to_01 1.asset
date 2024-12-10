@@ -12,25 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
   m_Name: 02_to_01 1
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: ac608d42f04bf534e8cfa90f769c87e8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Transform:
-    e00: 1
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 1
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 1
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  m_InstancedGameObject: {fileID: 6441155145412033094, guid: 381f5b11afd840c468780d093f53c59c, type: 3}
-  m_Flags: 1
-  m_ColliderType: 1
+  m_AnimatedSprites:
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 2
+  _prefab: {fileID: 0}
