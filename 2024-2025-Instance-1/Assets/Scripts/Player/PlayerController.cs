@@ -132,6 +132,11 @@ namespace Player
             });
 
             EventManager.instance.canInteract.Invoke(_interactablesInFront.OfType<IInteractableCallable>().Any());
+
+            // foreach (IInteractableInFront interactableInFront in _interactablesInFront.OfType<IInteractableInFront>())
+            //     interactableInFront.Interact();
+
+
         }
 
         private void Move()
@@ -160,6 +165,9 @@ namespace Player
             }
 
             List<CellObjectBase> nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
+
+            foreach (IInteractableInFront interactableInFront in nextCellObjects.OfType<IInteractableInFront>())
+                {interactableInFront.Interact(); Debug.Log(interactableInFront);}
 
             if (nextCellObjects.Any(objectOnCell => objectOnCell != null && objectOnCell is ICollisionObject))
             {

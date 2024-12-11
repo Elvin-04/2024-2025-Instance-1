@@ -119,8 +119,6 @@ namespace Grid
         {
             int xMoveDir = direction.x > 0 ? 1 : direction.x < 0 ? -1 : 0;
             int yMoveDir = direction.y > 0 ? 1 : direction.y < 0 ? -1 : 0;
-            
-            Debug.Log(xMoveDir + " " + yMoveDir);
 
             (int, int) nextIndex = (indexes.Item1 + xMoveDir, indexes.Item2 + yMoveDir);
             Vector2Int nextIndexVector = new(nextIndex.Item1, nextIndex.Item2);
