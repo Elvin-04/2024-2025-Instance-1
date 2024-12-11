@@ -175,8 +175,7 @@ namespace Player
             {
                 CheckInteraction<IInteractableCallable>(_moveDirection);
                 EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
-                // wait one frame. this is to allow interactions to actually happen
-                StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
+                _reachedTargetCell = true;
             });
             GetInteractableFrontOfMe<IInteractable>(_moveDirection);
         }

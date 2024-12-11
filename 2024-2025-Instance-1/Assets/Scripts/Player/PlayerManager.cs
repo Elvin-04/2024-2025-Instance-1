@@ -60,7 +60,7 @@ namespace Player
 
         private IEnumerator Respawn(GameObject player)
         {
-            yield return new WaitForEndOfFrame();
+            
             player.SetActive(false);
             yield return new WaitForSeconds(_waitTimeBeforeRespawn);
             player.transform.position = GetCellPos(_levelManager.spawnPoint.position);
