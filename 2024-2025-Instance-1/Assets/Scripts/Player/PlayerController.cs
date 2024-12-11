@@ -23,6 +23,8 @@ namespace Player
 
         private bool _reachedTargetCell = true;
 
+        private Animator _animator;
+
         //Components
         private Transform _transform;
         public PlayerDirection currentDirection { get; private set; }
@@ -30,6 +32,8 @@ namespace Player
         private void Awake()
         {
             _transform = transform;
+
+            _animator = GetComponent<Animator>();
         }
 
         private void Start()
@@ -157,13 +161,14 @@ namespace Player
 
             List<CellObjectBase> nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
-
             if (nextCellObjects.Any(objectOnCell => objectOnCell != null && objectOnCell is ICollisionObject))
             {
                 CheckInteraction<IInteractable>(_moveDirection);
                 StopMove();
                 return;
             }
+
+            SetAnimation((int) currentDirection);
 
             _reachedTargetCell = false;
             EventManager.instance.updateClock?.Invoke();
@@ -175,7 +180,9 @@ namespace Player
             {
                 CheckInteraction<IInteractableCallable>(_moveDirection);
                 EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
+                // SetAnimation(0);
                 // wait one frame. this is to allow interactions to actually happen
+                
                 StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
             });
             GetInteractableFrontOfMe<IInteractable>(_moveDirection);
@@ -183,6 +190,7 @@ namespace Player
 
         private void StopMove()
         {
+            SetAnimation(0);
             _canMove = false;
         }
 
@@ -190,6 +198,12 @@ namespace Player
         {
             if (_interactablesInFront.Count == 0) return;
             _interactablesInFront.ForEach(objectInFront => objectInFront.Interact());
+        }
+
+        private void SetAnimation(int value)
+        {
+            if (_animator?.GetInteger("direction") != value)
+                _animator.SetInteger("direction", value);
         }
     }
 }
