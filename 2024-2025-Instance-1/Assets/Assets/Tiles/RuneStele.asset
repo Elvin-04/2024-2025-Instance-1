@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: RuneStele
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 4695565016294147796, guid: 705d959a4bdc7cf42a5917122fed0309, type: 3}
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  - {fileID: -6087595192274276162, guid: 155e307c0198fe247bb70caf7b26847d, type: 3}
+  - {fileID: 5029940846520997077, guid: f1e60f288ecd65541b43e32a73d5c3d8, type: 3}
+  - {fileID: 8197771340461576738, guid: eb0521fa0731af6478f40ad4fe310f72, type: 3}
+  - {fileID: -7784168912200571673, guid: 80d4b3a2b26243d44870f1d4dc3fc927, type: 3}
+  - {fileID: -2981459519220117411, guid: 8c6c8cde9bc2ccd4897be4d9f68cb53e, type: 3}
+  m_MinSpeed: 7
+  m_MaxSpeed: 7
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0
