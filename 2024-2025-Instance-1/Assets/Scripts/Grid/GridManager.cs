@@ -117,8 +117,10 @@ namespace Grid
 
         public Vector2Int GetNextIndex((int, int) indexes, Vector2 direction)
         {
-            int yMoveDir = Mathf.CeilToInt(Mathf.Abs(direction.y)) * (int)Mathf.Sign(direction.y);
-            int xMoveDir = Mathf.CeilToInt(Mathf.Abs(direction.x)) * (int)Mathf.Sign(direction.x);
+            int xMoveDir = direction.x > 0 ? 1 : direction.x < 0 ? -1 : 0;
+            int yMoveDir = direction.y > 0 ? 1 : direction.y < 0 ? -1 : 0;
+            
+            Debug.Log(xMoveDir + " " + yMoveDir);
 
             (int, int) nextIndex = (indexes.Item1 + xMoveDir, indexes.Item2 + yMoveDir);
             Vector2Int nextIndexVector = new(nextIndex.Item1, nextIndex.Item2);
