@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 37db1b20b883d294f96c619b98e4b103
+guid: e33d7642e10faf14bbacbbeb36f6502e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3705065890056707439
-    second: lemur 1_0
+      213: 7075519309926293440
+    second: sol_duba_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,7 +152,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lemur 1_0
+      name: sol_duba_0
       rect:
         serializedVersion: 2
         x: 0
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 192e0c90436f49cc0800000000000000
-      internalID: -3705065890056707439
+      spriteID: 0cfd29d135b413260800000000000000
+      internalID: 7075519309926293440
       vertices: []
       indices: 
       edges: []
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      lemur 1_0: -3705065890056707439
+      sol_duba_0: 7075519309926293440
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
