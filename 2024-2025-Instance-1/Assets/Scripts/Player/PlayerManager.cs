@@ -1,5 +1,6 @@
 using DeathSystem;
 using Grid;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -10,7 +11,7 @@ namespace Player
     public class PlayerManager : MonoBehaviour
     {
         //Prefabs
-        [Header("Prefabs")] [SerializeField] private GameObject _playerPrefab;
+        [Header("Prefabs")][SerializeField] private GameObject _playerPrefab;
 
         //Properties
         private GameObject _currentPlayer;
@@ -18,6 +19,8 @@ namespace Player
 
         //Components
         private LevelManager _levelManager;
+
+        [SerializeField] private float _waitTimeBeforeRespawn = 1f;
 
         private void Awake()
         {
@@ -51,7 +54,18 @@ namespace Player
 
         private void OnDeath(GameObject player)
         {
+            StartCoroutine(nameof(Respawn), player);
+
+        }
+
+        private IEnumerator Respawn(GameObject player)
+        {
+            yield return new WaitForEndOfFrame();
+            player.SetActive(false);
+            yield return new WaitForSeconds(_waitTimeBeforeRespawn);
             player.transform.position = GetCellPos(_levelManager.spawnPoint.position);
+            player.SetActive(true);
+            EventManager.instance.onRespawn?.Invoke();
             EventManager.instance.onPlayerMoved?.Invoke(player.transform.position);
         }
     }
