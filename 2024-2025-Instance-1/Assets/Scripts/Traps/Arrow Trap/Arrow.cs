@@ -12,7 +12,7 @@ namespace Traps.Arrow_Trap
         public Vector2 direction;
 
         private Transform _transform;
-        public GridManager gridManager { get; private set; }
+        private GridManager _gridManager;
 
         private void Awake()
         {
@@ -39,7 +39,7 @@ namespace Traps.Arrow_Trap
 
         public void SetGridManager(GridManager gridManagerToSet)
         {
-            gridManager = gridManagerToSet;
+            _gridManager = gridManagerToSet;
         }
 
         public void SetDirection(PlayerDirection directionToSet)
@@ -51,7 +51,7 @@ namespace Traps.Arrow_Trap
 
         public void UpdateClock()
         {
-            Vector2Int cellIndex = gridManager.GetCellIndex(_transform.position);
+            Vector2Int cellIndex = _gridManager.GetCellIndex(_transform.position);
 
             direction = directionEnum switch
             {
@@ -62,19 +62,19 @@ namespace Traps.Arrow_Trap
                 _ => Vector3.zero
             };
 
-            Vector2Int nextIndex = gridManager.GetNextIndex(cellIndex, direction);
+            Vector2Int nextIndex = _gridManager.GetNextIndex(cellIndex, direction);
 
-            if (gridManager.GetObjectsOnCell(gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any())
+            if (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any())
             {
                 EventManager.instance.updateClock.RemoveListener(UpdateClock);
                 Destroy(gameObject);
                 return;
             }
 
-            _transform.DOMove(gridManager.GetCellPos(nextIndex), 0.2f).OnComplete(() =>
+            _transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime()).OnComplete(() =>
             {
-                gridManager.AddObjectOnCell(nextIndex, this);
-                gridManager.RemoveObjectOnCell(cellIndex, this);
+                _gridManager.AddObjectOnCell(nextIndex, this);
+                _gridManager.RemoveObjectOnCell(cellIndex, this);
             });
         }
     }

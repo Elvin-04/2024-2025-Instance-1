@@ -8,7 +8,6 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private float _movementTime;
 
         private bool _canMove;
         private Tween _currentMoveAnim;
@@ -175,7 +174,7 @@ namespace Player
 
             _currentMoveAnim = _transform.DOMove(
                 position,
-                _movementTime).SetEase(Ease.Linear).OnComplete(() =>
+                _gridManager.GetGlobalMoveTime()).SetEase(Ease.Linear).OnComplete(() =>
             {
                 CheckInteraction<IInteractableCallable>(_moveDirection);
                 EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
