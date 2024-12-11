@@ -180,7 +180,6 @@ namespace Player
             {
                 CheckInteraction<IInteractableCallable>(_moveDirection);
                 EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
-                // SetAnimation(0);
                 // wait one frame. this is to allow interactions to actually happen
                 
                 StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
