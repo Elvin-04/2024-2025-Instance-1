@@ -68,7 +68,7 @@ namespace Traps.Arrow_Trap
             {
                 EventManager.instance.updateClock.RemoveListener(UpdateClock);
                 Destroy(gameObject);
-                gridManager.RemoveObjectOnCell(cellIndex, this);
+                _gridManager.RemoveObjectOnCell(cellIndex, this);
                 return;
             }
 
