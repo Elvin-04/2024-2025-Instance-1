@@ -67,7 +67,6 @@ namespace Player
         private void TryMove()
         {
             if (!_canMove || !_reachedTargetCell) return;
-
             Move();
         }
 
@@ -133,8 +132,7 @@ namespace Player
 
         private void Move()
         {
-            Vector2Int cellIndex = _gridManager.GetCellIndex(_transform.position);
-            (int, int) nextIndex = (cellIndex.x + (int)_moveDirection.x, cellIndex.y + (int)_moveDirection.y);
+            Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, _moveDirection);
 
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
@@ -166,7 +164,6 @@ namespace Player
                 StopMove();
                 return;
             }
-
 
             _reachedTargetCell = false;
             EventManager.instance.updateClock?.Invoke();
