@@ -20,6 +20,7 @@ namespace Runes
         public void Interact()
         {
             onTake?.Invoke();
+            EventManager.instance.canInteract.Invoke(false);
             EventManager.instance.addRuneToInventory.Invoke(this);
         }
 
