@@ -348,11 +348,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1942168811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 50}
   m_SizeDelta: {x: 120, y: 120}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &434624321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +709,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.92
       objectReference: {fileID: 0}
+    - target: {fileID: 5191951653006571299, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _gridManager
+      value: 
+      objectReference: {fileID: 1075084691}
     - target: {fileID: 5421966097212900045, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
       propertyPath: m_Name
       value: CreateDoorButtonSideY
