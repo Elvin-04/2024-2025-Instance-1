@@ -42,7 +42,8 @@ public class LevelManager : MonoBehaviour
     public void ReloadScene()
     {
         Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadSceneAsync(scene.name);
+        EventManager.Instance.OnTransitionScene.Invoke(scene.name);
+
     }
 
     private void OnDrawGizmos()

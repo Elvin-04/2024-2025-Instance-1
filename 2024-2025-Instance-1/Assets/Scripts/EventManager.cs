@@ -31,7 +31,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent OnWin { get; private set; } = new UnityEvent();
     public UnityEvent<Vector3> StopInteract { get; private set; } = new UnityEvent<Vector3>();
     public UnityEvent<Vector3, CellObjectBase> OnRemoveObjectOnCell { get; private set; } = new UnityEvent<Vector3, CellObjectBase>();
-
+    public UnityEvent<string> OnTransitionScene { get; private set; } = new UnityEvent<string>();
     private void Awake()
     {
         if (Instance == null)
