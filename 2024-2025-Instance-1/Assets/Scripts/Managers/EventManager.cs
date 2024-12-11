@@ -21,7 +21,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent<bool> canInteract { get; private set; } = new();
     public UnityEvent onPause { get; private set; } = new();
     public UnityEvent<Rune> updateRune { get; private set; } = new();
-    public UnityEvent updateDeath { get; private set; } = new();
+    public UnityEvent onRespawn { get; private set; } = new();
     public UnityEvent onDeath { get; private set; } = new();
     public UnityEvent updateClock { get; private set; } = new();
     public UnityEvent onClockUpdated { get; private set; } = new();

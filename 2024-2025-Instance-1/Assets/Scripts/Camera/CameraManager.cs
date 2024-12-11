@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
     private Vector3 _cameraPos;
     private Tween _moveAnim;
     private bool _reachedEnd;
+    private bool _isDead = false;
 
     private void Awake()
     {
@@ -44,11 +45,14 @@ public class CameraManager : MonoBehaviour
     private void LateStart()
     {
         EventManager.instance.onWin.AddListener(() => IsReachedEnd(true));
+        EventManager.instance.onDeath.AddListener(() => _isDead = true);
+        EventManager.instance.onRespawn.AddListener(() => _isDead = false);
     }
+
 
     private void OnPlayerMoved(Vector3 pos)
     {
-        if (_reachedEnd) return;
+        if (_reachedEnd || _isDead) return;
 
         float height = 2f * _camera.orthographicSize;
         float width = height * _camera.aspect;
