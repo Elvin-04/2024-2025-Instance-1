@@ -68,11 +68,11 @@ namespace Traps.Arrow_Trap
             {
                 EventManager.instance.updateClock.RemoveListener(UpdateClock);
                 Destroy(gameObject);
-                gridManager.RemoveObjectOnCell(cellIndex, this);
+                _gridManager.RemoveObjectOnCell(cellIndex, this);
                 return;
             }
 
-            _transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime()).OnComplete(() =>
+            _transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime()).SetEase(Ease.Linear).OnComplete(() =>
             {
                 _gridManager.AddObjectOnCell(nextIndex, this);
                 _gridManager.RemoveObjectOnCell(cellIndex, this);
