@@ -1,17 +1,16 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Camera
+public class CameraManager : MonoBehaviour
 {
-    public class CameraManager : MonoBehaviour
-    {
-        [SerializeField] private float _moveTime;
-        private UnityEngine.Camera _camera;
-        private Vector3 _cameraPos;
-        private Tween _moveAnim;
-        private bool _reachedEnd;
+    [SerializeField] private float _moveTime;
+    private Camera _camera;
+    private Vector3 _cameraPos;
+    private Tween _moveAnim;
+    private bool _reachedEnd;
+    private bool _isDead = false;
 
-        private void Awake()
+    private void Awake()
         {
             _camera = UnityEngine.Camera.main;
         }
@@ -44,14 +43,16 @@ namespace Camera
             if (_reachedEnd) _moveAnim?.Kill();
         }
 
-        private void LateStart()
-        {
-            EventManager.instance.onWin.AddListener(() => IsReachedEnd(true));
-        }
+    private void LateStart()
+    {
+        EventManager.instance.onWin.AddListener(() => IsReachedEnd(true));
+        EventManager.instance.onDeath.AddListener(() => _isDead = true);
+        EventManager.instance.onRespawn.AddListener(() => _isDead = false);
+    }
 
-        private void OnPlayerMoved(Vector3 pos)
-        {
-            if (_reachedEnd) return;
+    private void OnPlayerMoved(Vector3 pos)
+    {
+        if (_reachedEnd || _isDead) return;
 
             float height = 2f * _camera.orthographicSize;
             float width = height * _camera.aspect;
@@ -71,6 +72,5 @@ namespace Camera
             direction = directionVector.normalized;
             Vector3 targetPosition = _camera.transform.position + Utils.Multiply(direction, screenSize);
             _moveAnim = _camera.transform.DOMove(targetPosition, _moveTime);
-        }
     }
 }
