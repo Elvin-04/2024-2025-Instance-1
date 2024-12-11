@@ -61,17 +61,17 @@ namespace Traps
         private void Open(Transform doorTransform)
         {
             EventManager.instance.onChangeCell?.Invoke(doorTransform.position, _doorOpen);
-            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right, _wallCloseToDoorOpened);
-            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left, _wallCloseToDoorOpened);
+            //EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right, _wallCloseToDoorOpened);
+            //EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left, _wallCloseToDoorOpened);
         }
 
         private void Close(Transform doorTransform)
         {
             EventManager.instance.onChangeCell?.Invoke(doorTransform.position, _doorClose);
-            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right,
-                _wallCloseToDoorClosedLeft);
-            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left,
-                _wallCloseToDoorClosedRight);
+            //EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right,
+            //    _wallCloseToDoorClosedLeft);
+            //EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left,
+            //    _wallCloseToDoorClosedRight);
         }
     }
 }
