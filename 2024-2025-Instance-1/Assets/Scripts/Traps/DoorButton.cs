@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Creators;
 using Grid;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -10,19 +11,23 @@ namespace Traps
         [SerializeField] private Cell _doorOpen;
         [SerializeField] private Cell _doorClose;
 
-        [SerializeField] private Cell _wallCloseToDoorOpened;
+        [SerializeField] private Cell _wallCloseToDoorOpenedRight;
+        [SerializeField] private Cell _wallCloseToDoorOpenedLeft;
 
         [SerializeField] private Cell _wallCloseToDoorClosedLeft;
         [SerializeField] private Cell _wallCloseToDoorClosedRight;
         private List<Transform> _doorTransforms = new();
+        private List<PillarObject> _pillars = new();
 
         private void Start()
         {
             Assert.IsNotNull(_doorOpen, "door open is null in DoorButton");
             Assert.IsNotNull(_doorClose, "door close is null in DoorButton");
-            Assert.IsNotNull(_wallCloseToDoorOpened, "wall close to door opened is null in DoorButton");
+            Assert.IsNotNull(_wallCloseToDoorOpenedRight, "wall close to door opened is null in DoorButton Right");
+            Assert.IsNotNull(_wallCloseToDoorOpenedLeft, "wall close to door opened is null in DoorButton Left");
             Assert.IsNotNull(_wallCloseToDoorClosedLeft, "wall close to door closed left is null in DoorButton");
             Assert.IsNotNull(_wallCloseToDoorClosedRight, "wall close to door closed right is null in DoorButton");
+            Close();
         }
 
         public bool canPickUp
@@ -33,45 +38,58 @@ namespace Traps
 
         public void Interact()
         {
-            OpenDoors();
+            Open();
         }
 
         public void StopInteract()
         {
-            CloseDoors();
+            Close();
         }
 
         public void SetDoorTransforms(List<Transform> transforms)
         {
             _doorTransforms = transforms;
         }
+        public void SetPillars(List<PillarObject> pillars)
+        {
+            _pillars = pillars;
+        }
 
-        private void OpenDoors()
+        private void Open()
         {
             if (_doorTransforms == null) return;
 
-            foreach (Transform doorTransform in _doorTransforms) Open(doorTransform);
+            foreach (Transform doorTransform in _doorTransforms) OpenDoor(doorTransform);
+            foreach (PillarObject pillar in _pillars) OpenPillar(pillar);
         }
 
-        private void CloseDoors()
+        private void Close()
         {
-            foreach (Transform doorTransform in _doorTransforms) Close(doorTransform);
+            foreach (Transform doorTransform in _doorTransforms) CloseDoor(doorTransform);
+            foreach (PillarObject pillar in _pillars) ClosePillar(pillar);
         }
 
-        private void Open(Transform doorTransform)
+        private void OpenDoor(Transform doorTransform)
         {
             EventManager.instance.onChangeCell?.Invoke(doorTransform.position, _doorOpen);
-            //EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right, _wallCloseToDoorOpened);
-            //EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left, _wallCloseToDoorOpened);
         }
 
-        private void Close(Transform doorTransform)
+        private void CloseDoor(Transform doorTransform)
         {
             EventManager.instance.onChangeCell?.Invoke(doorTransform.position, _doorClose);
-            //EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right,
-            //    _wallCloseToDoorClosedLeft);
-            //EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left,
-            //    _wallCloseToDoorClosedRight);
         }
+
+        private void OpenPillar(PillarObject pillar)
+        {
+            EventManager.instance.onChangeCell?.Invoke(pillar.transform.position, 
+                pillar.side == Side.Right ? _wallCloseToDoorOpenedRight : _wallCloseToDoorOpenedLeft);
+        }
+
+        private void ClosePillar(PillarObject pillar)
+        {
+            EventManager.instance.onChangeCell?.Invoke(pillar.transform.position,
+                pillar.side == Side.Right ? _wallCloseToDoorClosedLeft : _wallCloseToDoorClosedRight) ;
+        }
+
     }
 }
