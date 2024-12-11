@@ -50,6 +50,7 @@ public class CameraManager : MonoBehaviour
         EventManager.instance.onRespawn.AddListener(() => _isDead = false);
     }
 
+
     private void OnPlayerMoved(Vector3 pos)
     {
         if (_reachedEnd || _isDead) return;

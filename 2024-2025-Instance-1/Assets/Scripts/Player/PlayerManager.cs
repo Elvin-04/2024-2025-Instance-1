@@ -64,8 +64,6 @@ namespace Player
             player.SetActive(false);
             yield return new WaitForSeconds(_waitTimeBeforeRespawn);
             player.transform.position = GetCellPos(_levelManager.spawnPoint.position);
-            player.SetActive(true);
-            EventManager.instance.onRespawn?.Invoke();
             EventManager.instance.onPlayerMoved?.Invoke(player.transform.position);
         }
     }
