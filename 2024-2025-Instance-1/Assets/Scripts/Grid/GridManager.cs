@@ -10,6 +10,7 @@ namespace Grid
     {
         [SerializeField] private Cell _groundCell;
         [field: SerializeField] public Tilemap tilemap { get; private set; }
+        [SerializeField] private float _globalMoveTime;
         private readonly Dictionary<(int, int), CellContainer> _cellContainers = new();
 
         private void Awake()
@@ -69,6 +70,11 @@ namespace Grid
             EventManager.instance.onResetCell?.AddListener(ResetCell);
             EventManager.instance.onRemoveObjectOnCell.AddListener(OnRemoveObjectOnCell);
             EventManager.instance.stopInteract.AddListener(OnStopInteract);
+        }
+
+        public float GetGlobalMoveTime()
+        {
+            return _globalMoveTime;
         }
 
         private void OnRemoveObjectOnCell(Vector3 pos, CellObjectBase cellObject)
