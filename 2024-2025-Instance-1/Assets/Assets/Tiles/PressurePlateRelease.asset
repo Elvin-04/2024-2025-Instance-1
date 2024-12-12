@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
-  m_Name: PressurePlateSideY
+  m_Name: PressurePlateRelease
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
   - {fileID: 4939794916806950809, guid: f400471bec40e5544bf131c923b1d26d, type: 3}
@@ -20,4 +20,4 @@ MonoBehaviour:
   m_AnimationStartFrame: 0
   m_TileColliderType: 0
   m_TileAnimationFlags: 0
-  _prefab: {fileID: 6610866179624033917, guid: 4b45cb2c6c3fdf74a86553be7e88cfc6, type: 3}
+  _prefab: {fileID: 0}

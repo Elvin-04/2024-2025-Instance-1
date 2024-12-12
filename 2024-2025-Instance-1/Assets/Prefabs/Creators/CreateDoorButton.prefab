@@ -112,7 +112,8 @@ MonoBehaviour:
   _cellToSpawn: {fileID: 11400000, guid: 8a53f206bb8445949845058d834d9fa7, type: 2}
   _gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   _door: {fileID: 11400000, guid: 9b9d0d63e1399ec48b51b0a5e2ed11fe, type: 2}
-  _pillar: {fileID: 11400000, guid: 6afbdb050d4a68e43874571fb2586bff, type: 2}
+  _pillarRight: {fileID: 11400000, guid: bba85e9ddf53a2d4fa55f8ef0682aeef, type: 2}
+  _pillarLeft: {fileID: 11400000, guid: c1d6ed991e5615d49aca9a7e1221aa62, type: 2}
   _doorTransforms:
   - {fileID: 1080367878510791621}
   _pillars:
@@ -121,6 +122,7 @@ MonoBehaviour:
   - transform: {fileID: 7659540069001267149}
     side: 1
   _gridManager: {fileID: 0}
+  _plateToSpawn: {fileID: 311796568613666352, guid: f8e6b8fa9ac00c240ad81e244213dd63, type: 3}
 --- !u!1 &8364790204833203904
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 8364790204833203904}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 2, z: 0.01077715}
+  m_LocalPosition: {x: -1.57, y: 0.03, z: 0.01077715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

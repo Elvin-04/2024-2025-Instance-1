@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Creators;
 using Grid;
@@ -6,16 +7,28 @@ using UnityEngine.Assertions;
 
 namespace Traps
 {
-    public class DoorButton : CellObjectBase, IInteractable
+    public class PressurePlate : CellObjectBase, IInteractable
     {
+
+        public Action onPlate;
+        public Action offPlate;
+
+        [Header("Pressure Plate")]
+        [SerializeField] private Cell _platePress;
+        [SerializeField] private Cell _plateRelease;
+
+        [Header("Door")]
         [SerializeField] private Cell _doorOpen;
         [SerializeField] private Cell _doorClose;
 
+        [Header("Pillar")]
         [SerializeField] private Cell _wallCloseToDoorOpenedRight;
         [SerializeField] private Cell _wallCloseToDoorOpenedLeft;
 
         [SerializeField] private Cell _wallCloseToDoorClosedLeft;
         [SerializeField] private Cell _wallCloseToDoorClosedRight;
+
+        [Header("Transform List")]
         private List<Transform> _doorTransforms = new();
         private List<PillarObject> _pillars = new();
 
@@ -39,13 +52,19 @@ namespace Traps
         public void Interact()
         {
             Open();
+            onPlate.Invoke();
         }
 
         public void StopInteract()
         {
             Close();
+            offPlate.Invoke();
         }
 
+        public Cell GetTileBasedOnState(bool isPress)
+        {
+            return isPress ? _platePress : _plateRelease;
+        }
         public void SetDoorTransforms(List<Transform> transforms)
         {
             _doorTransforms = transforms;
@@ -57,14 +76,16 @@ namespace Traps
 
         private void Open()
         {
-            if (_doorTransforms == null) return;
+            if (_doorTransforms == null || _pillars == null) return;
 
+            EventManager.instance.onChangeCell?.Invoke(transform.position, _platePress);
             foreach (Transform doorTransform in _doorTransforms) OpenDoor(doorTransform);
             foreach (PillarObject pillar in _pillars) OpenPillar(pillar);
         }
 
         private void Close()
         {
+            EventManager.instance.onChangeCell?.Invoke(transform.position, _plateRelease);
             foreach (Transform doorTransform in _doorTransforms) CloseDoor(doorTransform);
             foreach (PillarObject pillar in _pillars) ClosePillar(pillar);
         }

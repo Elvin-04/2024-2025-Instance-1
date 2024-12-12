@@ -175,7 +175,8 @@ namespace Grid
 
         public void AddObjectOnCell((int, int) indexes, CellObjectBase cellObject)
         {
-            _cellContainers[indexes].AddObject(cellObject);
+            if (!_cellContainers[indexes].Contains(cellObject))
+                _cellContainers[indexes].AddObject(cellObject);
         }
 
         public void AddObjectOnCell(int x, int y, CellObjectBase cellObject)
