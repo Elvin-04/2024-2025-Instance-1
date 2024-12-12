@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using Data;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Managers.Audio
 {
     public class AudioManager : MonoBehaviour
     {
-        public static AudioManager instance;
+        private static AudioManager instance;
 
         [Header("Music")]
         [SerializeField] private Transform _musicParent;
@@ -22,10 +23,10 @@ namespace Managers.Audio
         [SerializeField] private GameObject _prefabSfxLink;
         [SerializeField] private List<AudioClipEntry> _sfxPlaylistEntries = new();
 
-        private Dictionary<string, AudioClip> _musicPlayInlist = new();
+        private Dictionary<string, List<AudioClip>> _musicPlayInlist = new();
         private ComponentPoolAudio<AudioSource> _musicPool;
 
-        private Dictionary<string, AudioClip> _sfxPlayInlist = new();
+        private Dictionary<string, List<AudioClip>> _sfxPlayInlist = new();
         private ComponentPoolAudio<AudioSource> _sfxPool;
 
 
@@ -44,6 +45,12 @@ namespace Managers.Audio
 
         private void Start()
         {
+            InitPools();
+            InitListeners();
+        }
+
+        private void InitPools()
+        {
             // Création avec le système de pool de :
             _musicPool = new ComponentPoolAudio<AudioSource>(_prefabMusicLink, _musicParent, 5); // Pré-allocation de 5 AudioSource pour la musique
             _sfxPool = new ComponentPoolAudio<AudioSource>(_prefabSfxLink, _sfxParent, 10); // Pré-allocation de 10 AudioSource pour les SFX
@@ -53,12 +60,29 @@ namespace Managers.Audio
             _sfxPlayInlist = ConvertListToDictionary(_sfxPlaylistEntries);
         }
 
-        private Dictionary<string, AudioClip> ConvertListToDictionary(List<AudioClipEntry> entries)
+        private void InitListeners()
         {
-            Dictionary<string, AudioClip> dictionary = new();
+            EventManager.instance.onPlayMusic.AddListener(PlayMusic);
+            EventManager.instance.onPlayAllMusic.AddListener(PlayAllMusic);
+            EventManager.instance.onPauseMusic.AddListener(PauseMusic);
+            EventManager.instance.onPauseAllMusic.AddListener(PauseAllMusic);
+            EventManager.instance.onStopMusic.AddListener(StopMusic);
+            EventManager.instance.onStopAllMusic.AddListener(StopAllMusic);
+
+            EventManager.instance.onPlaySfx.AddListener(PlaySfx);
+            EventManager.instance.onPlayAllSfx.AddListener(PlayAllSfx);
+            EventManager.instance.onPauseSfx.AddListener(PauseSfx);
+            EventManager.instance.onPauseAllSfx.AddListener(PauseAllSfx);
+            EventManager.instance.onStopSfx.AddListener(StopSfx);
+            EventManager.instance.onStopAllSfx.AddListener(StopAllSfx);
+        }
+
+        private Dictionary<string, List<AudioClip>> ConvertListToDictionary(List<AudioClipEntry> entries)
+        {
+            Dictionary<string, List<AudioClip>> dictionary = new();
             foreach (var entry in entries)
                 if (!dictionary.ContainsKey(entry.key))
-                    dictionary.Add(entry.key, entry.clip);
+                    dictionary.Add(entry.key, entry.clips);
 
             return dictionary;
         }
@@ -71,11 +95,19 @@ namespace Managers.Audio
         /// <param name="name"></param>
         public void PlayMusic(string name)
         {
-            if (!_musicPlayInlist.ContainsKey(name))
+            if (!_musicPlayInlist.TryGetValue(name, out var clips))
             {
                 Debug.LogWarning($"No Music track named {name} found in the playlist.");
                 return;
             }
+
+            if (clips.Count == 0)
+            {
+                Debug.LogWarning($"No clips available for Music track {name}.");
+                return;
+            }
+
+            var clip = clips[Random.Range(0, clips.Count)]; // Sélection aléatoire d'un clip
 
             var musicSource = _musicPool.Get();
 
@@ -86,22 +118,23 @@ namespace Managers.Audio
                 musicSource = musicObject.GetComponent<AudioSource>();
             }
 
-            // Configurer l'AudioSource avec le clip audio correspondant
-            musicSource.clip = _musicPlayInlist[name];
+            // Configurer l'AudioSource avec le clip audio sélectionné
+            musicSource.clip = clip;
             musicSource.Play();
 
             // Initialiser le script AudioSourceRelease pour libérer l'objet après la lecture
-            var releaseScript = musicSource.gameObject.AddComponent<AudioSourceRelease>();
+            var releaseScript = musicSource.gameObject.GetComponent<AudioSourceRelease>() ?? musicSource.gameObject.AddComponent<AudioSourceRelease>();
             releaseScript.Initialize(musicSource, _musicPool);
+            Debug.Log($"Playing music: '{clip.name}' from track '{name}'");
         }
 
-        public void PlayAllMusic()
+        private void PlayAllMusic()
         {
             if (_sfxPlayInlist.Count == 0) return;
             foreach (var musicSource in _musicPool.GetAll()) musicSource.Play();
         }
 
-        public void PauseMusic(string name)
+        private void PauseMusic(string name)
         {
             foreach (var musicSource in _musicPool.GetAll())
             {
@@ -110,12 +143,12 @@ namespace Managers.Audio
             }
         }
 
-        public void PauseAllMusic()
+        private void PauseAllMusic()
         {
             foreach (var musicSource in _musicPool.GetAll()) musicSource.Pause();
         }
 
-        public void StopMusic(string name)
+        private void StopMusic(string name)
         {
             foreach (var musicSource in _musicPool.GetAll())
             {
@@ -126,7 +159,7 @@ namespace Managers.Audio
             }
         }
 
-        public void StopAllMusic()
+        private void StopAllMusic()
         {
             foreach (var musicSource in _musicPool.GetAll())
             {
@@ -145,11 +178,19 @@ namespace Managers.Audio
         /// <param name="name"></param>
         public void PlaySfx(string name)
         {
-            if (!_sfxPlayInlist.ContainsKey(name))
+            if (!_sfxPlayInlist.TryGetValue(name, out var clips))
             {
-                Debug.LogWarning($"No SFX track named {name} found in the playlist.");
+                Debug.LogWarning($"No Music track named {name} found in the playlist.");
                 return;
             }
+
+            if (clips.Count == 0)
+            {
+                Debug.LogWarning($"No clips available for Music track {name}.");
+                return;
+            }
+
+            var clip = clips[Random.Range(0, clips.Count)]; // Sélection aléatoire d'un clip
 
             var sfxSource = _sfxPool.Get();
 
@@ -160,22 +201,23 @@ namespace Managers.Audio
                 sfxSource = sfxObject.GetComponent<AudioSource>();
             }
 
-            // Configurer l'AudioSource avec le clip audio correspondant
-            sfxSource.clip = _sfxPlayInlist[name];
+            // Configurer l'AudioSource avec le clip audio sélectionné
+            sfxSource.clip = clip;
             sfxSource.Play();
 
             // Initialiser le script AudioSourceRelease pour libérer l'objet après la lecture
-            var releaseScript = sfxSource.gameObject.AddComponent<AudioSourceRelease>();
+            var releaseScript = sfxSource.gameObject.GetComponent<AudioSourceRelease>() ?? sfxSource.gameObject.AddComponent<AudioSourceRelease>();
             releaseScript.Initialize(sfxSource, _sfxPool);
+            Debug.Log($"Playing sfx: '{clip.name}' from track '{name}'");
         }
 
-        public void PlayAllSfx()
+        private void PlayAllSfx()
         {
             if (_sfxPlayInlist.Count == 0) return;
             foreach (var sfxSource in _sfxPool.GetAll()) sfxSource.Play();
         }
 
-        public void PauseSfx(string name)
+        private void PauseSfx(string name)
         {
             foreach (var sfxSource in _sfxPool.GetAll())
             {
@@ -184,12 +226,12 @@ namespace Managers.Audio
             }
         }
 
-        public void PauseAllSfx()
+        private void PauseAllSfx()
         {
             foreach (var sfxSource in _sfxPool.GetAll()) sfxSource.Pause();
         }
 
-        public void StopSfx(string name)
+        private void StopSfx(string name)
         {
             foreach (var sfxSource in _sfxPool.GetAll())
             {
@@ -200,7 +242,7 @@ namespace Managers.Audio
             }
         }
 
-        public void StopAllSfx()
+        private void StopAllSfx()
         {
             foreach (var sfxSource in _sfxPool.GetAll())
             {
@@ -218,5 +260,5 @@ namespace Managers.Audio
 public class AudioClipEntry
 {
     public string key;
-    public AudioClip clip;
+    public List<AudioClip> clips = new();
 }
