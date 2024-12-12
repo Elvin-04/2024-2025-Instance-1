@@ -7,6 +7,7 @@ namespace Grid
         public void Interact()
         {
             EventManager.instance.onWin.Invoke();
+            EventManager.instance.onDisableInput.Invoke();
         }
 
         public void StopInteract()
