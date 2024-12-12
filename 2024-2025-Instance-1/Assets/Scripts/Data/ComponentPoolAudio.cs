@@ -6,14 +6,14 @@ namespace Data
     public class ComponentPoolAudio<T> where T : Component
     {
         private readonly Transform _parent;
-        private readonly Queue<T> _pool;
+        private readonly List<T> _pool;
         private readonly GameObject _prefab;
 
         public ComponentPoolAudio(GameObject prefab, Transform parent, int initialSize)
         {
             _prefab = prefab;
             _parent = parent;
-            _pool = new Queue<T>();
+            _pool = new List<T>();
 
             // Pré-allocation des composants
             for (var i = 0; i < initialSize; i++)
@@ -21,30 +21,56 @@ namespace Data
                 var obj = Object.Instantiate(_prefab, _parent);
                 var component = obj.GetComponent<T>();
                 obj.SetActive(false); // Garde l'objet inactif
-                _pool.Enqueue(component);
+                _pool.Add(component);
             }
         }
 
         public T Get()
         {
-            // Si le pool est vide, retourner null
-            if (_pool.Count == 0)
-                return null;
+            // Rechercher un objet inactif dans la liste
+            foreach (var component in _pool)
+                if (!component.gameObject.activeSelf)
+                {
+                    component.gameObject.SetActive(true); // Activer l'objet
+                    return component;
+                }
 
-            var component = _pool.Dequeue();
-            component.gameObject.SetActive(true); // Activer le composant
-            return component;
+            // Si aucun objet inactif n'est trouvé, retourner null
+            Debug.LogWarning("No available object in the pool.");
+            return null;
         }
 
         public void Release(GameObject obj)
         {
-            obj.SetActive(false);
-            _pool.Enqueue(obj.GetComponent<T>()); // Retourner le composant dans le pool
+            var component = obj.GetComponent<T>();
+            if (!component)
+            {
+                Debug.LogWarning("The object to release does not contain the correct component.");
+                return;
+            }
+
+            // Désactiver l'objet et s'assurer qu'il appartient bien au pool
+            if (_pool.Contains(component))
+                obj.SetActive(false);
+            else
+                Debug.LogWarning("The object does not belong to this pool.");
         }
 
         public IEnumerable<T> GetAll()
         {
             foreach (var component in _pool) yield return component;
+        }
+
+        public void AddToPool(int additionalSize)
+        {
+            // Ajouter des objets supplémentaires au pool
+            for (var i = 0; i < additionalSize; i++)
+            {
+                var obj = Object.Instantiate(_prefab, _parent);
+                var component = obj.GetComponent<T>();
+                obj.SetActive(false);
+                _pool.Add(component);
+            }
         }
     }
 }
