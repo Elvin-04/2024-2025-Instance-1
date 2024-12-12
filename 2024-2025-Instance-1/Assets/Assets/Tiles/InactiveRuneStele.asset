@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: InactiveRuneStele
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 4695565016294147796, guid: 705d959a4bdc7cf42a5917122fed0309, type: 3}
+  - {fileID: 5716912062524699285, guid: e2e3fa03cdac6214f9df4b83fbdfeb68, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0

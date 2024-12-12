@@ -14,6 +14,8 @@ namespace Traps.Arrow_Trap
         private Transform _transform;
         private GridManager _gridManager;
 
+        private bool _movedOnce = false;
+
         private void Awake()
         {
             _transform = transform;
@@ -44,7 +46,15 @@ namespace Traps.Arrow_Trap
 
         public void SetDirection(PlayerDirection directionToSet)
         {
-            transform.rotation = Quaternion.Euler(0, 0, (int)(directionToSet + 1) * 90);
+            //transform.rotation = Quaternion.Euler(0, 0, (int)(directionToSet + 1) * 90);
+
+            switch(directionToSet)
+            {
+                case PlayerDirection.Left: transform.rotation = Quaternion.Euler(0, 0, 180); break;
+                case PlayerDirection.Up: transform.rotation = Quaternion.Euler(0, 0, 90); break;
+                case PlayerDirection.Down: transform.rotation = Quaternion.Euler(0, 0, -90); break;
+                case PlayerDirection.Right: transform.rotation = Quaternion.Euler(0, 0, 0); break;
+            }
 
             directionEnum = directionToSet;
         }
@@ -64,7 +74,7 @@ namespace Traps.Arrow_Trap
 
             Vector2Int nextIndex = _gridManager.GetNextIndex(cellIndex, direction);
 
-            if (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any())
+            if (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any() || (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(cellIndex)).OfType<ICollisionObject>().Any() && _movedOnce))
             {
                 EventManager.instance.updateClock.RemoveListener(UpdateClock);
                 Destroy(gameObject);
@@ -77,6 +87,8 @@ namespace Traps.Arrow_Trap
                 _gridManager.AddObjectOnCell(nextIndex, this);
                 _gridManager.RemoveObjectOnCell(cellIndex, this);
             });
+
+            _movedOnce = true;
         }
     }
 }
