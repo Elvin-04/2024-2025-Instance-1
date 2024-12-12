@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: a4f0edf1190fbe844b000b1e640343ae
+guid: 49ce5bf6ec4ec3f44b99f3dbca0f06c2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3777454501971972936
-    second: KABOOOM0005_0
-  - first:
-      213: 4854571280590610056
-    second: KABOOOM0005_1
-  - first:
-      213: -459426567696786011
-    second: KABOOOM0005_2
+      213: -736310717133374191
+    second: kaboom0004_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: KABOOOM0005_0
+      name: kaboom0004_0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 33
-        width: 25
-        height: 28
+        x: 52
+        y: 24
+        width: 177
+        height: 210
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,52 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8435d311bd63c6430800000000000000
-      internalID: 3777454501971972936
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: KABOOOM0005_1
-      rect:
-        serializedVersion: 2
-        x: 21
-        y: 26
-        width: 111
-        height: 112
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 88e9a6cebd6ee5340800000000000000
-      internalID: 4854571280590610056
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: KABOOOM0005_2
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 33
-        width: 38
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5ad5e0888f9cf99f0800000000000000
-      internalID: -459426567696786011
+      spriteID: 11db3fccd4918c5f0800000000000000
+      internalID: -736310717133374191
       vertices: []
       indices: 
       edges: []
@@ -198,9 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      KABOOOM0005_0: 3777454501971972936
-      KABOOOM0005_1: 4854571280590610056
-      KABOOOM0005_2: -459426567696786011
+      kaboom0004_0: -736310717133374191
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

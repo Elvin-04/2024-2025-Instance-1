@@ -7411,15 +7411,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7180334820093100599, guid: 98f8df5f001b49a409b1c00d2d191dca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.6382614
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7180334820093100599, guid: 98f8df5f001b49a409b1c00d2d191dca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6395698
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7180334820093100599, guid: 98f8df5f001b49a409b1c00d2d191dca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0010040468
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7180334820093100599, guid: 98f8df5f001b49a409b1c00d2d191dca, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7452,10 +7452,6 @@ PrefabInstance:
     - target: {fileID: 8541747565679402840, guid: 98f8df5f001b49a409b1c00d2d191dca, type: 3}
       propertyPath: m_Name
       value: explosionPrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 8541747565679402840, guid: 98f8df5f001b49a409b1c00d2d191dca, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
