@@ -106,7 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundCell: {fileID: 11400000, guid: af5f64e5816715e41bdb76c4dab6ee3b, type: 2}
-  <staticTilemap>k__BackingField: {fileID: 0}
+  <tilemap>k__BackingField: {fileID: 0}
+  _globalMoveTime: 0
 --- !u!114 &4417687692467390695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +120,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35934c45c5dae5a48a8b8621fac3c4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _runeText: {fileID: 0}
-  _runeTextFormat: 'Rune Name: {0}'
   _winPanel: {fileID: 0}
-  _popUpInteractible: {fileID: 0}
+  _popUpInteractable: {fileID: 0}
