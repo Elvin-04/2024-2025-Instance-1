@@ -7200,16 +7200,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1080367878510791621, guid: 87e7d8143bdf24e4e87293ef0ff3e260, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.57
+      value: 4.04
       objectReference: {fileID: 0}
     - target: {fileID: 1080367878510791621, guid: 87e7d8143bdf24e4e87293ef0ff3e260, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.03
+      value: 2.05
       objectReference: {fileID: 0}
+    - target: {fileID: 5191951653006571299, guid: 87e7d8143bdf24e4e87293ef0ff3e260, type: 3}
+      propertyPath: _pillarLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: bba85e9ddf53a2d4fa55f8ef0682aeef, type: 2}
     - target: {fileID: 5191951653006571299, guid: 87e7d8143bdf24e4e87293ef0ff3e260, type: 3}
       propertyPath: _gridManager
       value: 
       objectReference: {fileID: 1075084691}
+    - target: {fileID: 5191951653006571299, guid: 87e7d8143bdf24e4e87293ef0ff3e260, type: 3}
+      propertyPath: _pillarRight
+      value: 
+      objectReference: {fileID: 11400000, guid: c1d6ed991e5615d49aca9a7e1221aa62, type: 2}
     - target: {fileID: 5421966097212900045, guid: 87e7d8143bdf24e4e87293ef0ff3e260, type: 3}
       propertyPath: m_Name
       value: CreateDoor

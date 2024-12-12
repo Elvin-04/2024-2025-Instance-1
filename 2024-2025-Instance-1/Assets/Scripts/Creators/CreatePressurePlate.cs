@@ -9,13 +9,16 @@ using UnityEngine.Assertions;
 
 namespace Creators
 {
-    public class CreateDoorBtn : CellCreator
+    public class CreatePressurePlate : CellCreator
     {
         [SerializeField] private Cell _door;
-        [SerializeField] private Cell _pillar;
+        [SerializeField] private Cell _pillarRight;
+        [SerializeField] private Cell _pillarLeft;
         [SerializeField] private List<Transform> _doorTransforms;
         [SerializeField] private List<PillarObject> _pillars;
         [SerializeField] protected GridManager _gridManager;
+        [SerializeField] private PressurePlate _plateToSpawn;
+        private PressurePlate _plateSpawned;
 
         protected override void Start()
         {
@@ -52,14 +55,52 @@ namespace Creators
         {
             base.LateStart();
 
-            _gridManager.GetObjectsOnCell(cellCreatorTransform.position).ForEach(objectOnCell =>
-                (objectOnCell as DoorButton)?.SetDoorTransforms(_doorTransforms));
+            //_gridManager.GetObjectsOnCell(cellCreatorTransform.position).ForEach(objectOnCell =>
+            //    (objectOnCell as PressurePlate)?.SetDoorTransforms(_doorTransforms));
 
-            _gridManager.GetObjectsOnCell(cellCreatorTransform.position).ForEach(objectOnCell =>
-                (objectOnCell as DoorButton)?.SetPillars(_pillars));
+            //_gridManager.GetObjectsOnCell(cellCreatorTransform.position).ForEach(objectOnCell =>
+            //    (objectOnCell as PressurePlate)?.SetPillars(_pillars));
+
+            //CreateCells(_door, _doorTransforms);
+            //CreateCells(_pillar, _pillars.Select(pillar => pillar.transform).ToList());  
+        }
+
+        protected override void SetTile(Cell cell)
+        {
+            _plateSpawned = Instantiate(_plateToSpawn, transform.position, Quaternion.identity);
+            Invoke(nameof(SetupObjectsOnCell), 0);
+        }
+
+        private void SetupObjectsOnCell()
+        {
+            _gridManager.AddObjectOnCell(transform.position, _plateSpawned);
+            _plateSpawned.SetDoorTransforms(_doorTransforms);
+            _plateSpawned.SetPillars(_pillars);
 
             CreateCells(_door, _doorTransforms);
-            CreateCells(_pillar, _pillars.Select(pillar => pillar.transform).ToList());  
+            List<Transform> rightPillars = new List<Transform>();
+            List<Transform> leftPillars = new List<Transform>();
+            foreach(PillarObject p in _pillars)
+            {
+                if (p.side == Side.Right)
+                    rightPillars.Add(p.transform);
+                else
+                    leftPillars.Add(p.transform);
+            }
+            CreateCells(_pillarLeft, leftPillars);
+            CreateCells(_pillarRight, rightPillars);
+            _plateSpawned.onPlate += OnPlate;
+            _plateSpawned.offPlate += OffPlate;
+        }
+
+        private void OnPlate()
+        {
+            _gridManager.AddObjectOnCell(transform.position, _plateSpawned);
+        }
+
+        private void OffPlate()
+        {
+            _gridManager.AddObjectOnCell(transform.position, _plateSpawned);
         }
 
         #region CreateCell

@@ -36,5 +36,10 @@ namespace Grid
         {
             foreach (CellObjectBase cellObject in cellObjects) RemoveObject(cellObject);
         }
+
+        public bool Contains(CellObjectBase cellObject)
+        {
+            return objectsOnCell.Contains(cellObject);
+        }
     }
 }
