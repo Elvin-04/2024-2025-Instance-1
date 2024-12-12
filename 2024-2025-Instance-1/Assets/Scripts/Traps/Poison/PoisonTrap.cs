@@ -20,6 +20,7 @@ public class PoisonTrap : CellObjectBase, IInteractable, IWeightInteractable
         EventManager.instance.onDeath?.AddListener(OnDeath); 
         EventManager.instance.onClockUpdated?.AddListener(OnClockUpdate);
     }
+
     public void OnClockUpdate()
     {
         if (!_playerPoisoned)
