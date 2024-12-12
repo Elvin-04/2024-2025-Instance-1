@@ -37,14 +37,14 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector3> onPlayerMoved { get; private set; } = new();
 
     // Audio
-    public UnityEvent<SoundsName> onPlayMusic { get; private set; } = new();
+    public UnityEvent<SoundsName, Transform> onPlayMusic { get; private set; } = new();
     public UnityEvent onPlayAllMusic { get; private set; } = new();
     public UnityEvent<SoundsName> onPauseMusic { get; private set; } = new();
     public UnityEvent onPauseAllMusic { get; private set; } = new();
     public UnityEvent<SoundsName> onStopMusic { get; private set; } = new();
     public UnityEvent onStopAllMusic { get; private set; } = new();
 
-    public UnityEvent<SoundsName> onPlaySfx { get; private set; } = new();
+    public UnityEvent<SoundsName, Transform> onPlaySfx { get; private set; } = new();
     public UnityEvent onPlayAllSfx { get; private set; } = new();
     public UnityEvent<SoundsName> onPauseSfx { get; private set; } = new();
     public UnityEvent onPauseAllSfx { get; private set; } = new();

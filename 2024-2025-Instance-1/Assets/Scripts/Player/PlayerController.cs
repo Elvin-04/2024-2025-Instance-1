@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Grid;
+using Managers.Audio;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-
         private bool _canMove;
         private Tween _currentMoveAnim;
 
@@ -69,6 +69,7 @@ namespace Player
             if (!_canMove || !_reachedTargetCell) return;
 
             Move();
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.SandMovementPlayer, null);
         }
 
         private void StartMove(Vector2 direction)
@@ -85,12 +86,12 @@ namespace Player
 
         private void GetInteractableUnderMe()
         {
-            List<IInteractable> interacts =
+            var interacts =
                 _gridManager.GetObjectsOnCell(_transform.position)
                     .Select(cellObject => cellObject as IInteractable).Where(interactable => interactable != null)
                     .ToList();
 
-            List<IInteractable> commonInteracts = interacts.Intersect(_interactablesUnder).ToList();
+            var commonInteracts = interacts.Intersect(_interactablesUnder).ToList();
 
             _interactablesUnder.Except(commonInteracts).ToList()
                 .ForEach(interact =>
@@ -102,15 +103,15 @@ namespace Player
             _interactablesUnder = interacts;
             _interactablesUnderPosition = _transform.position;
 
-            foreach (IInteractable interactable in _interactablesUnder.ToList()) interactable?.Interact();
+            foreach (var interactable in _interactablesUnder.ToList()) interactable?.Interact();
         }
 
         private void GetInteractableFrontOfMe<T>(Vector3 dir) where T : IInteractable
         {
-            Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, dir);
+            var nextIndex = _gridManager.GetNextIndex(_transform.position, dir);
 
 
-            Cell nextCell = _gridManager.GetCell(nextIndex);
+            var nextCell = _gridManager.GetCell(nextIndex);
 
             if (nextCell == null) return;
 
@@ -120,7 +121,7 @@ namespace Player
                     .Select(objectOnCell => objectOnCell as IInteractable).Where(interactable => interactable != null)
                     .ToList();
 
-            List<IMoving> movingObjectsInFront = _interactablesInFront.OfType<IMoving>().ToList();
+            var movingObjectsInFront = _interactablesInFront.OfType<IMoving>().ToList();
             movingObjectsInFront.ForEach(movingObjectInFront =>
             {
                 if (dir.Equals(-movingObjectInFront.direction))
@@ -133,10 +134,10 @@ namespace Player
 
         private void Move()
         {
-            Vector2Int cellIndex = _gridManager.GetCellIndex(_transform.position);
-            (int, int) nextIndex = (cellIndex.x + (int)_moveDirection.x, cellIndex.y + (int)_moveDirection.y);
+            var cellIndex = _gridManager.GetCellIndex(_transform.position);
+            var nextIndex = (cellIndex.x + (int)_moveDirection.x, cellIndex.y + (int)_moveDirection.y);
 
-            Cell nextCell = _gridManager.GetCell(nextIndex);
+            var nextCell = _gridManager.GetCell(nextIndex);
 
             currentDirection = _moveDirection.x switch
             {
@@ -157,7 +158,7 @@ namespace Player
                 return;
             }
 
-            List<CellObjectBase> nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
+            var nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
 
             if (nextCellObjects.Any(objectOnCell => objectOnCell != null && objectOnCell is ICollisionObject))
@@ -170,7 +171,7 @@ namespace Player
 
             _reachedTargetCell = false;
             EventManager.instance.updateClock?.Invoke();
-            Vector3 position = _gridManager.GetCellPos(nextIndex);
+            var position = _gridManager.GetCellPos(nextIndex);
 
             _currentMoveAnim = _transform.DOMove(
                 position,

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Grid;
+using Managers.Audio;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -34,11 +35,13 @@ namespace Traps
         public void Interact()
         {
             OpenDoors();
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.PressPressurePlate, transform);
         }
 
         public void StopInteract()
         {
             CloseDoors();
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.ReleasePressurePlate, transform);
         }
 
         public void SetDoorTransforms(List<Transform> transforms)
@@ -50,12 +53,12 @@ namespace Traps
         {
             if (_doorTransforms == null) return;
 
-            foreach (Transform doorTransform in _doorTransforms) Open(doorTransform);
+            foreach (var doorTransform in _doorTransforms) Open(doorTransform);
         }
 
         private void CloseDoors()
         {
-            foreach (Transform doorTransform in _doorTransforms) Close(doorTransform);
+            foreach (var doorTransform in _doorTransforms) Close(doorTransform);
         }
 
         private void Open(Transform doorTransform)
@@ -63,15 +66,15 @@ namespace Traps
             EventManager.instance.onChangeCell?.Invoke(doorTransform.position, _doorOpen);
             EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right, _wallCloseToDoorOpened);
             EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left, _wallCloseToDoorOpened);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.OpenDoor, doorTransform);
         }
 
         private void Close(Transform doorTransform)
         {
             EventManager.instance.onChangeCell?.Invoke(doorTransform.position, _doorClose);
-            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right,
-                _wallCloseToDoorClosedLeft);
-            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left,
-                _wallCloseToDoorClosedRight);
+            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.right, _wallCloseToDoorClosedLeft);
+            EventManager.instance.onChangeCell?.Invoke(doorTransform.position + Vector3.left, _wallCloseToDoorClosedRight);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.CloseDoor, doorTransform);
         }
     }
 }
