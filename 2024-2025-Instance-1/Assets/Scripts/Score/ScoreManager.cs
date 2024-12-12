@@ -8,9 +8,7 @@ namespace Score
     public class ScoreManager : MonoBehaviour
     {
         private int _deaths;
-
         private LevelManager _levelManager;
-
         private int _stars;
         private int _steps;
 
@@ -51,6 +49,7 @@ namespace Score
 
         private void CalculateScore()
         {
+            _stars = 3;
             if (_deaths < _levelManager.maxDeaths.firstThreshold && _steps < _levelManager.maxSteps.firstThreshold)
             {
                 _stars = 3;
@@ -64,6 +63,10 @@ namespace Score
                      _steps < _levelManager.maxSteps.thirdThreshold)
             {
                 _stars = 1;
+            }
+            else
+            {
+                _stars = 0;
             }
         }
     }
