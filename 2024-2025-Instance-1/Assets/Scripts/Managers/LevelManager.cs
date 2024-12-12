@@ -2,38 +2,43 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour
+namespace Managers
 {
-    private static LevelManager _instance;
-
-    [field: SerializeField] public Transform spawnPoint { get; private set; }
-
-    private void Awake()
+    public class LevelManager : MonoBehaviour
     {
-        Assert.IsNotNull(spawnPoint, "spawnPoint is null in LevelManager");
-    }
+        private static LevelManager _instance;
 
-    private void Start()
-    {
-        if (_instance)
+        [field: SerializeField] public Transform spawnPoint { get; private set; }
+        [field: SerializeField] public ScoreCounter maxDeaths { get; private set; }
+        [field: SerializeField] public ScoreCounter maxSteps { get; private set; }
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            Assert.IsNotNull(spawnPoint, "spawnPoint is null in LevelManager");
         }
 
-        _instance = this;
-        EventManager.instance.onRetry.AddListener(ReloadScene);
-    }
+        private void Start()
+        {
+            if (_instance)
+            {
+                Destroy(gameObject);
+                return;
+            }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.grey;
-        Gizmos.DrawCube(spawnPoint.position, Vector3.one * 0.5f);
-    }
+            _instance = this;
+            EventManager.instance.onRetry.AddListener(ReloadScene);
+        }
 
-    public void ReloadScene()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadSceneAsync(scene.name);
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.grey;
+            Gizmos.DrawCube(spawnPoint.position, Vector3.one * 0.5f);
+        }
+
+        public void ReloadScene()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadSceneAsync(scene.name);
+        }
     }
 }

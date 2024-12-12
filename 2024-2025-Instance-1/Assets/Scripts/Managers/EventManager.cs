@@ -36,6 +36,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector3> onPlayerMoved { get; private set; } = new();
     public UnityEvent onEnableInput { get; private set; } = new();
     public UnityEvent onDisableInput { get; private set; } = new();
+    public UnityEvent<float> onScoreUpdated { get; private set; } = new();
 
     private void Awake()
     {
