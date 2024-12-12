@@ -1,5 +1,6 @@
 using UnityEngine;
 using Grid;
+using Creators;
 
 namespace Traps
 {
@@ -9,6 +10,8 @@ public class PoisonTrap : CellObjectBase, IInteractable, IWeightInteractable
     [SerializeField] private int _maxTickClock;
     private int _currentTickClock;
     private bool _playerPoisoned = false;
+
+    [HideInInspector] public PoisonTrapCreator creator;
 
     public bool canPickUp { get => false; set { } }
 
@@ -39,12 +42,12 @@ public class PoisonTrap : CellObjectBase, IInteractable, IWeightInteractable
 
     public void WeightInteract()
     {
-        Debug.Log("disabled");
+        creator.WeightInteract(this);
     }
 
     public void StopWeightInteract()
     {
-        Debug.Log("enabled");
+        creator.StopWeightInteract(this);
     }
 
     private void OnDeath()
