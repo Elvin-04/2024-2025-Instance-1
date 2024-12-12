@@ -1,4 +1,5 @@
 using Grid;
+using Managers.Audio;
 using Runes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -36,18 +37,18 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector3> onPlayerMoved { get; private set; } = new();
 
     // Audio
-    public UnityEvent<string> onPlayMusic { get; private set; } = new();
+    public UnityEvent<SoundsName> onPlayMusic { get; private set; } = new();
     public UnityEvent onPlayAllMusic { get; private set; } = new();
-    public UnityEvent<string> onPauseMusic { get; private set; } = new();
+    public UnityEvent<SoundsName> onPauseMusic { get; private set; } = new();
     public UnityEvent onPauseAllMusic { get; private set; } = new();
-    public UnityEvent<string> onStopMusic { get; private set; } = new();
+    public UnityEvent<SoundsName> onStopMusic { get; private set; } = new();
     public UnityEvent onStopAllMusic { get; private set; } = new();
 
-    public UnityEvent<string> onPlaySfx { get; private set; } = new();
+    public UnityEvent<SoundsName> onPlaySfx { get; private set; } = new();
     public UnityEvent onPlayAllSfx { get; private set; } = new();
-    public UnityEvent<string> onPauseSfx { get; private set; } = new();
+    public UnityEvent<SoundsName> onPauseSfx { get; private set; } = new();
     public UnityEvent onPauseAllSfx { get; private set; } = new();
-    public UnityEvent<string> onStopSfx { get; private set; } = new();
+    public UnityEvent<SoundsName> onStopSfx { get; private set; } = new();
     public UnityEvent onStopAllSfx { get; private set; } = new();
 
 
