@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4f8fb76a5ddeb4446a2f8c369603f7e9
+guid: a773cfeddf14d8c45bbdb2e04a0fb0ee
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2022257936097560910
-    second: langledumurduba_0
+      213: -4433531340260408051
+    second: porte_vertical_kasse_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,63 +96,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WindowsStoreApps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: langledumurduba_0
+      name: porte_vertical_kasse_0
       rect:
         serializedVersion: 2
         x: 0
@@ -167,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e494f45e0e0801c10800000000000000
-      internalID: 2022257936097560910
+      spriteID: d0587336cbee872c0800000000000000
+      internalID: -4433531340260408051
       vertices: []
       indices: 
       edges: []
@@ -187,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      langledumurduba_0: 2022257936097560910
+      porte_vertical_kasse_0: -4433531340260408051
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
