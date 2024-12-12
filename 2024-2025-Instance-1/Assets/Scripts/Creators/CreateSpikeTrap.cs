@@ -1,3 +1,5 @@
+using Managers.Audio;
+
 namespace Creators
 {
     public class CreateSpikeTrap : SwitchableCellCreator
@@ -18,6 +20,7 @@ namespace Creators
                 _isActive = true;
                 _numberOfTick = 0;
                 EventManager.instance.onChangeCell?.Invoke(transform.position, GetTileBasedOnState(_isActive));
+                EventManager.instance.onPlaySfx?.Invoke(SoundsName.ActivateSpike, transform);
                 return;
             }
 
@@ -25,6 +28,7 @@ namespace Creators
                 return;
 
             _isActive = false;
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.DeactivateSpike, transform);
             EventManager.instance.onChangeCell?.Invoke(transform.position, GetTileBasedOnState(_isActive));
         }
 

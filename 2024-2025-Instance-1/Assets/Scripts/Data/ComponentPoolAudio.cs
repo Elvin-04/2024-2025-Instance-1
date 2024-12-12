@@ -40,6 +40,22 @@ namespace Data
             return null;
         }
 
+        public T Get(Transform newTransform)
+        {
+            // Rechercher un objet inactif dans la liste
+            foreach (var component in _pool)
+                if (!component.gameObject.activeSelf)
+                {
+                    component.gameObject.SetActive(true); // Activer l'objet
+                    component.transform.position = newTransform.position;
+                    return component;
+                }
+
+            // Si aucun objet inactif n'est trouvé, retourner null
+            Debug.LogWarning("No available object in the pool.");
+            return null;
+        }
+
         public void Release(GameObject obj)
         {
             var component = obj.GetComponent<T>();

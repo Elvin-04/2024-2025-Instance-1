@@ -80,25 +80,29 @@ MonoBehaviour:
   _musicParent: {fileID: 185813311497636679}
   _prefabMusicLink: {fileID: 927932528693020260, guid: ef41d9c50a80d5141a9de115d7e720ef, type: 3}
   _musicPlaylistEntries:
-  - key: TestMusic
-    clips: []
+  - key: 0
+    clips:
+    - {fileID: 8300000, guid: 2c7c32d07cd535843bf62c81f85f0551, type: 3}
+    - {fileID: 8300000, guid: 6e184b5a0859cc24a8c86d6866df404c, type: 3}
+    - {fileID: 8300000, guid: 6a6f210fa41992a44a3355778d15c677, type: 3}
+    - {fileID: 8300000, guid: 932f5305f4be7cc498fb8e7753238341, type: 3}
   _sfxParent: {fileID: 8068355077259895226}
   _prefabSfxLink: {fileID: 6000888519599686910, guid: bd5e07ad6ea175e48a3c38e7ebf029a0, type: 3}
   _sfxPlaylistEntries:
-  - key: ActiveArrowThrower
+  - key: 0
     clips:
     - {fileID: 8300000, guid: a4614bd553b43894c8faae475b8f6a5e, type: 3}
-  - key: ActivateSpike
+  - key: 1
     clips:
     - {fileID: 8300000, guid: a95a1ee3fd409fa4bb7d9741be479d93, type: 3}
     - {fileID: 8300000, guid: 69ce4946de0fc9640aaa398fc830332a, type: 3}
     - {fileID: 8300000, guid: b2ed64046968511418073324dacb35cc, type: 3}
     - {fileID: 8300000, guid: ace7f4b0bab828c4d8eafe4e8c69404a, type: 3}
     - {fileID: 8300000, guid: c2e9f790b7a83f04680c2eb1d9eac23a, type: 3}
-  - key: DeactivateSpike
+  - key: 2
     clips:
     - {fileID: 8300000, guid: b43fffd05f32d6440a114b74b28f93cb, type: 3}
-  - key: Collectible
+  - key: 3
     clips:
     - {fileID: 8300000, guid: aa5e26dd0ea44f44ba9faadf664b77de, type: 3}
     - {fileID: 8300000, guid: 54568f7a871b63f4eb4d8050244f87a3, type: 3}
@@ -126,7 +130,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 875e018de4842ca4c82692cefb039c3a, type: 3}
     - {fileID: 8300000, guid: 0075f9c0fb575e64c8edcacc400cc929, type: 3}
     - {fileID: 8300000, guid: ab91ca3ca4767d841b212d86294750e2, type: 3}
-  - key: SandMovementPlayer
+  - key: 4
     clips:
     - {fileID: 8300000, guid: 5e66b28fdf32d9344a2d8121a9008043, type: 3}
     - {fileID: 8300000, guid: 109d599e025b2534390b0545a7cbe2ef, type: 3}
@@ -134,31 +138,31 @@ MonoBehaviour:
     - {fileID: 8300000, guid: d1133bbfe2bae604c98f6023fd84a3de, type: 3}
     - {fileID: 8300000, guid: 33f0bcd0134a3d24c9927af1af56baab, type: 3}
     - {fileID: 8300000, guid: 35ce403c4716d644998620bda054ba7d, type: 3}
-  - key: ButtonPress
+  - key: 5
     clips:
     - {fileID: 8300000, guid: dafbfdd535411a546aca526a7161e634, type: 3}
-  - key: ButtonRelease
+  - key: 6
     clips:
     - {fileID: 8300000, guid: 379a1f651f3a34f44999fd33b52bf62c, type: 3}
-  - key: DeathByArrow
+  - key: 7
     clips:
     - {fileID: 8300000, guid: c7dc9cc7c2976b74598e7b9922bcf5a0, type: 3}
-  - key: BreakDoor
+  - key: 8
     clips:
     - {fileID: 8300000, guid: 3ee2a7e5c66327441bbe7431c0d42def, type: 3}
-  - key: OpenDoor
+  - key: 9
     clips:
     - {fileID: 8300000, guid: 625355306985df04492ae11a19075926, type: 3}
-  - key: CloseDoor
+  - key: 10
     clips:
     - {fileID: 8300000, guid: 4309f328f933f604a81ed9b548ace379, type: 3}
-  - key: PressPressurePlate
+  - key: 11
     clips:
     - {fileID: 8300000, guid: 900bdb31387a4b848bc3fd6029bfc043, type: 3}
-  - key: ReleasePressurePlate
+  - key: 12
     clips:
     - {fileID: 8300000, guid: c906af19e6a7bd547aa1ba1b5191462b, type: 3}
-  - key: DestroyWall
+  - key: 13
     clips:
     - {fileID: 8300000, guid: 6e184b5a0859cc24a8c86d6866df404c, type: 3}
 --- !u!1 &8900674179908919303

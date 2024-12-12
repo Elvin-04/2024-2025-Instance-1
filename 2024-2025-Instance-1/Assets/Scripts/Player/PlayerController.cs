@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Grid;
+using Managers.Audio;
 using UnityEngine;
 
 namespace Player
@@ -88,9 +89,14 @@ namespace Player
         private void TryMove()
         {
             if (!_canMove || !_reachedTargetCell) return;
-            
+
             if ((_holdingFor += Time.deltaTime) >= _holdTime)
-                {_holdingFor = 0f; Move();}
+            {
+                _holdingFor = 0f;
+                Move();
+            }
+
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.SandMovementPlayer, null);
         }
 
         private void StartMove(Vector2 direction)
@@ -113,7 +119,7 @@ namespace Player
                 .ToList();
 
             List<IInteractable> interacts = new();
-            foreach (var objectOnCell in _gridManager.GetObjectsOnCell(_transform.position))
+            foreach (CellObjectBase objectOnCell in _gridManager.GetObjectsOnCell(_transform.position))
                 if (objectOnCell is IInteractable interactable)
                     interacts.Add(interactable);
 
@@ -134,9 +140,13 @@ namespace Player
             _interactablesUnder = interacts;
             _interactablesUnderPosition = _transform.position;
 
-            if (!_dead)
-                foreach (var interactable in _interactablesUnder.ToList())
-                    interactable?.Interact();
+            if (_dead)
+            {
+                return;
+            }
+
+            foreach (IInteractable interactable in _interactablesUnder.ToList())
+                interactable?.Interact();
         }
 
         private void GetInteractableFrontOfMe<T>(Vector3 dir) where T : IInteractable
@@ -155,9 +165,11 @@ namespace Player
 
             List<IMoving> movingObjectsInFront = new();
 
-            foreach (var interactable in _interactablesInFront)
+            foreach (IInteractable interactable in _interactablesInFront)
+            {
                 if (interactable is IMoving moving)
                     movingObjectsInFront.Add(moving);
+            }
 
             movingObjectsInFront.ForEach(movingObjectInFront =>
             {
@@ -181,7 +193,7 @@ namespace Player
         {
             //_moveDirection = direction;
             Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, _moveDirection);
-            var nextCell = _gridManager.GetCell(nextIndex);
+            Cell nextCell = _gridManager.GetCell(nextIndex);
 
             currentDirection = _moveDirection.x switch
             {
@@ -221,6 +233,8 @@ namespace Player
             SetAnimation((int)currentDirection);
 
             _reachedTargetCell = false;
+            EventManager.instance.updateClock?.Invoke();
+            Vector3 position = _gridManager.GetCellPos(nextIndex);
 
             EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
             var position = _gridManager.GetCellPos(nextIndex);
@@ -249,7 +263,9 @@ namespace Player
         private void Interact()
         {
             if (_interactablesInFront.Count == 0) return;
-            _interactablesInFront.Where(objectInFront => objectInFront.canPickUp && objectInFront is not IInteractableInFront).ToList().ForEach(objectInFront => objectInFront.Interact());
+            _interactablesInFront
+                .Where(objectInFront => objectInFront.canPickUp && objectInFront is not IInteractableInFront).ToList()
+                .ForEach(objectInFront => objectInFront.Interact());
         }
 
         private void SetAnimation(int value)
