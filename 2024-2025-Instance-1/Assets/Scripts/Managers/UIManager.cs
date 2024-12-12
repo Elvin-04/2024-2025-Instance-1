@@ -1,3 +1,4 @@
+using UI;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -6,6 +7,8 @@ public class UIManager : MonoBehaviour
     [Space] [SerializeField] private GameObject _winPanel;
 
     [SerializeField] private GameObject _popUpInteractable;
+
+
 
     private void Start()
     {
@@ -32,5 +35,10 @@ public class UIManager : MonoBehaviour
     private void OnWin()
     {
         _winPanel.SetActive(true);
+    }
+
+    public void RestartLevelButton()
+    {
+        EventManager.instance.onRetry.Invoke();
     }
 }

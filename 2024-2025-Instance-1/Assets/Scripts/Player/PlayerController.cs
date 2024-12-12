@@ -161,6 +161,11 @@ namespace Player
 
             List<CellObjectBase> nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
+            foreach (IInteractableInFront interactableInFront in nextCellObjects.OfType<IInteractableInFront>().ToList())
+                {interactableInFront.Interact(); Debug.Log(interactableInFront);}
+            
+            nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
+
             if (nextCellObjects.Any(objectOnCell => objectOnCell != null && objectOnCell is ICollisionObject))
             {
                 CheckInteraction<IInteractable>(_moveDirection);
