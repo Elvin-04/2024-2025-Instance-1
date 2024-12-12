@@ -25,6 +25,8 @@ namespace Player
 
         private Animator _animator;
 
+        private bool _dead = false;
+
         //Components
         private Transform _transform;
         public PlayerDirection currentDirection { get; private set; }
@@ -42,6 +44,9 @@ namespace Player
             EventManager.instance.onMoveCanceled?.AddListener(StopMove);
             EventManager.instance.onInteract?.AddListener(Interact);
             EventManager.instance.onDeath?.AddListener(StopMoveAnim);
+
+            EventManager.instance.onDeath?.AddListener(() => _dead = true);
+            EventManager.instance.onRespawn?.AddListener(() => _dead = false);
         }
 
         private void Update()
@@ -105,7 +110,8 @@ namespace Player
             _interactablesUnder = interacts;
             _interactablesUnderPosition = _transform.position;
 
-            foreach (IInteractable interactable in _interactablesUnder.ToList()) interactable?.Interact();
+            if (!_dead)
+                foreach (IInteractable interactable in _interactablesUnder.ToList()) interactable?.Interact();
         }
 
         private void GetInteractableFrontOfMe<T>(Vector3 dir) where T : IInteractable
