@@ -12,6 +12,8 @@ namespace Grid
         [field: SerializeField] public Tilemap tilemap { get; private set; }
         [SerializeField] private float _globalMoveTime;
         private readonly Dictionary<(int, int), CellContainer> _cellContainers = new();
+        private int _countX;
+        private int _countY;
 
         private void Awake()
         {
@@ -23,12 +25,9 @@ namespace Grid
             tilemap.gameObject.SetActive(false);
             tilemap = Instantiate(tilemap, tilemap.transform.parent);
             tilemap.gameObject.SetActive(true);
-
-            int indexX = 0;
-            int indexY = 0;
-
             for (int x = tilemap.origin.x; x < tilemap.origin.x + tilemap.size.x; x++)
             {
+                _countY = 0;
                 for (int y = tilemap.origin.y; y < tilemap.origin.y + tilemap.size.y; y++)
                 {
                     Vector3Int pos = Vector3Int.zero;
@@ -37,7 +36,7 @@ namespace Grid
 
                     if (cell == null)
                     {
-                        indexY++;
+                        _countY++;
                         continue;
                     }
 
@@ -46,20 +45,18 @@ namespace Grid
                     //Debug
                     //CreateCellAt(cellPos).name = "x : " + indexX + " y : " + indexY;
 
-                    _cellContainers[(indexX, indexY)] = new CellContainer(cell, cellPos);
+                    _cellContainers[(_countX, _countY)] = new CellContainer(cell, cellPos);
                     if (cell.getPrefab)
                     {
                         GameObject goInstance = Instantiate(cell.getPrefab, cellPos, Quaternion.identity,
                             tilemap.transform);
                         cell.SetInstancedObject(goInstance);
-                        _cellContainers[(indexX, indexY)].AddObject(goInstance.GetComponent<CellObjectBase>());
+                        _cellContainers[(_countX, _countY)].AddObject(goInstance.GetComponent<CellObjectBase>());
                     }
 
-                    indexY++;
+                    _countY++;
                 }
-
-                indexX++;
-                indexY = 0;
+                _countX++;
             }
         }
 
@@ -71,6 +68,8 @@ namespace Grid
             EventManager.instance.onRemoveObjectOnCell.AddListener(OnRemoveObjectOnCell);
             EventManager.instance.stopInteract.AddListener(OnStopInteract);
         }
+        
+        public Vector2Int size => new(_countX, _countY);
 
         public float GetGlobalMoveTime()
         {
@@ -174,7 +173,11 @@ namespace Grid
         public void AddObjectOnCell((int, int) indexes, CellObjectBase cellObject)
         {
             if (!_cellContainers[indexes].Contains(cellObject))
+            {
                 _cellContainers[indexes].AddObject(cellObject);
+                EventManager.instance.onCellChanged?.Invoke(indexes);
+            }
+            
         }
 
         public void AddObjectOnCell(int x, int y, CellObjectBase cellObject)
@@ -198,7 +201,7 @@ namespace Grid
 
         public List<CellObjectBase> GetObjectsOnCell((int, int) indexes)
         {
-            return _cellContainers[indexes].objectsOnCell;
+            return _cellContainers.TryGetValue(indexes, out CellContainer container) ? container.objectsOnCell : null;
         }
 
         public List<CellObjectBase> GetObjectsOnCell(int x, int y)
@@ -327,6 +330,7 @@ namespace Grid
             _cellContainers[indexes].AddObject(goInstance.GetComponent<CellObjectBase>());
             
             _cellContainers[indexes].cell.SetInstancedObject(goInstance);
+            EventManager.instance.onCellChanged?.Invoke(indexes);
         }
 
         //Overload
