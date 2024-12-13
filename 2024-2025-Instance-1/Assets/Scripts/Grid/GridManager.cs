@@ -318,7 +318,12 @@ namespace Grid
 
             CellContainer old = _cellContainers[indexes];
 
-            Destroy(old.cell.instancedObject);
+            if(old.cell.instancedObject != null)
+            {
+                CellObjectBase oldCellObjectBase = old.cell.instancedObject?.GetComponent<CellObjectBase>();
+                _cellContainers[indexes].RemoveObject(oldCellObjectBase);
+                Destroy(old.cell.instancedObject);
+            }
 
             _cellContainers[indexes] = new CellContainer(toCell, old.cellPos);
             _cellContainers[indexes].Take(old);
