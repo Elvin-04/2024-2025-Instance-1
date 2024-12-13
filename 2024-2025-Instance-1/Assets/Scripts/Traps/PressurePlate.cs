@@ -7,7 +7,7 @@ using UnityEngine.Assertions;
 
 namespace Traps
 {
-    public class PressurePlate : CellObjectBase, IInteractable
+    public class PressurePlate : CellObjectBase, IInteractable, IWeightInteractable
     {
 
         public Action onPlate;
@@ -60,6 +60,9 @@ namespace Traps
             Close();
             offPlate.Invoke();
         }
+
+        public void WeightInteract() => Interact();
+        public void StopWeightInteract() => StopInteract();
 
         public Cell GetTileBasedOnState(bool isPress)
         {
