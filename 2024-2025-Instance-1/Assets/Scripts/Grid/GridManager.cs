@@ -312,12 +312,21 @@ namespace Grid
         {
             Vector3Int pos = tilemap.WorldToCell(_cellContainers[indexes].cellPos);
             tilemap.SetTile(pos, toCell);
-            Destroy(_cellContainers[indexes].cell.instancedObject);
-            _cellContainers[indexes] = new CellContainer(toCell, _cellContainers[indexes].cellPos);
-            if (toCell.getPrefab == null) return;
+
+            CellContainer old = _cellContainers[indexes];
+
+            Destroy(old.cell.instancedObject);
+
+            _cellContainers[indexes] = new CellContainer(toCell, old.cellPos);
+            _cellContainers[indexes].Take(old);
+
+            if (toCell.getPrefab == null) 
+                return;
 
             GameObject goInstance = Instantiate(toCell.getPrefab, pos, Quaternion.identity, tilemap.transform);
             _cellContainers[indexes].AddObject(goInstance.GetComponent<CellObjectBase>());
+            
+            _cellContainers[indexes].cell.SetInstancedObject(goInstance);
         }
 
         //Overload
@@ -344,7 +353,6 @@ namespace Grid
 
         public void ResetCell((int, int) indexes)
         {
-            Debug.Log(indexes);
             ChangeCell(indexes, _groundCell);
         }
 
