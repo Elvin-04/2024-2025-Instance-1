@@ -314,19 +314,22 @@ namespace Grid
         public void ChangeCell((int, int) indexes, Cell toCell)
         {
             Vector3Int pos = tilemap.WorldToCell(_cellContainers[indexes].cellPos);
+
+            Cell old = _cellContainers[indexes].cell;
+            CellContainer oldContainer = _cellContainers[indexes];
             tilemap.SetTile(pos, toCell);
 
-            CellContainer old = _cellContainers[indexes];
-
-            if(old.cell.instancedObject != null)
+            /*if(old != null)
             {
-                CellObjectBase oldCellObjectBase = old.cell.instancedObject?.GetComponent<CellObjectBase>();
-                _cellContainers[indexes].RemoveObject(oldCellObjectBase);
-                Destroy(old.cell.instancedObject);
-            }
+                if (old.instancedObject != null)
+                {
+                    CellObjectBase oldCellObjectBase = old.instancedObject.GetComponent<CellObjectBase>();
+                    _cellContainers[indexes].RemoveObject(oldCellObjectBase);
+                }
+                Destroy(old.instancedObject);
+            }*/
 
-            _cellContainers[indexes] = new CellContainer(toCell, old.cellPos);
-            _cellContainers[indexes].Take(old);
+            _cellContainers[indexes] = new CellContainer(toCell, oldContainer.cellPos);
 
             if (toCell.getPrefab == null) 
                 return;
