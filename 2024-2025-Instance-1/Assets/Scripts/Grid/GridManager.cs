@@ -318,6 +318,8 @@ namespace Grid
 
             GameObject goInstance = Instantiate(toCell.getPrefab, pos, Quaternion.identity, tilemap.transform);
             _cellContainers[indexes].AddObject(goInstance.GetComponent<CellObjectBase>());
+            
+            _cellContainers[indexes].cell.SetInstancedObject(goInstance);
         }
 
         //Overload

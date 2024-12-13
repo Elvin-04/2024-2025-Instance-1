@@ -60,6 +60,7 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
                 {
                     if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> _)) return;
                     (interact as IInteractable)?.StopInteract();
+                    interact.StopWeightInteract();
                 });
 
             _interactablesUnder = interacts;

@@ -48,6 +48,8 @@ namespace Creators
                         _poisonCells.Add(position);
                     }
 
+                    cellToSpawn.onGameObjectInstanciated += (obj) => obj.GetComponent<PoisonTrap>().creator = this;
+
                     // TODO CHECK IF THE CURRENT CELL IS "EMPTY"
                     // AND DO NOT SPAWN THE CELL IF IT IS NOT EMPTY                    
                     EventManager.instance.onChangeCell?.Invoke(_gridManager.GetCellPos(position), cellToSpawn);
