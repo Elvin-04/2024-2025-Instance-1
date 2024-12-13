@@ -7,4 +7,5 @@ public interface IInteractable
 
 public interface IInteractableCallable : IInteractable
 {
+    public string showName { get;}
 }

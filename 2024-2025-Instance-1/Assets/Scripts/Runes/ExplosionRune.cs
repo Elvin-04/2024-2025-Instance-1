@@ -1,25 +1,39 @@
 using System.Collections.Generic;
 using Grid;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Runes
 {
-    public class ExplosionRune : Rune
+    public class ExplosionRune : Rune, IZone
     {
-        [SerializeField] private int _radius;
         [SerializeField] private GameObject _explosionPrefab;
         private ExplosionAnimControl _explosion;
+        [SerializeField] private int _radius;
+        [SerializeField] private string _interactionText;
 
+        public override string showName { get => "Explosion Rune"; }
+        public int radius
+        {
+            get => _radius;
+            set => _radius = value;
+        }
+
+        public override void PlayAnimation(Animator animatorAura, Animator animatorZone)
+        {
+            animatorAura.Play(nameof(ExplosionRune));
+            animatorZone.Play(nameof(ExplosionRune));
+        }
 
         public override void ApplyEffect(Vector3 position, GridManager gridManager)
         {
             Vector2Int positionIndexes = gridManager.GetCellIndex(position);
             _explosion = Instantiate(_explosionPrefab, position, Quaternion.identity).GetComponentInChildren<ExplosionAnimControl>();
-
+            _explosion.SetSize(radius);
             _explosion.action += () =>
             {
-                for (int x = positionIndexes.x - _radius; x <= positionIndexes.x + _radius; x++)
-                    for (int y = positionIndexes.y - _radius; y <= positionIndexes.y + _radius; y++)
+                for (int x = positionIndexes.x - radius; x <= positionIndexes.x + radius; x++)
+                    for (int y = positionIndexes.y - radius; y <= positionIndexes.y + radius; y++)
                     {
                         if (!gridManager.GetCellObjectsByType(x, y, out List<IExplosive> cellObjects)) continue;
 
