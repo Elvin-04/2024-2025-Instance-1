@@ -9,24 +9,23 @@ public class Save : MonoBehaviour
     public SaveObject obj;
     private void Awake()
     {
-        path = Application.persistentDataPath + "/fffff.json";
+        path = Application.persistentDataPath + "/LevelSaveInformation.json";
         string directoryPath = Path.GetDirectoryName(path);
         if(!File.Exists(path))
         {
             string rawData = JsonUtility.ToJson(new Data());
-            System.IO.File.WriteAllText(path, rawData);
+            File.WriteAllText(path, rawData);
         }
 
     }
 
     private void Start()
     {
-        EventManager.instance.onScoreUpdated.AddListener((float score) => 
+        EventManager.instance.onScoreUpdated.AddListener((float stars) => 
         {
-            obj.score = 40;
+            obj.score = stars;
             SaveToJson(obj); 
         });
-        obj = LoadFromJson(obj.id);
     }
     public void SaveToJson(SaveObject obj)
     {
@@ -37,7 +36,7 @@ public class Save : MonoBehaviour
             data = new Data();
         }
 
-        data.ChangeData(obj);
+        data.UdpadeBestScore(obj);
         string rawData = JsonUtility.ToJson(data);
         System.IO.File.WriteAllText(path, rawData);
         Debug.Log($"Object is save :: ID :: {obj.id}, Score::{obj.score}");
@@ -69,16 +68,18 @@ public class Save : MonoBehaviour
 [System.Serializable]
 public class Data
 {
-
-    public List<SaveObject> saveObjects = new(); // Replace Dictionary with List
+    public List<SaveObject> saveObjects = new();
 
     public Data() { }
 
-    public void ChangeData(SaveObject obj)
+    public void UdpadeBestScore(SaveObject obj)
     {
-        // Remove existing object with the same ID
+        SaveObject oldObject = saveObjects.FirstOrDefault(o => o.id == obj.id);
+        oldObject ??= new SaveObject(obj.id);
+        if (oldObject.score > obj.score)
+            return;
+
         saveObjects.RemoveAll(o => o.id == obj.id);
-        // Add the new/updated object
         saveObjects.Add(obj);
     }
 

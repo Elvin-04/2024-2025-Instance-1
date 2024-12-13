@@ -7041,8 +7041,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj:
-    score: 1
-    id: 1
+    score: 42
+    id: 3
 --- !u!114 &1663743991
 MonoBehaviour:
   m_ObjectHideFlags: 0
