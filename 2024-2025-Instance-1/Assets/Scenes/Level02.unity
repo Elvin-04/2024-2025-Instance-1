@@ -1195,14 +1195,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455547383}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5466f5840fc54abc818bd6148d94386e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _moveTime: 0.25
   _playerInput:
-    m_Name: 
+    m_Name: Player Input
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: fa54a7f6-56f5-4813-9d2a-eeaa87e73cf2
