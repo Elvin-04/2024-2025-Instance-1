@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Grid;
+using Runes;
+using TMPro;
 using UnityEngine;
 
 namespace Player
@@ -131,7 +133,9 @@ namespace Player
                         .ForEach(interactable => interactable.Interact());
             });
 
-            EventManager.instance.canInteract.Invoke(_interactablesInFront.OfType<IInteractableCallable>().Any());
+            List<IInteractableCallable> callable = _interactablesInFront.OfType<IInteractableCallable>().ToList();
+            bool isNotNull = callable.Count > 0;
+            EventManager.instance.canInteract.Invoke(callable.Count > 0, isNotNull ? callable[0].showName : "");
         }
 
         private void Move()

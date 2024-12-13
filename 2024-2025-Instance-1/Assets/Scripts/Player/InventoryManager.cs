@@ -6,7 +6,8 @@ namespace Player
     public class InventoryManager : MonoBehaviour
     {
         public Rune currentRune { get; private set; }
-        [SerializeField] private Animator animator;
+        [SerializeField] private Animator _animatorAura;
+        [SerializeField] private Animator _animatorZone;
 
         private void Start()
         {
@@ -17,15 +18,13 @@ namespace Player
         public void TakeRune(Rune rune)
         {
             currentRune = rune;
-            PlayAuraAnimation(currentRune);
-        }
-
-        private void PlayAuraAnimation(Rune rune)
-        {
             if (rune == null)
-                animator.Play("None");
-            if(rune is ExplosionRune)
-                animator.Play(nameof(ExplosionRune));
+            {
+                _animatorAura.Play("None");
+                _animatorZone.Play("None");
+            }
+            else
+                rune.PlayAnimation(_animatorAura,_animatorZone);
 
         }
     }

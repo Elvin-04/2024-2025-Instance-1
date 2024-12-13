@@ -16,12 +16,19 @@ namespace Runes
             get => _canPickUp;
             set => _canPickUp = value;
         }
+        public virtual string showName { get => "Rune";}
 
         public void Interact()
         {
             onTake?.Invoke();
-            EventManager.instance.canInteract.Invoke(false);
+            EventManager.instance.canInteract.Invoke(false, "");
             EventManager.instance.addRuneToInventory.Invoke(this);
+        }
+
+        public virtual void PlayAnimation(Animator animatorAura, Animator animatorZone)
+        {
+            animatorAura.Play("None");
+            animatorZone.Play("None");
         }
 
         public void StopInteract()

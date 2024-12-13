@@ -18,7 +18,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector2> onMoveStarted { get; private set; } = new();
     public UnityEvent onMoveCanceled { get; private set; } = new();
     public UnityEvent onInteract { get; private set; } = new();
-    public UnityEvent<bool> canInteract { get; private set; } = new();
+    public UnityEvent<bool, string> canInteract { get; private set; } = new();
     public UnityEvent onPause { get; private set; } = new();
     public UnityEvent<Rune> updateRune { get; private set; } = new();
     public UnityEvent onRespawn { get; private set; } = new();
@@ -37,6 +37,8 @@ public class EventManager : MonoBehaviour
     public UnityEvent onEnableInput { get; private set; } = new();
     public UnityEvent onDisableInput { get; private set; } = new();
     public UnityEvent<float> onScoreUpdated { get; private set; } = new();
+    public UnityEvent<int> OnZoneEffect { get; private set; } = new();
+    public UnityEvent StopZoneEffect { get; private set; } = new();
 
     private void Awake()
     {
