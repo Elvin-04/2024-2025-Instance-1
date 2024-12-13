@@ -6,11 +6,13 @@ namespace Debugs
 {
     public class CellObjectDebugger : MonoBehaviour
     {
+        [SerializeField] private GameObject _instancedObject;
         [SerializeField] private List<CellObjectBase> _cellObjectNames = new();
 
-        public void SetCellObjectNames(List<CellObjectBase> cellObject)
+        public void Setup(List<CellObjectBase> cellObject, GameObject instancedObject)
         {
             _cellObjectNames = cellObject;
+            _instancedObject = instancedObject;
         }
     }
 }
