@@ -978,6 +978,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveTime: 0.25
+  _playerInput:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: fa54a7f6-56f5-4813-9d2a-eeaa87e73cf2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &1558359883
 GameObject:
   m_ObjectHideFlags: 0
@@ -4766,6 +4775,14 @@ PrefabInstance:
       propertyPath: _winPanel
       value: 
       objectReference: {fileID: 1756691072}
+    - target: {fileID: 4417687692467390695, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: _canInteractText
+      value: 
+      objectReference: {fileID: 728192901}
+    - target: {fileID: 4417687692467390695, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: _interactionText
+      value: Take {0} by press F
+      objectReference: {fileID: 0}
     - target: {fileID: 4417687692467390695, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
       propertyPath: _popUpInteractable
       value: 
