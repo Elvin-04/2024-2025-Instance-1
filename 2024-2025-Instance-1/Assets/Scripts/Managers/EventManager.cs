@@ -39,8 +39,8 @@ public class EventManager : MonoBehaviour
     public UnityEvent<float> onScoreUpdated { get; private set; } = new();
     public UnityEvent<int> OnZoneEffect { get; private set; } = new();
     public UnityEvent StopZoneEffect { get; private set; } = new();
-    public UnityEvent<Vector3> onPlayerFinishedMoving { get; set; }
-    public UnityEvent onRuneDropped { get; set; }
+    public UnityEvent<Vector3> onPlayerFinishedMoving { get; set; } = new();
+    public UnityEvent onRuneDropped { get; set; } = new();
 
     private void Awake()
     {

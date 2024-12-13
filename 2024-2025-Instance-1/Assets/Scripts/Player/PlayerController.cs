@@ -22,7 +22,6 @@ namespace Player
         private Vector2 _moveDirection;
 
         private bool _reachedTargetCell = true;
-        private Animator _animator;
 
         private bool _dead = false;
         //Components
