@@ -10,11 +10,13 @@ namespace Traps.Arrow_Trap
     {
         public PlayerDirection directionEnum;
         public Vector2 direction;
-
-        private Transform _transform;
         private GridManager _gridManager;
 
-        private bool _movedOnce = false;
+        private bool _movedOnce;
+
+        private Tween _moveTween;
+
+        private Transform _transform;
 
         private void Awake()
         {
@@ -46,7 +48,8 @@ namespace Traps.Arrow_Trap
 
         public void SetDirection(PlayerDirection directionToSet)
         {
-            switch(directionToSet)
+
+            switch (directionToSet)
             {
                 case PlayerDirection.Left: transform.rotation = Quaternion.Euler(0, 0, 180); break;
                 case PlayerDirection.Up: transform.rotation = Quaternion.Euler(0, 0, 90); break;
@@ -72,20 +75,24 @@ namespace Traps.Arrow_Trap
 
             Vector2Int nextIndex = _gridManager.GetNextIndex(cellIndex, direction);
 
-            if (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any() || (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(cellIndex)).OfType<ICollisionObject>().Any() && _movedOnce))
+            if (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any() ||
+                (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(cellIndex)).OfType<ICollisionObject>().Any() &&
+                 _movedOnce))
             {
                 EventManager.instance.updateClock.RemoveListener(UpdateClock);
+                _moveTween?.Kill();
                 Destroy(gameObject);
                 _gridManager.RemoveObjectOnCell(cellIndex, this);
                 return;
             }
 
-            _transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime()).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                _gridManager.AddObjectOnCell(nextIndex, this);
-                _gridManager.RemoveObjectOnCell(cellIndex, this);
-            });
-
+            _moveTween = transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime())
+                .SetEase(Ease.Linear)
+                .OnComplete(() =>
+                {
+                    _gridManager.AddObjectOnCell(nextIndex, this);
+                    _gridManager.RemoveObjectOnCell(cellIndex, this);
+                });
             _movedOnce = true;
         }
     }

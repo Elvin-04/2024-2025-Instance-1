@@ -1,6 +1,6 @@
+using System.Collections;
 using DeathSystem;
 using Grid;
-using System.Collections;
 using Managers;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -12,7 +12,10 @@ namespace Player
     public class PlayerManager : MonoBehaviour
     {
         //Prefabs
-        [Header("Prefabs")][SerializeField] private GameObject _playerPrefab;
+        [Header("Prefabs")] [SerializeField] private GameObject _playerPrefab;
+
+        [SerializeField] private float _waitTimeBeforeRespawn = 1f;
+        private bool _calledUpdateClockThisFrame;
 
         //Properties
         private GameObject _currentPlayer;
@@ -20,8 +23,6 @@ namespace Player
 
         //Components
         private LevelManager _levelManager;
-
-        [SerializeField] private float _waitTimeBeforeRespawn = 1f;
 
         private void Awake()
         {
@@ -33,18 +34,34 @@ namespace Player
 
         private void Start()
         {
-            SpawnPlayer();
+            SpawnPlayer(_levelManager.spawnPoint.position);
+            EventManager.instance.onPlayerMoved?.AddListener(OnPlayerMoved);
         }
 
-        private void SpawnPlayer()
+        private void OnPlayerMoved(Vector3 pos)
         {
-            GameObject player = Instantiate(_playerPrefab, GetCellPos(_levelManager.spawnPoint.position),
+            if (_calledUpdateClockThisFrame) return;
+            _calledUpdateClockThisFrame = true;
+            EventManager.instance.updateClock?.Invoke();
+            StartCoroutine(ResetUpdateClockFlagAtEndOfFrame());
+        }
+
+        private IEnumerator ResetUpdateClockFlagAtEndOfFrame()
+        {
+            yield return new WaitForEndOfFrame();
+            _calledUpdateClockThisFrame = false;
+        }
+
+        public GameObject SpawnPlayer(Vector3 pos)
+        {
+            GameObject player = Instantiate(_playerPrefab, GetCellPos(pos),
                 Quaternion.identity);
             DeathManager playerDeathManager = player.GetComponent<DeathManager>();
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerDeathManager.SetGridManager(_gridManager);
             playerDeathManager.onPlayerDeath += OnDeath;
             playerController.SetGridManager(_gridManager);
+            return player;
         }
 
         private Vector3 GetCellPos(Vector3 pos)
@@ -55,13 +72,11 @@ namespace Player
 
         private void OnDeath(GameObject player)
         {
-            StartCoroutine(nameof(Respawn), player);
-
+            if (player != null) StartCoroutine(nameof(Respawn), player);
         }
 
         private IEnumerator Respawn(GameObject player)
         {
-            
             player.SetActive(false);
             yield return new WaitForSeconds(_waitTimeBeforeRespawn);
             player.transform.position = GetCellPos(_levelManager.spawnPoint.position);

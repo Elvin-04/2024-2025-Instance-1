@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private float _moveTime;
-    private Camera _camera;
-    private Vector3 _cameraPos;
-    private Tween _moveAnim;
-    private bool _reachedEnd;
-    private bool _isDead = false;
 
     [SerializeField] private InputAction _playerInput;
+    private Camera _camera;
+    private Vector3 _cameraPos;
+    private bool _isDead;
+    private Tween _moveAnim;
+    private bool _reachedEnd;
 
     private void Awake()
     {
@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
 
     private void Start()
     {
-        EventManager.instance.onPlayerMoved?.AddListener(OnPlayerMoved);
+        EventManager.instance.onPlayerFinishedMoving?.AddListener(OnPlayerMoved);
         Invoke(nameof(LateStart), 0);
     }
 
