@@ -3,6 +3,7 @@ namespace Managers.Audio
     public enum SoundsName
     {
         ActiveArrowThrower,
+        ImpactArrowWithWall,
         ActivateSpike,
         DeactivateSpike,
         Collectible,

@@ -234,9 +234,6 @@ namespace Player
 
             _reachedTargetCell = false;
             EventManager.instance.updateClock?.Invoke();
-            Vector3 position = _gridManager.GetCellPos(nextIndex);
-
-            EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
             var position = _gridManager.GetCellPos(nextIndex);
             _currentMoveAnim = _transform.DOMove(
                 position,

@@ -83,6 +83,7 @@ namespace Traps.Arrow_Trap
             {
                 EventManager.instance.updateClock.RemoveListener(UpdateClock);
                 _moveTween?.Kill();
+                EventManager.instance.onPlaySfx?.Invoke(SoundsName.ImpactArrowWithWall, transform);
                 Destroy(gameObject);
                 _gridManager.RemoveObjectOnCell(cellIndex, this);
                 return;
