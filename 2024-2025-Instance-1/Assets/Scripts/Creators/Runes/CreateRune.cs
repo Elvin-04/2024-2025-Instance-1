@@ -3,13 +3,13 @@ using Runes;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace Creators
+namespace Creators.Runes
 {
-    public class CreateRune : SwitchableCellCreator
+    public abstract class CreateRune : SwitchableCellCreator
     {
         [SerializeField] private GridManager _gridManager;
-        [SerializeField] private Rune _runeToSpawn;
-        private Rune _spawnedRune;
+        [SerializeField] protected Rune _runeToSpawn;
+        protected Rune _spawnedRune;
 
         protected override void Start()
         {
@@ -25,20 +25,20 @@ namespace Creators
             Invoke(nameof(SetupObjectsOnCell), 0);
         }
 
-        private void SetupObjectsOnCell()
+        protected virtual void SetupObjectsOnCell()
         {
             _gridManager.AddObjectOnCell(transform.position, _spawnedRune);
             _spawnedRune.onDrop += OnDrop;
             _spawnedRune.onTake += OnTake;
         }
 
-        private void OnTake()
+        protected virtual void OnTake()
         {
             EventManager.instance.onChangeCell?.Invoke(transform.position, GetTileBasedOnState(false));
             _gridManager.RemoveObjectOnCell(transform.position, _spawnedRune);
         }
 
-        private void OnDrop()
+        protected virtual void OnDrop()
         {
             EventManager.instance.onChangeCell?.Invoke(transform.position, GetTileBasedOnState(true));
             SetupObjectsOnCell();

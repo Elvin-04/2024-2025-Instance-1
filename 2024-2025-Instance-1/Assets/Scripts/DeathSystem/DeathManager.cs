@@ -54,8 +54,6 @@ namespace DeathSystem
                         objectOnCell.StopInteract();
             }
 
-            _inventoryManager.currentRune?.DropRune();
-
             _inventoryManager.TakeRune(null);
             onPlayerDeath?.Invoke(gameObject);
         }

@@ -2,15 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Grid;
-using Runes;
-using TMPro;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-
+        private Animator _animator;
         private bool _canMove;
         private Tween _currentMoveAnim;
 
@@ -24,8 +22,6 @@ namespace Player
         private Vector2 _moveDirection;
 
         private bool _reachedTargetCell = true;
-
-        private Animator _animator;
 
         //Components
         private Transform _transform;
@@ -165,9 +161,13 @@ namespace Player
 
             List<CellObjectBase> nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
-            foreach (IInteractableInFront interactableInFront in nextCellObjects.OfType<IInteractableInFront>().ToList())
-                {interactableInFront.Interact(); Debug.Log(interactableInFront);}
-            
+            foreach (IInteractableInFront interactableInFront in
+                     nextCellObjects.OfType<IInteractableInFront>().ToList())
+            {
+                interactableInFront.Interact();
+                Debug.Log(interactableInFront);
+            }
+
             nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
             if (nextCellObjects.Any(objectOnCell => objectOnCell != null && objectOnCell is ICollisionObject))
@@ -177,21 +177,20 @@ namespace Player
                 return;
             }
 
-            SetAnimation((int) currentDirection);
+            SetAnimation((int)currentDirection);
 
             _reachedTargetCell = false;
-            EventManager.instance.updateClock?.Invoke();
-            Vector3 position = _gridManager.GetCellPos(nextIndex);
 
+            EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
+            Vector3 position = _gridManager.GetCellPos(nextIndex);
             _currentMoveAnim = _transform.DOMove(
                 position,
                 _gridManager.GetGlobalMoveTime()).SetEase(Ease.Linear).OnComplete(() =>
             {
                 CheckInteraction<IInteractableCallable>(_moveDirection);
-                EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
-                // wait one frame. this is to allow interactions to actually happen
-                
-                StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
+                EventManager.instance.onPlayerFinishedMoving?.Invoke(_transform.position);
+
+                _reachedTargetCell = true;
             });
             GetInteractableFrontOfMe<IInteractable>(_moveDirection);
         }

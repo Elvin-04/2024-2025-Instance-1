@@ -49,7 +49,7 @@ namespace Grid
                     _cellContainers[(indexX, indexY)] = new CellContainer(cell, cellPos);
                     if (cell.getPrefab)
                     {
-                        GameObject goInstance = Instantiate(cell.getPrefab, pos, Quaternion.identity,
+                        GameObject goInstance = Instantiate(cell.getPrefab, cellPos, Quaternion.identity,
                             tilemap.transform);
                         cell.SetInstancedObject(goInstance);
                         _cellContainers[(indexX, indexY)].AddObject(goInstance.GetComponent<CellObjectBase>());
