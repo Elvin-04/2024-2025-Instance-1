@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -13,6 +14,9 @@ namespace Grid
         public void SetInstancedObject(GameObject obj)
         {
             instancedObject = obj;
+            onGameObjectInstanciated?.Invoke(obj);
         }
+
+        public Action<GameObject> onGameObjectInstanciated;
     }
 }

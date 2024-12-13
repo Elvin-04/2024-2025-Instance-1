@@ -48,7 +48,6 @@ namespace Traps.Arrow_Trap
 
         public void SetDirection(PlayerDirection directionToSet)
         {
-            //transform.rotation = Quaternion.Euler(0, 0, (int)(directionToSet + 1) * 90);
 
             switch (directionToSet)
             {

@@ -12,7 +12,7 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
 
     private Vector2 _playerDirection;
 
-    private List<IInteractable> _interactablesUnder = new();
+    private List<IWeightInteractable> _interactablesUnder = new();
     private Vector3 _interactablesUnderPosition;
 
     private void Start()
@@ -48,24 +48,26 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
 
     private void GetInteractableUnderMe()
         {
-            List<IInteractable> interacts =
+            List<IWeightInteractable> interacts =
                 _gridManager.GetObjectsOnCell(transform.position)
-                    .Select(cellObject => cellObject as IInteractable).Where(interactable => interactable != null && interactable is not IWeight)
+                    .Select(cellObject => cellObject as IWeightInteractable).Where(interactable => interactable != null)
                     .ToList();
 
-            List<IInteractable> commonInteracts = interacts.Intersect(_interactablesUnder).ToList();
+            List<IWeightInteractable> commonInteracts = interacts.Intersect(_interactablesUnder).ToList();
 
             _interactablesUnder.Except(commonInteracts).ToList()
                 .ForEach(interact =>
                 {
                     if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> _)) return;
-                    interact?.StopInteract();
+                    (interact as IInteractable)?.StopInteract();
+                    interact.StopWeightInteract();
                 });
 
             _interactablesUnder = interacts;
             _interactablesUnderPosition = transform.position;
 
-            foreach (IInteractable interactable in _interactablesUnder.ToList()) interactable?.Interact();
+            foreach (IWeightInteractable interactable in _interactablesUnder.ToList()) 
+                interactable?.WeightInteract();
         }
 
     public void StopInteract()
