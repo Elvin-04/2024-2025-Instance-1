@@ -47,4 +47,9 @@ MonoBehaviour:
   _cellToSpawn: {fileID: 11400000, guid: 7efba845691211e4e8d6234f69b156da, type: 2}
   _gizmoColor: {r: 1, g: 1, b: 1, a: 1}
   _gridManager: {fileID: 0}
-  _radius: 1
+  _radius:
+    top: 1
+    bottom: 1
+    left: 1
+    right: 1
+  _poisonCell: {fileID: 11400000, guid: c826e725ef0640046869aa9ff81bbe8f, type: 2}

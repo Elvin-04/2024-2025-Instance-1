@@ -160,7 +160,6 @@ namespace Player
 
             if (nextCell == null)
             {
-                Debug.Log("next cell is null");
                 StopMove();
                 return;
             }
@@ -168,7 +167,7 @@ namespace Player
             List<CellObjectBase> nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
             foreach (IInteractableInFront interactableInFront in nextCellObjects.OfType<IInteractableInFront>().ToList())
-                {interactableInFront.Interact(); Debug.Log(interactableInFront);}
+                interactableInFront.Interact();
             
             nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
