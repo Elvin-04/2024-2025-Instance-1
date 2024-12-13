@@ -5,13 +5,13 @@ using UnityEngine;
 /// </summary>
 
 [System.Serializable]
-public class SaveObject : MonoBehaviour
+public class SaveObject
 {
     public float score;
     public int id;
 
-    private void Start()
+    public SaveObject(int id)
     {
-        EventManager.instance.onScoreUpdated.AddListener((float newScore) => score = newScore);
+        this.id = id;
     }
 }
