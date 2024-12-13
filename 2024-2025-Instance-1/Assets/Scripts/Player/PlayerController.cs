@@ -69,7 +69,6 @@ namespace Player
             if (!_canMove || !_reachedTargetCell) return;
 
             Move();
-            EventManager.instance.onPlaySfx?.Invoke(SoundsName.SandMovementPlayer, null);
         }
 
         private void StartMove(Vector2 direction)
@@ -171,8 +170,9 @@ namespace Player
 
             _reachedTargetCell = false;
             EventManager.instance.updateClock?.Invoke();
-            var position = _gridManager.GetCellPos(nextIndex);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.SandMovementPlayer, null);
 
+            var position = _gridManager.GetCellPos(nextIndex);
             _currentMoveAnim = _transform.DOMove(
                 position,
                 _gridManager.GetGlobalMoveTime()).SetEase(Ease.Linear).OnComplete(() =>

@@ -35,8 +35,8 @@ namespace Traps.Arrow_Trap
             _currentTick = 0;
             ShootArrow();
 
-            Debug.Log($"EventManager.instance: {EventManager.instance}");
-            Debug.Log($"transform: {transform}");
+            //Debug.Log($"EventManager.instance: {EventManager.instance}");
+            //Debug.Log($"transform: {transform}");
             EventManager.instance.onPlaySfx?.Invoke(SoundsName.ActiveArrowThrower, transform);
         }
 

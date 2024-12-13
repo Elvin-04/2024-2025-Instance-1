@@ -69,6 +69,7 @@ namespace Traps.Arrow_Trap
             if (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any())
             {
                 EventManager.instance.updateClock.RemoveListener(UpdateClock);
+                EventManager.instance.onPlaySfx?.Invoke(SoundsName.ImpactArrowWithWall, transform);
                 Destroy(gameObject);
                 _gridManager.RemoveObjectOnCell(cellIndex, this);
                 return;
