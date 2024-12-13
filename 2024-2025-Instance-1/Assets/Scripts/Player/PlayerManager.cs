@@ -38,7 +38,7 @@ namespace Player
 
         private void SpawnPlayer()
         {
-            GameObject player = Instantiate(_playerPrefab, GetCellPos(_levelManager.spawnPoint.position),
+            GameObject player = Instantiate(_playerPrefab, GetCellPos(_levelManager.spawnPoint),
                 Quaternion.identity);
             DeathManager playerDeathManager = player.GetComponent<DeathManager>();
             PlayerController playerController = player.GetComponent<PlayerController>();
@@ -64,7 +64,7 @@ namespace Player
             
             player.SetActive(false);
             yield return new WaitForSeconds(_waitTimeBeforeRespawn);
-            player.transform.position = GetCellPos(_levelManager.spawnPoint.position);
+            player.transform.position = GetCellPos(_levelManager.spawnPoint);
             player.SetActive(true);
             EventManager.instance.onRespawn?.Invoke();
             EventManager.instance.onPlayerMoved?.Invoke(player.transform.position);
