@@ -15,11 +15,6 @@ namespace Grid
             this.cellPos = cellPos;
         }
 
-        public void Take(CellContainer container)
-        {
-            objectsOnCell.AddRange(container.objectsOnCell);
-        }
-
         
         public void AddObject(CellObjectBase cellObjectBase)
         {
@@ -33,7 +28,10 @@ namespace Grid
 
         public void RemoveObject(CellObjectBase cellObject)
         {
-            if (objectsOnCell.Contains(cellObject)) objectsOnCell.Remove(cellObject);
+            if (objectsOnCell.Contains(cellObject))
+            {
+                objectsOnCell.Remove(cellObject);
+            }
         }
 
         public void RemoveObjects(List<CellObjectBase> cellObjects)

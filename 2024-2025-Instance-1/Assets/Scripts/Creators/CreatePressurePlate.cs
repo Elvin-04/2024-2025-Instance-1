@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Grid;
 using Traps;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -41,6 +39,7 @@ namespace Creators
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawLine(t.position, cellCreatorTransform.position);
             }
+
             Gizmos.color = Color.yellow;
             foreach (PillarObject t in _pillars)
             {
@@ -55,18 +54,19 @@ namespace Creators
         {
             base.LateStart();
 
-            //_gridManager.GetObjectsOnCell(cellCreatorTransform.position).ForEach(objectOnCell =>
-            //    (objectOnCell as PressurePlate)?.SetDoorTransforms(_doorTransforms));
+            /*_gridManager.GetObjectsOnCell(cellCreatorTransform.position).ForEach(objectOnCell =>
+                (objectOnCell as PressurePlate)?.SetDoorTransforms(_doorTransforms));
 
-            //_gridManager.GetObjectsOnCell(cellCreatorTransform.position).ForEach(objectOnCell =>
-            //    (objectOnCell as PressurePlate)?.SetPillars(_pillars));
+            _gridManager.GetObjectsOnCell(cellCreatorTransform.position).ForEach(objectOnCell =>
+                (objectOnCell as PressurePlate)?.SetPillars(_pillars));
 
-            //CreateCells(_door, _doorTransforms);
-            //CreateCells(_pillar, _pillars.Select(pillar => pillar.transform).ToList());  
+            CreateCells(_door, _doorTransforms);
+            CreateCells(_pillar, _pillars.Select(pillar => pillar.transform).ToList()); */
         }
 
         protected override void SetTile(Cell cell)
         {
+            base.SetTile(cell);
             _plateSpawned = Instantiate(_plateToSpawn, transform.position, Quaternion.identity);
             Invoke(nameof(SetupObjectsOnCell), 0);
         }
@@ -76,21 +76,29 @@ namespace Creators
             _gridManager.AddObjectOnCell(transform.position, _plateSpawned);
             _plateSpawned.SetDoorTransforms(_doorTransforms);
             _plateSpawned.SetPillars(_pillars);
-
+            _plateSpawned.onPlate += OnPlate;
+            _plateSpawned.offPlate += OffPlate;
             CreateCells(_door, _doorTransforms);
-            List<Transform> rightPillars = new List<Transform>();
-            List<Transform> leftPillars = new List<Transform>();
-            foreach(PillarObject p in _pillars)
+
+            List<Transform> rightPillars = new();
+            List<Transform> leftPillars = new();
+
+            foreach (PillarObject p in _pillars)
             {
                 if (p.side == Side.Right)
                     rightPillars.Add(p.transform);
                 else
                     leftPillars.Add(p.transform);
             }
+
             CreateCells(_pillarLeft, leftPillars);
             CreateCells(_pillarRight, rightPillars);
-            _plateSpawned.onPlate += OnPlate;
-            _plateSpawned.offPlate += OffPlate;
+            //Invoke(nameof(Test), 0);
+        }
+
+        private void Test()
+        {
+            _plateSpawned.StopInteract();
         }
 
         private void OnPlate()
@@ -108,12 +116,14 @@ namespace Creators
         private void CreateCell(Cell tile, Transform spawnTransform)
         {
             _gridManager.ChangeCell(spawnTransform.position, tile);
-            _gridManager.GetCell(spawnTransform.position);
         }
 
         private void CreateCells(Cell tile, List<Transform> spawnTransforms)
         {
-            foreach (Transform spawnTransform in spawnTransforms) CreateCell(tile, spawnTransform);
+            foreach (Transform spawnTransform in spawnTransforms)
+            {
+                CreateCell(tile, spawnTransform);
+            }
         }
 
         #endregion
@@ -129,6 +139,7 @@ namespace Creators
     [Serializable]
     public enum Side
     {
-        Left, Right
+        Left,
+        Right
     }
 }
