@@ -65,20 +65,34 @@ namespace Creators
 
         public void WeightInteract(PoisonTrap trap)
         {
-            if (_gridManager.GetCellIndex(trap.transform.position) != _mainTrapIndex)
-                return;
-            
-            foreach ((int, int) position in _poisonCells)
-                _gridManager.ResetCell(position);
+            Vector2Int pos = _gridManager.GetCellIndex(trap.transform.position);
+
+            if (pos == _mainTrapIndex)
+            {
+                foreach ((int, int) position in _poisonCells)
+                    _gridManager.ResetCell(position);
+            }
+            else
+            {
+                _gridManager.ResetCell(pos);
+            }        
         }
 
         public void StopWeightInteract(PoisonTrap trap)
         {
-            if (_gridManager.GetCellIndex(trap.transform.position) != _mainTrapIndex)
-                return;
+            Vector2Int pos = _gridManager.GetCellIndex(trap.transform.position);
+
+            if (pos == _mainTrapIndex)
+            {
+                foreach ((int, int) position in _poisonCells)
+                    _gridManager.ChangeCell(position, _poisonCell);
+            }
+            else
+            {
+                _gridManager.ChangeCell(pos, _poisonCell);
+            }
             
-            foreach ((int, int) position in _poisonCells)
-                _gridManager.ChangeCell(position, _poisonCell);
+            
         }
     }
 }
