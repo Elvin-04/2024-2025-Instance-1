@@ -264,7 +264,7 @@ namespace Player
         private void Interact()
         {
             if (_interactablesInFront.Count == 0) return;
-            _interactablesInFront.ForEach(objectInFront => objectInFront.Interact());
+            _interactablesInFront.Where(objectInFront => objectInFront.canPickUp).ToList().ForEach(objectInFront => objectInFront.Interact());
         }
 
         private void SetAnimation(int value)
