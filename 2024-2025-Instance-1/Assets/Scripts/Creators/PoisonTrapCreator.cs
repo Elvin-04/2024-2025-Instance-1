@@ -38,17 +38,23 @@ namespace Creators
                 for (int y = positionIndexes.y - _radius.bottom; y <= positionIndexes.y + _radius.top; y++)
                 {
                     (int, int) position = (x, y);
+
                     Cell cellToSpawn;
                     
                     if (x == positionIndexes.x && y == positionIndexes.y)
                         cellToSpawn = cell;
                     else
                     {
+                        if (!_gridManager.IsCellGround(_gridManager.GetCell(position)))
+                            continue;
+
                         cellToSpawn = _poisonCell;
                         _poisonCells.Add(position);
                     }
 
                     cellToSpawn.onGameObjectInstanciated += (obj) => obj.GetComponent<PoisonTrap>().creator = this;
+
+
 
                     // TODO CHECK IF THE CURRENT CELL IS "EMPTY"
                     // AND DO NOT SPAWN THE CELL IF IT IS NOT EMPTY                    

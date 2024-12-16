@@ -71,6 +71,11 @@ namespace Grid
         
         public Vector2Int size => new(_countX, _countY);
 
+        public bool IsCellGround(Cell cell)
+        {
+            return cell == _groundCell;
+        }
+
         public float GetGlobalMoveTime()
         {
             return _globalMoveTime;
