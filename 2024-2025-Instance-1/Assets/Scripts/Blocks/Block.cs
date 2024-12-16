@@ -1,12 +1,13 @@
+using System.Collections;
 using Grid;
-using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWeight
 {
-    public bool canPickUp {get; set;} = true;
+    public bool canPickUp { get; set; } = true;
 
     [SerializeField] private GridManager _gridManager;
 
@@ -33,42 +34,68 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
         Vector2Int cellIndex = _gridManager.GetCellIndex(transform.position);
         Vector2Int nextIndex = _gridManager.GetNextIndex(cellIndex, _playerDirection);
 
-        if (_gridManager.GetCellObjectsByType(nextIndex, out List<ICollisionObject> nextObjects))
+        if (_gridManager.GetCellObjectsByType(nextIndex, out List<ICollisionObject> _))
             return;
 
         if (canPickUp)
         {
+            Debug.Log("Move");
             transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime())
-            .OnComplete(GetInteractableUnderMe);
-
-            _gridManager.AddObjectOnCell(nextIndex, this);
+                .OnComplete(GetInteractableUnderMe);
+            
             _gridManager.RemoveObjectOnCell(cellIndex, this);
+            _gridManager.AddObjectOnCell(nextIndex, this);
         }
     }
 
     private void GetInteractableUnderMe()
+    {
+        List<IWeightInteractable> interacts = new();
+
+        foreach (CellObjectBase objectOnCell in _gridManager.GetObjectsOnCell(transform.position))
         {
-            List<IWeightInteractable> interacts =
-                _gridManager.GetObjectsOnCell(transform.position)
-                    .Select(cellObject => cellObject as IWeightInteractable).Where(interactable => interactable != null)
-                    .ToList();
-
-            List<IWeightInteractable> commonInteracts = interacts.Intersect(_interactablesUnder).ToList();
-
-            _interactablesUnder.Except(commonInteracts).ToList()
-                .ForEach(interact =>
-                {
-                    if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> _)) return;
-                    (interact as IInteractable)?.StopInteract();
-                    interact.StopWeightInteract();
-                });
-
-            _interactablesUnder = interacts;
-            _interactablesUnderPosition = transform.position;
-
-            foreach (IWeightInteractable interactable in _interactablesUnder.ToList()) 
-                interactable?.WeightInteract();
+            if (objectOnCell is IWeightInteractable interactable)
+            {
+                interacts.Add(interactable);
+            }
         }
+
+        List<IWeightInteractable> commonInteracts = new();
+
+        foreach (IWeightInteractable interactable in _interactablesUnder)
+        {
+            if (interacts.Contains(interactable))
+            {
+                commonInteracts.Add(interactable);
+            }
+        }
+        
+        
+
+        foreach (IWeightInteractable interactable in _interactablesUnder)
+        {
+            if (!commonInteracts.Contains(interactable))
+            {
+                if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> _))
+                {
+                    return;
+                }
+                Debug.Log("stopping interactions");
+                if (interactable is IInteractable interact)
+                {
+                    interact.StopInteract();
+                }
+                
+                interactable.StopWeightInteract();
+            }
+        }
+
+        _interactablesUnder = interacts;
+        _interactablesUnderPosition = transform.position;
+
+        foreach (IWeightInteractable interactable in _interactablesUnder.ToList())
+            interactable?.WeightInteract();
+    }
 
     public void StopInteract()
     {
