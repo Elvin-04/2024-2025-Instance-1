@@ -1,61 +1,75 @@
-using UnityEngine;
-using Grid;
 using Creators;
+using Grid;
+using UnityEngine;
 
 namespace Traps
 {
-
-public class PoisonTrap : CellObjectBase, IInteractable, IWeightInteractable
-{
-    [SerializeField] private int _maxTickClock;
-    private int _currentTickClock;
-    private bool _playerPoisoned = false;
-
-    [HideInInspector] public PoisonTrapCreator creator;
-
-    public bool canPickUp { get => false; set { } }
-
-    private void Start()
+    public class PoisonTrap : CellObjectBase, IInteractable, IWeightInteractable
     {
-        EventManager.instance.onDeath?.AddListener(OnDeath); 
-        EventManager.instance.onClockUpdated?.AddListener(OnClockUpdate);
-    }
+        [SerializeField] private int _maxTickClock;
 
-    public void OnClockUpdate()
-    {
-        if (!_playerPoisoned)
-            return;
 
-        // yes, i++
-        //  not ++i
-        if (_currentTickClock++ >= _maxTickClock)
+        [HideInInspector] public PoisonTrapCreator creator;
+        private bool _playerPoisoned;
+
+        public int currentLifeTime { get; private set; }
+        public int maxLifeTime => _maxTickClock;
+
+        private void Start()
         {
-            EventManager.instance.onDeath?.Invoke();
+            EventManager.instance.onDeath?.AddListener(OnDeath);
+            EventManager.instance.onClockUpdated?.AddListener(OnClockUpdate);
+            currentLifeTime = _maxTickClock;
+        }
+
+        public bool canPickUp
+        {
+            get => false;
+            set { }
+        }
+
+        public void Interact()
+        {
+            _playerPoisoned = true;
+        }
+
+        public void StopInteract()
+        {
+        }
+
+        public void WeightInteract()
+        {
+            creator.WeightInteract(this);
+        }
+
+        public void StopWeightInteract()
+        {
+            creator.StopWeightInteract(this);
+        }
+
+        public void OnClockUpdate()
+        {
+            if (!_playerPoisoned)
+                return;
+
+            UpdateLifeTime();
+            CheckPlayerDied();
+        }
+
+        private void UpdateLifeTime()
+        {
+            currentLifeTime--;
+        }
+
+        private void CheckPlayerDied()
+        {
+            if (currentLifeTime < 0) EventManager.instance.onDeath?.Invoke();
+        }
+
+        private void OnDeath()
+        {
+            currentLifeTime = _maxTickClock;
+            _playerPoisoned = false;
         }
     }
-
-    public void Interact()
-    {
-        _playerPoisoned = true;
-    }
-
-    public void StopInteract() {}
-
-    public void WeightInteract()
-    {
-        creator.WeightInteract(this);
-    }
-
-    public void StopWeightInteract()
-    {
-        creator.StopWeightInteract(this);
-    }
-
-    private void OnDeath()
-    {
-        _currentTickClock = 0;
-        _playerPoisoned = false;
-    }
-}
-
 }
