@@ -9,7 +9,6 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         private Animator _animator;
-        private bool _canMove;
         private Tween _currentMoveAnim;
 
         //Properties
@@ -37,8 +36,7 @@ namespace Player
 
         private void Start()
         {
-            EventManager.instance.onMoveStarted?.AddListener(StartMove);
-            EventManager.instance.onMoveCanceled?.AddListener(StopMove);
+            EventManager.instance.onMoveStarted?.AddListener(TryMove);
             EventManager.instance.onInteract?.AddListener(Interact);
             EventManager.instance.onDeath?.AddListener(StopMoveAnim);
 
@@ -48,8 +46,6 @@ namespace Player
 
         private void Update()
         {
-            TryMove();
-
             //////////////////////////////////////////////////////////////////
             if (Input.GetKeyDown(KeyCode.K)) EventManager.instance.onDeath.Invoke(true);
             ///////////////////////////////////////////////////////////////////
@@ -66,20 +62,13 @@ namespace Player
             _interactablesUnder.Clear();
             _interactablesInFront.Clear();
             _currentMoveAnim?.Kill();
-            _canMove = false;
             _reachedTargetCell = true;
         }
 
-        private void TryMove()
+        private void TryMove(Vector2 direction)
         {
-            if (!_canMove || !_reachedTargetCell) return;
-            Move();
-        }
-
-        private void StartMove(Vector2 direction)
-        {
-            _canMove = true;
-            _moveDirection = direction;
+            if (!_reachedTargetCell) return;
+            Move(direction);
         }
 
         private void CheckInteraction<T>(Vector3 dir) where T : IInteractable
@@ -190,8 +179,9 @@ namespace Player
             EventManager.instance.canInteract.Invoke(callable.Count > 0, isNotNull ? callable[0].showName : "");
         }
 
-        private void Move()
+        private void Move(Vector2 direction)
         {
+            _moveDirection = direction;
             Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, _moveDirection);
 
             Cell nextCell = _gridManager.GetCell(nextIndex);
@@ -210,7 +200,6 @@ namespace Player
 
             if (nextCell == null)
             {
-                StopMove();
                 return;
             }
 
@@ -232,7 +221,6 @@ namespace Player
                 if (objectOnCell is ICollisionObject)
                 {
                     CheckInteraction<IInteractable>(_moveDirection);
-                    StopMove();
                     return;
                 }
             }
@@ -253,18 +241,14 @@ namespace Player
                 _reachedTargetCell = true;
             });
             GetInteractableFrontOfMe<IInteractable>(_moveDirection);
-        }
-
-        private void StopMove()
-        {
+            
             SetAnimation(0);
-            _canMove = false;
         }
 
         private void Interact()
         {
             if (_interactablesInFront.Count == 0) return;
-            _interactablesInFront.ForEach(objectInFront => objectInFront.Interact());
+            _interactablesInFront.Where(objectInFront => objectInFront.canPickUp && objectInFront is not IInteractableInFront).ToList().ForEach(objectInFront => objectInFront.Interact());
         }
 
         private void SetAnimation(int value)

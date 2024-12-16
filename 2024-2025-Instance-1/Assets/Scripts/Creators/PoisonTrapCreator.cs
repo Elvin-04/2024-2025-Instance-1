@@ -18,6 +18,8 @@ namespace Creators
 
     public class PoisonTrapCreator : CellCreator
     {
+        [SerializeField] private int _maxTickClock;
+        private int _currentTickClock;
         [SerializeField] private GridManager _gridManager;
 
         [SerializeField] private PoisonRadius _radius;
@@ -26,7 +28,15 @@ namespace Creators
         [SerializeField] private Cell _poisonCell;
 
         private Vector2Int _mainTrapIndex;
+        private bool _playerPoisoned;
         private List<(int, int)> _poisonCells = new();
+
+        protected override void Start()
+        {
+            base.Start();
+            EventManager.instance.onClockUpdated?.AddListener(OnClockUpdate);
+            EventManager.instance.onDeath?.AddListener(OnDeath);
+        }
 
         protected override void SetTile(Cell cell)
         {
@@ -72,6 +82,19 @@ namespace Creators
             else
             {
                 _gridManager.GetCellContainer(position).instancedObject.GetComponent<PoisonTrap>().creator = this;
+            }
+        }
+
+        private void OnClockUpdate()
+        {
+            if (!_playerPoisoned)
+                return;
+
+            // yes, i++
+            //  not ++i
+            if (_currentTickClock++ >= _maxTickClock)
+            {
+                EventManager.instance.onDeath?.Invoke();
             }
         }
 
@@ -124,6 +147,17 @@ namespace Creators
                 _gridManager.ChangeCell(pos, _poisonCell);
                 StartCoroutine(SetupPoison((pos.x, pos.y)));
             }
+        }
+
+        public void PoisonPlayer()
+        {
+            _playerPoisoned = true;
+        }
+        
+        private void OnDeath()
+        {
+            _currentTickClock = 0;
+            _playerPoisoned = false;
         }
     }
 }

@@ -7,9 +7,6 @@ namespace Traps
 
 public class PoisonTrap : CellObjectBase, IInteractable, IWeightInteractable
 {
-    [SerializeField] private int _maxTickClock;
-    private int _currentTickClock;
-    private bool _playerPoisoned = false;
 
     [HideInInspector] public PoisonTrapCreator creator;
 
@@ -33,10 +30,9 @@ public class PoisonTrap : CellObjectBase, IInteractable, IWeightInteractable
             EventManager.instance.onDeath?.Invoke(true);
         }
     }
-
     public void Interact()
     {
-        _playerPoisoned = true;
+        creator.PoisonPlayer();
     }
 
     public void StopInteract() {}
