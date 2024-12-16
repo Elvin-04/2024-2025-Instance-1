@@ -32,7 +32,7 @@ namespace DeathSystem
         private void Start()
         {
             EventManager.instance.onDeath?.AddListener(Death);
-            EventManager.instance.onDeath?.AddListener(deathEffect => _isDead = true);
+            EventManager.instance.onDeath?.AddListener(() => _isDead = true);
             EventManager.instance.onRespawn?.AddListener(() => _isDead = false);
         }
 
@@ -42,26 +42,22 @@ namespace DeathSystem
             _gridManager = gridManager;
         }
 
-        private void Death(bool deathEffect)
+        private void Death()
         {
             if (_isDead)
                 return;
-
-            if (deathEffect)
+            if (_inventoryManager.currentRune == null)
             {
-                if (_inventoryManager.currentRune == null)
-                {
-                    GameObject playerCorpse = Instantiate(_playerCorpse, _transform.position, Quaternion.identity);
-                    Corpse corpse = playerCorpse.GetComponent<Corpse>();
-                    _gridManager.AddObjectOnCell(_transform.position, corpse);
-                }
-                else
-                {
-                    _inventoryManager.currentRune.ApplyEffect(transform.position, _gridManager);
-                    if (_gridManager.GetCellObjectsByType(_transform.position, out List<IInteractable> interactables))
-                        foreach (IInteractable objectOnCell in interactables)
-                            objectOnCell.StopInteract();
-                }
+                GameObject playerCorpse = Instantiate(_playerCorpse, _transform.position, Quaternion.identity);
+                Corpse corpse = playerCorpse.GetComponent<Corpse>();
+                _gridManager.AddObjectOnCell(_transform.position, corpse);
+            }
+            else
+            {
+                _inventoryManager.currentRune.ApplyEffect(transform.position, _gridManager);
+                if (_gridManager.GetCellObjectsByType(_transform.position, out List<IInteractable> interactables))
+                    foreach (IInteractable objectOnCell in interactables)
+                        objectOnCell.StopInteract();
             }
 
             _inventoryManager.TakeRune(null);

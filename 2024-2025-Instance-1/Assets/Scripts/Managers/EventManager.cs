@@ -22,7 +22,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent onPause { get; private set; } = new();
     public UnityEvent<Rune> updateRune { get; private set; } = new();
     public UnityEvent onRespawn { get; private set; } = new();
-    public UnityEvent<bool> onDeath { get; private set; } = new();
+    public UnityEvent onDeath { get; private set; } = new();
     public UnityEvent updateClock { get; private set; } = new();
     public UnityEvent onClockUpdated { get; private set; } = new();
     public UnityEvent<Vector3, Cell> onChangeCell { get; private set; } = new(); //=> position of the cell, tile to set 

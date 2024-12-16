@@ -12,24 +12,6 @@ public class PoisonTrap : CellObjectBase, IInteractable, IWeightInteractable
 
     public bool canPickUp { get => false; set { } }
 
-    private void Start()
-    {
-        EventManager.instance.onDeath?.AddListener(OnDeath); 
-        EventManager.instance.onClockUpdated?.AddListener(OnClockUpdate);
-    }
-
-    public void OnClockUpdate()
-    {
-        if (!_playerPoisoned)
-            return;
-
-        // yes, i++
-        //  not ++i
-        if (_currentTickClock++ >= _maxTickClock)
-        {
-            EventManager.instance.onDeath?.Invoke(true);
-        }
-    }
     public void Interact()
     {
         creator.PoisonPlayer();
@@ -45,12 +27,6 @@ public class PoisonTrap : CellObjectBase, IInteractable, IWeightInteractable
     public void StopWeightInteract()
     {
         creator.StopWeightInteract(this);
-    }
-
-    private void OnDeath(bool deathEffect)
-    {
-        _currentTickClock = 0;
-        _playerPoisoned = false;
     }
 }
 

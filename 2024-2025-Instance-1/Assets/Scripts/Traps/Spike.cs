@@ -6,7 +6,7 @@ namespace Traps
     {
         public void Interact()
         {
-            EventManager.instance.onDeath?.Invoke(true);
+            EventManager.instance.onDeath?.Invoke();
         }
 
         public void StopInteract()

@@ -49,7 +49,7 @@ public class CameraManager : MonoBehaviour
     private void LateStart()
     {
         EventManager.instance.onWin.AddListener(() => IsReachedEnd(true));
-        EventManager.instance.onDeath.AddListener(deathEffect => _isDead = true);
+        EventManager.instance.onDeath.AddListener(() => _isDead = true);
         EventManager.instance.onRespawn.AddListener(() => _isDead = false);
     }
 

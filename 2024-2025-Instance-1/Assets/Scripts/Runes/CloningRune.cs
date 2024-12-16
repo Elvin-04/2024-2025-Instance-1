@@ -28,7 +28,7 @@ namespace Runes
             Vector3 projectedPoint = _mirrorLineStart + lineDir * projectedLength;
             Vector3 oppositePos = projectedPoint + (projectedPoint - position);
             _spawnedPlayer = _playerManager.SpawnPlayer(oppositePos);
-            _spawnedPlayer.GetComponent<DeathManager>().onPlayerDeath += DropRune;
+            _spawnedPlayer.GetComponent<DeathManager>().onPlayerDeath = DropRune;
         }
 
         private void DropRune(GameObject player)

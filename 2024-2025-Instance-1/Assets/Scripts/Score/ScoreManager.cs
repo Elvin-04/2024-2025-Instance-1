@@ -29,7 +29,7 @@ namespace Score
             CalculateFinalScore();
         }
 
-        private void OnPlayerDies(bool deathEffect)
+        private void OnPlayerDies()
         {
             _deaths++;
             CalculateFinalScore();
