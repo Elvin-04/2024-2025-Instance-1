@@ -14,6 +14,7 @@ namespace Managers
         [field: SerializeField] public ScoreCounter maxDeaths { get; private set; }
         [field: SerializeField] public ScoreCounter maxSteps { get; private set; }
 
+        [Tooltip("Order matters! Once a spawn point is reached, any previous spawn points will be disabled.")]
         [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
         private List<(Vector2Int, Vector3)> _spawnPoints = new List<(Vector2Int, Vector3)>();
 
