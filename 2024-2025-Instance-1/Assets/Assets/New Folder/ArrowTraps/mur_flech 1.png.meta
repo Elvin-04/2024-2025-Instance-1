@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 806408e8bce93b446ba7ad84e0b9fc60
+guid: 07e65c4e13f679e449803a008999640f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7758543131223908907
-    second: blok_a_pousse_0
+      213: -882450248066637248
+    second: mur_flech 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,40 +96,27 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blok_a_pousse_0
+      name: mur_flech 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
+        width: 139
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5dd1ad0f02e145490800000000000000
-      internalID: -7758543131223908907
+      spriteID: 0426800cc28e0c3f0800000000000000
+      internalID: -882450248066637248
       vertices: []
       indices: 
       edges: []
@@ -138,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 262d77d36203acd4b81915e468345442
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      blok_a_pousse_0: -7758543131223908907
+      mur_flech 1_0: -882450248066637248
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
