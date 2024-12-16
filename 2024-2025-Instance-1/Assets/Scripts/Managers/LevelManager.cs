@@ -11,6 +11,8 @@ namespace Managers
         private static LevelManager _instance;
 
         [SerializeField] private GridManager _gridManager;
+        [SerializeField] private Cell _spawnPointCell;
+        [SerializeField] private Cell _spawnPointActivatedCell;
 
         [field: SerializeField] public ScoreCounter maxDeaths { get; private set; }
         [field: SerializeField] public ScoreCounter maxSteps { get; private set; }
@@ -42,13 +44,17 @@ namespace Managers
 
             _instance = this;
             EventManager.instance.onRetry.AddListener(ReloadScene);
-            EventManager.instance.onPlayerMoved.AddListener(OnPlayerMoved);
+            EventManager.instance.onPlayerFinishedMoving.AddListener(OnPlayerMoved);
 
             foreach (Transform spawnPoint in spawnPoints)
             {
                 Vector3 spawnPos = _gridManager.GetCellPos(spawnPoint.position);
                 _spawnPoints.Add((_gridManager.GetCellIndex(spawnPos), spawnPos));
+
+                _gridManager.ChangeCell(_spawnPoints[^1].Item1, _spawnPointCell);
             }
+
+            _gridManager.ChangeCell(_spawnPoints[0].Item1, _spawnPointActivatedCell);
         }
 
         public void OnPlayerMoved(Vector3 position)
@@ -58,10 +64,13 @@ namespace Managers
 
             Vector2Int cellIndex = _gridManager.GetCellIndex(_gridManager.GetCellPos(position));
 
-            for (int i = 0; i < _spawnPoints.Count; i++)
+            for (int i = _spawnPointIndex + 1; i < _spawnPoints.Count; i++)
             {
-                if (_spawnPoints[i].Item1 == cellIndex && i > _spawnPointIndex)
+                if (_spawnPoints[i].Item1 == cellIndex)
                 {
+                    _gridManager.ChangeCell(_spawnPoints[i - 1].Item1, _spawnPointCell);
+                    _gridManager.ChangeCell(cellIndex, _spawnPointActivatedCell);
+
                     _spawnPointIndex = i;
                     break;
                 }
