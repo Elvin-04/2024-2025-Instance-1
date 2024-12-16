@@ -94,7 +94,7 @@ namespace Creators
             //  not ++i
             if (_currentTickClock++ >= _maxTickClock)
             {
-                EventManager.instance.onDeath?.Invoke();
+                EventManager.instance.onDeath?.Invoke(true);
             }
         }
 
@@ -154,7 +154,7 @@ namespace Creators
             _playerPoisoned = true;
         }
         
-        private void OnDeath()
+        private void OnDeath(bool deathEffect)
         {
             _currentTickClock = 0;
             _playerPoisoned = false;
