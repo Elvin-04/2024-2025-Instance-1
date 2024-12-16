@@ -20,6 +20,8 @@ namespace DeathSystem
         //Actions
         public Action<GameObject> onPlayerDeath;
 
+        private bool _isDead = false;
+
         private void Awake()
         {
             Assert.IsNotNull(_playerCorpse, "player corpse cell prefab is null in DeathManager");
@@ -30,6 +32,8 @@ namespace DeathSystem
         private void Start()
         {
             EventManager.instance.onDeath?.AddListener(Death);
+            EventManager.instance.onDeath?.AddListener(() => _isDead = true);
+            EventManager.instance.onRespawn?.AddListener(() => _isDead = false);
         }
 
         //To be called when player is instantiated
@@ -40,6 +44,8 @@ namespace DeathSystem
 
         private void Death()
         {
+            if (_isDead)
+                return;
             if (_inventoryManager.currentRune == null)
             {
                 GameObject playerCorpse = Instantiate(_playerCorpse, _transform.position, Quaternion.identity);
