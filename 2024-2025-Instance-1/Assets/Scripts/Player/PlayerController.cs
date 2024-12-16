@@ -42,7 +42,7 @@ namespace Player
             EventManager.instance.onInteract?.AddListener(Interact);
             EventManager.instance.onDeath?.AddListener(StopMoveAnim);
 
-            EventManager.instance.onDeath?.AddListener(() => _dead = true);
+            EventManager.instance.onDeath?.AddListener(deathEffect => _dead = true);
             EventManager.instance.onRespawn?.AddListener(() => _dead = false);
         }
 
@@ -51,7 +51,7 @@ namespace Player
             TryMove();
 
             //////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.K)) EventManager.instance.onDeath.Invoke();
+            if (Input.GetKeyDown(KeyCode.K)) EventManager.instance.onDeath.Invoke(true);
             ///////////////////////////////////////////////////////////////////
         }
 
@@ -61,7 +61,7 @@ namespace Player
             _gridManager = gridManager;
         }
 
-        public void StopMoveAnim()
+        public void StopMoveAnim(bool deathEffect)
         {
             _interactablesUnder.Clear();
             _interactablesInFront.Clear();

@@ -104,13 +104,8 @@ namespace Creators
         {
             if (_gridManager.GetCell(_gridManager.GetCellIndex(position)) == _door)
             {
-                EventManager.instance.onDeath.Invoke();
+                EventManager.instance.onDeath.Invoke(false);
             }
-        }
-
-        private void RemoveCorpse(DeathManager deathManager)
-        {
-
         }
 
         private void Test()
