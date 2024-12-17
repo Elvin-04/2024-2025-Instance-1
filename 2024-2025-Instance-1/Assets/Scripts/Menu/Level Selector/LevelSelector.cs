@@ -16,6 +16,7 @@ namespace Menu.Level_Selector
                 instance = this;
             else
                 Destroy(gameObject);
+                
             DontDestroyOnLoad(gameObject);
         }
 
@@ -26,6 +27,12 @@ namespace Menu.Level_Selector
 
         public void StartLevel(LevelInfo level)
         {
+            if (!level)
+            {
+                _currentLevel = null;
+                SceneManager.LoadScene(0);
+            }
+
             _currentLevel = level;
             level.Load();
 
