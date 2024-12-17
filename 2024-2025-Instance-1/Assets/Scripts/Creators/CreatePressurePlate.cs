@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DeathSystem;
 using Grid;
 using Traps;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace Creators
             Assert.IsNotNull(_pillars, "pillars transform is null in CreateDoorBtn");
             Assert.IsNotNull(_gridManager, "grid manager is null in CreateDoorBtn");
             base.Start();
+
+            EventManager.instance.onPlayerFinishedMoving.AddListener(OnPlayerFinishedMoving);
         }
 
         protected override void OnDrawGizmos()
@@ -94,6 +97,15 @@ namespace Creators
             CreateCells(_pillarLeft, leftPillars);
             CreateCells(_pillarRight, rightPillars);
             //Invoke(nameof(Test), 0);
+        }
+
+
+        private void OnPlayerFinishedMoving(Vector3 position)
+        {
+            if (_gridManager.GetCell(_gridManager.GetCellIndex(position)) == _door)
+            {
+                EventManager.instance.onDeath.Invoke(false);
+            }
         }
 
         private void Test()
