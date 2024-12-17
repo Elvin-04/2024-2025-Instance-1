@@ -18,11 +18,6 @@ namespace Creators
         [SerializeField] private List<Transform> _doorTransforms;
         [SerializeField] private List<PillarObject> _pillars;
 
-        //[Header("Default Cells")]
-        //[SerializeField] private Cell _door;
-        //[SerializeField] private Cell _pillarRight;
-        //[SerializeField] private Cell _pillarLeft;
-
         [Header("Plate")]
         private PressurePlate _plate;
 
@@ -108,7 +103,7 @@ namespace Creators
 
         private void OnPlayerFinishedMoving(Vector3 position)
         {
-            if (_gridManager.GetCell(_gridManager.GetCellIndex(position)) == _door)
+            if (_gridManager.GetCell(_gridManager.GetCellIndex(position)) == _plate.GetDoorClose)
             {
                 EventManager.instance.onDeath.Invoke(false);
             }
