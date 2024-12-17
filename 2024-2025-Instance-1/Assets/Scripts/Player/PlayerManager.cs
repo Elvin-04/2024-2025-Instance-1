@@ -79,10 +79,11 @@ namespace Player
 
         private IEnumerator Respawn(GameObject player)
         {
-            player.SetActive(false);
+            GameObject playerSprite = player.GetComponent<PlayerController>().spriteRenderer.gameObject;
+            playerSprite.SetActive(false);
             yield return new WaitForSeconds(_waitTimeBeforeRespawn);
             player.transform.position = GetCellPos(_levelManager.spawnPoint);
-            player.SetActive(true);
+            playerSprite.SetActive(true);
             EventManager.instance.onRespawn?.Invoke();
             EventManager.instance.onEnableInput.Invoke();
             //EventManager.instance.onPlayerMoved?.Invoke(player.transform.position);

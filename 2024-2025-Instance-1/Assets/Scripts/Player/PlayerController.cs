@@ -4,6 +4,7 @@ using DG.Tweening;
 using Grid;
 using Managers.Audio;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Player
 {
@@ -31,11 +32,13 @@ namespace Player
         public Vector2 moveDirection => _moveDirection;
 
         [SerializeField] [Range(0f, 0.5f)] private float _movementHoldTime = 0.2f;
+        [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
         private float _holdTime = 0f;
         private float _holdingFor = 0f;
 
         private void Awake()
         {
+            Assert.IsNotNull(spriteRenderer, "sprite renderer is null in player controller");
             _transform = transform;
 
             _animator = GetComponent<Animator>();
@@ -89,9 +92,12 @@ namespace Player
         private void TryMove()
         {
             if (!_canMove || !_reachedTargetCell) return;
-            
+
             if ((_holdingFor += Time.deltaTime) >= _holdTime)
-                {_holdingFor = 0f; Move();}
+            {
+                _holdingFor = 0f;
+                Move();
+            }
         }
 
         private void StartMove(Vector2 direction)
@@ -251,7 +257,9 @@ namespace Player
         private void Interact()
         {
             if (_interactablesInFront.Count == 0) return;
-            _interactablesInFront.Where(objectInFront => objectInFront.canPickUp && objectInFront is not IInteractableInFront).ToList().ForEach(objectInFront => objectInFront.Interact());
+            _interactablesInFront
+                .Where(objectInFront => objectInFront.canPickUp && objectInFront is not IInteractableInFront).ToList()
+                .ForEach(objectInFront => objectInFront.Interact());
         }
 
         private void SetAnimation(int value)
