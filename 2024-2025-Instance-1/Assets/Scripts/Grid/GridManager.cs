@@ -77,7 +77,8 @@ namespace Grid
 
         private void SetInstancedObject((int, int) pos, CellObjectBase instancedObjectToSet)
         {
-            //Debug.Log("invoke");
+            //
+            //("invoke");
             _cellContainers[(pos.Item1, pos.Item2)]
                 .SetInstancedObject(instancedObjectToSet.GetComponent<CellObjectBase>());
             onGameObjectInstanced?.Invoke(pos, instancedObjectToSet);

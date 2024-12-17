@@ -23,7 +23,6 @@ namespace Debugs
 
         private void LateStart()
         {
-            Debug.Log(_gridManager.size);
             for (int x = 0; x < _gridManager.size.x; x++)
             for (int y = 0; y < _gridManager.size.y; y++)
             {
