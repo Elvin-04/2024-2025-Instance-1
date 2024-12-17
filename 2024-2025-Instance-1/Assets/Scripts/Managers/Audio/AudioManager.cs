@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Data;
 using Managers.Audio;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Managers.Audio
@@ -36,7 +37,11 @@ namespace Managers.Audio
 
         private void Awake()
         {
-            cam = UnityEngine.Camera.main;
+            cam = Camera.main;
+            SceneManager.sceneLoaded += (_, _) =>
+            {
+                cam = Camera.main;
+            };
             if (!instance)
             {
                 instance = this;
@@ -50,6 +55,11 @@ namespace Managers.Audio
 
         private void Start()
         {
+            SceneManager.sceneLoaded += (_, _) =>
+            {
+                InitPools();
+                InitListeners();
+            };
             InitPools();
             InitListeners();
         }
@@ -246,7 +256,7 @@ namespace Managers.Audio
 
         private bool IsInCameraView(Vector3 position, UnityEngine.Camera cam)
         {
-            var viewportPoint = cam.WorldToViewportPoint(position);
+            Vector3 viewportPoint = cam.WorldToViewportPoint(position);
             return viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1;
         }
 

@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementHoldTime: 0.2
+  <spriteRenderer>k__BackingField: {fileID: 1989502327359781853}
 --- !u!114 &8121179530381066035
 MonoBehaviour:
   m_ObjectHideFlags: 0
