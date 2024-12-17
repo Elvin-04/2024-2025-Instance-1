@@ -34,7 +34,7 @@ namespace Creators
         protected override void Start()
         {
             base.Start();
-            EventManager.instance.onClockUpdated?.AddListener(OnClockUpdate);
+            EventManager.instance.onPlayerFinishedMoving?.AddListener(OnClockUpdate);
             EventManager.instance.onDeath?.AddListener(OnDeath);
             _currentTickClock = _maxTickClock;
         }
@@ -92,7 +92,7 @@ namespace Creators
                 _gridManager.GetCellContainer(position).instancedObject.GetComponent<PoisonTrap>().creator = this;
         }
 
-        private void OnClockUpdate()
+        private void OnClockUpdate(Vector3 _)
         {
             if (!_playerPoisoned)
                 return;
