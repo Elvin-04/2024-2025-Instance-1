@@ -27,6 +27,7 @@ namespace Player
         //Components
         private Transform _transform;
         public PlayerDirection currentDirection { get; private set; }
+        public Vector2 moveDirection => _moveDirection;
 
         [SerializeField] [Range(0f, 0.5f)] private float _movementHoldTime = 0.2f;
         private float _holdTime = 0f;
