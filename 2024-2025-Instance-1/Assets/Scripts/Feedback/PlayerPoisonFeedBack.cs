@@ -1,7 +1,7 @@
-using System.Collections;
 using Creators;
 using JetBrains.Annotations;
 using Player;
+using System.Collections;
 using TMPro;
 using Traps;
 using UnityEngine;
@@ -113,7 +113,7 @@ public class PlayerPoisonFeedBack : MonoBehaviour
         EventManager.instance.onPoisonedPlayer?.RemoveListener(ActionIsPoisoned);
     }
 
-    private void OnDeath()
+    private void OnDeath(bool deathEffect = false)
     {
         _poisonTrap = null;
         _isPoisoned = false;

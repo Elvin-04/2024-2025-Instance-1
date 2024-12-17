@@ -179,7 +179,7 @@ namespace Player
 
         private void Move()
         {
-            _moveDirection = direction;
+            //_moveDirection = direction;
             Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, _moveDirection);
             var nextCell = _gridManager.GetCell(nextIndex);
 
