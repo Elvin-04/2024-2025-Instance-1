@@ -1,3 +1,4 @@
+using Menu.Level_Selector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,12 +13,12 @@ namespace UI
 
         public void RestartGame()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            LevelSelector.instance.StartLevel(LevelSelector.instance.currentLevel);
         }
 
         public void NextLevel()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            LevelSelector.instance.StartLevel(LevelSelector.instance.currentLevel.nextLevel);
         }
 
         public void MainMenu()

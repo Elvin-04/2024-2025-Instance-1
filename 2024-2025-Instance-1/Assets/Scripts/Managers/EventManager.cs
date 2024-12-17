@@ -37,7 +37,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector3> onPlayerMoved { get; private set; } = new();
     public UnityEvent onEnableInput { get; private set; } = new();
     public UnityEvent onDisableInput { get; private set; } = new();
-    public UnityEvent<float> onScoreUpdated { get; private set; } = new();
+    public UnityEvent<int> onScoreUpdated { get; private set; } = new();
     public UnityEvent<int> OnZoneEffect { get; private set; } = new();
     public UnityEvent StopZoneEffect { get; private set; } = new();
     public UnityEvent<Vector3> onPlayerFinishedMoving { get; private set; } = new();

@@ -8,12 +8,17 @@ namespace Menu.Level_Selector
         private LevelInfo _currentLevel;
         public static LevelSelector instance { get; private set; }
 
+        public LevelInfo currentLevel => _currentLevel;
+
+        private int _currentLevelStars = 0;
+
         private void Awake()
         {
             if (instance == null)
                 instance = this;
             else
                 Destroy(gameObject);
+
             DontDestroyOnLoad(gameObject);
         }
 
@@ -24,15 +29,28 @@ namespace Menu.Level_Selector
 
         public void StartLevel(LevelInfo level)
         {
-            _currentLevel = level;
-            SceneManager.LoadScene(level.levelScene);
+            if (!level)
+            {
+                _currentLevel = null;
+                _currentLevelStars = 0;
+                SceneManager.LoadScene(0);
+            }
 
-            StartCoroutine(Utils.InvokeAfterUnscaled(() => EventManager.instance.onWin.AddListener(OnWin), 1.0f));
+            _currentLevel = level;
+            level.Load();
+
+            StartCoroutine(Utils.InvokeAfterUnscaled(AddStuffToEventManager, 1.0f));
         }
 
         private void OnWin()
         {
-            _currentLevel.MarkComplete();
+            _currentLevel.MarkComplete(_currentLevelStars);
+        }
+
+        private void AddStuffToEventManager()
+        {
+            EventManager.instance.onWin.AddListener(OnWin);
+            EventManager.instance.onScoreUpdated.AddListener(stars => _currentLevelStars = stars);
         }
     }
 }
