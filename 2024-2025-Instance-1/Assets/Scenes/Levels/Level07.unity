@@ -935,6 +935,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -4.0499997
       objectReference: {fileID: 0}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorClosedLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fba71955fc86284badcc4303a08e460, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorOpenedLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: 60ba8b27d08c49c438502dfdb3f6d588, type: 2}
     - target: {fileID: 5191951653006571299, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
       propertyPath: _gridManager
       value: 
