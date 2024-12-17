@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
@@ -7,30 +8,44 @@ namespace Effect
     [RequireComponent(typeof(Light2D))]
     public class FlickeringLight : MonoBehaviour
     {
-        [SerializeField] private float _minIntensity = 0.5f;
-        [SerializeField] private float _maxIntensity = 1.5f;
-        [SerializeField] private float _flickerSpeed = 10f;
-        [SerializeField] private float _randomSpeed = 10f;
-        private Light2D _fireLight;
+        [Header("Flicker Settings")]
+        [Tooltip("Valeur centrale autour de laquelle le flicker oscille.")]
+        [SerializeField] private float _baseValue = 1f;
 
-        private Light2D fireLight
+        [Tooltip("Amplitude maximale du flicker.")]
+        [SerializeField] private float _flickerAmplitude = 0.5f;
+
+        [Tooltip("Vitesse du flicker.")]
+        [SerializeField] private float _flickerSpeed = 1f;
+
+        private float _randomSeed;
+
+        private float _flickerResult;
+
+        private Light2D _light;
+
+        private void Awake()
         {
-            get
-            {
-                if (_fireLight == null)
-                {
-                    _fireLight = GetComponent<Light2D>();
-                }
+            _light = GetComponent<Light2D>();
+        }
 
-                return _fireLight;
-            }
+        private void Start()
+        {
+            // Initialise le seed pour un flicker unique
+            _randomSeed = Random.Range(0f, 1000f);
         }
 
         private void Update()
         {
-            fireLight.pointLightOuterRadius =
-                Mathf.Lerp(_minIntensity, _maxIntensity, Mathf.PingPong(Time.time * _flickerSpeed, 1)) +
-                Random.Range(-1f, 1f) * _randomSpeed;
+            // Calcul de flicker avec du Perlin Noise pour un effet plus naturel
+            float noiseValue = Mathf.PerlinNoise(_randomSeed, Time.time * _flickerSpeed);
+
+            // Remap le bruit (0 à 1) vers (-1 à 1) pour osciller autour de la valeur de base
+            float flickerOffset = (noiseValue * 2f - 1f) * _flickerAmplitude;
+
+            // Applique l'offset à la valeur de base
+            _flickerResult = _baseValue + flickerOffset;
+            _light.intensity = _flickerResult;
         }
     }
 }

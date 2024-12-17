@@ -26,6 +26,7 @@ namespace Player
         //Components
         private Transform _transform;
         public PlayerDirection currentDirection { get; private set; }
+        public Vector2 moveDirection => _moveDirection;
 
         private void Awake()
         {
