@@ -23,7 +23,7 @@ namespace UI
 
         public void MainMenu()
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("Ben Test main menu");
         }
     }
 }

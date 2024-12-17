@@ -20,10 +20,6 @@ namespace Menu.Level_Selector
                 Destroy(gameObject);
 
             DontDestroyOnLoad(gameObject);
-        }
-
-        private void Start()
-        {
             LevelInfo.completedLevels.Clear();
         }
 
