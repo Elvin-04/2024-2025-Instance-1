@@ -349,6 +349,38 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 7.06
       objectReference: {fileID: 0}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _doorOpen
+      value: 
+      objectReference: {fileID: 11400000, guid: af5f64e5816715e41bdb76c4dab6ee3b, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _doorClose
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c25a4752ba478f4aa001a6d12ba07bd, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _platePress
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a53f206bb8445949845058d834d9fa7, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _plateRelease
+      value: 
+      objectReference: {fileID: 11400000, guid: 817c9fa0d1240a447a70a02018f26ff0, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorClosedLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: 5becb1c2696f4574c911b7e53f35fecd, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorOpenedLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: 6afbdb050d4a68e43874571fb2586bff, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorClosedRight
+      value: 
+      objectReference: {fileID: 11400000, guid: a92fbef9788e56c46bffcc02cc932b0e, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorOpenedRight
+      value: 
+      objectReference: {fileID: 11400000, guid: 177908eb48e330a45bafe4d4b2a33e7c, type: 2}
     - target: {fileID: 5191951653006571299, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
       propertyPath: _gridManager
       value: 
@@ -357,6 +389,10 @@ PrefabInstance:
       propertyPath: _pillarRight
       value: 
       objectReference: {fileID: 11400000, guid: a92fbef9788e56c46bffcc02cc932b0e, type: 2}
+    - target: {fileID: 5191951653006571299, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _plateToSpawn
+      value: 
+      objectReference: {fileID: 6610866179624033917, guid: 4b45cb2c6c3fdf74a86553be7e88cfc6, type: 3}
     - target: {fileID: 5421966097212900045, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
       propertyPath: m_Name
       value: CreateDoorButtonSideY (1)
@@ -943,26 +979,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1080367878510791621, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1080367878510791621, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2343463818277865594, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 2343463818277865594, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 5191951653006571299, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
-      propertyPath: _pillarLeft
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorClosedLeft
       value: 
       objectReference: {fileID: 11400000, guid: 3fba71955fc86284badcc4303a08e460, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorOpenedLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: 60ba8b27d08c49c438502dfdb3f6d588, type: 2}
     - target: {fileID: 5191951653006571299, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
       propertyPath: _gridManager
       value: 
@@ -1010,14 +1034,6 @@ PrefabInstance:
     - target: {fileID: 6072595811584577028, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6908411269916964331, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 6908411269916964331, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -6.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
