@@ -6457,6 +6457,30 @@ PrefabInstance:
       propertyPath: 'spawnPoints.Array.data[1]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxSteps>k__BackingField.<firstThreshold>k__BackingField
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxSteps>k__BackingField.<thirdThreshold>k__BackingField
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxDeaths>k__BackingField.<firstThreshold>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxDeaths>k__BackingField.<thirdThreshold>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxSteps>k__BackingField.<secondThreshold>k__BackingField
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxDeaths>k__BackingField.<secondThreshold>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
