@@ -72,6 +72,7 @@ namespace Player
 
         private void OnDeath(GameObject player)
         {
+            EventManager.instance.onDisableInput.Invoke();
             if (player != null) StartCoroutine(nameof(Respawn), player);
         }
 
@@ -82,6 +83,7 @@ namespace Player
             player.transform.position = GetCellPos(_levelManager.spawnPoint);
             player.SetActive(true);
             EventManager.instance.onRespawn?.Invoke();
+            EventManager.instance.onEnableInput.Invoke();
             //EventManager.instance.onPlayerMoved?.Invoke(player.transform.position);
         }
     }
