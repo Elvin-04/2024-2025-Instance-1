@@ -5,106 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5dae3c8-57b4-4f13-9a51-cbff5b87e13f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Animations/Rune/ExplosionRuneDisableRadius.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Animations/Rune/ExplosionRuneDisableRadius.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/fin_demur_avek_flech 1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/fin_demur_avek_flech 1.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/fin_demur_avek_flech 2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/fin_demur_avek_flech 2.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/fin_demur_otre_sens_flech 1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/fin_demur_otre_sens_flech 1.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/fin_demur_otre_sens_flech 2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/fin_demur_otre_sens_flech 2.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/mur_flech 1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/mur_flech 1.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/mur_flech 2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/ArrowTraps/mur_flech 2.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/UI.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/UI/ui_reset.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/UI/ui_reset.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/blok_porte_en_L.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/blok_porte_en_L.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/mur_pa_en_pers et skelete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/mur_pa_en_pers et skelete.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/porte_mur_du_dsou.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/porte_mur_du_dsou.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/porte_mur_du_dsu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/porte_mur_du_dsu.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/fin_demur_otre_sens 1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/fin_demur_otre_sens 1.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/fin_demur_otre_sens_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/fin_demur_otre_sens_1.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/mur_fin_plu_sombre.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/mur_fin_plu_sombre.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/mur_fin_plu_sombreevlgfbh njk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/mur_fin_plu_sombreevlgfbh njk.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/piegeaflechedemurbottom.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/piegeaflechedemurbottom.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/porte_mur_du_dsou.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/porte_mur_du_dsou.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/porte_mur_du_dsu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/porte_mur_du_dsu.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Doors.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Doors/bot.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Doors/bot.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Doors/top.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Doors/top.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Walls/WallCell_14.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Walls/WallCell_14.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Walls/WallCell_15.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Walls/WallCell_15.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Walls/WallCell_16.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Walls/WallCell_16.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Walls/WallCell_17.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Walls/WallCell_17.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Walls/WallWithSkull.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Assets/Tiles/Walls/WallWithSkull.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Traps/Arrow Trap Wall Bottom.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Traps/Arrow Trap Wall Bottom.prefab.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2024-2025-Instance-1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024-2025-Instance-1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Feedback/Zone/AnimZone.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Feedback/Zone/AnimZone.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/None.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Rune/RuneDisableAura.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/None.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Rune/RuneDisableAura.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/blokporte_vertical_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/blokporte_vertical_2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/langledemur 1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/langledemur 1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/langledemur.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/langledemur.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/langledumurduba 1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/langledumurduba 1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/langledumurduba.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/langledumurduba.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/angleduba_san_pers.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/angleduba_san_pers.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/angleduba_san_pers_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/angleduba_san_pers_1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/mur_pa_en_pers 1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/mur_pa_en_pers 1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/mur_pa_en_pers 2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/mur_pa_en_pers 2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/mur_pa_en_pers.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/new/mur_pa_en_pers.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/sol_duba.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/Walls/sol_duba.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/blok.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/blok.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_a_pousse.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_a_pousse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_a_pousse.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_a_pousse.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_porte_drouate.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_porte_drouate.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_porte_geuche.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_porte_geuche.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_porte_kasse.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_porte_kasse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_porte_verticale.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_porte_verticale.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_san_pano.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/blok_san_pano.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/blokporte_vertical_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/blokporte_vertical_2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/portedanlmur - Copie.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/portedanlmur - Copie.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets/New Folder/portedanlmur.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets/New Folder/portedanlmur.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Palettes/Ground Tiles.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Palettes/Ground Tiles.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Blocks/blok.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Blocks/blok.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Managers/Managers.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Managers/Managers.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DevroomDoriann.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DevroomDoriann.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DevroomEnzo.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DevroomEnzo.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level01.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level01.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level02.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level02.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level03.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level03.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level07.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level07.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Blocks/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Blocks/Block.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Level07 TestPoison.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Level07 TestPoison.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Creators/PoisonTrapCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Creators/PoisonTrapCreator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DeathSystem/DeathManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DeathSystem/DeathManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Debugs/DebugObjectOnCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Debugs/DebugObjectOnCell.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid/Cell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grid/Cell.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid/CellContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grid/CellContainer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Feedback/PlayerPoisonFeedBack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Feedback/PlayerPoisonFeedBack.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grid/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grid/GridManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/LevelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/LevelManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/EventManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Traps/Poison/PoisonTrap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Traps/Poison/PoisonTrap.cs" afterDir="false" />
     </list>
@@ -172,7 +79,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.5015625&quot;,
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging feat-Poisonfeedback&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat-Poisonfeedback&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,

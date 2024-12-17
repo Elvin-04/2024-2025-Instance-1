@@ -8,6 +8,7 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
+        private readonly List<IInteractable> _interactablesInFront = new();
         private Animator _animator;
         private Tween _currentMoveAnim;
 
@@ -15,8 +16,6 @@ namespace Player
 
         //Properties
         private GridManager _gridManager;
-
-        private readonly List<IInteractable> _interactablesInFront = new();
         private List<IInteractable> _interactablesUnder = new();
         private Vector3 _interactablesUnderPosition;
 
@@ -93,7 +92,6 @@ namespace Player
             _gridManager.GetObjectsOnCell(_transform.position)
                 .Select(cellObject => cellObject as IInteractable).Where(interactable => interactable != null)
                 .ToList();
-            */
 
             List<IInteractable> interacts = new();
             foreach (var objectOnCell in _gridManager.GetObjectsOnCell(_transform.position))

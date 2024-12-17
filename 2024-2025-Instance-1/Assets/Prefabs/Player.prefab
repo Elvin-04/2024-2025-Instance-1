@@ -225,7 +225,6 @@ MonoBehaviour:
   _poisonTextColor: {r: 1, g: 0, b: 0.4211607, a: 1}
   _frequency: 8
   _amplitude: 0.1
-  _durationFollowTarget: 0.31
 --- !u!1 &2833182833582293986
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +421,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_TargetDisplay: 0
 --- !u!114 &5840963074275090000
 MonoBehaviour:
