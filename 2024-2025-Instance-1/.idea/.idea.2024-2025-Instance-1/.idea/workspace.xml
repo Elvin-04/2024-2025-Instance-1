@@ -6,10 +6,41 @@
   <component name="ChangeListManager">
     <list default="true" id="c5dae3c8-57b4-4f13-9a51-cbff5b87e13f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2024-2025-Instance-1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024-2025-Instance-1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_2.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_3.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_4.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_4.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_5.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_5.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_6.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Movement/Player/Sand/MovingOnACorpse - Part_6.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/ActivateSpike - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/ActivateSpike - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/ActivateSpike - Part_2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/ActivateSpike - Part_2.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/ActivateSpike - Part_3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/ActivateSpike - Part_3.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/ActivateSpike - Part_4.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/ActivateSpike - Part_4.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/ActivateSpike - Part_5.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/ActivateSpike - Part_5.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Audio/AS_SFX.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Audio/AS_SFX.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Managers/AudioManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Managers/AudioManager.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Level07 TestPoison.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Level07 TestPoison.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Creators/CreateSpikeTrap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Creators/CreateSpikeTrap.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Door/ExplodeDoor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Door/ExplodeDoor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Audio/AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Audio/AudioManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/EventManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runes/Rune.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runes/Rune.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Traps/Arrow Trap/Arrow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Traps/Arrow Trap/Arrow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Traps/Arrow Trap/ArrowTrap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Traps/Arrow Trap/ArrowTrap.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Traps/PressurePlate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Traps/PressurePlate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Traps/Spike.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Traps/Spike.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,25 +99,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "XThreadsFramesViewSplitterKey": "0.5015625",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "fix-Sound",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "rider.code.cleanup.on.save": "true",
-    "rider.code.cleanup.on.save.profile": "Dodo",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.5011442&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fix-AudioLevel&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;rider.code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;rider.code.cleanup.on.save.profile&quot;: &quot;Dodo&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CodeLensConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../Build/TestMVP\2024-2025-Instance-1.exe" />
@@ -125,15 +156,13 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="10216">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="10216" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -181,25 +210,6 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Managers/Audio/AudioManager.cs</url>
-          <line>212</line>
-          <properties documentPath="C:\Users\Dodo\Documents\GitHub\2024-2025-Instance-1\2024-2025-Instance-1\Assets\Scripts\Managers\Audio\AudioManager.cs" containingFunctionPresentation="Method 'PlaySfx'">
-            <startOffsets>
-              <option value="8103" />
-            </startOffsets>
-            <endOffsets>
-              <option value="8156" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

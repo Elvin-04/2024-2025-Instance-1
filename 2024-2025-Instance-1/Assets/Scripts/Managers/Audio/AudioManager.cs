@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Data;
 using Managers.Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,36 +11,25 @@ namespace Managers.Audio
     {
         private static AudioManager instance;
 
-        [Header("Music")]
+        [Header("Music Settings")]
         [SerializeField] private Transform _musicParent;
 
         [SerializeField] private GameObject _prefabMusicLink;
-        [SerializeField] private List<AudioClipEntry> _musicPlaylistEntries = new();
+        [SerializeField] private List<AudioClipEntry> _musicEntries = new();
 
-        [Space(25)]
-        [Header("Sfx")]
-        [SerializeField] private float _maxSpacialBlend = 0.95f;
-
+        [Space(30)]
+        [Header("SFX Settings")]
         [SerializeField] private Transform _sfxParent;
 
         [SerializeField] private GameObject _prefabSfxLink;
-        [SerializeField] private List<AudioClipEntry> _sfxPlaylistEntries = new();
-        private Dictionary<SoundsName, List<AudioClip>> _musicPlayInlist = new();
-        private ComponentPoolAudio<AudioSource> _musicPool;
+        [SerializeField] private List<AudioClipEntry> _sfxEntries = new();
 
-        private Dictionary<SoundsName, List<AudioClip>> _sfxPlayInlist = new();
-        private ComponentPoolAudio<AudioSource> _sfxPool;
-
-        private UnityEngine.Camera cam;
-
+        private bool _isSfxPaused;
+        private AudioSource _musicAudioSource;
+        private AudioSource _sfxAudioSource;
 
         private void Awake()
         {
-            cam = Camera.main;
-            SceneManager.sceneLoaded += (_, _) =>
-            {
-                cam = Camera.main;
-            };
             if (!instance)
             {
                 instance = this;
@@ -55,24 +43,28 @@ namespace Managers.Audio
 
         private void Start()
         {
-            SceneManager.sceneLoaded += (_, _) =>
-            {
-                InitPools();
-                InitListeners();
-            };
-            InitPools();
+            InitPrefabsLink();
             InitListeners();
+            SceneManager.sceneLoaded += (_, _) => { InitListeners(); };
         }
 
-        private void InitPools()
+        private void Update()
         {
-            // Création avec le système de pool de :
-            _musicPool = new ComponentPoolAudio<AudioSource>(_prefabMusicLink, _musicParent, 5); // Pré-allocation de 5 AudioSource pour la musique
-            _sfxPool = new ComponentPoolAudio<AudioSource>(_prefabSfxLink, _sfxParent, 10); // Pré-allocation de 10 AudioSource pour les SFX
+            // Teste si l'on appuie sur S pour mettre en pause ou reprendre les effets sonores
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                if (_isSfxPaused)
+                    UnpauseSfx();
+                else
+                    PauseSfx();
+            }
+        }
 
-            // Convertir les listes en dictionnaires
-            _musicPlayInlist = ConvertListToDictionary(_musicPlaylistEntries);
-            _sfxPlayInlist = ConvertListToDictionary(_sfxPlaylistEntries);
+
+        private void InitPrefabsLink()
+        {
+            _musicAudioSource = Instantiate(_prefabMusicLink, _musicParent).GetComponent<AudioSource>();
+            _sfxAudioSource = Instantiate(_prefabSfxLink, _sfxParent).GetComponent<AudioSource>();
         }
 
         /// <summary>
@@ -82,22 +74,122 @@ namespace Managers.Audio
         {
             // Music
             EventManager.instance.onPlayMusic.AddListener(PlayMusic);
-            EventManager.instance.onPlayAllMusic.AddListener(PlayAllMusic);
             EventManager.instance.onPauseMusic.AddListener(PauseMusic);
-            EventManager.instance.onPauseAllMusic.AddListener(PauseAllMusic);
             EventManager.instance.onStopMusic.AddListener(StopMusic);
-            EventManager.instance.onStopAllMusic.AddListener(StopAllMusic);
 
             // Sfx
             EventManager.instance.onPlaySfx.AddListener(PlaySfx);
-            EventManager.instance.onPlayAllSfx.AddListener(PlayAllSfx);
             EventManager.instance.onPauseSfx.AddListener(PauseSfx);
-            EventManager.instance.onPauseAllSfx.AddListener(PauseAllSfx);
             EventManager.instance.onStopSfx.AddListener(StopSfx);
-            EventManager.instance.onStopAllSfx.AddListener(StopAllSfx);
         }
 
-        /// <summary>
+        private AudioClip FindClip(List<AudioClipEntry> entries, SoundsName name)
+        {
+            AudioClipEntry entry = entries.Find(e => e.key == name);
+            if (entry != null && entry.clips.Count > 0) return entry.clips[Random.Range(0, entry.clips.Count)];
+            return null;
+        }
+
+        #region Music
+
+        private void PlayMusic(SoundsName name)
+        {
+            AudioClip clip = FindClip(_musicEntries, name);
+            if (!clip)
+            {
+                Debug.LogWarning($"No music clip found for {name}");
+                return;
+            }
+
+            _musicAudioSource.clip = clip;
+            _musicAudioSource.Play();
+        }
+
+        private void PauseMusic()
+        {
+            if (_musicAudioSource.isPlaying) _musicAudioSource.Pause();
+        }
+
+        private void UnpauseMusic()
+        {
+            _musicAudioSource.UnPause();
+        }
+
+        private void StopMusic()
+        {
+            if (!_musicAudioSource.isPlaying) return;
+            _musicAudioSource.Stop();
+        }
+
+        #endregion
+
+        #region SFX
+
+        private void PlaySfx(SoundsName name)
+        {
+            AudioClip clip = FindClip(_sfxEntries, name);
+            if (!clip)
+            {
+                Debug.LogWarning($"No SFX clip found for {name}");
+                return;
+            }
+
+            // Utilise PlayOneShot pour jouer sans écraser le son précédent
+            _sfxAudioSource.PlayOneShot(clip);
+        }
+
+        private void PauseSfx()
+        {
+            if (!_sfxAudioSource.isPlaying) return;
+            _sfxAudioSource.Pause();
+            _isSfxPaused = true;
+        }
+
+        private void UnpauseSfx()
+        {
+            _sfxAudioSource.UnPause();
+            _isSfxPaused = false; // Marquer les SFX comme non-pause
+        }
+
+        private void StopSfx()
+        {
+            if (!_sfxAudioSource.isPlaying) return;
+            _sfxAudioSource.Stop();
+        }
+
+        #endregion
+    }
+}
+
+
+[Serializable]
+public class AudioClipEntry
+{
+    public SoundsName key;
+    public List<AudioClip> clips = new();
+}
+
+
+/*      //[SerializeField] private float _maxSpacialBlend = 0.95f;
+        //private Dictionary<SoundsName, List<AudioClip>> _musicPlayInlist = new();
+        //private Dictionary<SoundsName, List<AudioClip>> _sfxPlayInlist = new();
+
+        //private ComponentPoolAudio<AudioSource> _musicPool;
+        //private ComponentPoolAudio<AudioSource> _sfxPool;
+        //private Camera cam;
+
+         private void InitPools()
+
+        {
+            // Création avec le système de pool de :
+            _musicPool = new ComponentPoolAudio<AudioSource>(_prefabMusicLink, _musicParent, 5); // Pré-allocation de 5 AudioSource pour la musique
+            _sfxPool = new ComponentPoolAudio<AudioSource>(_prefabSfxLink, _sfxParent, 10); // Pré-allocation de 10 AudioSource pour les SFX
+
+            // Convertir les listes en dictionnaires
+            _musicPlayInlist = ConvertListToDictionary(_musicPlaylistEntries);
+            _sfxPlayInlist = ConvertListToDictionary(_sfxPlaylistEntries);
+        }
+                /// <summary>
         ///     Convert a list of AudioClipEntry into a dictionary where the key is the SoundsName and the value is the list of
         ///     AudioClips associated with this SoundsName
         /// </summary>
@@ -105,20 +197,14 @@ namespace Managers.Audio
         /// <returns>The converted dictionary</returns>
         private Dictionary<SoundsName, List<AudioClip>> ConvertListToDictionary(List<AudioClipEntry> entries)
         {
-            // Create a new dictionary to store the result
             Dictionary<SoundsName, List<AudioClip>> dictionary = new();
 
-            // Iterate over the list of entries
-            foreach (var entry in entries)
-                // If the dictionary does not contain the key, add it
+            foreach (AudioClipEntry entry in entries)
                 if (!dictionary.ContainsKey(entry.key))
                     dictionary.Add(entry.key, entry.clips);
 
-            // Return the converted dictionary
             return dictionary;
         }
-
-
         #region Music
 
         /// <summary>
@@ -127,7 +213,7 @@ namespace Managers.Audio
         /// <param name="name"></param>
         public void PlayMusic(SoundsName name, Transform newTransformToPlaySound)
         {
-            if (!_musicPlayInlist.TryGetValue(name, out var clips))
+            if (!_musicPlayInlist.TryGetValue(name, out List<AudioClip> clips))
             {
                 Debug.LogWarning($"No Music track named {name} found in the playlist.");
                 return;
@@ -139,13 +225,13 @@ namespace Managers.Audio
                 return;
             }
 
-            var clip = clips[Random.Range(0, clips.Count)]; // Sélection aléatoire d'un clip
-            var musicSource = newTransformToPlaySound == null ? _musicPool.Get() : _musicPool.Get(newTransformToPlaySound);
+            AudioClip clip = clips[Random.Range(0, clips.Count)]; // Sélection aléatoire d'un clip
+            AudioSource musicSource = newTransformToPlaySound == null ? _musicPool.Get() : _musicPool.Get(newTransformToPlaySound);
 
             // Si le pool est vide, créer un nouvel objet AudioSource
             if (musicSource == null)
             {
-                var musicObject = newTransformToPlaySound == null ? Instantiate(_prefabMusicLink, _musicParent) : Instantiate(_prefabMusicLink, newTransformToPlaySound.position, Quaternion.identity, _musicParent);
+                GameObject musicObject = newTransformToPlaySound == null ? Instantiate(_prefabMusicLink, _musicParent) : Instantiate(_prefabMusicLink, newTransformToPlaySound.position, Quaternion.identity, _musicParent);
                 ;
                 musicSource = musicObject.GetComponent<AudioSource>();
             }
@@ -155,7 +241,7 @@ namespace Managers.Audio
             musicSource.Play();
 
             // Initialiser le script AudioSourceRelease pour libérer l'objet après la lecture
-            var releaseScript = musicSource.gameObject.GetComponent<AudioSourceRelease>() ?? musicSource.gameObject.AddComponent<AudioSourceRelease>();
+            AudioSourceRelease releaseScript = musicSource.gameObject.GetComponent<AudioSourceRelease>() ?? musicSource.gameObject.AddComponent<AudioSourceRelease>();
             releaseScript.Initialize(musicSource, _musicPool);
             Debug.Log($"Playing music: '{clip.name}' from track '{name}'");
         }
@@ -163,12 +249,12 @@ namespace Managers.Audio
         private void PlayAllMusic()
         {
             if (_sfxPlayInlist.Count == 0) return;
-            foreach (var musicSource in _musicPool.GetAll()) musicSource.Play();
+            foreach (AudioSource musicSource in _musicPool.GetAll()) musicSource.Play();
         }
 
         private void PauseMusic(SoundsName name)
         {
-            foreach (var musicSource in _musicPool.GetAll())
+            foreach (AudioSource musicSource in _musicPool.GetAll())
             {
                 if (musicSource.clip.name != name.ToString()) continue;
                 musicSource.Pause();
@@ -177,12 +263,12 @@ namespace Managers.Audio
 
         private void PauseAllMusic()
         {
-            foreach (var musicSource in _musicPool.GetAll()) musicSource.Pause();
+            foreach (AudioSource musicSource in _musicPool.GetAll()) musicSource.Pause();
         }
 
         private void StopMusic(SoundsName name)
         {
-            foreach (var musicSource in _musicPool.GetAll())
+            foreach (AudioSource musicSource in _musicPool.GetAll())
             {
                 if (musicSource.clip.name != name.ToString()) continue;
 
@@ -193,7 +279,7 @@ namespace Managers.Audio
 
         private void StopAllMusic()
         {
-            foreach (var musicSource in _musicPool.GetAll())
+            foreach (AudioSource musicSource in _musicPool.GetAll())
             {
                 musicSource.Stop();
                 _musicPool.Release(musicSource.gameObject);
@@ -215,7 +301,7 @@ namespace Managers.Audio
         /// <param name="newTransformToPlaySound">Transform à utiliser pour instancier l'objet AudioSource</param>
         public void PlaySfx(SoundsName name, Transform newTransformToPlaySound)
         {
-            if (!_sfxPlayInlist.TryGetValue(name, out var clips))
+            if (!_sfxPlayInlist.TryGetValue(name, out List<AudioClip> clips))
             {
                 Debug.LogWarning($"No SFX track named {name} found in the playlist.");
                 return;
@@ -232,13 +318,13 @@ namespace Managers.Audio
                 //Debug.LogWarning($"SFX {name} will not be played because {newTransformToPlaySound.name} is out of camera view.");
                 return;
 
-            var clip = clips[Random.Range(0, clips.Count)]; // Sélection aléatoire d'un clip
-            var sfxSource = newTransformToPlaySound == null ? _sfxPool.Get() : _sfxPool.Get(newTransformToPlaySound);
+            AudioClip clip = clips[Random.Range(0, clips.Count)]; // Sélection aléatoire d'un clip
+            AudioSource sfxSource = newTransformToPlaySound == null ? _sfxPool.Get() : _sfxPool.Get(newTransformToPlaySound);
 
             // Si le pool est vide, créer un nouvel objet AudioSource
             if (sfxSource == null)
             {
-                var sfxObject = newTransformToPlaySound == null ? Instantiate(_prefabSfxLink, _sfxParent) : Instantiate(_prefabSfxLink, newTransformToPlaySound.position, Quaternion.identity, _sfxParent);
+                GameObject sfxObject = newTransformToPlaySound == null ? Instantiate(_prefabSfxLink, _sfxParent) : Instantiate(_prefabSfxLink, newTransformToPlaySound.position, Quaternion.identity, _sfxParent);
                 sfxSource = sfxObject.GetComponent<AudioSource>();
             }
 
@@ -249,12 +335,12 @@ namespace Managers.Audio
             sfxSource.Play();
 
             // Initialiser le script AudioSourceRelease pour libérer l'objet après la lecture
-            var releaseScript = sfxSource.gameObject.GetComponent<AudioSourceRelease>() ?? sfxSource.gameObject.AddComponent<AudioSourceRelease>();
+            AudioSourceRelease releaseScript = sfxSource.gameObject.GetComponent<AudioSourceRelease>() ?? sfxSource.gameObject.AddComponent<AudioSourceRelease>();
             releaseScript.Initialize(sfxSource, _sfxPool);
             //Debug.Log($"Playing sfx: '{clip.name}' from track '{name}' at position {newTransformToPlaySound.position}");
         }
 
-        private bool IsInCameraView(Vector3 position, UnityEngine.Camera cam)
+        private bool IsInCameraView(Vector3 position, Camera cam)
         {
             Vector3 viewportPoint = cam.WorldToViewportPoint(position);
             return viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1;
@@ -264,12 +350,12 @@ namespace Managers.Audio
         private void PlayAllSfx()
         {
             if (_sfxPlayInlist.Count == 0) return;
-            foreach (var sfxSource in _sfxPool.GetAll()) sfxSource.Play();
+            foreach (AudioSource sfxSource in _sfxPool.GetAll()) sfxSource.Play();
         }
 
         private void PauseSfx(SoundsName name)
         {
-            foreach (var sfxSource in _sfxPool.GetAll())
+            foreach (AudioSource sfxSource in _sfxPool.GetAll())
             {
                 if (sfxSource.clip.name != name.ToString()) continue;
                 sfxSource.Pause();
@@ -278,23 +364,31 @@ namespace Managers.Audio
 
         private void PauseAllSfx()
         {
-            foreach (var sfxSource in _sfxPool.GetAll()) sfxSource.Pause();
+            foreach (AudioSource sfxSource in _sfxPool.GetAll()) sfxSource.Pause();
         }
+
 
         private void StopSfx(SoundsName name)
         {
-            foreach (var sfxSource in _sfxPool.GetAll())
+            if (_sfxPlayInlist.TryGetValue(name, out List<AudioClip> sfxList))
             {
-                if (sfxSource.clip.name != name.ToString()) continue;
+                foreach (AudioClip audioClip in sfxList)
+                {
+                    AudioSource sfxSource = GetAudioSourceFromClip(audioClip);
+                    if (!sfxSource) continue;
+                    sfxSource.Stop();
+                    _sfxPool.Release(sfxSource.gameObject);
+                }
 
-                sfxSource.Stop();
-                _sfxPool.Release(sfxSource.gameObject);
+                // Optionnel : Nettoie la liste après avoir tout arrêté
+                Debug.LogWarning("_sfxPlayInlist.count : " + _sfxPlayInlist.Count);
+                //_sfxPlayInlist[name].Clear();
             }
         }
 
         private void StopAllSfx()
         {
-            foreach (var sfxSource in _sfxPool.GetAll())
+            foreach (AudioSource sfxSource in _sfxPool.GetAll())
             {
                 sfxSource.Stop();
                 _sfxPool.Release(sfxSource.gameObject);
@@ -302,13 +396,13 @@ namespace Managers.Audio
         }
 
         #endregion
-    }
-}
 
-
-[Serializable]
-public class AudioClipEntry
-{
-    public SoundsName key;
-    public List<AudioClip> clips = new();
-}
+        /*private AudioSource GetAudioSourceFromClip(AudioClip clip)
+        {
+            foreach (KeyValuePair<SoundsName, List<AudioClip>> source in _sfxPlayInlist.Key)
+            {
+                if (source.Key .clip == clip)
+                    return source;
+            }
+            return null;
+        }#1#*/
