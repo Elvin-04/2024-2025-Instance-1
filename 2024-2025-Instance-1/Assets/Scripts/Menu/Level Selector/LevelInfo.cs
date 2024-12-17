@@ -6,7 +6,7 @@ namespace Menu.Level_Selector
 {
     public class LevelInfo : MonoBehaviour
     {
-        public static HashSet<string> completedLevels = new();
+        public static Dictionary<string, int> completedLevels = new();
 
         //TODO: A refaire avec des ids
         public string levelName = "LEVEL NAME";
@@ -20,12 +20,12 @@ namespace Menu.Level_Selector
             if (previousLevel == null)
                 return true;
 
-            return completedLevels.Contains(previousLevel.levelScene);
+            return completedLevels.ContainsKey(previousLevel.levelScene);
         }
 
-        public void MarkComplete()
+        public void MarkComplete(int stars)
         {
-            completedLevels.Add(levelScene);
+            completedLevels[levelScene] = stars;
         }
 
         public void Load()
