@@ -92,10 +92,31 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 3ba9c1f4ba24d344d8bdf53b7b849969, type: 3}
   - key: 8
     clips:
-    - {fileID: 8300000, guid: c7dc9cc7c2976b74598e7b9922bcf5a0, type: 3}
+    - {fileID: 8300000, guid: 3ae9b62d663ed534b958cf70ab7f5132, type: 3}
   - key: 2
     clips:
-    - {fileID: 8300000, guid: 60e0670e7b6bfb442a0626a5800619ee, type: 3}
+    - {fileID: 8300000, guid: 72451083d9ff31d4ca01e656a36f5c48, type: 3}
+  - key: 12
+    clips:
+    - {fileID: 8300000, guid: 810b252569f1de045a37534c16088459, type: 3}
+  - key: 13
+    clips:
+    - {fileID: 8300000, guid: 8d0ef0aaa32d3c64596099fcd960e4da, type: 3}
+  - key: 10
+    clips:
+    - {fileID: 8300000, guid: 31e79977b37075646b77bcacf8d07e18, type: 3}
+  - key: 11
+    clips:
+    - {fileID: 8300000, guid: 5f3d716f80cd0a64f8a20d95e818d6c8, type: 3}
+  - key: 9
+    clips:
+    - {fileID: 8300000, guid: 62e11f5692aa7e8459598938199d1ccf, type: 3}
+  - key: 15
+    clips:
+    - {fileID: 8300000, guid: a336cc5a10a0ff94586f191aab25cb6b, type: 3}
+  - key: 16
+    clips:
+    - {fileID: 8300000, guid: 1458835a130541042af4a510cb5c5d4b, type: 3}
 --- !u!1 &8900674179908919303
 GameObject:
   m_ObjectHideFlags: 0
