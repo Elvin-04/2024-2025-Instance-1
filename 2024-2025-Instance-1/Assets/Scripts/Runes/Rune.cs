@@ -1,5 +1,6 @@
 using System;
 using Grid;
+using Managers.Audio;
 using UnityEngine;
 
 namespace Runes
@@ -24,6 +25,7 @@ namespace Runes
             onTake?.Invoke();
             EventManager.instance.canInteract.Invoke(false, "");
             EventManager.instance.addRuneToInventory.Invoke(this);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.Collectible, null);
         }
 
         public void StopInteract()

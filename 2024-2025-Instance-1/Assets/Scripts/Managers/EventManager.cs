@@ -1,4 +1,5 @@
 using Grid;
+using Managers.Audio;
 using Runes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -43,6 +44,22 @@ public class EventManager : MonoBehaviour
     public UnityEvent onRuneDropped { get; private set; } = new();
     public UnityEvent<(int, int)> onCellChanged { get; private set; } = new();
     public UnityEvent onPoisonedPlayer { get; private set; } = new();
+
+    // Audio
+    public UnityEvent<SoundsName, Transform> onPlayMusic { get; private set; } = new();
+    public UnityEvent onPlayAllMusic { get; private set; } = new();
+    public UnityEvent<SoundsName> onPauseMusic { get; private set; } = new();
+    public UnityEvent onPauseAllMusic { get; private set; } = new();
+    public UnityEvent<SoundsName> onStopMusic { get; private set; } = new();
+    public UnityEvent onStopAllMusic { get; private set; } = new();
+
+    public UnityEvent<SoundsName, Transform> onPlaySfx { get; private set; } = new();
+    public UnityEvent onPlayAllSfx { get; private set; } = new();
+    public UnityEvent<SoundsName> onPauseSfx { get; private set; } = new();
+    public UnityEvent onPauseAllSfx { get; private set; } = new();
+    public UnityEvent<SoundsName> onStopSfx { get; private set; } = new();
+    public UnityEvent onStopAllSfx { get; private set; } = new();
+
 
     private void Awake()
     {

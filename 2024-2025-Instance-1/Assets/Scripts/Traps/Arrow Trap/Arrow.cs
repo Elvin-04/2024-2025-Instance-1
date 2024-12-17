@@ -1,6 +1,7 @@
 using System.Linq;
 using DG.Tweening;
 using Grid;
+using Managers.Audio;
 using Player;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ namespace Traps.Arrow_Trap
 
         public void Interact()
         {
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.DeathByArrow, null);
             EventManager.instance.onDeath?.Invoke(true);
         }
 
@@ -62,7 +64,7 @@ namespace Traps.Arrow_Trap
 
         public void UpdateClock()
         {
-            Vector2Int cellIndex = _gridManager.GetCellIndex(_transform.position);
+            var cellIndex = _gridManager.GetCellIndex(_transform.position);
 
             direction = directionEnum switch
             {
@@ -73,7 +75,7 @@ namespace Traps.Arrow_Trap
                 _ => Vector3.zero
             };
 
-            Vector2Int nextIndex = _gridManager.GetNextIndex(cellIndex, direction);
+            var nextIndex = _gridManager.GetNextIndex(cellIndex, direction);
 
             if (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any() ||
                 (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(cellIndex)).OfType<ICollisionObject>().Any() &&
@@ -81,6 +83,7 @@ namespace Traps.Arrow_Trap
             {
                 EventManager.instance.updateClock.RemoveListener(UpdateClock);
                 _moveTween?.Kill();
+                EventManager.instance.onPlaySfx?.Invoke(SoundsName.ImpactArrowWithWall, transform);
                 Destroy(gameObject);
                 _gridManager.RemoveObjectOnCell(cellIndex, this);
                 return;
