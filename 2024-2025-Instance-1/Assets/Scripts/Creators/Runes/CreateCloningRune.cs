@@ -7,6 +7,8 @@ namespace Creators.Runes
 {
     public class CreateCloningRune : CreateRune
     {
+        [SerializeField] private Transform _cloneSpawnPositon;
+
         [SerializeField] private Transform[] _lineEnds = new Transform[2];
         [SerializeField] private PlayerManager _playerManager;
         private CloningRune spawnedCloningRune => _spawnedRune as CloningRune;
@@ -40,7 +42,7 @@ namespace Creators.Runes
         protected override void SetupObjectsOnCell()
         {
             base.SetupObjectsOnCell();
-            spawnedCloningRune.SetupCloningRune(_lineEnds[0].position, _lineEnds[1].position, _playerManager);
+            spawnedCloningRune.SetupCloningRune(_lineEnds[0].position, _lineEnds[1].position, _playerManager, _cloneSpawnPositon);
         }
     }
 }
