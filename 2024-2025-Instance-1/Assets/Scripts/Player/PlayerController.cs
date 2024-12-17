@@ -51,7 +51,11 @@ namespace Player
             EventManager.instance.onInteract?.AddListener(Interact);
             EventManager.instance.onDeath?.AddListener(StopMoveAnim);
 
-            EventManager.instance.onDeath?.AddListener(deathEffect => _dead = true);
+            EventManager.instance.onDeath?.AddListener(deathEffect =>
+            {
+                _dead = true;
+                StopMove();
+            });
             EventManager.instance.onRespawn?.AddListener(() => _dead = false);
         }
 
