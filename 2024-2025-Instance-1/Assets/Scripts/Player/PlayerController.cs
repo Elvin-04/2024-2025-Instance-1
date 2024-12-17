@@ -138,7 +138,7 @@ namespace Player
             foreach (var interactable in _interactablesUnder)
                 if (!commonInteracts.Contains(interactable))
                 {
-                    if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> _)) return;
+                    if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> _)) continue;
                     interactable?.StopInteract();
                 }
 
@@ -147,7 +147,10 @@ namespace Player
 
             if (!_dead)
                 foreach (var interactable in _interactablesUnder.ToList())
+                {
                     interactable?.Interact();
+                }
+
         }
 
         private void GetInteractableFrontOfMe<T>(Vector3 dir) where T : IInteractable
