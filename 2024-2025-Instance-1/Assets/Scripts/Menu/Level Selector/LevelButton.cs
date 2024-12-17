@@ -19,12 +19,11 @@ namespace Menu.Level_Selector
             _btn = GetComponent<Button>();
 
             Assert.IsNotNull(_level, "level is null in LevelButton");
-            _btn.interactable = _level.IsUnlocked();
-
             Assert.IsNotNull(_btnText, "button text is null");
+
             _btnText.text = _level.levelName;
 
-            if (_level.IsUnlocked())
+            if (_btn.interactable = _level.IsUnlocked())
             {
                 if (LevelInfo.completedLevels.TryGetValue(_level.levelScene, out int stars) && stars > 0)
                 {
