@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Grid;
+using Managers.Audio;
 using UnityEngine;
 
 namespace Player
@@ -221,6 +222,7 @@ namespace Player
             SetAnimation((int)currentDirection);
 
             _reachedTargetCell = false;
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.SandMovementPlayer, null);
 
             EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
             var position = _gridManager.GetCellPos(nextIndex);
