@@ -24,7 +24,7 @@ namespace Menu.Level_Selector
             Assert.IsNotNull(_btnText, "button text is null");
             _btnText.text = _level.levelName;
 
-            if (_level.IsUnlocked() || true)
+            if (_level.IsUnlocked())
             {
                 if (LevelInfo.completedLevels.TryGetValue(_level.levelScene, out int stars) && stars > 0)
                 {
