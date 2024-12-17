@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 4633414997124130403}
   - component: {fileID: 8418409475730476054}
   - component: {fileID: 4263319553551004904}
+  - component: {fileID: -7924721300832066552}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -230,6 +231,7 @@ Transform:
   m_Children:
   - {fileID: 7399386638457607711}
   - {fileID: 7020510128144461954}
+  - {fileID: 3131624231016783348}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4235197221650875418
@@ -244,6 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78489ee65a45e9b4720e736b6a7fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movementHoldTime: 0.2
 --- !u!114 &8121179530381066035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +312,14 @@ MonoBehaviour:
   _poisonTextColor: {r: 1, g: 0, b: 0.4211607, a: 1}
   _frequency: 8
   _amplitude: 0.1
+--- !u!81 &-7924721300832066552
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2806801040940657499}
+  m_Enabled: 1
 --- !u!1 &2833182833582293986
 GameObject:
   m_ObjectHideFlags: 0
