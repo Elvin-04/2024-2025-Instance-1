@@ -39,6 +39,11 @@ namespace Runes
         {
             DropRune();
         }
+        public override void PlayAnimation(Animator animatorAura, Animator animatorZone)
+        {
+            animatorAura.Play(nameof(CloningRune));
+            animatorZone.Play("None");
+        }
 
         public override void DropRune()
         {

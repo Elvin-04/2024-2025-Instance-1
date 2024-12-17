@@ -33,7 +33,7 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
         Vector2Int cellIndex = _gridManager.GetCellIndex(transform.position);
         Vector2Int nextIndex = _gridManager.GetNextIndex(cellIndex, _playerDirection);
 
-        if (_gridManager.GetCellObjectsByType(nextIndex, out List<ICollisionObject> _))
+        if (_gridManager.GetCellObjectsByType(nextIndex, out List<ICollisionObject> _) || _gridManager.GetCell(nextIndex) == null)
             return;
 
         if (canPickUp)
