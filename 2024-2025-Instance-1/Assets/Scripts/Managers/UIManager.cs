@@ -1,3 +1,5 @@
+using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -6,6 +8,11 @@ public class UIManager : MonoBehaviour
     [Space] [SerializeField] private GameObject _winPanel;
 
     [SerializeField] private GameObject _popUpInteractable;
+
+    [Header("Can Interact")]
+    [SerializeField] private TextMeshProUGUI _canInteractText;
+    [SerializeField] private string _interactionText = $"Take {0} by press F";
+
 
     private void Start()
     {
@@ -18,10 +25,13 @@ public class UIManager : MonoBehaviour
         manager.onWin.AddListener(OnWin);
     }
 
-    private void PopUpInteract(bool canInteract)
+    private void PopUpInteract(bool canInteract, string objName)
     {
-        if (_popUpInteractable)
-            _popUpInteractable.SetActive(canInteract);
+        if (!_popUpInteractable.activeSelf && !canInteract)
+            return;
+
+        _popUpInteractable.SetActive(canInteract);
+        _canInteractText.text = string.Format(_interactionText, objName);
     }
 
     public void Pause()
@@ -32,5 +42,10 @@ public class UIManager : MonoBehaviour
     private void OnWin()
     {
         _winPanel.SetActive(true);
+    }
+
+    public void RestartLevelButton()
+    {
+        EventManager.instance.onRetry.Invoke();
     }
 }

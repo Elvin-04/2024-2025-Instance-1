@@ -19,11 +19,11 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector2> onMoveStarted { get; private set; } = new();
     public UnityEvent onMoveCanceled { get; private set; } = new();
     public UnityEvent onInteract { get; private set; } = new();
-    public UnityEvent<bool> canInteract { get; private set; } = new();
+    public UnityEvent<bool, string> canInteract { get; private set; } = new();
     public UnityEvent onPause { get; private set; } = new();
     public UnityEvent<Rune> updateRune { get; private set; } = new();
-    public UnityEvent updateDeath { get; private set; } = new();
-    public UnityEvent onDeath { get; private set; } = new();
+    public UnityEvent onRespawn { get; private set; } = new();
+    public UnityEvent<bool> onDeath { get; private set; } = new();
     public UnityEvent updateClock { get; private set; } = new();
     public UnityEvent onClockUpdated { get; private set; } = new();
     public UnityEvent<Vector3, Cell> onChangeCell { get; private set; } = new(); //=> position of the cell, tile to set 
@@ -35,6 +35,15 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector3> stopInteract { get; private set; } = new();
     public UnityEvent<Vector3, CellObjectBase> onRemoveObjectOnCell { get; private set; } = new();
     public UnityEvent<Vector3> onPlayerMoved { get; private set; } = new();
+    public UnityEvent onEnableInput { get; private set; } = new();
+    public UnityEvent onDisableInput { get; private set; } = new();
+    public UnityEvent<float> onScoreUpdated { get; private set; } = new();
+    public UnityEvent<int> OnZoneEffect { get; private set; } = new();
+    public UnityEvent StopZoneEffect { get; private set; } = new();
+    public UnityEvent<Vector3> onPlayerFinishedMoving { get; private set; } = new();
+    public UnityEvent onRuneDropped { get; private set; } = new();
+    public UnityEvent<(int, int)> onCellChanged { get; private set; } = new();
+    public UnityEvent onPoisonedPlayer { get; private set; } = new();
 
     // Audio
     public UnityEvent<SoundsName, Transform> onPlayMusic { get; private set; } = new();

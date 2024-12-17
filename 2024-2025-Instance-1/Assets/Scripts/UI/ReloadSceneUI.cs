@@ -17,6 +17,10 @@ namespace UI
             Assert.IsNotNull(_fillAmountImage, "fill amount image is null in ReloadSceneUI");
             EventManager.instance.onReloadUIRetry.AddListener(UpdateUIReloadScene);
             EventManager.instance.onStopHoldingReload.AddListener(CancelReload);
+
+            _fillAmountImage.type = Image.Type.Filled;
+
+            Reset();
         }
 
         private void Update()
@@ -25,13 +29,15 @@ namespace UI
             {
                 _holdTimer += Time.deltaTime;
                 _fillAmountImage.fillAmount = _holdTimer / _holdDuration;
-                if (_holdTimer >= _holdDuration) _isHolding = false;
+
+                if (_holdTimer >= _holdDuration) 
+                    _isHolding = false;
             }
             else
             {
-                _holdTimer = 0;
-                _fillAmountImage.fillAmount = _holdTimer / _holdDuration;
+                Reset();
             }
+
         }
 
         private void UpdateUIReloadScene()
@@ -42,6 +48,12 @@ namespace UI
         private void CancelReload()
         {
             _isHolding = false;
+        }
+
+        private void Reset()
+        {
+            _holdTimer = 0f;
+            _fillAmountImage.fillAmount = 0f;
         }
     }
 }

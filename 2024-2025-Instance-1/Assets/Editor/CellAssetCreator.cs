@@ -25,8 +25,6 @@ namespace Grid
                 // Create the asset at the chosen location
                 AssetDatabase.CreateAsset(newCell, path);
                 AssetDatabase.SaveAssets();
-
-                Debug.Log($"Cell asset created at {path}");
             }
         }
     }
