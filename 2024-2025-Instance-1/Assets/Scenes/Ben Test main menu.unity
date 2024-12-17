@@ -4427,6 +4427,7 @@ MonoBehaviour:
   levelName: Level 1
   levelScene: Level01
   previousLevel: {fileID: 0}
+  nextLevel: {fileID: 1765349830}
 --- !u!114 &1319354411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6654,6 +6655,7 @@ MonoBehaviour:
   levelName: Level 3
   levelScene: Level03
   previousLevel: {fileID: 1765349830}
+  nextLevel: {fileID: 1890869010}
 --- !u!114 &1615012488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7246,6 +7248,7 @@ MonoBehaviour:
   levelName: Level 2
   levelScene: Level02
   previousLevel: {fileID: 1319354410}
+  nextLevel: {fileID: 1615012487}
 --- !u!114 &1765349831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7409,6 +7412,7 @@ MonoBehaviour:
   levelName: Level 7
   levelScene: Level07
   previousLevel: {fileID: 1615012487}
+  nextLevel: {fileID: 0}
 --- !u!114 &1817862213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7749,6 +7753,7 @@ MonoBehaviour:
   levelName: Level 4
   levelScene: Level04
   previousLevel: {fileID: 1890869010}
+  nextLevel: {fileID: 1817862212}
 --- !u!114 &1890869011
 MonoBehaviour:
   m_ObjectHideFlags: 0

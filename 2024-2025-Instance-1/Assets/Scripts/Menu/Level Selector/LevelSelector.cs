@@ -8,6 +8,8 @@ namespace Menu.Level_Selector
         private LevelInfo _currentLevel;
         public static LevelSelector instance { get; private set; }
 
+        public LevelInfo currentLevel => _currentLevel;
+
         private void Awake()
         {
             if (instance == null)
@@ -25,7 +27,7 @@ namespace Menu.Level_Selector
         public void StartLevel(LevelInfo level)
         {
             _currentLevel = level;
-            SceneManager.LoadScene(level.levelScene);
+            level.Load();
 
             StartCoroutine(Utils.InvokeAfterUnscaled(() => EventManager.instance.onWin.AddListener(OnWin), 1.0f));
         }

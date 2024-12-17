@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Menu.Level_Selector
 {
@@ -12,6 +13,7 @@ namespace Menu.Level_Selector
         public string levelScene = "LEVEL SCENE";
 
         public LevelInfo previousLevel;
+        public LevelInfo nextLevel;
 
         public bool IsUnlocked()
         {
@@ -24,6 +26,11 @@ namespace Menu.Level_Selector
         public void MarkComplete()
         {
             completedLevels.Add(levelScene);
+        }
+
+        public void Load()
+        {
+            SceneManager.LoadScene(levelScene);
         }
     }
 }
