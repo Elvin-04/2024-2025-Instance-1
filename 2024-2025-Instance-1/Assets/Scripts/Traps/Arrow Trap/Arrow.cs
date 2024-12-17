@@ -1,8 +1,8 @@
-using System.Linq;
 using DG.Tweening;
 using Grid;
 using Managers.Audio;
 using Player;
+using System.Linq;
 using UnityEngine;
 
 namespace Traps.Arrow_Trap

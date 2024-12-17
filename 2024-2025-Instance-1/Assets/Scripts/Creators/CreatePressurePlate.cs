@@ -1,7 +1,6 @@
+using Grid;
 using System;
 using System.Collections.Generic;
-using DeathSystem;
-using Grid;
 using Traps;
 using UnityEngine;
 using UnityEngine.Assertions;

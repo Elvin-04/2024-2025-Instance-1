@@ -12,6 +12,8 @@ namespace Menu.Level_Selector
 
         private Button _btn;
         [SerializeField] private TMP_Text _btnText;
+        [SerializeField] private GameObject _starPrefab;
+        [SerializeField] private GameObject _starsContainer;
 
         private void Start()
         {
@@ -24,12 +26,14 @@ namespace Menu.Level_Selector
 
             if (_btn.interactable = _level.IsUnlocked())
             {
-                if (LevelInfo.completedLevels.TryGetValue(_level.levelScene, out int stars) && stars > 0)
+                if (LevelInfo.completedLevels.TryGetValue(_level.levelScene, out int stars))
                 {
-                    _btnText.text += ": ";
-                    // ugly
-                    for (int i = 0; i < LevelInfo.completedLevels[_level.levelScene]; i++)
-                        _btnText.text += "*";
+                    for (int i = 0; i < stars; i++)
+                    {   
+                        GameObject starObject = Instantiate(_starPrefab);
+                        starObject.SetActive(true);
+                        starObject.transform.SetParent(_starsContainer.transform, false);
+                    }
                 }
             }
         }

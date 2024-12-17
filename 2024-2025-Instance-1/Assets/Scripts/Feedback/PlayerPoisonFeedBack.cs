@@ -1,8 +1,8 @@
-using System.Collections;
 using Creators;
 using Grid;
 using JetBrains.Annotations;
 using Player;
+using System.Collections;
 using TMPro;
 using Traps;
 using UnityEngine;
