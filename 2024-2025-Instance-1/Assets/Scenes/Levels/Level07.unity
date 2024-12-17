@@ -1339,6 +1339,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.9599988
       objectReference: {fileID: 0}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorClosedRight
+      value: 
+      objectReference: {fileID: 11400000, guid: f7b4a3c9a09317b4b8048bb4792a2128, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorOpenedRight
+      value: 
+      objectReference: {fileID: 11400000, guid: c5fe246ebdc915843b94af41ab9b78fe, type: 2}
     - target: {fileID: 5191951653006571299, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
       propertyPath: _gridManager
       value: 
@@ -4650,7 +4658,7 @@ Tilemap:
       - {fileID: 1819137660525787590, guid: f85356a2b6ea4564bb23ce2adf3404c6, type: 3}
       - {fileID: -5444840437395464535, guid: 24ddca22c9d9496468e3dd08e7df5812, type: 3}
       - {fileID: -3423849643319072150, guid: 3e8297b20cde59848ba796397e1130e4, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 1, y: 3, z: 0}
@@ -5445,6 +5453,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 6.1500006
       objectReference: {fileID: 0}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorClosedLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: 76c8c82b66ad977449054f57ed6eb342, type: 2}
+    - target: {fileID: 5003245569739265971, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
+      propertyPath: _wallCloseToDoorOpenedLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: bba85e9ddf53a2d4fa55f8ef0682aeef, type: 2}
     - target: {fileID: 5191951653006571299, guid: ef954440d22636e4c9f415e8f73f0820, type: 3}
       propertyPath: _gridManager
       value: 
