@@ -16,7 +16,10 @@ namespace Traps
 
         public void Interact()
         {
-            creator.PoisonPlayer();
+            if(creator != null)
+            {
+                creator.PoisonPlayer();
+            }
         }
 
         public void StopInteract()
@@ -25,12 +28,18 @@ namespace Traps
 
         public void WeightInteract()
         {
-            creator.WeightInteract(this);
+            if (creator != null)
+            {
+                creator.WeightInteract(this);
+            }
         }
 
         public void StopWeightInteract()
         {
-            creator.StopWeightInteract(this);
+            if (creator != null)
+            {
+                creator?.StopWeightInteract(this);
+            }
         }
     }
 }

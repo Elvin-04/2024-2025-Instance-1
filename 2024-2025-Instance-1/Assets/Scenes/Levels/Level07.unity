@@ -888,7 +888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4859892083817467668, guid: 29a3e81b21461c24bac771a1814efc55, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7828970620190123550, guid: 29a3e81b21461c24bac771a1814efc55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1335,7 +1335,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1455547386}
   - component: {fileID: 1455547385}
-  - component: {fileID: 1455547384}
   - component: {fileID: 1455547387}
   - component: {fileID: 1455547388}
   m_Layer: 0
@@ -1345,14 +1344,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1455547384
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1455547383}
-  m_Enabled: 1
 --- !u!20 &1455547385
 Camera:
   m_ObjectHideFlags: 0
@@ -2042,8 +2033,8 @@ Tilemap:
   - first: {x: -8, y: -3, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 19
-      m_TileSpriteIndex: 19
+      m_TileIndex: 1
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -3626,13 +3617,8 @@ Tilemap:
     second:
       serializedVersion: 2
       m_AnimatedSprites:
-      - {fileID: -7287830702051999477, guid: 3de7728993752714288a39a4fd867f48, type: 3}
-      - {fileID: -2850473313168770183, guid: e83b177a322de664da5638bf2b27355a, type: 3}
-      - {fileID: 5386723498813923986, guid: 2510db400242276489e761a5174f89d9, type: 3}
-      - {fileID: 1819137660525787590, guid: f85356a2b6ea4564bb23ce2adf3404c6, type: 3}
-      - {fileID: -5444840437395464535, guid: 24ddca22c9d9496468e3dd08e7df5812, type: 3}
-      - {fileID: -3423849643319072150, guid: 3e8297b20cde59848ba796397e1130e4, type: 3}
-      m_AnimationSpeed: 5
+      - {fileID: 3514223523984640118, guid: edd15ed95ebc2b840802c6abfa087407, type: 3}
+      m_AnimationSpeed: 1
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -7, y: -3, z: 0}
@@ -4799,7 +4785,7 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: aa08235951a1dd24989bf956b08c669d, type: 2}
-  - m_RefCount: 83
+  - m_RefCount: 84
     m_Data: {fileID: 11400000, guid: af5f64e5816715e41bdb76c4dab6ee3b, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: d16ddbddec1c3b74f9f061df282c0846, type: 2}
@@ -4835,7 +4821,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 6afbdb050d4a68e43874571fb2586bff, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 8bc4d613f0bd8ea4ca65a42fa3daaba0, type: 2}
-  - m_RefCount: 6
+  - m_RefCount: 5
     m_Data: {fileID: 11400000, guid: c570a933ab2474842b3d2fe4ad491124, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
@@ -4846,7 +4832,7 @@ Tilemap:
     m_Data: {fileID: -9202836121247852643, guid: 7cc020a983235ee498e0dc3c4295b57b, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 949264624870762462, guid: 7f1ade5f3a93e7e4e999f5e95093a2dd, type: 3}
-  - m_RefCount: 83
+  - m_RefCount: 84
     m_Data: {fileID: 3514223523984640118, guid: edd15ed95ebc2b840802c6abfa087407, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: -4714939171631255691, guid: c32eba27369b03e49bdf8383509cbe99, type: 3}
@@ -4876,7 +4862,7 @@ Tilemap:
     m_Data: {fileID: -6711552133777759786, guid: 5aa2ab79da9b61d42aadd39806ac94b7, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 7776186826667819666, guid: 304c36d75993b7844897174c18a17488, type: 3}
-  - m_RefCount: 6
+  - m_RefCount: 5
     m_Data: {fileID: -3423849643319072150, guid: 3e8297b20cde59848ba796397e1130e4, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 162
@@ -5075,6 +5061,10 @@ PrefabInstance:
     - target: {fileID: 4821644237535769847, guid: 9bc899ca120dfef4e84a5ea1dbe1ac06, type: 3}
       propertyPath: m_Name
       value: PoisonTrapCreator (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821644237535769847, guid: 9bc899ca120dfef4e84a5ea1dbe1ac06, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7754745873742242433, guid: 9bc899ca120dfef4e84a5ea1dbe1ac06, type: 3}
       propertyPath: _gridManager
