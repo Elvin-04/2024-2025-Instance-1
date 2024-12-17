@@ -251,6 +251,10 @@ PrefabInstance:
       propertyPath: _gridManager
       value: 
       objectReference: {fileID: 1075084691}
+    - target: {fileID: 7754745873742242433, guid: 9bc899ca120dfef4e84a5ea1dbe1ac06, type: 3}
+      propertyPath: _maxTickClock
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1133,6 +1137,10 @@ PrefabInstance:
       propertyPath: _gridManager
       value: 
       objectReference: {fileID: 1075084691}
+    - target: {fileID: 7754745873742242433, guid: 9bc899ca120dfef4e84a5ea1dbe1ac06, type: 3}
+      propertyPath: _maxTickClock
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
