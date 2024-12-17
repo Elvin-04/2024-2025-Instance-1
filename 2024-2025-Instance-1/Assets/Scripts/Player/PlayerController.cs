@@ -28,6 +28,10 @@ namespace Player
         private Transform _transform;
         public PlayerDirection currentDirection { get; private set; }
 
+        [SerializeField] [Range(0f, 0.5f)] private float _movementHoldTime = 0.2f;
+        private float _holdTime = 0f;
+        private float _holdingFor = 0f;
+
         private void Awake()
         {
             _transform = transform;
@@ -73,12 +77,15 @@ namespace Player
         private void TryMove()
         {
             if (!_canMove || !_reachedTargetCell) return;
-            Move();
+            
+            if ((_holdingFor += Time.deltaTime) >= _holdTime)
+                {_holdingFor = 0f; Move();}
         }
 
         private void StartMove(Vector2 direction)
         {
             _canMove = true;
+            _holdTime = _moveDirection == direction ? _movementHoldTime : 0f;
             _moveDirection = direction;
         }
 
@@ -251,6 +258,7 @@ namespace Player
                 EventManager.instance.onPlayerFinishedMoving?.Invoke(_transform.position);
 
                 _reachedTargetCell = true;
+                _holdTime = _movementHoldTime;
             });
             GetInteractableFrontOfMe<IInteractable>(_moveDirection);
         }
@@ -259,6 +267,9 @@ namespace Player
         {
             SetAnimation(0);
             _canMove = false;
+            _moveDirection = Vector2.zero;
+            _holdTime = 0f;
+            _holdingFor = 0f;
         }
 
         private void Interact()
