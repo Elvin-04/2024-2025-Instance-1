@@ -35,5 +35,10 @@ namespace Menu.Level_Selector
                 }
             }
         }
+
+        public void LoadLevel()
+        {
+            LevelSelector.instance.StartLevel(_level);
+        }
     }
 }
