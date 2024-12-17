@@ -34,7 +34,7 @@ namespace Player
 
         private void Start()
         {
-            SpawnPlayer(_levelManager.spawnPoint.position);
+            SpawnPlayer(_levelManager.spawnPoint);
             EventManager.instance.onPlayerMoved?.AddListener(OnPlayerMoved);
         }
 
@@ -54,8 +54,9 @@ namespace Player
 
         public GameObject SpawnPlayer(Vector3 pos)
         {
-            GameObject player = Instantiate(_playerPrefab, GetCellPos(pos),
+            GameObject player = Instantiate(_playerPrefab, GetCellPos(_levelManager.spawnPoint),
                 Quaternion.identity);
+            player.transform.position = pos;
             DeathManager playerDeathManager = player.GetComponent<DeathManager>();
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerDeathManager.SetGridManager(_gridManager);
@@ -72,6 +73,7 @@ namespace Player
 
         private void OnDeath(GameObject player)
         {
+            EventManager.instance.onDisableInput.Invoke();
             if (player != null) StartCoroutine(nameof(Respawn), player);
         }
 
@@ -79,9 +81,10 @@ namespace Player
         {
             player.SetActive(false);
             yield return new WaitForSeconds(_waitTimeBeforeRespawn);
-            player.transform.position = GetCellPos(_levelManager.spawnPoint.position);
+            player.transform.position = GetCellPos(_levelManager.spawnPoint);
             player.SetActive(true);
             EventManager.instance.onRespawn?.Invoke();
+            EventManager.instance.onEnableInput.Invoke();
             //EventManager.instance.onPlayerMoved?.Invoke(player.transform.position);
         }
     }

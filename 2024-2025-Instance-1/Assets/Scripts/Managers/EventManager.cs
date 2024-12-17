@@ -1,4 +1,5 @@
 using Grid;
+using Managers.Audio;
 using Runes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,7 +23,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent onPause { get; private set; } = new();
     public UnityEvent<Rune> updateRune { get; private set; } = new();
     public UnityEvent onRespawn { get; private set; } = new();
-    public UnityEvent onDeath { get; private set; } = new();
+    public UnityEvent<bool> onDeath { get; private set; } = new();
     public UnityEvent updateClock { get; private set; } = new();
     public UnityEvent onClockUpdated { get; private set; } = new();
     public UnityEvent<Vector3, Cell> onChangeCell { get; private set; } = new(); //=> position of the cell, tile to set 
@@ -36,11 +37,29 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector3> onPlayerMoved { get; private set; } = new();
     public UnityEvent onEnableInput { get; private set; } = new();
     public UnityEvent onDisableInput { get; private set; } = new();
-    public UnityEvent<float> onScoreUpdated { get; private set; } = new();
+    public UnityEvent<int> onScoreUpdated { get; private set; } = new();
     public UnityEvent<int> OnZoneEffect { get; private set; } = new();
     public UnityEvent StopZoneEffect { get; private set; } = new();
-    public UnityEvent<Vector3> onPlayerFinishedMoving { get; set; } = new();
-    public UnityEvent onRuneDropped { get; set; } = new();
+    public UnityEvent<Vector3> onPlayerFinishedMoving { get; private set; } = new();
+    public UnityEvent onRuneDropped { get; private set; } = new();
+    public UnityEvent<(int, int)> onCellChanged { get; private set; } = new();
+    public UnityEvent onPoisonedPlayer { get; private set; } = new();
+
+    // Audio
+    public UnityEvent<SoundsName, Transform> onPlayMusic { get; private set; } = new();
+    public UnityEvent onPlayAllMusic { get; private set; } = new();
+    public UnityEvent<SoundsName> onPauseMusic { get; private set; } = new();
+    public UnityEvent onPauseAllMusic { get; private set; } = new();
+    public UnityEvent<SoundsName> onStopMusic { get; private set; } = new();
+    public UnityEvent onStopAllMusic { get; private set; } = new();
+
+    public UnityEvent<SoundsName, Transform> onPlaySfx { get; private set; } = new();
+    public UnityEvent onPlayAllSfx { get; private set; } = new();
+    public UnityEvent<SoundsName> onPauseSfx { get; private set; } = new();
+    public UnityEvent onPauseAllSfx { get; private set; } = new();
+    public UnityEvent<SoundsName> onStopSfx { get; private set; } = new();
+    public UnityEvent onStopAllSfx { get; private set; } = new();
+
 
     private void Awake()
     {

@@ -9,10 +9,6 @@ namespace Traps
 {
     public class PressurePlate : CellObjectBase, IInteractable, IWeightInteractable
     {
-
-        public Action onPlate;
-        public Action offPlate;
-
         [Header("Pressure Plate")]
         [SerializeField] private Cell _platePress;
         [SerializeField] private Cell _plateRelease;
@@ -21,16 +17,21 @@ namespace Traps
         [SerializeField] private Cell _doorOpen;
         [SerializeField] private Cell _doorClose;
 
-        [Header("Pillar")]
+        [Header("Pillar Right")]
         [SerializeField] private Cell _wallCloseToDoorOpenedRight;
-        [SerializeField] private Cell _wallCloseToDoorOpenedLeft;
-
-        [SerializeField] private Cell _wallCloseToDoorClosedLeft;
         [SerializeField] private Cell _wallCloseToDoorClosedRight;
+
+        [Header("Pillar Left")]
+        [SerializeField] private Cell _wallCloseToDoorOpenedLeft;
+        [SerializeField] private Cell _wallCloseToDoorClosedLeft;
 
         [Header("Transform List")]
         private List<Transform> _doorTransforms = new();
+
         private List<PillarObject> _pillars = new();
+        public Action offPlate;
+
+        public Action onPlate;
 
         private void Start()
         {
@@ -40,7 +41,6 @@ namespace Traps
             Assert.IsNotNull(_wallCloseToDoorOpenedLeft, "wall close to door opened is null in DoorButton Left");
             Assert.IsNotNull(_wallCloseToDoorClosedLeft, "wall close to door closed left is null in DoorButton");
             Assert.IsNotNull(_wallCloseToDoorClosedRight, "wall close to door closed right is null in DoorButton");
-            Close();
         }
 
         public bool canPickUp
@@ -61,17 +61,26 @@ namespace Traps
             offPlate.Invoke();
         }
 
-        public void WeightInteract() => Interact();
-        public void StopWeightInteract() => StopInteract();
+        public void WeightInteract()
+        {
+            Interact();
+        }
+
+        public void StopWeightInteract()
+        {
+            StopInteract();
+        }
 
         public Cell GetTileBasedOnState(bool isPress)
         {
             return isPress ? _platePress : _plateRelease;
         }
+
         public void SetDoorTransforms(List<Transform> transforms)
         {
             _doorTransforms = transforms;
         }
+
         public void SetPillars(List<PillarObject> pillars)
         {
             _pillars = pillars;
@@ -79,11 +88,20 @@ namespace Traps
 
         private void Open()
         {
-            if (_doorTransforms == null || _pillars == null) return;
+            if (_doorTransforms == null || _pillars == null)
+            {
+                return;
+            }
 
             EventManager.instance.onChangeCell?.Invoke(transform.position, _platePress);
-            foreach (Transform doorTransform in _doorTransforms) OpenDoor(doorTransform);
-            foreach (PillarObject pillar in _pillars) OpenPillar(pillar);
+            foreach (Transform doorTransform in _doorTransforms)
+            {
+                OpenDoor(doorTransform);
+            }
+            foreach (PillarObject pillar in _pillars)
+            {
+                OpenPillar(pillar);
+            }
         }
 
         private void Close()
@@ -105,15 +123,18 @@ namespace Traps
 
         private void OpenPillar(PillarObject pillar)
         {
-            EventManager.instance.onChangeCell?.Invoke(pillar.transform.position, 
+            EventManager.instance.onChangeCell?.Invoke(pillar.transform.position,
                 pillar.side == Side.Right ? _wallCloseToDoorOpenedRight : _wallCloseToDoorOpenedLeft);
         }
 
         private void ClosePillar(PillarObject pillar)
         {
             EventManager.instance.onChangeCell?.Invoke(pillar.transform.position,
-                pillar.side == Side.Right ? _wallCloseToDoorClosedLeft : _wallCloseToDoorClosedRight) ;
+                pillar.side == Side.Right ?  _wallCloseToDoorClosedRight : _wallCloseToDoorClosedLeft);
         }
 
+        public Cell GetDoorClose => _doorClose;
+        public Cell GetPillarLeftClose => _wallCloseToDoorClosedLeft;
+        public Cell GetPillarRightClose => _wallCloseToDoorClosedRight;
     }
 }

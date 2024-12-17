@@ -1,4 +1,5 @@
 using Grid;
+using Managers.Audio;
 using Player;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -33,19 +34,23 @@ namespace Traps.Arrow_Trap
             if (++_currentTick != _fireEveryTicks) return;
             _currentTick = 0;
             ShootArrow();
+
+            //Debug.Log($"EventManager.instance: {EventManager.instance}");
+            //Debug.Log($"transform: {transform}");
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.ActiveArrowThrower, transform);
         }
 
         private void ShootArrow()
         {
-            GameObject arrowObject =
+            var arrowObject =
                 Instantiate(_arrowPrefab, _gridManager.GetCellPos(_transform.position), Quaternion.identity);
             arrowObject.SetActive(true);
 
-            Transform arrowTransform = arrowObject.transform;
+            var arrowTransform = arrowObject.transform;
 
             arrowTransform.position = _transform.position;
 
-            Arrow arrow = arrowObject.GetComponent<Arrow>();
+            var arrow = arrowObject.GetComponent<Arrow>();
             arrow.SetDirection(_direction);
             arrow.SetGridManager(_gridManager);
         }

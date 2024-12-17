@@ -13,7 +13,7 @@ namespace UI
         [SerializeField] private Animator _star1;
         [SerializeField] private Animator _star2;
         [SerializeField] private Animator _star3;
-        private float _currentScore = 3;
+        private int _currentScore = 3;
         private Animator _panelAnimator;
 
         private void Awake()
@@ -38,7 +38,7 @@ namespace UI
             StartCoroutine(StartStarAnim(_currentScore));
         }
 
-        private void OnScoreUpdated(float score)
+        private void OnScoreUpdated(int score)
         {
             _currentScore = score;
         }

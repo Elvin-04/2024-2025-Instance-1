@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Grid
     {
         public Cell cell { get; private set; }
         public Vector3 cellPos { get; private set; }
+        public CellObjectBase instancedObject { get; private set; }
         public List<CellObjectBase> objectsOnCell { get; } = new();
 
         public CellContainer(Cell cell, Vector3 cellPos)
@@ -15,12 +17,12 @@ namespace Grid
             this.cellPos = cellPos;
         }
 
-        public void Take(CellContainer container)
+        public void SetInstancedObject(CellObjectBase instancedObjectToSet)
         {
-            objectsOnCell.AddRange(container.objectsOnCell);
+            instancedObject = instancedObjectToSet;
         }
 
-        
+
         public void AddObject(CellObjectBase cellObjectBase)
         {
             objectsOnCell.Add(cellObjectBase);
@@ -31,9 +33,14 @@ namespace Grid
             objectsOnCell.AddRange(cellObjectBase);
         }
 
-        public void RemoveObject(CellObjectBase cellObject)
+        public CellObjectBase RemoveObject(CellObjectBase cellObject)
         {
-            if (objectsOnCell.Contains(cellObject)) objectsOnCell.Remove(cellObject);
+            if (objectsOnCell.Contains(cellObject))
+            {
+                objectsOnCell.Remove(cellObject);
+            }
+
+            return cellObject;
         }
 
         public void RemoveObjects(List<CellObjectBase> cellObjects)
