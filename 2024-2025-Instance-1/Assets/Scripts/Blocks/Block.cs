@@ -1,9 +1,8 @@
-using System.Collections;
-using Grid;
-using UnityEngine;
 using DG.Tweening;
+using Grid;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWeight
 {
@@ -34,12 +33,11 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
         Vector2Int cellIndex = _gridManager.GetCellIndex(transform.position);
         Vector2Int nextIndex = _gridManager.GetNextIndex(cellIndex, _playerDirection);
 
-        if (_gridManager.GetCellObjectsByType(nextIndex, out List<ICollisionObject> _))
+        if (_gridManager.GetCellObjectsByType(nextIndex, out List<ICollisionObject> _) || _gridManager.GetCell(nextIndex) == null)
             return;
 
         if (canPickUp)
         {
-            Debug.Log("Move");
             transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime())
                 .OnComplete(GetInteractableUnderMe);
             
@@ -80,7 +78,6 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
                 {
                     return;
                 }
-                Debug.Log("stopping interactions");
                 if (interactable is IInteractable interact)
                 {
                     interact.StopInteract();

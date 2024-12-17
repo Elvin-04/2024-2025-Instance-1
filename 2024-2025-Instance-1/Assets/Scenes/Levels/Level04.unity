@@ -186,7 +186,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2555454931538815659, guid: 183e3016024e8b541ae021c82b16ac5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.55
+      value: 2.5500002
       objectReference: {fileID: 0}
     - target: {fileID: 2555454931538815659, guid: 183e3016024e8b541ae021c82b16ac5b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -282,7 +282,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2555454931538815659, guid: 183e3016024e8b541ae021c82b16ac5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.54
+      value: 3.54
       objectReference: {fileID: 0}
     - target: {fileID: 2555454931538815659, guid: 183e3016024e8b541ae021c82b16ac5b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -953,7 +953,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2555454931538815659, guid: 183e3016024e8b541ae021c82b16ac5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.58
+      value: 1.58
       objectReference: {fileID: 0}
     - target: {fileID: 2555454931538815659, guid: 183e3016024e8b541ae021c82b16ac5b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1476,7 +1476,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2555454931538815659, guid: 183e3016024e8b541ae021c82b16ac5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.55
+      value: 4.55
       objectReference: {fileID: 0}
     - target: {fileID: 2555454931538815659, guid: 183e3016024e8b541ae021c82b16ac5b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1630,7 +1630,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2555454931538815659, guid: 183e3016024e8b541ae021c82b16ac5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2555454931538815659, guid: 183e3016024e8b541ae021c82b16ac5b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6456,6 +6456,30 @@ PrefabInstance:
     - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
       propertyPath: 'spawnPoints.Array.data[1]'
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxSteps>k__BackingField.<firstThreshold>k__BackingField
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxSteps>k__BackingField.<thirdThreshold>k__BackingField
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxDeaths>k__BackingField.<firstThreshold>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxDeaths>k__BackingField.<thirdThreshold>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxSteps>k__BackingField.<secondThreshold>k__BackingField
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985530484064599274, guid: f6069fd460ecda24d8dcc7a2c744ea3d, type: 3}
+      propertyPath: <maxDeaths>k__BackingField.<secondThreshold>k__BackingField
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine.Assertions;
 
 public class Pool<T> : IPool<T> where T : class, IPooledObject<T>

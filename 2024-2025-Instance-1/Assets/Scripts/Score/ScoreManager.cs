@@ -1,5 +1,5 @@
-using System;
 using Managers;
+using System;
 using UnityEngine;
 
 namespace Score
@@ -22,6 +22,8 @@ namespace Score
             EventManager.instance.onClockUpdated.AddListener(OnPlayerMove);
             EventManager.instance.onDeath.AddListener(OnPlayerDies);
             Invoke(nameof(LateStart), 0);
+
+            EventManager.instance.onWin.AddListener(() => Debug.Log(_steps));
         }
 
         private void LateStart()

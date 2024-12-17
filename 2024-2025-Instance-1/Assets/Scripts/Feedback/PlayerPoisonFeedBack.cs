@@ -1,8 +1,8 @@
-using System.Collections;
 using Creators;
 using Grid;
 using JetBrains.Annotations;
 using Player;
+using System.Collections;
 using TMPro;
 using Traps;
 using UnityEngine;
@@ -63,13 +63,13 @@ public class PlayerPoisonFeedBack : MonoBehaviour
     {
         if (!_isPoisoned) return;
         if (!gameObject.activeSelf) return;
-        StartCoroutine(UpdatePoisonTextAfterDelay());
+        UpdatePoisonTextAfterDelay();
     }
 
     private void ActionIsPoisoned()
     {
         _isPoisoned = true;
-        StartCoroutine(UpdatePoisonTextAfterDelay());
+        UpdatePoisonTextAfterDelay();
         EventManager.instance.onPoisonedPlayer?.RemoveListener(ActionIsPoisoned);
     }
 
@@ -109,11 +109,8 @@ public class PlayerPoisonFeedBack : MonoBehaviour
         );
     }
 
-    private IEnumerator UpdatePoisonTextAfterDelay()
+    private void UpdatePoisonTextAfterDelay()
     {
-        print("t3st");
-        yield return null;
-
         if (_poisonTrap)
         {
             SetPoisonText();
@@ -121,14 +118,11 @@ public class PlayerPoisonFeedBack : MonoBehaviour
         else
         {
             _poisonTrap = GetPoisonTrap();
-            if (!_poisonTrap) yield break;
+            if (!_poisonTrap) return;
 
             _poisonTrapCreator = _poisonTrap.creator;
             SetPoisonText();
         }
-
-        if (_poisonTrap)
-            Debug.Log("_poisonTrap.creator.GetPoisoned() : " + _poisonTrap.creator.GetPoisoned());
     }
 
     private PoisonTrap GetPoisonTrap()

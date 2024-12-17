@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
 using Grid;
 using Managers.Audio;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -137,7 +137,7 @@ namespace Player
             foreach (IInteractable interactable in _interactablesUnder)
                 if (!commonInteracts.Contains(interactable))
                 {
-                    if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> _)) return;
+                    if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> _)) continue;
                     interactable?.StopInteract();
                 }
 
@@ -147,6 +147,7 @@ namespace Player
             if (!_dead)
                 foreach (IInteractable interactable in _interactablesUnder.ToList())
                     interactable?.Interact();
+
         }
 
         private void GetInteractableFrontOfMe<T>(Vector3 dir) where T : IInteractable

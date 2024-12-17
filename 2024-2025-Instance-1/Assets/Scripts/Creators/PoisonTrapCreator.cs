@@ -1,7 +1,7 @@
+using Grid;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Grid;
 using Traps;
 using UnityEngine;
 
@@ -86,10 +86,11 @@ namespace Creators
         private IEnumerator SetupPoison((int, int) position)
         {
             yield return new WaitForEndOfFrame();
+
             if (_gridManager.GetCellContainer(position).instancedObject == null)
-                Debug.Log("no instanced object");
-            else
-                _gridManager.GetCellContainer(position).instancedObject.GetComponent<PoisonTrap>().creator = this;
+                yield break;
+
+            _gridManager.GetCellContainer(position).instancedObject.GetComponent<PoisonTrap>().creator = this;
         }
 
         private void OnClockUpdate(Vector3 _)
@@ -122,8 +123,6 @@ namespace Creators
         {
             if (trap == null) return;
 
-            Debug.Log("stopping weight interact");
-
             var pos = _gridManager.GetCellIndex(trap.transform.position);
 
             if (pos == _mainTrapIndex)
@@ -144,7 +143,6 @@ namespace Creators
         public void PoisonPlayer()
         {
             _playerPoisoned = true;
-            Debug.Log($"player poisoned : {_playerPoisoned}");
             EventManager.instance.onPoisonedPlayer?.Invoke();
         }
 

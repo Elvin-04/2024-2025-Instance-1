@@ -10,12 +10,16 @@ public class InputManager : MonoBehaviour
         EventManager.instance.onDisableInput.AddListener(DisableInput);
         EventManager.instance.onEnableInput.AddListener(EnableInput);
     }
+
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (!_inputEnabled) 
-            {return;}
+        if (!_inputEnabled)
+        {
+            return;
+        }
 
         Vector2 input = ctx.ReadValue<Vector2>();
+        input = input.normalized;
         if (ctx.performed)
         {
             if (input.x != 0 && input.y != 0)
@@ -55,6 +59,7 @@ public class InputManager : MonoBehaviour
     {
         _inputEnabled = false;
     }
+
     private void EnableInput()
     {
         _inputEnabled = true;
