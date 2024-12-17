@@ -14,11 +14,13 @@ namespace Menu.Level_Selector
 
         private void Awake()
         {
-            if (instance == null)
-                instance = this;
-            else
+            if (instance)
+            {
                 Destroy(gameObject);
+                return;
+            }
 
+            instance = this;
             DontDestroyOnLoad(gameObject);
             LevelInfo.completedLevels.Clear();
         }

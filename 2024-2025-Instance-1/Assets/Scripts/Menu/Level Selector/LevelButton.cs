@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -14,7 +13,7 @@ namespace Menu.Level_Selector
         private Button _btn;
         [SerializeField] private TMP_Text _btnText;
 
-        private void Awake()
+        private void Start()
         {
             _btn = GetComponent<Button>();
 
