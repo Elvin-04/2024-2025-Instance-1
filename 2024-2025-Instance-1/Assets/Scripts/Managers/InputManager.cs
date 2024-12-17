@@ -12,7 +12,9 @@ public class InputManager : MonoBehaviour
     }
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (!_inputEnabled) {return;}
+        if (!_inputEnabled) 
+            {return;}
+
         Vector2 input = ctx.ReadValue<Vector2>();
         if (ctx.performed)
         {
