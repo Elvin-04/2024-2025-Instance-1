@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Grid;
 using Traps;
@@ -17,16 +18,25 @@ namespace Creators
 
     public class PoisonTrapCreator : CellCreator
     {
+        [SerializeField] private int _maxTickClock;
+        private int _currentTickClock;
         [SerializeField] private GridManager _gridManager;
 
         [SerializeField] private PoisonRadius _radius;
 
 
-
         [SerializeField] private Cell _poisonCell;
-        
+
         private Vector2Int _mainTrapIndex;
+        private bool _playerPoisoned;
         private List<(int, int)> _poisonCells = new();
+
+        protected override void Start()
+        {
+            base.Start();
+            EventManager.instance.onClockUpdated?.AddListener(OnClockUpdate);
+            EventManager.instance.onDeath?.AddListener(OnDeath);
+        }
 
         protected override void SetTile(Cell cell)
         {
@@ -40,7 +50,7 @@ namespace Creators
                     (int, int) position = (x, y);
 
                     Cell cellToSpawn;
-                    
+
                     if (x == positionIndexes.x && y == positionIndexes.y)
                         cellToSpawn = cell;
                     else
@@ -52,14 +62,39 @@ namespace Creators
                         _poisonCells.Add(position);
                     }
 
-                    cellToSpawn.onGameObjectInstanciated += (obj) => obj.GetComponent<PoisonTrap>().creator = this;
-
+                    StartCoroutine(SetupPoison(position));
 
 
                     // TODO CHECK IF THE CURRENT CELL IS "EMPTY"
                     // AND DO NOT SPAWN THE CELL IF IT IS NOT EMPTY                    
                     EventManager.instance.onChangeCell?.Invoke(_gridManager.GetCellPos(position), cellToSpawn);
                 }
+            }
+        }
+
+        private IEnumerator SetupPoison((int, int) position)
+        {
+            yield return new WaitForEndOfFrame();
+            if (_gridManager.GetCellContainer(position).instancedObject == null)
+            {
+                Debug.Log("no instanced object");
+            }
+            else
+            {
+                _gridManager.GetCellContainer(position).instancedObject.GetComponent<PoisonTrap>().creator = this;
+            }
+        }
+
+        private void OnClockUpdate()
+        {
+            if (!_playerPoisoned)
+                return;
+
+            // yes, i++
+            //  not ++i
+            if (_currentTickClock++ >= _maxTickClock)
+            {
+                EventManager.instance.onDeath?.Invoke();
             }
         }
 
@@ -70,29 +105,59 @@ namespace Creators
             if (pos == _mainTrapIndex)
             {
                 foreach ((int, int) position in _poisonCells)
-                    _gridManager.ResetCell(position);
+                {
+                    Vector2Int currentPos = new()
+                    {
+                        x = position.Item1,
+                        y = position.Item2
+                    };
+                    if (currentPos != pos)
+                    {
+                        _gridManager.ResetCell(position);
+                    }
+                }
             }
             else
             {
-                _gridManager.ResetCell(pos);
-            }        
+                //_gridManager.ResetCell(pos);
+            }
         }
 
         public void StopWeightInteract(PoisonTrap trap)
         {
+            if (trap == null)
+            {
+                return;
+            }
+
+            Debug.Log("stopping weight interact");
+
             Vector2Int pos = _gridManager.GetCellIndex(trap.transform.position);
 
             if (pos == _mainTrapIndex)
             {
                 foreach ((int, int) position in _poisonCells)
+                {
                     _gridManager.ChangeCell(position, _poisonCell);
+                    StartCoroutine(SetupPoison(position));
+                }
             }
             else
             {
                 _gridManager.ChangeCell(pos, _poisonCell);
+                StartCoroutine(SetupPoison((pos.x, pos.y)));
             }
-            
-            
+        }
+
+        public void PoisonPlayer()
+        {
+            _playerPoisoned = true;
+        }
+        
+        private void OnDeath()
+        {
+            _currentTickClock = 0;
+            _playerPoisoned = false;
         }
     }
 }

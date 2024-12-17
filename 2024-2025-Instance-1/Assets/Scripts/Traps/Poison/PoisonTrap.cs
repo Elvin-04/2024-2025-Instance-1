@@ -6,7 +6,7 @@ namespace Traps
 {
     public class PoisonTrap : CellObjectBase, IInteractable, IWeightInteractable
     {
-        [SerializeField] private int _maxTickClock;
+        /*[SerializeField] private int _maxTickClock;
 
 
         [HideInInspector] public PoisonTrapCreator creator;
@@ -70,6 +70,34 @@ namespace Traps
         {
             currentLifeTime = _maxTickClock;
             _playerPoisoned = false;
+        }
+    }*/
+
+        [HideInInspector] public PoisonTrapCreator creator;
+
+        public bool canPickUp
+        {
+            get => false;
+            set { }
+        }
+
+        public void Interact()
+        {
+            creator.PoisonPlayer();
+        }
+
+        public void StopInteract()
+        {
+        }
+
+        public void WeightInteract()
+        {
+            creator.WeightInteract(this);
+        }
+
+        public void StopWeightInteract()
+        {
+            creator.StopWeightInteract(this);
         }
     }
 }

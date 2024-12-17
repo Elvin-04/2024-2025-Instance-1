@@ -49,7 +49,7 @@ namespace Debugs
                 name = indexes.ToString()
             };
             CellObjectDebugger debugger = debuggerGo.AddComponent<CellObjectDebugger>();
-            debugger.Setup(GetCellObjects(indexes), _gridManager.GetCell(indexes).instancedObject);
+            debugger.Setup(GetCellObjects(indexes), _gridManager.GetCellContainer(indexes).instancedObject?.gameObject);
             return debugger;
         }
 
@@ -79,7 +79,7 @@ namespace Debugs
 
             if (debugger != null)
             {
-                _debuggers[indexes].Setup(GetCellObjects(indexes), _gridManager.GetCell(indexes).instancedObject);
+                _debuggers[indexes].Setup(GetCellObjects(indexes), _gridManager.GetCellContainer(indexes).instancedObject?.gameObject);
             }
         }
     }
