@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -14,17 +13,16 @@ namespace Menu.Level_Selector
         private Button _btn;
         [SerializeField] private TMP_Text _btnText;
 
-        private void Awake()
+        private void Start()
         {
             _btn = GetComponent<Button>();
 
             Assert.IsNotNull(_level, "level is null in LevelButton");
-            _btn.interactable = _level.IsUnlocked();
-
             Assert.IsNotNull(_btnText, "button text is null");
+
             _btnText.text = _level.levelName;
 
-            if (_level.IsUnlocked())
+            if (_btn.interactable = _level.IsUnlocked())
             {
                 if (LevelInfo.completedLevels.TryGetValue(_level.levelScene, out int stars) && stars > 0)
                 {
@@ -34,6 +32,11 @@ namespace Menu.Level_Selector
                         _btnText.text += "*";
                 }
             }
+        }
+
+        public void LoadLevel()
+        {
+            LevelSelector.instance.StartLevel(_level);
         }
     }
 }

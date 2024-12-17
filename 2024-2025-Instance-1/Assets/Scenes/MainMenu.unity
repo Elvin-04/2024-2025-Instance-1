@@ -4486,13 +4486,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1292227425}
-        m_TargetAssemblyTypeName: Menu.Level_Selector.LevelSelector, Assembly-CSharp
-        m_MethodName: StartLevel
-        m_Mode: 2
+      - m_Target: {fileID: 1319354411}
+        m_TargetAssemblyTypeName: Menu.Level_Selector.LevelButton, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1319354410}
-          m_ObjectArgumentAssemblyTypeName: Menu.Level_Selector.LevelInfo, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6715,13 +6715,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1292227425}
-        m_TargetAssemblyTypeName: Menu.Level_Selector.LevelSelector, Assembly-CSharp
-        m_MethodName: StartLevel
-        m_Mode: 2
+      - m_Target: {fileID: 1615012488}
+        m_TargetAssemblyTypeName: Menu.Level_Selector.LevelButton, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1615012487}
-          m_ObjectArgumentAssemblyTypeName: Menu.Level_Selector.LevelInfo, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7309,13 +7309,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1292227425}
-        m_TargetAssemblyTypeName: Menu.Level_Selector.LevelSelector, Assembly-CSharp
-        m_MethodName: StartLevel
-        m_Mode: 2
+      - m_Target: {fileID: 1765349831}
+        m_TargetAssemblyTypeName: Menu.Level_Selector.LevelButton, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1765349830}
-          m_ObjectArgumentAssemblyTypeName: Menu.Level_Selector.LevelInfo, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7474,13 +7474,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1292227425}
-        m_TargetAssemblyTypeName: Menu.Level_Selector.LevelSelector, Assembly-CSharp
-        m_MethodName: StartLevel
-        m_Mode: 2
+      - m_Target: {fileID: 1817862213}
+        m_TargetAssemblyTypeName: Menu.Level_Selector.LevelButton, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1817862212}
-          m_ObjectArgumentAssemblyTypeName: Menu.Level_Selector.LevelInfo, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7816,13 +7816,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1292227425}
-        m_TargetAssemblyTypeName: Menu.Level_Selector.LevelSelector, Assembly-CSharp
-        m_MethodName: StartLevel
-        m_Mode: 2
+      - m_Target: {fileID: 1890869011}
+        m_TargetAssemblyTypeName: Menu.Level_Selector.LevelButton, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1890869010}
-          m_ObjectArgumentAssemblyTypeName: Menu.Level_Selector.LevelInfo, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
