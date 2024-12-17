@@ -10,6 +10,7 @@ namespace Player
     {
         private readonly List<IInteractable> _interactablesInFront = new();
         private Animator _animator;
+        private bool _canMove;
         private Tween _currentMoveAnim;
 
         private bool _dead;
@@ -26,6 +27,11 @@ namespace Player
         //Components
         private Transform _transform;
         public PlayerDirection currentDirection { get; private set; }
+        public Vector2 moveDirection => _moveDirection;
+
+        [SerializeField] [Range(0f, 0.5f)] private float _movementHoldTime = 0.2f;
+        private float _holdTime = 0f;
+        private float _holdingFor = 0f;
 
         private void Awake()
         {
@@ -36,18 +42,21 @@ namespace Player
 
         private void Start()
         {
-            EventManager.instance.onMoveStarted?.AddListener(TryMove);
+            EventManager.instance.onMoveStarted?.AddListener(StartMove);
+            EventManager.instance.onMoveCanceled?.AddListener(StopMove);
             EventManager.instance.onInteract?.AddListener(Interact);
             EventManager.instance.onDeath?.AddListener(StopMoveAnim);
 
-            EventManager.instance.onDeath?.AddListener(() => _dead = true);
+            EventManager.instance.onDeath?.AddListener(deathEffect => _dead = true);
             EventManager.instance.onRespawn?.AddListener(() => _dead = false);
         }
 
         private void Update()
         {
+            TryMove();
+
             //////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.K)) EventManager.instance.onDeath.Invoke();
+            if (Input.GetKeyDown(KeyCode.K)) EventManager.instance.onDeath.Invoke(true);
             ///////////////////////////////////////////////////////////////////
         }
 
@@ -67,18 +76,28 @@ namespace Player
             return _gridManager;
         }
 
-        public void StopMoveAnim()
+        public void StopMoveAnim(bool deathEffect)
         {
             _interactablesUnder.Clear();
             _interactablesInFront.Clear();
             _currentMoveAnim?.Kill();
+            _canMove = false;
             _reachedTargetCell = true;
         }
 
-        private void TryMove(Vector2 direction)
+        private void TryMove()
         {
-            if (!_reachedTargetCell) return;
-            Move(direction);
+            if (!_canMove || !_reachedTargetCell) return;
+            
+            if ((_holdingFor += Time.deltaTime) >= _holdTime)
+                {_holdingFor = 0f; Move();}
+        }
+
+        private void StartMove(Vector2 direction)
+        {
+            _canMove = true;
+            _holdTime = _moveDirection == direction ? _movementHoldTime : 0f;
+            _moveDirection = direction;
         }
 
         private void CheckInteraction<T>(Vector3 dir) where T : IInteractable
@@ -158,11 +177,10 @@ namespace Player
             EventManager.instance.canInteract.Invoke(callable.Count > 0, isNotNull ? callable[0].showName : "");
         }
 
-        private void Move(Vector2 direction)
+        private void Move()
         {
             _moveDirection = direction;
-            var nextIndex = _gridManager.GetNextIndex(_transform.position, _moveDirection);
-
+            Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, _moveDirection);
             var nextCell = _gridManager.GetCell(nextIndex);
 
             currentDirection = _moveDirection.x switch
@@ -177,7 +195,11 @@ namespace Player
                 }
             };
 
-            if (nextCell == null) return;
+            if (nextCell == null)
+            {
+                StopMove();
+                return;
+            }
 
             var nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
@@ -192,6 +214,7 @@ namespace Player
                 if (objectOnCell is ICollisionObject)
                 {
                     CheckInteraction<IInteractable>(_moveDirection);
+                    StopMove();
                     return;
                 }
 
@@ -209,10 +232,18 @@ namespace Player
                 EventManager.instance.onPlayerFinishedMoving?.Invoke(_transform.position);
 
                 _reachedTargetCell = true;
+                _holdTime = _movementHoldTime;
             });
             GetInteractableFrontOfMe<IInteractable>(_moveDirection);
+        }
 
+        private void StopMove()
+        {
             SetAnimation(0);
+            _canMove = false;
+            _moveDirection = Vector2.zero;
+            _holdTime = 0f;
+            _holdingFor = 0f;
         }
 
         private void Interact()

@@ -160,10 +160,11 @@ namespace Creators
 
         private void CheckPlayerDied()
         {
-            if (_currentTickClock < 0) EventManager.instance.onDeath?.Invoke();
+            if (_currentTickClock < 0) EventManager.instance.onDeath?.Invoke(true);
         }
 
-        private void OnDeath()
+        
+        private void OnDeath(bool deathEffect)
         {
             _currentTickClock = _maxTickClock;
             _playerPoisoned = false;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DeathSystem;
 using Grid;
 using Traps;
 using UnityEngine;
@@ -7,24 +8,28 @@ using UnityEngine.Assertions;
 
 namespace Creators
 {
+    [RequireComponent(typeof(PressurePlate))]
     public class CreatePressurePlate : CellCreator
     {
-        [SerializeField] private Cell _door;
-        [SerializeField] private Cell _pillarRight;
-        [SerializeField] private Cell _pillarLeft;
+        [Header("Manager")]
+        [SerializeField] protected GridManager _gridManager;
+
+        [Header("Transforms")]
         [SerializeField] private List<Transform> _doorTransforms;
         [SerializeField] private List<PillarObject> _pillars;
-        [SerializeField] protected GridManager _gridManager;
-        [SerializeField] private PressurePlate _plateToSpawn;
-        private PressurePlate _plateSpawned;
+
+        [Header("Plate")]
+        private PressurePlate _plate;
 
         protected override void Start()
         {
-            Assert.IsNotNull(_door, "door is null in CreateDoorBtn");
             Assert.IsNotNull(_doorTransforms, "doors transform is null in CreateDoorBtn");
             Assert.IsNotNull(_pillars, "pillars transform is null in CreateDoorBtn");
             Assert.IsNotNull(_gridManager, "grid manager is null in CreateDoorBtn");
+            _plate = GetComponent<PressurePlate>();
             base.Start();
+
+            EventManager.instance.onPlayerFinishedMoving.AddListener(OnPlayerFinishedMoving);
         }
 
         protected override void OnDrawGizmos()
@@ -67,18 +72,17 @@ namespace Creators
         protected override void SetTile(Cell cell)
         {
             base.SetTile(cell);
-            _plateSpawned = Instantiate(_plateToSpawn, transform.position, Quaternion.identity);
             Invoke(nameof(SetupObjectsOnCell), 0);
         }
 
         private void SetupObjectsOnCell()
         {
-            _gridManager.AddObjectOnCell(transform.position, _plateSpawned);
-            _plateSpawned.SetDoorTransforms(_doorTransforms);
-            _plateSpawned.SetPillars(_pillars);
-            _plateSpawned.onPlate += OnPlate;
-            _plateSpawned.offPlate += OffPlate;
-            CreateCells(_door, _doorTransforms);
+            _gridManager.AddObjectOnCell(transform.position, _plate);
+            _plate.SetDoorTransforms(_doorTransforms);
+            _plate.SetPillars(_pillars);
+            _plate.onPlate += OnPlate;
+            _plate.offPlate += OffPlate;
+            CreateCells(_plate.GetDoorClose, _doorTransforms);
 
             List<Transform> rightPillars = new();
             List<Transform> leftPillars = new();
@@ -91,24 +95,33 @@ namespace Creators
                     leftPillars.Add(p.transform);
             }
 
-            CreateCells(_pillarLeft, leftPillars);
-            CreateCells(_pillarRight, rightPillars);
+            CreateCells(_plate.GetPillarLeftClose, leftPillars);
+            CreateCells(_plate.GetPillarRightClose, rightPillars);
             //Invoke(nameof(Test), 0);
+        }
+
+
+        private void OnPlayerFinishedMoving(Vector3 position)
+        {
+            if (_gridManager.GetCell(_gridManager.GetCellIndex(position)) == _plate.GetDoorClose)
+            {
+                EventManager.instance.onDeath.Invoke(false);
+            }
         }
 
         private void Test()
         {
-            _plateSpawned.StopInteract();
+            _plate.StopInteract();
         }
 
         private void OnPlate()
         {
-            _gridManager.AddObjectOnCell(transform.position, _plateSpawned);
+            _gridManager.AddObjectOnCell(transform.position, _plate);
         }
 
         private void OffPlate()
         {
-            _gridManager.AddObjectOnCell(transform.position, _plateSpawned);
+            _gridManager.AddObjectOnCell(transform.position, _plate);
         }
 
         #region CreateCell

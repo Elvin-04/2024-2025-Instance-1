@@ -11,21 +11,19 @@ namespace Traps
     {
         [Header("Pressure Plate")]
         [SerializeField] private Cell _platePress;
-
         [SerializeField] private Cell _plateRelease;
 
         [Header("Door")]
         [SerializeField] private Cell _doorOpen;
-
         [SerializeField] private Cell _doorClose;
 
-        [Header("Pillar")]
+        [Header("Pillar Right")]
         [SerializeField] private Cell _wallCloseToDoorOpenedRight;
-
-        [SerializeField] private Cell _wallCloseToDoorOpenedLeft;
-
-        [SerializeField] private Cell _wallCloseToDoorClosedLeft;
         [SerializeField] private Cell _wallCloseToDoorClosedRight;
+
+        [Header("Pillar Left")]
+        [SerializeField] private Cell _wallCloseToDoorOpenedLeft;
+        [SerializeField] private Cell _wallCloseToDoorClosedLeft;
 
         [Header("Transform List")]
         private List<Transform> _doorTransforms = new();
@@ -132,7 +130,11 @@ namespace Traps
         private void ClosePillar(PillarObject pillar)
         {
             EventManager.instance.onChangeCell?.Invoke(pillar.transform.position,
-                pillar.side == Side.Right ? _wallCloseToDoorClosedLeft : _wallCloseToDoorClosedRight);
+                pillar.side == Side.Right ?  _wallCloseToDoorClosedRight : _wallCloseToDoorClosedLeft);
         }
+
+        public Cell GetDoorClose => _doorClose;
+        public Cell GetPillarLeftClose => _wallCloseToDoorClosedLeft;
+        public Cell GetPillarRightClose => _wallCloseToDoorClosedRight;
     }
 }
