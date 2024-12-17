@@ -42,6 +42,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent<Vector3> onPlayerFinishedMoving { get; private set; } = new();
     public UnityEvent onRuneDropped { get; private set; } = new();
     public UnityEvent<(int, int)> onCellChanged { get; private set; } = new();
+    public UnityEvent onPoisonedPlayer { get; private set; } = new();
 
     private void Awake()
     {
