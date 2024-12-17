@@ -1,5 +1,6 @@
 using Managers;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Score
@@ -21,7 +22,14 @@ namespace Score
         {
             EventManager.instance.onClockUpdated.AddListener(OnPlayerMove);
             EventManager.instance.onDeath.AddListener(OnPlayerDies);
+            EventManager.instance.onWin.AddListener((() => StartCoroutine(LateCalculate())));
             Invoke(nameof(LateStart), 0);
+        }
+
+        private IEnumerator LateCalculate()
+        {
+            yield return new WaitForEndOfFrame();
+            CalculateFinalScore();
         }
 
         private void LateStart()
@@ -68,6 +76,7 @@ namespace Score
             {
                 _stars = 0;
             }
+            Debug.Log("event called");
         }
     }
 }
