@@ -1,5 +1,5 @@
-using System;
 using Managers;
+using System;
 using UnityEngine;
 
 namespace Score

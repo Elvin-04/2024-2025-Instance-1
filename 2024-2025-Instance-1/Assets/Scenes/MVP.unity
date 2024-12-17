@@ -889,6 +889,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveTime: 0.25
+  _playerInput:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 91d45594-49e1-4487-b1c8-bf23fe90d585
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &1558359883
 GameObject:
   m_ObjectHideFlags: 0
@@ -6960,71 +6969,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1001 &1648737324
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 382405296317783976, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_Name
-      value: CreateRune
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810067725495531215, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810067725495531215, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810067725495531215, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810067725495531215, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810067725495531215, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810067725495531215, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810067725495531215, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810067725495531215, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810067725495531215, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810067725495531215, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5607132089522310240, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: _gridManager
-      value: 
-      objectReference: {fileID: 1075084691}
-    - target: {fileID: 5607132089522310240, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
-      propertyPath: _runeToSpawn
-      value: 
-      objectReference: {fileID: 4558655405851064084, guid: 0ae72618880e1bf429406d8d628654d7, type: 3}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d36aafab168ceaa4096edb28675ffb62, type: 3}
 --- !u!1 &1663743986
 GameObject:
   m_ObjectHideFlags: 0
@@ -7649,6 +7593,6 @@ SceneRoots:
   - {fileID: 1942168811}
   - {fileID: 2089783915}
   - {fileID: 664748567}
-  - {fileID: 1648737324}
   - {fileID: 931179538}
   - {fileID: 7317408587883082295}
+  - {fileID: 1962450682}
