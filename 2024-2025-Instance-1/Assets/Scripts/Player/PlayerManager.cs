@@ -56,6 +56,7 @@ namespace Player
         {
             GameObject player = Instantiate(_playerPrefab, GetCellPos(_levelManager.spawnPoint),
                 Quaternion.identity);
+            player.transform.position = pos;
             DeathManager playerDeathManager = player.GetComponent<DeathManager>();
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerDeathManager.SetGridManager(_gridManager);
