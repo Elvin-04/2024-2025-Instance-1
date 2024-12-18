@@ -32,6 +32,7 @@ namespace Menu.Level_Selector
                 _currentLevel = null;
                 _currentLevelStars = 0;
                 SceneManager.LoadScene(0);
+                return;
             }
 
             _currentLevel = level;
