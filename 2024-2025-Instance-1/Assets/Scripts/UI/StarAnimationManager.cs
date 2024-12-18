@@ -13,7 +13,7 @@ namespace UI
         [SerializeField] private Animator _star1;
         [SerializeField] private Animator _star2;
         [SerializeField] private Animator _star3;
-        private int _currentScore = 3;
+        private int _currentScore;
         private Animator _panelAnimator;
 
         private void Awake()
@@ -40,8 +40,7 @@ namespace UI
         }
 
         private void OnScoreUpdated(int score)
-        {
-            Debug.Log("event received");
+        {   
             _currentScore = score;
             if (gameObject.activeSelf)
             {
