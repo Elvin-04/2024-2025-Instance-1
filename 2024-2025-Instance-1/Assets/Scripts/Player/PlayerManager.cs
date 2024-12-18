@@ -23,7 +23,6 @@ namespace Player
 
         //Components
         private LevelManager _levelManager;
-
         private void Awake()
         {
             Assert.IsNotNull(_playerPrefab, "player prefab is null in PlayerManager");
@@ -62,6 +61,13 @@ namespace Player
             playerDeathManager.SetGridManager(_gridManager);
             playerDeathManager.onPlayerDeath += OnDeath;
             playerController.SetGridManager(_gridManager);
+
+            return player;
+        }
+        public GameObject SpawnPlayer(Vector3 pos, Color color)
+        {
+            GameObject player = SpawnPlayer(pos);
+            player.GetComponentInChildren<SpriteRenderer>().color = color;
             return player;
         }
 
