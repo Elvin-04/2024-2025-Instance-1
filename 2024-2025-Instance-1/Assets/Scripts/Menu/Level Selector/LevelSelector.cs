@@ -27,11 +27,12 @@ namespace Menu.Level_Selector
 
         public void StartLevel(LevelInfo level)
         {
-            if (level == null)
+            if (!level)
             {
                 _currentLevel = null;
                 _currentLevelStars = 0;
                 SceneManager.LoadScene(0);
+                return;
             }
 
             _currentLevel = level;
