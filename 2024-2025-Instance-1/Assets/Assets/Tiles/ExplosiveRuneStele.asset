@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f00e031566451eab07189ccfe4e7de, type: 3}
+  m_Name: ExplosiveRuneStele
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 21300000, guid: 55df0090626d8ec4b9d8dcc13adcaf54, type: 3}
+  - {fileID: 21300000, guid: 47e41110c93522d4eb405f839593b625, type: 3}
+  - {fileID: 21300000, guid: 77cea434169528e4480e0a6092a0fd4a, type: 3}
+  - {fileID: 21300000, guid: 0968a812c36db4744a1203960325bf2a, type: 3}
+  - {fileID: 21300000, guid: d68ba294519a79e48955dd55aee2f870, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0
+  _prefab: {fileID: 0}
