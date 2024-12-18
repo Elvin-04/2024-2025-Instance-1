@@ -50,15 +50,15 @@ namespace UI
         {
             yield return new WaitForEndOfFrame();
             yield return new WaitForSeconds(_panelAnimator.GetCurrentAnimatorStateInfo(0).length + _waitStarTime);
-            if (score == 1) EventManager.instance.onPlaySfx?.Invoke(_jingleStars);
+            if (score >= 1) EventManager.instance.onPlaySfx?.Invoke(_jingleStars);
             _star1.SetBool(IsOn, score >= 1);
             yield return new WaitForEndOfFrame();
             yield return new WaitForSeconds(_star1.GetCurrentAnimatorClipInfo(0)[0].clip.length + _waitStarTime);
-            if (score == 2) EventManager.instance.onPlaySfx?.Invoke(_jingleStars);
+            if (score >= 2) EventManager.instance.onPlaySfx?.Invoke(_jingleStars);
             _star2.SetBool(IsOn, score >= 2);
             yield return new WaitForEndOfFrame();
             yield return new WaitForSeconds(_star2.GetCurrentAnimatorClipInfo(0)[0].clip.length + _waitStarTime);
-            if (score == 3) EventManager.instance.onPlaySfx?.Invoke(_jingleStars);
+            if (score >= 3) EventManager.instance.onPlaySfx?.Invoke(_jingleStars);
             _star3.SetBool(IsOn, score >= 3);
         }
     }
