@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Creators;
 using Grid;
 using Managers.Audio;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -33,6 +33,8 @@ namespace Traps
         [Header("Transform List")]
         private List<Transform> _doorTransforms = new();
 
+        private bool _isPress;
+
         private List<PillarObject> _pillars = new();
         public Action offPlate;
 
@@ -60,12 +62,16 @@ namespace Traps
 
         public void Interact()
         {
+            if (_isPress) return;
+            _isPress = true;
             Open();
             onPlate.Invoke();
         }
 
         public void StopInteract()
         {
+            if (!_isPress) return;
+            _isPress = false;
             Close();
             offPlate.Invoke();
         }

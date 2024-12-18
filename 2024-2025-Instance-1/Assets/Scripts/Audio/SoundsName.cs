@@ -18,6 +18,9 @@ namespace Managers.Audio
         ReleasePressurePlate,
         DestroyWall,
         ButtonMouseOver,
-        ButtonMouseExit
+        ButtonMouseExit,
+        ButtonMouseClick,
+        MusicMenuPrincipal,
+        MusicInGame
     }
 }
