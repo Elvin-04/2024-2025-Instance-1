@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5dae3c8-57b4-4f13-9a51-cbff5b87e13f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenuDoriann.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenuDoriann.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2024-2025-Instance-1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024-2025-Instance-1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Death/DeathByArrow.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Death/DeathByArrow.mp3.meta" beforeDir="false" />

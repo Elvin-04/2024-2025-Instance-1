@@ -1,15 +1,18 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
-    [Space] [SerializeField] private GameObject _winPanel;
+    [Space]
+    [SerializeField] private GameObject _winPanel;
 
     [SerializeField] private GameObject _popUpInteractable;
 
     [Header("Can Interact")]
     [SerializeField] private TextMeshProUGUI _canInteractText;
+
     [SerializeField] private string _interactionText = $"Take {0} by press F";
 
 

@@ -1,14 +1,23 @@
+using System;
 using Menu.Level_Selector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace UI
 {
     public class EndLevelUI : MonoBehaviour
     {
+
+        [SerializeField] private GameObject _winPanelFirstBtn;
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        private void OnEnable()
+        {
+            EventSystem.current.SetSelectedGameObject(_winPanelFirstBtn);
         }
 
         public void RestartGame()

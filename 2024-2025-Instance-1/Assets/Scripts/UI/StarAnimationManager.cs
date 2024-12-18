@@ -27,6 +27,7 @@ namespace UI
             Assert.IsNotNull(_star2, "star2 is null in ScoreUI");
             Assert.IsNotNull(_star3, "star3 is null in ScoreUI");
             EventManager.instance.onScoreUpdated?.AddListener(OnScoreUpdated);
+            Debug.Log("start ");
         }
 
         private void OnEnable()
@@ -35,12 +36,17 @@ namespace UI
             _star2.SetTrigger(IsIdle);
             _star3.SetTrigger(IsIdle);
             
-            StartCoroutine(StartStarAnim(_currentScore));
+            
         }
 
         private void OnScoreUpdated(int score)
         {
+            Debug.Log("event received");
             _currentScore = score;
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(StartStarAnim(_currentScore));
+            }
         }
 
         private IEnumerator StartStarAnim(float score)
