@@ -15,6 +15,7 @@ namespace Menu.Level_Selector
         [SerializeField] private GameObject _starsContainer;
 
         private Button _btn;
+        private readonly SoundsName _musicGame = SoundsName.MusicInGame;
 
         private void Start()
         {
@@ -38,7 +39,7 @@ namespace Menu.Level_Selector
         public void LoadLevel()
         {
             LevelSelector.instance.StartLevel(_level);
-            EventManager.instance.onPlayMusic.Invoke(SoundsName.MusicInGame);
+            EventManager.instance.onPlayMusic.Invoke(_musicGame);
         }
     }
 }

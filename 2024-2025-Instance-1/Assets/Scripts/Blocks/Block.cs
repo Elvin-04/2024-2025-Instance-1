@@ -2,6 +2,7 @@ using DG.Tweening;
 using Grid;
 using System.Collections.Generic;
 using System.Linq;
+using Managers.Audio;
 using UnityEngine;
 
 public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWeight
@@ -15,6 +16,8 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
     private List<IWeightInteractable> _interactablesUnder = new();
     private Vector3 _interactablesUnderPosition;
 
+    private SoundsName _sfxRockSlide = SoundsName.RockSlide;
+    
     private void Start()
     {
         transform.position = _gridManager.GetCellPos(transform.position);
@@ -41,6 +44,7 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
             transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime())
                 .OnComplete(GetInteractableUnderMe);
             
+            EventManager.instance.onPlaySfx?.Invoke(_sfxRockSlide);
             _gridManager.RemoveObjectOnCell(cellIndex, this);
             _gridManager.AddObjectOnCell(nextIndex, this);
         }

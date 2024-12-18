@@ -21,6 +21,7 @@ namespace Managers.Audio
         ButtonMouseExit,
         ButtonMouseClick,
         MusicMenuPrincipal,
-        MusicInGame
+        MusicInGame,
+        RockSlide
     }
 }
