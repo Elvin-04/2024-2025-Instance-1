@@ -111,9 +111,6 @@ public class PlayerPoisonFeedBack : MonoBehaviour
 
     private void UpdatePoisonTextAfterDelay()
     {
-        print("t3st");
-
-
         if (_poisonTrap)
         {
             SetPoisonText();
@@ -126,9 +123,6 @@ public class PlayerPoisonFeedBack : MonoBehaviour
             _poisonTrapCreator = _poisonTrap.creator;
             SetPoisonText();
         }
-
-        if (_poisonTrap)
-            Debug.Log("_poisonTrap.creator.GetPoisoned() : " + _poisonTrap.creator.GetPoisoned());
     }
 
     private PoisonTrap GetPoisonTrap()

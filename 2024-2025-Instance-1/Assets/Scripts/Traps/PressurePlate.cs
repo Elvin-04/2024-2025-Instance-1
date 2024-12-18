@@ -1,5 +1,6 @@
 using Creators;
 using Grid;
+using Managers.Audio;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,18 +12,22 @@ namespace Traps
     {
         [Header("Pressure Plate")]
         [SerializeField] private Cell _platePress;
+
         [SerializeField] private Cell _plateRelease;
 
         [Header("Door")]
         [SerializeField] private Cell _doorOpen;
+
         [SerializeField] private Cell _doorClose;
 
         [Header("Pillar Right")]
         [SerializeField] private Cell _wallCloseToDoorOpenedRight;
+
         [SerializeField] private Cell _wallCloseToDoorClosedRight;
 
         [Header("Pillar Left")]
         [SerializeField] private Cell _wallCloseToDoorOpenedLeft;
+
         [SerializeField] private Cell _wallCloseToDoorClosedLeft;
 
         [Header("Transform List")]
@@ -32,6 +37,10 @@ namespace Traps
         public Action offPlate;
 
         public Action onPlate;
+
+        public Cell GetDoorClose => _doorClose;
+        public Cell GetPillarLeftClose => _wallCloseToDoorClosedLeft;
+        public Cell GetPillarRightClose => _wallCloseToDoorClosedRight;
 
         private void Start()
         {
@@ -88,25 +97,22 @@ namespace Traps
 
         private void Open()
         {
-            if (_doorTransforms == null || _pillars == null)
-            {
-                return;
-            }
+            if (_doorTransforms == null || _pillars == null) return;
 
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.OpenDoor);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.PressPressurePlate);
             EventManager.instance.onChangeCell?.Invoke(transform.position, _platePress);
-            foreach (Transform doorTransform in _doorTransforms)
-            {
-                OpenDoor(doorTransform);
-            }
-            foreach (PillarObject pillar in _pillars)
-            {
-                OpenPillar(pillar);
-            }
+
+            foreach (Transform doorTransform in _doorTransforms) OpenDoor(doorTransform);
+            foreach (PillarObject pillar in _pillars) OpenPillar(pillar);
         }
 
         private void Close()
         {
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.CloseDoor);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.ReleasePressurePlate);
             EventManager.instance.onChangeCell?.Invoke(transform.position, _plateRelease);
+
             foreach (Transform doorTransform in _doorTransforms) CloseDoor(doorTransform);
             foreach (PillarObject pillar in _pillars) ClosePillar(pillar);
         }
@@ -130,11 +136,7 @@ namespace Traps
         private void ClosePillar(PillarObject pillar)
         {
             EventManager.instance.onChangeCell?.Invoke(pillar.transform.position,
-                pillar.side == Side.Right ?  _wallCloseToDoorClosedRight : _wallCloseToDoorClosedLeft);
+                pillar.side == Side.Right ? _wallCloseToDoorClosedRight : _wallCloseToDoorClosedLeft);
         }
-
-        public Cell GetDoorClose => _doorClose;
-        public Cell GetPillarLeftClose => _wallCloseToDoorClosedLeft;
-        public Cell GetPillarRightClose => _wallCloseToDoorClosedRight;
     }
 }

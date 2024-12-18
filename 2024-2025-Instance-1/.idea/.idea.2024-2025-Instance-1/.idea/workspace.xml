@@ -8,8 +8,244 @@
       <change afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenuDoriann.unity" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenuDoriann.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2024-2025-Instance-1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024-2025-Instance-1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Menu/MainMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Death/DeathByArrow.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Death/DeathByArrow.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Door/Break/mp3/DestroyDoor.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Door/Break/mp3/DestroyDoor.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Door/Close/CloseDoor - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Door/Close/CloseDoor - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Door/Open/OpenDoor - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Door/Open/OpenDoor - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/PressurePlate/Pressure Plate Sound Effect - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/PressurePlate/Pressure Plate Sound Effect - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/PressurePlate/Pressure Plate Sound Effect - Part_2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/PressurePlate/Pressure Plate Sound Effect - Part_2.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/egal - ActivateSpike.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/egal - ActivateSpike.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/egal - ActivateSpike.mp3.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Audio/SFX/Spike/Activate/egal - ActivateSpike.mp3.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Arrow.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Arrow/egal - ImpactArrowWithWall.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Arrow/egal - ImpactArrowWithWall.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/mp3/egal - ButtonPress.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/mp3/egal - ButtonPress.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/mp3/egal - ButtonRelease.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/mp3/egal - ButtonRelease.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/wav/ButtonPress - Part_1.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/wav/ButtonPress - Part_1.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/wav/ButtonPress.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/wav/ButtonPress.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/wav/ButtonRelease.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Button/wav/ButtonRelease.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/Collectible total.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/Collectible total.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_10.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_10.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_11.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_11.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_12 - Reverse.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_12 - Reverse.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_12.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_12.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_13 - Reverse.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_13 - Reverse.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_13.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_13.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_14 - Reverse.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_14 - Reverse.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_14.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_14.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_15 - Reverse.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_15 - Reverse.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_15.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_15.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_16.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_16.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_17 - plus grave.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_17 - plus grave.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_17.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_17.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_18.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_18.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_19.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_19.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_2.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_20.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_20.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_21.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_21.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_3.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_4.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_4.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_5.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_5.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_6.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_6.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_7.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_7.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_8.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_8.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_9.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/mp3/Collectible - Part_9.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_1.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_1.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_10.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_10.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_11.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_11.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_12 - Reverse.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_12 - Reverse.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_12.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_12.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_13 - Reverse.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_13 - Reverse.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_13.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_13.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_14 - Reverse.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_14 - Reverse.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_14.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_14.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_15 - Reverse.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_15 - Reverse.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_15.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_15.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_16.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_16.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_17 - plus grave.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_17 - plus grave.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_17.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_17.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_18.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_18.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_19.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_19.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_2.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_2.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_20.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_20.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_21.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_21.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_3.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_3.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_4.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_4.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_5.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_5.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_6.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_6.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_7.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_7.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_8.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_8.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_9.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Collectible/wav/Collectible - Part_9.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Corpse.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Death.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Death/egal - DeathByArrow.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Death/egal - DeathByArrow.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Break.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Break/mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Break/mp3/egal - DestroyDoor.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Break/mp3/egal - DestroyDoor.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Break/wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Break/wav/DestroyDoor.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Break/wav/DestroyDoor.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Butt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Butt/egal - ButteDoor.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Butt/egal - ButteDoor.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Close.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Close/egal - CloseDoor - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Close/egal - CloseDoor - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Open.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Open/OpenDoor - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Open/OpenDoor - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Open/egal - OpenDoor - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Door/Open/egal - OpenDoor - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand/egal - MovingOnACorpse - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand/egal - MovingOnACorpse - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand/egal - MovingOnACorpse - Part_2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand/egal - MovingOnACorpse - Part_2.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand/egal - MovingOnACorpse - Part_3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand/egal - MovingOnACorpse - Part_3.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand/egal - MovingOnACorpse - Part_4.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand/egal - MovingOnACorpse - Part_4.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand/egal - MovingOnACorpse - Part_5.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Sand/egal - MovingOnACorpse - Part_5.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Stone.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Stone/egal - PlayerFreeMove - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Stone/egal - PlayerFreeMove - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Stone/egal - PlayerFreeMove - Part_2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Stone/egal - PlayerFreeMove - Part_2.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Stone/egal - PlayerFreeMove - Part_3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Movement/Player/Stone/egal - PlayerFreeMove - Part_3.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/PressurePlate.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/PressurePlate/TEST1.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/PressurePlate/TEST1.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/PressurePlate/egal - Pressure Plate Sound Effect - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/PressurePlate/egal - Pressure Plate Sound Effect - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/PressurePlate/egal - Pressure Plate Sound Effect - Part_2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/PressurePlate/egal - Pressure Plate Sound Effect - Part_2.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/mp3/Recup Rune Givre.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/mp3/Recup Rune Givre.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/mp3/Recup_Rune_Givre - Part_2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/mp3/Recup_Rune_Givre - Part_2.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/mp3/Recup_Rune_Givre - Part_3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/mp3/Recup_Rune_Givre - Part_3.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/wav/Recup Rune Givre.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/wav/Recup Rune Givre.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/wav/Recup_Rune_Givre - Part_2.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/wav/Recup_Rune_Givre - Part_2.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/wav/Recup_Rune_Givre - Part_3.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Runes/Givre/wav/Recup_Rune_Givre - Part_3.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Spike.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Spike/Activate.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Spike/Activate/egal - ActivateSpike - Part_3mp3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Spike/Activate/egal - ActivateSpike - Part_3mp3.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Spike/Deactivate.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Spike/Deactivate/egal - DeactivateSpike - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Spike/Deactivate/egal - DeactivateSpike - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Thrower.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Thrower/egal - ActiveArrowthrower.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Thrower/egal - ActiveArrowthrower.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/mp3/egal - DestroyWall - Part_1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/mp3/egal - DestroyWall - Part_1.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/mp3/egal - DestroyWall - Part_2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/mp3/egal - DestroyWall - Part_2.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/mp3/egal - DestroyWall - Part_3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/mp3/egal - DestroyWall - Part_3.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/mp3/egal - DestroyWall - Part_4.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/mp3/egal - DestroyWall - Part_4.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/wav/DestroyWall - Part_1.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/wav/DestroyWall - Part_1.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/wav/DestroyWall - Part_2.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/wav/DestroyWall - Part_2.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/wav/DestroyWall - Part_3.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/wav/DestroyWall - Part_3.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/wav/DestroyWall - Part_4.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Audio/SFX/_equalizer/Wall/Break/wav/DestroyWall - Part_4.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Managers/AudioManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Managers/AudioManager.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Audio/SoundsName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Audio/SoundsName.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,25 +304,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "XThreadsFramesViewSplitterKey": "0.5015625",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "Reverting in feat-ControllerNavigation",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "rider.code.cleanup.on.save": "true",
-    "rider.code.cleanup.on.save.profile": "Dodo",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.5011442&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fix-AudioLevel&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;rider.code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;rider.code.cleanup.on.save.profile&quot;: &quot;Dodo&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CodeLensConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../Build/TestMVP\2024-2025-Instance-1.exe" />
@@ -179,25 +415,6 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Managers/Audio/AudioManager.cs</url>
-          <line>212</line>
-          <properties documentPath="C:\Users\Dodo\Documents\GitHub\2024-2025-Instance-1\2024-2025-Instance-1\Assets\Scripts\Managers\Audio\AudioManager.cs" containingFunctionPresentation="Method 'PlaySfx'">
-            <startOffsets>
-              <option value="8103" />
-            </startOffsets>
-            <endOffsets>
-              <option value="8156" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

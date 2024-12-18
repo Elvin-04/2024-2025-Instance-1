@@ -24,6 +24,8 @@ namespace Score
             EventManager.instance.onDeath.AddListener(OnPlayerDies);
             EventManager.instance.onWin.AddListener((() => StartCoroutine(LateCalculate())));
             Invoke(nameof(LateStart), 0);
+
+            EventManager.instance.onWin.AddListener(() => Debug.Log(_steps));
         }
 
         private IEnumerator LateCalculate()

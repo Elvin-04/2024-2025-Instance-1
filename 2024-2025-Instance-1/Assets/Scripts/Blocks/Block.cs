@@ -38,7 +38,6 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
 
         if (canPickUp)
         {
-            Debug.Log("Move");
             transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime())
                 .OnComplete(GetInteractableUnderMe);
             
@@ -79,7 +78,6 @@ public class Block : CellObjectBase, ICollisionObject, IInteractableInFront, IWe
                 {
                     return;
                 }
-                Debug.Log("stopping interactions");
                 if (interactable is IInteractable interact)
                 {
                     interact.StopInteract();

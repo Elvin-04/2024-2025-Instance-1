@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754f3548583a4b048379fe7164d6bbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugImage: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  _cloneColor: {r: 0, g: 0.6117647, b: 1, a: 1}
