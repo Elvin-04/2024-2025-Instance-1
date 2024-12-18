@@ -16,6 +16,8 @@ namespace Managers.Audio
         CloseDoor,
         PressPressurePlate,
         ReleasePressurePlate,
-        DestroyWall
+        DestroyWall,
+        ButtonMouseOver,
+        ButtonMouseExit
     }
 }

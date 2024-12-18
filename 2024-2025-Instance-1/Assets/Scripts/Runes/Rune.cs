@@ -25,7 +25,7 @@ namespace Runes
             onTake?.Invoke();
             EventManager.instance.canInteract.Invoke(false, "");
             EventManager.instance.addRuneToInventory.Invoke(this);
-            EventManager.instance.onPlaySfx?.Invoke(SoundsName.Collectible, null);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.Collectible);
         }
 
         public void StopInteract()

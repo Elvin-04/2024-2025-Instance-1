@@ -1,5 +1,4 @@
 using Grid;
-using Managers.Audio;
 using Player;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -37,20 +36,19 @@ namespace Traps.Arrow_Trap
 
             //Debug.Log($"EventManager.instance: {EventManager.instance}");
             //Debug.Log($"transform: {transform}");
-            EventManager.instance.onPlaySfx?.Invoke(SoundsName.ActiveArrowThrower, transform);
         }
 
         private void ShootArrow()
         {
-            var arrowObject =
+            GameObject arrowObject =
                 Instantiate(_arrowPrefab, _gridManager.GetCellPos(_transform.position), Quaternion.identity);
             arrowObject.SetActive(true);
 
-            var arrowTransform = arrowObject.transform;
+            Transform arrowTransform = arrowObject.transform;
 
             arrowTransform.position = _transform.position;
 
-            var arrow = arrowObject.GetComponent<Arrow>();
+            Arrow arrow = arrowObject.GetComponent<Arrow>();
             arrow.SetDirection(_direction);
             arrow.SetGridManager(_gridManager);
         }
