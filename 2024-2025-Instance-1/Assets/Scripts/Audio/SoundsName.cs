@@ -23,6 +23,8 @@ namespace Managers.Audio
         MusicMenuPrincipal,
         MusicInGame,
         RockSlide,
-        JingleWin
+        JingleWin,
+        JingleStars,
+        Explosion
     }
 }

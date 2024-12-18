@@ -129,6 +129,12 @@ MonoBehaviour:
   - key: 21
     clips:
     - {fileID: 8300000, guid: 78d47a9226bd4b345b3807ec4449a6a2, type: 3}
+  - key: 22
+    clips:
+    - {fileID: 8300000, guid: 507625e49a22ed04881339bc0b4e815f, type: 3}
+  - key: 23
+    clips:
+    - {fileID: 8300000, guid: 72b156aa9e7befd45a339e26ca2a280c, type: 3}
 --- !u!1 &8900674179908919303
 GameObject:
   m_ObjectHideFlags: 0
