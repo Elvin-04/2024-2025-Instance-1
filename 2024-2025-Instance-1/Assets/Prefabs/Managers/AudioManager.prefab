@@ -119,13 +119,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 62e11f5692aa7e8459598938199d1ccf, type: 3}
   - key: 15
     clips:
-    - {fileID: 8300000, guid: a336cc5a10a0ff94586f191aab25cb6b, type: 3}
-  - key: 16
-    clips:
     - {fileID: 8300000, guid: 1458835a130541042af4a510cb5c5d4b, type: 3}
-  - key: 18
+  - key: 17
     clips:
-    - {fileID: 8300000, guid: 775f0c9f87a1a1243acd8ab70dd6291d, type: 3}
+    - {fileID: 8300000, guid: a336cc5a10a0ff94586f191aab25cb6b, type: 3}
 --- !u!1 &8900674179908919303
 GameObject:
   m_ObjectHideFlags: 0
