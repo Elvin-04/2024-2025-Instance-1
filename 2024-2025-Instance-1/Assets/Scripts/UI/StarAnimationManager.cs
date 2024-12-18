@@ -16,6 +16,7 @@ namespace UI
         [SerializeField] private Animator _star3;
         private int _currentScore = 3;
         private readonly SoundsName _jingleStars = SoundsName.JingleStars;
+ 
         private Animator _panelAnimator;
 
         private void Awake()
@@ -40,8 +41,7 @@ namespace UI
         }
 
         private void OnScoreUpdated(int score)
-        {
-            Debug.Log("event received");
+        {   
             _currentScore = score;
             if (gameObject.activeSelf) StartCoroutine(StartStarAnim(_currentScore));
         }

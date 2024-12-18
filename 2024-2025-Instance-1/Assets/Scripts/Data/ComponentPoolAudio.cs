@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Data
-{
     public class ComponentPoolAudio<T> where T : Component
     {
         private readonly Transform _parent;
@@ -89,4 +87,3 @@ namespace Data
             }
         }
     }
-}

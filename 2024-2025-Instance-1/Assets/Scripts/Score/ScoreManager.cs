@@ -8,10 +8,10 @@ namespace Score
     [RequireComponent(typeof(LevelManager))]
     public class ScoreManager : MonoBehaviour
     {
-        private int _deaths;
+        public int deaths { get; private set; }
         private LevelManager _levelManager;
         private int _stars;
-        private int _steps;
+        public int steps { get; private set; }
 
         private void Awake()
         {
@@ -25,7 +25,7 @@ namespace Score
             EventManager.instance.onWin.AddListener((() => StartCoroutine(LateCalculate())));
             Invoke(nameof(LateStart), 0);
 
-            EventManager.instance.onWin.AddListener(() => Debug.Log(_steps));
+            EventManager.instance.onWin.AddListener(() => Debug.Log(steps));
         }
 
         private IEnumerator LateCalculate()
@@ -41,13 +41,13 @@ namespace Score
 
         private void OnPlayerDies(bool deathEffect)
         {
-            _deaths++;
+            deaths++;
             CalculateFinalScore();
         }
 
         private void OnPlayerMove()
         {
-            _steps++;
+            steps++;
             CalculateFinalScore();
         }
 
@@ -60,17 +60,17 @@ namespace Score
         private void CalculateScore()
         {
             _stars = 3;
-            if (_deaths < _levelManager.maxDeaths.firstThreshold && _steps < _levelManager.maxSteps.firstThreshold)
+            if (deaths < _levelManager.maxDeaths.firstThreshold && steps < _levelManager.maxSteps.firstThreshold)
             {
                 _stars = 3;
             }
-            else if (_deaths < _levelManager.maxDeaths.secondThreshold &&
-                     _steps < _levelManager.maxSteps.secondThreshold)
+            else if (deaths < _levelManager.maxDeaths.secondThreshold &&
+                     steps < _levelManager.maxSteps.secondThreshold)
             {
                 _stars = 2;
             }
-            else if (_deaths < _levelManager.maxDeaths.thirdThreshold &&
-                     _steps < _levelManager.maxSteps.thirdThreshold)
+            else if (deaths < _levelManager.maxDeaths.thirdThreshold &&
+                     steps < _levelManager.maxSteps.thirdThreshold)
             {
                 _stars = 1;
             }
@@ -78,7 +78,6 @@ namespace Score
             {
                 _stars = 0;
             }
-            Debug.Log("event called");
         }
     }
 }

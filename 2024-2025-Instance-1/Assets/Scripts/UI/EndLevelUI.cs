@@ -8,7 +8,7 @@ namespace UI
 {
     public class EndLevelUI : MonoBehaviour
     {
-
+        [SerializeField] private int _NextLevel;
         [SerializeField] private GameObject _winPanelFirstBtn;
         public void QuitGame()
         {
@@ -22,15 +22,13 @@ namespace UI
 
         public void RestartGame()
         {
-            LevelSelector.instance.StartLevel(LevelSelector.instance.currentLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         public void NextLevel()
         {
-            print(LevelSelector.instance == null);
-            print(LevelSelector.instance.currentLevel == null);
-            print(LevelSelector.instance.currentLevel.nextLevel == null);
-            LevelSelector.instance.StartLevel(LevelSelector.instance.currentLevel.nextLevel);
+            PlayerPrefs.SetInt("ID", (PlayerPrefs.GetInt("ID")+1));
+            SceneManager.LoadScene(_NextLevel);
         }
 
         public void MainMenu()

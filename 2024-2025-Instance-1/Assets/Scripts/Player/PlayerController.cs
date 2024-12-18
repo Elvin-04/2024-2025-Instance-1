@@ -56,6 +56,15 @@ namespace Player
                 StopMove();
             });
             EventManager.instance.onRespawn?.AddListener(() => _dead = false);
+
+            EventManager.instance.onScoreUpdated.AddListener((int stars) =>
+            {
+                Save save = new Save();
+                SaveObject currentLevel = new SaveObject(PlayerPrefs.GetInt("ID"), stars);
+                SaveObject nextLevel = new SaveObject(PlayerPrefs.GetInt("ID")+1, 0);
+                save.SaveToJson(currentLevel);
+                save.SaveToJson(nextLevel);
+            });
         }
 
         private void Update()
@@ -190,6 +199,7 @@ namespace Player
         private void Move()
         {
             //_moveDirection = direction;
+            Vector2 lastMove = moveDirection;
             Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, _moveDirection);
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
@@ -238,7 +248,7 @@ namespace Player
                 position,
                 _gridManager.GetGlobalMoveTime()).SetEase(Ease.Linear).OnComplete(() =>
             {
-                CheckInteraction<IInteractableCallable>(_moveDirection);
+                CheckInteraction<IInteractableCallable>(lastMove);
                 EventManager.instance.onPlayerFinishedMoving?.Invoke(_transform.position);
                 EventManager.instance.onPlaySfx?.Invoke(SoundsName.SandMovementPlayer);
 
