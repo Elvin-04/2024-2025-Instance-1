@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      vaz_kanaup_0: -6326956388387990881
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
