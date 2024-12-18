@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Grid
@@ -8,25 +9,31 @@ namespace Grid
         [SerializeField] private int _lifeTime = 10;
         private int _currentLifeTime;
         private Transform _transform;
+        public Action<int> onTick;
 
         private void Awake()
         {
             _transform = GetComponent<Transform>();
+            _currentLifeTime = _lifeTime;
         }
 
         private void Start()
         {
-            _currentLifeTime = _lifeTime;
-            EventManager.Instance.OnClockUpdated?.AddListener(UpdateTime);
+            EventManager.instance.onClockUpdated?.AddListener(UpdateTime);
+        }
+
+        public int GetCurrentLifeTime()
+        {
+            return _currentLifeTime;
         }
 
         private void UpdateTime()
         {
-            _currentLifeTime--;
+            onTick?.Invoke(--_currentLifeTime);
             if (_currentLifeTime > 0) return;
 
-            EventManager.Instance.OnRemoveObjectOnCell?.Invoke(_transform.position, this);
-            EventManager.Instance.StopInteract?.Invoke(_transform.position);
+            EventManager.instance.onRemoveObjectOnCell?.Invoke(_transform.position, this);
+            EventManager.instance.stopInteract?.Invoke(_transform.position);
             Destroy(gameObject);
         }
     }

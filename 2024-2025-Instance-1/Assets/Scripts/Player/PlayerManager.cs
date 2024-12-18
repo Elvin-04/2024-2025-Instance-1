@@ -1,5 +1,7 @@
 using DeathSystem;
 using Grid;
+using Managers;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -12,13 +14,15 @@ namespace Player
         //Prefabs
         [Header("Prefabs")] [SerializeField] private GameObject _playerPrefab;
 
+        [SerializeField] private float _waitTimeBeforeRespawn = 1f;
+        private bool _calledUpdateClockThisFrame;
+
         //Properties
         private GameObject _currentPlayer;
         private GridManager _gridManager;
 
         //Components
         private LevelManager _levelManager;
-
         private void Awake()
         {
             Assert.IsNotNull(_playerPrefab, "player prefab is null in PlayerManager");
@@ -29,21 +33,42 @@ namespace Player
 
         private void Start()
         {
-            SpawnPlayer();
+            SpawnPlayer(_levelManager.spawnPoint);
+            EventManager.instance.onPlayerMoved?.AddListener(OnPlayerMoved);
         }
 
-        private void SpawnPlayer()
+        private void OnPlayerMoved(Vector3 pos)
         {
-            Assert.IsNotNull(_levelManager);
-            Assert.IsNotNull(_levelManager.spawnPoint);
-            Assert.IsNotNull(_playerPrefab);
-            GameObject player = Instantiate(_playerPrefab, GetCellPos(_levelManager.spawnPoint.position),
+            if (_calledUpdateClockThisFrame) return;
+            _calledUpdateClockThisFrame = true;
+            EventManager.instance.updateClock?.Invoke();
+            StartCoroutine(ResetUpdateClockFlagAtEndOfFrame());
+        }
+
+        private IEnumerator ResetUpdateClockFlagAtEndOfFrame()
+        {
+            yield return new WaitForEndOfFrame();
+            _calledUpdateClockThisFrame = false;
+        }
+
+        public GameObject SpawnPlayer(Vector3 pos)
+        {
+            GameObject player = Instantiate(_playerPrefab, GetCellPos(_levelManager.spawnPoint),
                 Quaternion.identity);
+            player.transform.position = pos;
             DeathManager playerDeathManager = player.GetComponent<DeathManager>();
             PlayerController playerController = player.GetComponent<PlayerController>();
             playerDeathManager.SetGridManager(_gridManager);
             playerDeathManager.onPlayerDeath += OnDeath;
             playerController.SetGridManager(_gridManager);
+
+            return player;
+        }
+        public GameObject SpawnPlayer(Vector3 pos, Color color)
+        {
+            GameObject player = SpawnPlayer(pos);
+            player.GetComponentInChildren<SpriteRenderer>().color = color;
+            return player;
         }
 
         private Vector3 GetCellPos(Vector3 pos)
@@ -54,7 +79,20 @@ namespace Player
 
         private void OnDeath(GameObject player)
         {
-            player.transform.position = GetCellPos(_levelManager.spawnPoint.position);
+            EventManager.instance.onDisableInput.Invoke();
+            if (player != null) StartCoroutine(nameof(Respawn), player);
+        }
+
+        private IEnumerator Respawn(GameObject player)
+        {
+            GameObject playerSprite = player.GetComponent<PlayerController>().spriteRenderer.gameObject;
+            playerSprite.SetActive(false);
+            yield return new WaitForSeconds(_waitTimeBeforeRespawn);
+            player.transform.position = GetCellPos(_levelManager.spawnPoint);
+            playerSprite.SetActive(true);
+            EventManager.instance.onRespawn?.Invoke();
+            EventManager.instance.onEnableInput.Invoke();
+            //EventManager.instance.onPlayerMoved?.Invoke(player.transform.position);
         }
     }
 }

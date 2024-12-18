@@ -1,44 +1,59 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
-public class ReloadSceneUI : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private Image _fillAmountImage;
-
-    private float _holdDuration = 1f;
-    private float _holdTimer = 0f;
-
-    private bool _isHolding = false;
-
-    private void Start()
+    public class ReloadSceneUI : MonoBehaviour
     {
-        EventManager.Instance.OnReloadUIRetry.AddListener(UpdateUIReloadScene);
-        EventManager.Instance.OnStopHoldingReload.AddListener(CancelReload);
-    }
-    private void Update()
-    {
-        if (_isHolding)
+        private const float _holdDuration = 1f;
+        [SerializeField] private Image _fillAmountImage;
+        private float _holdTimer;
+
+        private bool _isHolding;
+
+        private void Start()
         {
-            _holdTimer += Time.deltaTime;
-            _fillAmountImage.fillAmount = _holdTimer / _holdDuration;
-            if (_holdTimer >= _holdDuration)
-            {
-                _isHolding = false;
-            }
-        }
-        else 
-        { 
-            _holdTimer = 0;
-            _fillAmountImage.fillAmount = _holdTimer / _holdDuration;
-        }
-    }
-    private void UpdateUIReloadScene( )
-    {
-        _isHolding = true;
-    }
+            Assert.IsNotNull(_fillAmountImage, "fill amount image is null in ReloadSceneUI");
+            EventManager.instance.onReloadUIRetry.AddListener(UpdateUIReloadScene);
+            EventManager.instance.onStopHoldingReload.AddListener(CancelReload);
 
-    private void CancelReload()
-    {
-       _isHolding = false;
+            _fillAmountImage.type = Image.Type.Filled;
+
+            Reset();
+        }
+
+        private void Update()
+        {
+            if (_isHolding)
+            {
+                _holdTimer += Time.deltaTime;
+                _fillAmountImage.fillAmount = _holdTimer / _holdDuration;
+
+                if (_holdTimer >= _holdDuration) 
+                    _isHolding = false;
+            }
+            else
+            {
+                Reset();
+            }
+
+        }
+
+        private void UpdateUIReloadScene()
+        {
+            _isHolding = true;
+        }
+
+        private void CancelReload()
+        {
+            _isHolding = false;
+        }
+
+        private void Reset()
+        {
+            _holdTimer = 0f;
+            _fillAmountImage.fillAmount = 0f;
+        }
     }
 }

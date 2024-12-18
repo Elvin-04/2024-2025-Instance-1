@@ -1,69 +1,100 @@
-using System.Linq;
 using DG.Tweening;
 using Grid;
+using Managers.Audio;
+using Player;
+using System.Linq;
 using UnityEngine;
 
-public class Arrow : CellObjectBase, IInteractable, IMoving
+namespace Traps.Arrow_Trap
 {
-    [HideInInspector] public GridManager gridManager;
-    public Direction directionEnum;
-    public Vector2 direction;
-    private Direction _direction1;
-
-    private Transform _transform;
-
-    private void Start()
+    public class Arrow : CellObjectBase, IInteractable, IMoving
     {
-        _transform = transform;
+        public PlayerDirection directionEnum;
+        public Vector2 direction;
+        private GridManager _gridManager;
 
-        EventManager.Instance.UpdateClock.AddListener(UpdateClock);
-    }
+        private bool _movedOnce;
 
-    public bool CanPickUp { get; set; }
+        private Tween _moveTween;
 
-    public void Interact()
-    {
-        EventManager.Instance.OnDeath?.Invoke();
-    }
+        private Transform _transform;
 
-    public void StopInteract()
-    {
-    }
-
-    Vector2 IMoving.direction => direction;
-
-    public void SetDirection(Direction direction)
-    {
-        transform.rotation = Quaternion.Euler(0, 0, (int)direction * 90);
-        directionEnum = direction;
-    }
-
-    public void UpdateClock()
-    {
-        Vector2Int cellIndex = gridManager.GetCellIndex(_transform.position);
-
-        direction = directionEnum switch
+        private void Awake()
         {
-            Direction.North => Vector2.up,
-            Direction.South => Vector2.down,
-            Direction.East => Vector2.right,
-            Direction.West => Vector2.left,
-            _ => Vector3.zero
-        };
-
-        Vector2Int nextIndex = gridManager.GetNextIndex(cellIndex, direction);
-
-        if (gridManager.GetObjectsOnCell(gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any())
-        {
-            EventManager.Instance.UpdateClock.RemoveListener(UpdateClock);
-            Destroy(gameObject);
-            return;
+            _transform = transform;
         }
 
-        _transform.DOMove(gridManager.GetCellPos(nextIndex), 0.2f).OnComplete(() =>
+        private void Start()
         {
-            gridManager.AddObjectOnCell(nextIndex, this);
-            gridManager.RemoveObjectOnCell(cellIndex, this);
-        });
+            EventManager.instance.updateClock.AddListener(UpdateClock);
+        }
+
+        public bool canPickUp { get; set; }
+
+        public void Interact()
+        {
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.DeathByArrow);
+            EventManager.instance.onDeath?.Invoke(true);
+        }
+
+        public void StopInteract()
+        {
+        }
+
+        Vector2 IMoving.direction => direction;
+
+        public void SetGridManager(GridManager gridManagerToSet)
+        {
+            _gridManager = gridManagerToSet;
+        }
+
+        public void SetDirection(PlayerDirection directionToSet)
+        {
+            switch (directionToSet)
+            {
+                case PlayerDirection.Left: transform.rotation = Quaternion.Euler(0, 0, 180); break;
+                case PlayerDirection.Up: transform.rotation = Quaternion.Euler(0, 0, 90); break;
+                case PlayerDirection.Down: transform.rotation = Quaternion.Euler(0, 0, -90); break;
+                case PlayerDirection.Right: transform.rotation = Quaternion.Euler(0, 0, 0); break;
+            }
+
+            directionEnum = directionToSet;
+        }
+
+        public void UpdateClock()
+        {
+            Vector2Int cellIndex = _gridManager.GetCellIndex(_transform.position);
+
+            direction = directionEnum switch
+            {
+                PlayerDirection.Up => Vector2.up,
+                PlayerDirection.Down => Vector2.down,
+                PlayerDirection.Right => Vector2.right,
+                PlayerDirection.Left => Vector2.left,
+                _ => Vector3.zero
+            };
+
+            Vector2Int nextIndex = _gridManager.GetNextIndex(cellIndex, direction);
+
+            if (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any() ||
+                (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(cellIndex)).OfType<ICollisionObject>().Any() &&
+                 _movedOnce))
+            {
+                EventManager.instance.updateClock.RemoveListener(UpdateClock);
+                _moveTween?.Kill();
+                Destroy(gameObject);
+                _gridManager.RemoveObjectOnCell(cellIndex, this);
+                return;
+            }
+
+            _moveTween = transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime())
+                .SetEase(Ease.Linear)
+                .OnComplete(() =>
+                {
+                    _gridManager.AddObjectOnCell(nextIndex, this);
+                    _gridManager.RemoveObjectOnCell(cellIndex, this);
+                });
+            _movedOnce = true;
+        }
     }
 }

@@ -1,15 +1,13 @@
-using UnityEngine;
-using Player;
-
 namespace Grid
 {
     public class WinCell : CellObjectBase, IInteractable
     {
-        public bool CanPickUp {get; set;} = false;
+        public bool canPickUp { get; set; } = false;
 
         public void Interact()
         {
-            EventManager.Instance.OnWin.Invoke();
+            EventManager.instance.onWin.Invoke();
+            EventManager.instance.onDisableInput.Invoke();
         }
 
         public void StopInteract()

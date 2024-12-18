@@ -1,25 +1,48 @@
 using Grid;
+using Managers.Audio;
+using System;
 using UnityEngine;
-using Player;
 
-public abstract class Rune : CellObjectBase, IInteractableCallable, ICollisionObject
+namespace Runes
 {
-    protected bool _canPickUp = true;
-    protected Color _color;
-    public bool CanPickUp
+    public abstract class Rune : CellObjectBase, IInteractableCallable, ICollisionObject
     {
-        get => _canPickUp;
-        set => _canPickUp = value;
-    }
+        protected bool _canPickUp = true;
 
-    public abstract void ApplyEffect(Vector3 position, GridManager gridManager);
-    public void Interact()
-    {
-        EventManager.Instance.AddRuneToInventory.Invoke(this);
-    }
+        public Action onDrop;
+        public Action onTake;
 
-    public void StopInteract()
-    {
-       
+        public bool canPickUp
+        {
+            get => _canPickUp;
+            set => _canPickUp = value;
+        }
+
+        public virtual string showName => "Rune";
+
+        public void Interact()
+        {
+            onTake?.Invoke();
+            EventManager.instance.canInteract.Invoke(false, "");
+            EventManager.instance.addRuneToInventory.Invoke(this);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.Collectible);
+        }
+
+        public void StopInteract()
+        {
+        }
+
+        public virtual void PlayAnimation(Animator animatorAura, Animator animatorZone)
+        {
+            animatorAura.Play("None");
+            animatorZone.Play("None");
+        }
+
+        public abstract void ApplyEffect(Vector3 position, GridManager gridManager);
+
+        public virtual void DropRune()
+        {
+            onDrop?.Invoke();
+        }
     }
 }

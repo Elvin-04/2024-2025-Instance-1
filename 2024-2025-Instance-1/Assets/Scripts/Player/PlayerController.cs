@@ -1,26 +1,30 @@
-using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
 using Grid;
+using Managers.Audio;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Assertions;
 
 namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private float _movementTime;
-
-
-        public UnityEvent onWin;
+        [SerializeField] [Range(0f, 0.5f)] private float _movementHoldTime = 0.2f;
+        [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
+        private readonly List<IInteractable> _interactablesInFront = new();
+        private Animator _animator;
         private bool _canMove;
         private Tween _currentMoveAnim;
 
+        private bool _dead;
+
         //Properties
         private GridManager _gridManager;
-
-        private List<IInteractable> _interactablesInFront = new();
+        private float _holdingFor;
+        private float _holdTime;
         private List<IInteractable> _interactablesUnder = new();
+        private Vector3 _interactablesUnderPosition;
 
         private Vector2 _moveDirection;
 
@@ -28,21 +32,30 @@ namespace Player
 
         //Components
         private Transform _transform;
-
-        public PlayerDirection? bannedDirection;
         public PlayerDirection currentDirection { get; private set; }
+        public Vector2 moveDirection => _moveDirection;
 
         private void Awake()
         {
+            Assert.IsNotNull(spriteRenderer, "sprite renderer is null in player controller");
             _transform = transform;
+
+            _animator = GetComponent<Animator>();
         }
 
         private void Start()
         {
-            EventManager.Instance.OnMoveStarted?.AddListener(StartMove);
-            EventManager.Instance.OnMoveCanceled?.AddListener(StopMove);
-            EventManager.Instance.OnInteract?.AddListener(Interact);
-            EventManager.Instance.OnDeath?.AddListener(StopMoveAnim);
+            EventManager.instance.onMoveStarted?.AddListener(StartMove);
+            EventManager.instance.onMoveCanceled?.AddListener(StopMove);
+            EventManager.instance.onInteract?.AddListener(Interact);
+            EventManager.instance.onDeath?.AddListener(StopMoveAnim);
+
+            EventManager.instance.onDeath?.AddListener(deathEffect =>
+            {
+                _dead = true;
+                StopMove();
+            });
+            EventManager.instance.onRespawn?.AddListener(() => _dead = false);
         }
 
         private void Update()
@@ -50,8 +63,13 @@ namespace Player
             TryMove();
 
             //////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.K)) EventManager.Instance.OnDeath.Invoke();
+            if (Input.GetKeyDown(KeyCode.K)) EventManager.instance.onDeath.Invoke(true);
             ///////////////////////////////////////////////////////////////////
+        }
+
+        public Vector2 MoveDirection()
+        {
+            return _moveDirection;
         }
 
         //Has to be called when new player is spawned
@@ -60,7 +78,12 @@ namespace Player
             _gridManager = gridManager;
         }
 
-        public void StopMoveAnim()
+        public GridManager GetGridManager()
+        {
+            return _gridManager;
+        }
+
+        public void StopMoveAnim(bool deathEffect)
         {
             _interactablesUnder.Clear();
             _interactablesInFront.Clear();
@@ -73,12 +96,17 @@ namespace Player
         {
             if (!_canMove || !_reachedTargetCell) return;
 
-            Move();
+            if ((_holdingFor += Time.deltaTime) >= _holdTime)
+            {
+                _holdingFor = 0f;
+                Move();
+            }
         }
 
         private void StartMove(Vector2 direction)
         {
             _canMove = true;
+            _holdTime = _moveDirection == direction ? _movementHoldTime : 0f;
             _moveDirection = direction;
         }
 
@@ -90,22 +118,36 @@ namespace Player
 
         private void GetInteractableUnderMe()
         {
-            List<IInteractable> interacts =
-                _gridManager.GetObjectsOnCell(_transform.position)
-                    .Select(cellObject => cellObject as IInteractable).Where(interactable => interactable != null)
-                    .ToList();
+            _gridManager.GetObjectsOnCell(_transform.position)
+                .Select(cellObject => cellObject as IInteractable).Where(interactable => interactable != null)
+                .ToList();
 
-            List<IInteractable> commonInteracts = interacts.Intersect(_interactablesUnder).ToList();
+            List<IInteractable> interacts = new();
+            foreach (CellObjectBase objectOnCell in _gridManager.GetObjectsOnCell(_transform.position))
+                if (objectOnCell is IInteractable interactable)
+                    interacts.Add(interactable);
 
-            _interactablesUnder.Except(commonInteracts).ToList()
-                .ForEach(interact => interact?.StopInteract());
+            /*List<IInteractable> commonInteracts = interacts.Intersect(_interactablesUnder).ToList();*/
+
+            List<IInteractable> commonInteracts = new();
+            foreach (IInteractable interactable in _interactablesUnder)
+                if (interacts.Contains(interactable))
+                    commonInteracts.Add(interactable);
+
+            foreach (IInteractable interactable in _interactablesUnder)
+                if (!commonInteracts.Contains(interactable))
+                {
+                    if (_gridManager.GetCellObjectsByType(_interactablesUnderPosition, out List<IWeight> _)) continue;
+                    interactable?.StopInteract();
+                }
 
             _interactablesUnder = interacts;
+            _interactablesUnderPosition = _transform.position;
 
-            foreach (IInteractable interactable in _interactablesUnder.ToList())
-            {
-                interactable?.Interact();
-            }
+            if (!_dead)
+                foreach (IInteractable interactable in _interactablesUnder.ToList())
+                    interactable?.Interact();
+
         }
 
         private void GetInteractableFrontOfMe<T>(Vector3 dir) where T : IInteractable
@@ -117,31 +159,40 @@ namespace Player
 
             if (nextCell == null) return;
 
+            _interactablesInFront.Clear();
+            foreach (CellObjectBase objectOnCell in _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)))
+                if (objectOnCell is IInteractable interactable)
+                    _interactablesInFront.Add(interactable);
 
-            _interactablesInFront =
-                _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex))
-                    .Select(objectOnCell => objectOnCell as IInteractable).Where(interactable => interactable != null)
-                    .ToList();
+            List<IMoving> movingObjectsInFront = new();
 
-            List<IMoving> movingObjectsInFront = _interactablesInFront.OfType<IMoving>().ToList();
+            foreach (IInteractable interactable in _interactablesInFront)
+                if (interactable is IMoving moving)
+                    movingObjectsInFront.Add(moving);
+
             movingObjectsInFront.ForEach(movingObjectInFront =>
             {
                 if (dir.Equals(-movingObjectInFront.direction))
-                    movingObjectsInFront.OfType<T>().ToList()
-                        .ForEach(interactable => interactable.Interact());
+                    foreach (IMoving moving in movingObjectsInFront)
+                        if (moving is T interactable)
+                            interactable.Interact();
             });
 
-            EventManager.Instance.CanInteract.Invoke(_interactablesInFront.OfType<IInteractableCallable>().Count() > 0);
+            List<IInteractableCallable> callable = new();
+
+            foreach (IInteractable interactable in _interactablesInFront.ToList())
+                if (interactable is IInteractableCallable interactableCallable)
+                    callable.Add(interactableCallable);
+
+            bool isNotNull = callable.Count > 0;
+            EventManager.instance.canInteract.Invoke(callable.Count > 0, isNotNull ? callable[0].showName : "");
         }
 
         private void Move()
         {
-            Vector2Int cellIndex = _gridManager.GetCellIndex(_transform.position);
-            (int, int) nextIndex = (cellIndex.x + (int)_moveDirection.x, cellIndex.y + (int)_moveDirection.y);
-
+            //_moveDirection = direction;
+            Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, _moveDirection);
             Cell nextCell = _gridManager.GetCell(nextIndex);
-
-            PlayerDirection oldDiretion = currentDirection;
 
             currentDirection = _moveDirection.x switch
             {
@@ -155,72 +206,71 @@ namespace Player
                 }
             };
 
-            // if (bannedDirection != null)
-            // {
-            //     if (currentDirection == bannedDirection)
-            //     {
-            //         currentDirection = oldDiretion;
-            //         StopMove();
-
-            //         Debug.Log("can't move that way");
-            //         return;
-            //     }
-            //     else if (currentDirection == ((PlayerDirection) bannedDirection).GetOpposite())
-            //         bannedDirection = null;
-            // }
-
             if (nextCell == null)
             {
-                Debug.Log("next cell is null");
                 StopMove();
                 return;
             }
 
             List<CellObjectBase> nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
+            foreach (CellObjectBase interactableInFront in
+                     nextCellObjects.ToList())
+                if (interactableInFront is IInteractableInFront interactableInFront1)
+                    interactableInFront1.Interact();
 
-            if (nextCellObjects.Any(objectOnCell => objectOnCell != null && objectOnCell is ICollisionObject))
-            {
-                CheckInteraction<IInteractable>(_moveDirection);
-                StopMove();
-                return;
-            }
+            nextCellObjects = _gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex));
 
+            foreach (CellObjectBase objectOnCell in nextCellObjects.ToList())
+                if (objectOnCell is ICollisionObject)
+                {
+                    CheckInteraction<IInteractable>(_moveDirection);
+                    StopMove();
+                    return;
+                }
+
+            SetAnimation((int)currentDirection);
 
             _reachedTargetCell = false;
-            EventManager.Instance.UpdateClock?.Invoke();
-            Vector3 position = _gridManager.GetCellPos(nextIndex);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.SandMovementPlayer);
 
+            EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
+            Vector3 position = _gridManager.GetCellPos(nextIndex);
             _currentMoveAnim = _transform.DOMove(
                 position,
-                _movementTime).SetEase(Ease.Linear).OnComplete(() =>
+                _gridManager.GetGlobalMoveTime()).SetEase(Ease.Linear).OnComplete(() =>
             {
                 CheckInteraction<IInteractableCallable>(_moveDirection);
-                // wait one frame. this is to allow interactions to actually happen
-                StartCoroutine(Utils.InvokeAfterFrame(() => _reachedTargetCell = true));
+                EventManager.instance.onPlayerFinishedMoving?.Invoke(_transform.position);
+
+                _reachedTargetCell = true;
+                _holdTime = _movementHoldTime;
             });
             GetInteractableFrontOfMe<IInteractable>(_moveDirection);
         }
 
-        private void ReachTarget()
-        {
-            _reachedTargetCell = true;
-        }
-
-        public void BanDirection(PlayerDirection direction)
-        {
-            bannedDirection ??= direction;
-        }
-
         private void StopMove()
         {
+            SetAnimation(0);
             _canMove = false;
+            _moveDirection = Vector2.zero;
+            _holdTime = 0f;
+            _holdingFor = 0f;
         }
 
         private void Interact()
         {
             if (_interactablesInFront.Count == 0) return;
-            _interactablesInFront.ForEach(objectInFront => objectInFront.Interact());
+            _interactablesInFront
+                .Where(objectInFront => objectInFront.canPickUp && objectInFront is not IInteractableInFront).ToList()
+                .ForEach(objectInFront => objectInFront.Interact());
+        }
+
+        private void SetAnimation(int value)
+        {
+            if (_animator?.GetInteger("direction") != value)
+                if (_animator != null)
+                    _animator.SetInteger("direction", value);
         }
     }
 }

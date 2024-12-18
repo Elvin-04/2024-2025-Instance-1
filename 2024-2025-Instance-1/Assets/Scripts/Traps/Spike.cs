@@ -1,20 +1,24 @@
 using Grid;
-using Player;
+using Managers.Audio;
 
-public class Spike : CellObjectBase, IInteractable
+namespace Traps
 {
-    public void Interact()
+    public class Spike : CellObjectBase, IInteractable
     {
-        EventManager.Instance.OnDeath?.Invoke();
-    }
+        public void Interact()
+        {
+            EventManager.instance.onDeath?.Invoke(true);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.ActivateSpike);
+        }
 
-    public void StopInteract()
-    {
-    }
+        public void StopInteract()
+        {
+        }
 
-    public bool CanPickUp
-    {
-        get => false;
-        set { }
+        public bool canPickUp
+        {
+            get => false;
+            set { }
+        }
     }
 }

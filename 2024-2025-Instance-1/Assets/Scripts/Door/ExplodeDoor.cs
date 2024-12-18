@@ -1,11 +1,14 @@
 using Grid;
-using UnityEngine;
+using Managers.Audio;
 
-public class ExplodeDoor : CellObjectBase, IExplosable, ICollisionObject
+namespace Door
 {
-    public void Explose()
+    public class ExplodeDoor : CellObjectBase, IExplosive, ICollisionObject
     {
-        Debug.Log("Normalement je dois fonctionner");
-        EventManager.Instance.OnResetCell?.Invoke(transform.position);
+        public void Explode()
+        {
+            EventManager.instance.onResetCell?.Invoke(transform.position);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.BreakDoor);
+        }
     }
 }

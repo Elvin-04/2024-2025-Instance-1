@@ -1,18 +1,36 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+namespace Menu
 {
-
-    public void Play()
+    public class MainMenu : MonoBehaviour
     {
-        SceneManager.LoadScene("MVP");
-        Debug.Log("Scene Play Load");
-    }
+        [SerializeField] private GameObject _mainMenuFirstBtn, _optionFirstBtn, _levelSelectionFirstBtn;
+        public void Play()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
 
-    public void Quit()
-    {
-        Application.Quit();
-        Debug.Log("Quit");
+        public void OpenOption()
+        {
+            EventSystem.current.SetSelectedGameObject(_optionFirstBtn);
+        }
+
+        public void GoToMainMenu()
+        {
+            EventSystem.current.SetSelectedGameObject(_mainMenuFirstBtn);
+        }
+
+        public void OpenLevelSelector()
+        {
+            EventSystem.current.SetSelectedGameObject(_levelSelectionFirstBtn);
+        }
+
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }
