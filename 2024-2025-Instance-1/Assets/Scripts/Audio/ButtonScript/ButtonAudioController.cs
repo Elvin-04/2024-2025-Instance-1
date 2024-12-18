@@ -4,8 +4,8 @@ using UnityEngine.EventSystems;
 
 public class ButtonAudioController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    [SerializeField] private SoundsName _mouseOver;
-    [SerializeField] private SoundsName _mouseClick;
+    private readonly SoundsName _mouseClick = SoundsName.ButtonMouseClick;
+    private readonly SoundsName _mouseOver = SoundsName.ButtonMouseOver;
 
     public void OnPointerClick(PointerEventData eventData)
     {

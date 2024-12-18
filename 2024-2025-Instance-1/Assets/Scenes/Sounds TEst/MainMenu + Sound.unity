@@ -2107,8 +2107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17955d11d050cd4da6c94637fcb137c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mouseOver: 15
-  _mouseClick: 17
 --- !u!1001 &563565502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3443,8 +3441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17955d11d050cd4da6c94637fcb137c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mouseOver: 15
-  _mouseClick: 17
 --- !u!1 &984013441
 GameObject:
   m_ObjectHideFlags: 0
@@ -6880,8 +6876,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17955d11d050cd4da6c94637fcb137c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mouseOver: 15
-  _mouseClick: 17
 --- !u!1001 &1912368156
 PrefabInstance:
   m_ObjectHideFlags: 0
