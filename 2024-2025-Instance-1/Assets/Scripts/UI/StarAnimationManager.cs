@@ -1,4 +1,5 @@
 using System.Collections;
+using Managers.Audio;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -13,7 +14,9 @@ namespace UI
         [SerializeField] private Animator _star1;
         [SerializeField] private Animator _star2;
         [SerializeField] private Animator _star3;
-        private int _currentScore;
+        private int _currentScore = 3;
+        private readonly SoundsName _jingleStars = SoundsName.JingleStars;
+ 
         private Animator _panelAnimator;
 
         private void Awake()
@@ -35,29 +38,27 @@ namespace UI
             _star1.SetTrigger(IsIdle);
             _star2.SetTrigger(IsIdle);
             _star3.SetTrigger(IsIdle);
-            
-            
         }
 
         private void OnScoreUpdated(int score)
         {   
             _currentScore = score;
-            if (gameObject.activeSelf)
-            {
-                StartCoroutine(StartStarAnim(_currentScore));
-            }
+            if (gameObject.activeSelf) StartCoroutine(StartStarAnim(_currentScore));
         }
 
         private IEnumerator StartStarAnim(float score)
         {
             yield return new WaitForEndOfFrame();
             yield return new WaitForSeconds(_panelAnimator.GetCurrentAnimatorStateInfo(0).length + _waitStarTime);
+            if (score >= 1) EventManager.instance.onPlaySfx?.Invoke(_jingleStars);
             _star1.SetBool(IsOn, score >= 1);
             yield return new WaitForEndOfFrame();
             yield return new WaitForSeconds(_star1.GetCurrentAnimatorClipInfo(0)[0].clip.length + _waitStarTime);
+            if (score >= 2) EventManager.instance.onPlaySfx?.Invoke(_jingleStars);
             _star2.SetBool(IsOn, score >= 2);
             yield return new WaitForEndOfFrame();
             yield return new WaitForSeconds(_star2.GetCurrentAnimatorClipInfo(0)[0].clip.length + _waitStarTime);
+            if (score >= 3) EventManager.instance.onPlaySfx?.Invoke(_jingleStars);
             _star3.SetBool(IsOn, score >= 3);
         }
     }

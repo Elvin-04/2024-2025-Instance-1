@@ -22,6 +22,9 @@ namespace Managers.Audio
         ButtonMouseClick,
         MusicMenuPrincipal,
         MusicInGame,
-        RockSlide
+        RockSlide,
+        JingleWin,
+        JingleStars,
+        Explosion
     }
 }

@@ -1,5 +1,6 @@
-using Grid;
 using System.Collections.Generic;
+using Grid;
+using Managers.Audio;
 using UnityEngine;
 
 namespace Runes
@@ -10,6 +11,7 @@ namespace Runes
         [SerializeField] private int _radius;
         [SerializeField] private string _interactionText;
         private ExplosionAnimControl _explosion;
+        private readonly SoundsName _explosionSound = SoundsName.Explosion;
 
         public override string showName => "Explosion Rune";
 
@@ -42,6 +44,7 @@ namespace Runes
                 }
             };
             EventManager.instance.onRuneDropped?.Invoke();
+            EventManager.instance.onPlaySfx?.Invoke(_explosionSound);
         }
     }
 }
