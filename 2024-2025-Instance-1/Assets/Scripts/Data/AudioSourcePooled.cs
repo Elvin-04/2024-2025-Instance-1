@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Data
-{
+
     public class AudioSourcePooled : MonoBehaviour, IPooledObject<AudioSourcePooled>
     {
         [SerializeField] private AudioMixer _audioMixer;
@@ -20,4 +19,3 @@ namespace Data
             _pool.Release(this);
         }
     }
-}
