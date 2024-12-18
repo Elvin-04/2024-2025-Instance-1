@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 295e483286f54b42b8f0a6ecef3a1276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cellToSpawn: {fileID: 11400000, guid: e9af3235a53ecfb46bb3c65625f5699d, type: 2}
+  _cellToSpawn: {fileID: 11400000, guid: 28a71597d970b40428540ed50641ba19, type: 2}
   _gizmoColor: {r: 0.38193807, g: 0.8962264, b: 0.18178178, a: 1}
   _inactive: {fileID: 11400000, guid: 587a8b152e75ff5459d0a466b906c5b3, type: 2}
   _tick: 1
