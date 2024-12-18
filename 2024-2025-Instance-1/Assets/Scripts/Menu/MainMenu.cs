@@ -8,7 +8,7 @@ namespace Menu
     public class MainMenu : MonoBehaviour
     {
         [SerializeField] private GameObject _mainMenuFirstBtn, _optionFirstBtn, _levelSelectionFirstBtn;
-        [SerializeField] private SoundsName _musicName;
+        private SoundsName _musicName = SoundsName.MusicMenuPrincipal;
 
         private void Start()
         {

@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
 
     private void OnWin()

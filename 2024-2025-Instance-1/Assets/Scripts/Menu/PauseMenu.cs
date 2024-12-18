@@ -13,7 +13,7 @@ namespace Menu
         }
         public void ReturnMainMenu()
         {
-            SceneManager.LoadScene("Test main menu");
+            SceneManager.LoadScene(0);
         }
         private void Resume()
         {
@@ -42,7 +42,7 @@ namespace Menu
         {
             EventManager.instance.onDisableInput?.Invoke();
             _pausePanel.SetActive(true);
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
         }
     }
 }

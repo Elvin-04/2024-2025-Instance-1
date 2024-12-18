@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -3052061012849223409, guid: db24f94c12609f74c9c05b4349548323, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,8 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d6b082a4047f8449629f29b5a07314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Lockcolor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
-  _Unlockcolor: {r: 1, g: 1, b: 1, a: 1}
-  _unlockcolorSelected: {r: 0.30791855, g: 1, b: 0, a: 1}
-  _lockSelected: {r: 0.0067333197, g: 0.3433962, b: 0, a: 1}
+  _lockedSprite: {fileID: -3052061012849223409, guid: db24f94c12609f74c9c05b4349548323, type: 3}
+  _unlockedSprite: {fileID: -738698570241199085, guid: 6f2fe5c379f2d5547aac7fb3efd90e59, type: 3}
+  _SelectedSprite: {fileID: -6684647971191290575, guid: 95e411223110c074f820c5318e844ec9, type: 3}
   _image: {fileID: 8067467636862148950}
