@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Data
-{
     [Serializable]
     public class BiDictionary<T1, T2> : IEnumerable<KeyValuePair<T1, T2>>
     {
@@ -199,4 +197,3 @@ namespace Data
 
         #endregion
     }
-}

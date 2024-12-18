@@ -77,12 +77,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a626cdbf0546ab877fcbffcfe46e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cellToSpawn: {fileID: 11400000, guid: e9af3235a53ecfb46bb3c65625f5699d, type: 2}
+  _cellToSpawn: {fileID: 11400000, guid: a67bee1f7135fc24698a57db632da857, type: 2}
   _gizmoColor: {r: 1, g: 1, b: 1, a: 1}
   _inactive: {fileID: 11400000, guid: 587a8b152e75ff5459d0a466b906c5b3, type: 2}
   _tick: 1
   _gridManager: {fileID: 0}
   _runeToSpawn: {fileID: 8472362850621229090, guid: 505890f785238d44ba5f6fbd445c17c1, type: 3}
+  _cloneSpawnPositon: {fileID: 0}
   _lineEnds:
   - {fileID: 1198393406097916391}
   - {fileID: 1301301320827580727}
