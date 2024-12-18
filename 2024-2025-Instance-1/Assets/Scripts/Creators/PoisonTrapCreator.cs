@@ -1,4 +1,5 @@
 using Grid;
+using Managers.Audio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace Creators
 
         private Vector2Int _mainTrapIndex;
         private bool _playerPoisoned;
+        private SoundsName _deathSfx = SoundsName.Death;
 
         protected override void Start()
         {
@@ -165,6 +167,7 @@ namespace Creators
         private void OnDeath(bool deathEffect)
         {
             _currentTickClock = _maxTickClock;
+            if(_playerPoisoned) EventManager.instance.onPlaySfx?.Invoke(_deathSfx);
             _playerPoisoned = false;
         }
     }

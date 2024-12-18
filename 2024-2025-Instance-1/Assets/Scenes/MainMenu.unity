@@ -1179,6 +1179,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3001543713877794700, guid: 65bc3dcb7a8a8204e99dc99ee0242ccf, type: 3}
+      propertyPath: levelName
+      value: Level 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3001543713877794700, guid: 65bc3dcb7a8a8204e99dc99ee0242ccf, type: 3}
+      propertyPath: levelScene
+      value: Level05
+      objectReference: {fileID: 0}
     - target: {fileID: 3051669893069097144, guid: 65bc3dcb7a8a8204e99dc99ee0242ccf, type: 3}
       propertyPath: m_Type
       value: 0
@@ -2306,6 +2314,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5444501099292277984, guid: fedc6a179a44e5d47b9967dc599f4cb5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2332730060663431999}
+    - target: {fileID: 5444501099292277984, guid: fedc6a179a44e5d47b9967dc599f4cb5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444501099292277984, guid: fedc6a179a44e5d47b9967dc599f4cb5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Menu.MainMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5471891669540440100, guid: fedc6a179a44e5d47b9967dc599f4cb5, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -2879,6 +2899,17 @@ PrefabInstance:
       addedObject: {fileID: 1505976645}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fedc6a179a44e5d47b9967dc599f4cb5, type: 3}
+--- !u!114 &2332730060663431999 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6651908510332492083, guid: fedc6a179a44e5d47b9967dc599f4cb5, type: 3}
+  m_PrefabInstance: {fileID: 2332730060663431998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c826f0f1f98384ca64f1c2e729dbe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

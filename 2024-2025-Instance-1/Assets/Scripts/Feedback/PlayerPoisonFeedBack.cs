@@ -140,8 +140,6 @@ public class PlayerPoisonFeedBack : MonoBehaviour
 
     private void SetPoisonText()
     {
-        if (_poisonTrapCreator.GetCurrentTick().ToString() == string.Empty)
-            return;
         _textPoison.text = _poisonTrapCreator.GetCurrentTick().ToString();
         _textPoison.color = _poisonTextColor;
     }

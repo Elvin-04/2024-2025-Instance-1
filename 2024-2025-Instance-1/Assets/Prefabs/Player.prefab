@@ -314,7 +314,7 @@ MonoBehaviour:
   _lightColor: {r: 0.38039216, g: 1, b: 0, a: 1}
   _durationLerpColor: 0.75
   _textPoison: {fileID: 7344489031225191599}
-  _poisonTextColor: {r: 0.2512025, g: 0.6603774, b: 0, a: 1}
+  _poisonTextColor: {r: 1, g: 1, b: 1, a: 1}
   _frequency: 8
   _amplitude: 0.1
 --- !u!81 &-7924721300832066552
@@ -392,8 +392,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 25f9de533a1d9624490fd538bdbe9434, type: 2}
+  m_sharedMaterial: {fileID: 5167930195767003090, guid: 25f9de533a1d9624490fd538bdbe9434, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -417,13 +417,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.5
-  m_fontSizeBase: 0.5
+  m_fontSize: 0.3
+  m_fontSizeBase: 0.3
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

@@ -25,6 +25,7 @@ namespace Managers.Audio
         RockSlide,
         JingleWin,
         JingleStars,
-        Explosion
+        Explosion,
+        Death
     }
 }

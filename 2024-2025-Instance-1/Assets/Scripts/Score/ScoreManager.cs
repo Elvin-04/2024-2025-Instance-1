@@ -23,19 +23,21 @@ namespace Score
             EventManager.instance.onClockUpdated.AddListener(OnPlayerMove);
             EventManager.instance.onDeath.AddListener(OnPlayerDies);
             EventManager.instance.onWin.AddListener((() => StartCoroutine(LateCalculate())));
-            Invoke(nameof(LateStart), 0);
 
             EventManager.instance.onWin.AddListener(() => Debug.Log(steps));
+            EventManager.instance.onWin.AddListener(() =>
+            {
+                Save save = new Save();
+                SaveObject nextLevel = new SaveObject(PlayerPrefs.GetInt("ID") + 1, 0);
+                save.SaveToJson(nextLevel);
+                SaveObject currentLevel = new SaveObject(PlayerPrefs.GetInt("ID"), _stars);
+                save.SaveToJson(currentLevel);
+            });
         }
 
         private IEnumerator LateCalculate()
         {
             yield return new WaitForEndOfFrame();
-            CalculateFinalScore();
-        }
-
-        private void LateStart()
-        {
             CalculateFinalScore();
         }
 

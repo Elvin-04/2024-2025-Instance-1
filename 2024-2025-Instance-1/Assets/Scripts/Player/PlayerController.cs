@@ -3,6 +3,7 @@ using System.Linq;
 using DG.Tweening;
 using Grid;
 using Managers.Audio;
+using Score;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -56,19 +57,6 @@ namespace Player
                 StopMove();
             });
             EventManager.instance.onRespawn?.AddListener(() => _dead = false);
-
-            EventManager.instance.onWin.AddListener( () => 
-                {
-                    Save save = new Save();
-                    SaveObject nextLevel = new SaveObject(PlayerPrefs.GetInt("ID") + 1, 0);
-                    save.SaveToJson(nextLevel);
-                });
-            EventManager.instance.onScoreUpdated.AddListener((int stars) =>
-            {
-                Save save = new Save();
-                SaveObject currentLevel = new SaveObject(PlayerPrefs.GetInt("ID"), stars);
-                save.SaveToJson(currentLevel);
-            });
         }
 
         private void Update()

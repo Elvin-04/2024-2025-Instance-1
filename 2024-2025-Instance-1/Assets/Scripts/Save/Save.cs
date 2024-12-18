@@ -17,18 +17,10 @@ public class Save
             string rawData = JsonUtility.ToJson(new Data());
             File.WriteAllText(path, rawData);
         }
-        Debug.Log(path);
+
 
     }
 
-    private void Start()
-    {
-        //EventManager.instance.onScoreUpdated.AddListener((int stars) =>
-        //{
-        //    obj.score = stars;
-        //    SaveToJson(obj, stars);
-        //});
-    }
     public void SaveToJson(SaveObject obj)
     {
         Data data = GetData();
@@ -41,7 +33,7 @@ public class Save
         data.UdpadeBestScore(obj);
         string rawData = JsonUtility.ToJson(data);
         System.IO.File.WriteAllText(path, rawData);
-        Debug.Log($"Object is save :: ID :: {obj.id}, Score::{obj.score}");
+
     }
 
     public SaveObject LoadFromJson(int id)
@@ -52,7 +44,7 @@ public class Save
         SaveObject saveObject = data.GetObject(id);
         if (saveObject == null)
             return new SaveObject(id, -1);
-        Debug.Log($"Object is Load :: ID :: {saveObject.id}, Score::{saveObject.score}");
+
         return saveObject;
     }
 
