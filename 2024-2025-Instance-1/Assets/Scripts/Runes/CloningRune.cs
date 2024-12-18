@@ -13,6 +13,7 @@ namespace Runes
         private PlayerManager _playerManager;
         private GameObject _spawnedPlayer;
         private Transform _cloneSpawnPosition;
+        [SerializeField] private Color _cloneColor;
 
         public void SetupCloningRune(Vector3 start, Vector3 end, PlayerManager playerManager, Transform cloneSpawnPosition)
         {
@@ -31,7 +32,7 @@ namespace Runes
             Vector3 oppositePos = projectedPoint + (projectedPoint - position);
             //
             //_spawnedPlayer = _playerManager.SpawnPlayer(oppositePos);
-            _spawnedPlayer = _playerManager.SpawnPlayer(_cloneSpawnPosition.position);
+            _spawnedPlayer = _playerManager.SpawnPlayer(_cloneSpawnPosition.position, _cloneColor);
             _spawnedPlayer.GetComponent<DeathManager>().onPlayerDeath = DropRune;
         }
 
