@@ -27,6 +27,9 @@ namespace UI
 
         public void NextLevel()
         {
+            print(LevelSelector.instance == null);
+            print(LevelSelector.instance.currentLevel == null);
+            print(LevelSelector.instance.currentLevel.nextLevel == null);
             LevelSelector.instance.StartLevel(LevelSelector.instance.currentLevel.nextLevel);
         }
 
