@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      osiris_menu_2_0: 2300359167578658035
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
