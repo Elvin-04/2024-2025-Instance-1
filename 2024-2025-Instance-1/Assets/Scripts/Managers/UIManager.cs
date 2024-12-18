@@ -21,7 +21,6 @@ public class UIManager : MonoBehaviour
         Assert.IsNotNull(_popUpInteractable, "pop up interactable is null in UIManager");
         EventManager manager = EventManager.instance;
 
-        manager.onPause.AddListener(Pause);
         manager.canInteract.AddListener(PopUpInteract);
 
         manager.onWin.AddListener(OnWin);
@@ -34,11 +33,6 @@ public class UIManager : MonoBehaviour
 
         _popUpInteractable.SetActive(canInteract);
         _canInteractText.text = string.Format(_interactionText, objName);
-    }
-
-    public void Pause()
-    {
-        Time.timeScale = 0f;
     }
 
     private void OnWin()
