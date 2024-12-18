@@ -27,7 +27,7 @@ namespace Menu.Level_Selector
 
         public void StartLevel(LevelInfo level)
         {
-            if (!level)
+            if (level == null)
             {
                 _currentLevel = null;
                 _currentLevelStars = 0;
