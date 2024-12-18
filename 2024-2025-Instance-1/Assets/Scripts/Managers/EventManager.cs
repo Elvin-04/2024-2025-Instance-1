@@ -44,7 +44,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent onRuneDropped { get; private set; } = new();
     public UnityEvent<(int, int)> onCellChanged { get; private set; } = new();
     public UnityEvent onPoisonedPlayer { get; private set; } = new();
-
+    public UnityEvent<string> OnTransitionScene { get; private set; } = new();
     // Audio
     public UnityEvent<SoundsName> onPlayMusic { get; private set; } = new();
     public UnityEvent onPauseMusic { get; private set; } = new();
