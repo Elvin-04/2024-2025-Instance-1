@@ -19,6 +19,8 @@ namespace Managers.Audio
         DestroyWall,
         ButtonMouseOver,
         ButtonMouseExit,
-        ButtonMouseClick
+        ButtonMouseClick,
+        MusicMenuPrincipal,
+        MusicInGame
     }
 }

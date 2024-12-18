@@ -1,3 +1,4 @@
+using System.Collections;
 using Managers.Audio;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,13 +11,17 @@ public class ButtonAudioController : MonoBehaviour, IPointerEnterHandler, IPoint
 
     private Button _button;
 
-    //[Header("Gamepad")]
     private bool _isSelected;
+    //[Header("Gamepad")]
 
     private void Awake()
     {
         _button = GetComponent<Button>();
-        _button.onClick.AddListener(ButtonClick);
+    }
+
+    private void Start()
+    {
+        StartCoroutine(DelayedAddListener());
     }
 
     private void Update()
@@ -43,6 +48,13 @@ public class ButtonAudioController : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerExit(PointerEventData eventData)
     {
+    }
+
+    private IEnumerator DelayedAddListener()
+    {
+        yield return new WaitForSeconds(5f);
+
+        _button.onClick.AddListener(ButtonClick);
     }
 
     private void OnGamepadSelect()

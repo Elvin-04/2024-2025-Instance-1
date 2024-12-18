@@ -1,8 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using Grid;
 using Managers.Audio;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -147,7 +147,6 @@ namespace Player
             if (!_dead)
                 foreach (IInteractable interactable in _interactablesUnder.ToList())
                     interactable?.Interact();
-
         }
 
         private void GetInteractableFrontOfMe<T>(Vector3 dir) where T : IInteractable
@@ -232,7 +231,6 @@ namespace Player
             SetAnimation((int)currentDirection);
 
             _reachedTargetCell = false;
-            EventManager.instance.onPlaySfx?.Invoke(SoundsName.SandMovementPlayer);
 
             EventManager.instance.onPlayerMoved?.Invoke(_transform.position);
             Vector3 position = _gridManager.GetCellPos(nextIndex);
@@ -242,6 +240,7 @@ namespace Player
             {
                 CheckInteraction<IInteractableCallable>(_moveDirection);
                 EventManager.instance.onPlayerFinishedMoving?.Invoke(_transform.position);
+                EventManager.instance.onPlaySfx?.Invoke(SoundsName.SandMovementPlayer);
 
                 _reachedTargetCell = true;
                 _holdTime = _movementHoldTime;

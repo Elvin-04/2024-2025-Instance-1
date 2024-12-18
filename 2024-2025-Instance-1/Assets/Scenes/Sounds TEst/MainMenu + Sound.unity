@@ -2108,7 +2108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mouseOver: 15
-  _mouseExit: 16
   _mouseClick: 2
 --- !u!1001 &563565502
 PrefabInstance:
@@ -3445,7 +3444,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mouseOver: 15
-  _mouseExit: 16
   _mouseClick: 2
 --- !u!1 &984013441
 GameObject:
@@ -3828,6 +3826,7 @@ MonoBehaviour:
   _mainMenuFirstBtn: {fileID: 538149951}
   _optionFirstBtn: {fileID: 1570884161}
   _levelSelectionFirstBtn: {fileID: 829975006}
+  _musicName: 18
 --- !u!1 &1031567851
 GameObject:
   m_ObjectHideFlags: 0
@@ -6882,7 +6881,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mouseOver: 15
-  _mouseExit: 16
   _mouseClick: 2
 --- !u!1001 &1912368156
 PrefabInstance:

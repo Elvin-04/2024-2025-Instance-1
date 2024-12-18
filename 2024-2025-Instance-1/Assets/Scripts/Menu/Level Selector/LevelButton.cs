@@ -1,3 +1,4 @@
+using Managers.Audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -9,11 +10,11 @@ namespace Menu.Level_Selector
     public class LevelButton : MonoBehaviour
     {
         [SerializeField] private LevelInfo _level;
-
-        private Button _btn;
         [SerializeField] private TMP_Text _btnText;
         [SerializeField] private GameObject _starPrefab;
         [SerializeField] private GameObject _starsContainer;
+
+        private Button _btn;
 
         private void Start()
         {
@@ -25,22 +26,19 @@ namespace Menu.Level_Selector
             _btnText.text = _level.levelName;
 
             if (_btn.interactable = _level.IsUnlocked())
-            {
                 if (LevelInfo.completedLevels.TryGetValue(_level.levelScene, out int stars))
-                {
                     for (int i = 0; i < stars; i++)
-                    {   
+                    {
                         GameObject starObject = Instantiate(_starPrefab);
                         starObject.SetActive(true);
                         starObject.transform.SetParent(_starsContainer.transform, false);
                     }
-                }
-            }
         }
 
         public void LoadLevel()
         {
             LevelSelector.instance.StartLevel(_level);
+            EventManager.instance.onPlayMusic.Invoke(SoundsName.MusicInGame);
         }
     }
 }

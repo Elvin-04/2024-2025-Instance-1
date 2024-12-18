@@ -79,7 +79,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicParent: {fileID: 185813311497636679}
   _prefabMusicLink: {fileID: 927932528693020260, guid: ef41d9c50a80d5141a9de115d7e720ef, type: 3}
-  _musicEntries: []
+  _musicEntries:
+  - key: 18
+    clips:
+    - {fileID: 8300000, guid: f4ba13ee435aa4b4abcb88d5428dcfe0, type: 3}
+  - key: 19
+    clips:
+    - {fileID: 8300000, guid: de1cba8c0bcbad841922ae96323e3264, type: 3}
   _sfxParent: {fileID: 8068355077259895226}
   _prefabSfxLink: {fileID: 6000888519599686910, guid: bd5e07ad6ea175e48a3c38e7ebf029a0, type: 3}
   _sfxEntries:
@@ -117,6 +123,9 @@ MonoBehaviour:
   - key: 16
     clips:
     - {fileID: 8300000, guid: 1458835a130541042af4a510cb5c5d4b, type: 3}
+  - key: 18
+    clips:
+    - {fileID: 8300000, guid: 775f0c9f87a1a1243acd8ab70dd6291d, type: 3}
 --- !u!1 &8900674179908919303
 GameObject:
   m_ObjectHideFlags: 0

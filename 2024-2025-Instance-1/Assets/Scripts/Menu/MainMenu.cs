@@ -1,13 +1,20 @@
+using Managers.Audio;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Menu
 {
     public class MainMenu : MonoBehaviour
     {
         [SerializeField] private GameObject _mainMenuFirstBtn, _optionFirstBtn, _levelSelectionFirstBtn;
+        [SerializeField] private SoundsName _musicName;
+
+        private void Start()
+        {
+            EventManager.instance.onPlayMusic?.Invoke(_musicName);
+        }
+
         public void Play()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
