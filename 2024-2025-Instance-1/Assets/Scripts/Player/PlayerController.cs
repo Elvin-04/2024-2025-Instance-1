@@ -191,6 +191,7 @@ namespace Player
         private void Move()
         {
             //_moveDirection = direction;
+            Vector2 lastMove = moveDirection;
             Vector2Int nextIndex = _gridManager.GetNextIndex(_transform.position, _moveDirection);
             Cell nextCell = _gridManager.GetCell(nextIndex);
 
@@ -240,7 +241,7 @@ namespace Player
                 position,
                 _gridManager.GetGlobalMoveTime()).SetEase(Ease.Linear).OnComplete(() =>
             {
-                CheckInteraction<IInteractableCallable>(_moveDirection);
+                CheckInteraction<IInteractableCallable>(lastMove);
                 EventManager.instance.onPlayerFinishedMoving?.Invoke(_transform.position);
 
                 _reachedTargetCell = true;
