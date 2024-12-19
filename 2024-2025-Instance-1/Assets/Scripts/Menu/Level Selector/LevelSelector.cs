@@ -32,6 +32,7 @@ namespace Menu.Level_Selector
         private void Awake()
         {
             _save = new Save();
+            _save.SaveToJson(new SaveObject(0, 0));
             Debug.Log(_save);
 
             SetLevels();
@@ -39,7 +40,7 @@ namespace Menu.Level_Selector
 
         private void Start()
         {
-            _save.SaveToJson(new SaveObject(0, 0));
+
         }
         private void SetStar(int stars)
         {
