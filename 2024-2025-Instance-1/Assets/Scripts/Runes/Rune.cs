@@ -1,5 +1,6 @@
-using System;
 using Grid;
+using Managers.Audio;
+using System;
 using UnityEngine;
 
 namespace Runes
@@ -17,20 +18,29 @@ namespace Runes
             set => _canPickUp = value;
         }
 
+        public virtual string showName => "Rune";
+
         public void Interact()
         {
             onTake?.Invoke();
-            EventManager.instance.canInteract.Invoke(false);
+            EventManager.instance.canInteract.Invoke(false, "");
             EventManager.instance.addRuneToInventory.Invoke(this);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.Collectible);
         }
 
         public void StopInteract()
         {
         }
 
+        public virtual void PlayAnimation(Animator animatorAura, Animator animatorZone)
+        {
+            animatorAura.Play("None");
+            animatorZone.Play("None");
+        }
+
         public abstract void ApplyEffect(Vector3 position, GridManager gridManager);
 
-        public void DropRune()
+        public virtual void DropRune()
         {
             onDrop?.Invoke();
         }

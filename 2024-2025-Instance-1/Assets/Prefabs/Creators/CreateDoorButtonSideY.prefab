@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 353841912864105485}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.02, y: -0.03, z: 0.01077715}
+  m_LocalPosition: {x: 1.99, y: -6.1, z: 0.01077715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1861601604600376050}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.97, y: 2.06, z: 0.01077715}
+  m_LocalPosition: {x: 2.01, y: -4.02, z: 0.01077715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72,6 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6072595811584577028}
   - component: {fileID: 5191951653006571299}
+  - component: {fileID: 5003245569739265971}
   m_Layer: 0
   m_Name: CreateDoorButtonSideY
   m_TagString: Untagged
@@ -111,8 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellToSpawn: {fileID: 11400000, guid: 817c9fa0d1240a447a70a02018f26ff0, type: 2}
   _gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  _door: {fileID: 11400000, guid: 9b9d0d63e1399ec48b51b0a5e2ed11fe, type: 2}
-  _pillar: {fileID: 11400000, guid: 6afbdb050d4a68e43874571fb2586bff, type: 2}
+  _gridManager: {fileID: 0}
   _doorTransforms:
   - {fileID: 1080367878510791621}
   _pillars:
@@ -120,7 +120,26 @@ MonoBehaviour:
     side: 1
   - transform: {fileID: 6908411269916964331}
     side: 0
-  _gridManager: {fileID: 0}
+--- !u!114 &5003245569739265971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421966097212900045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8906f833bb2f804494f6c8f894f81f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _platePress: {fileID: 11400000, guid: 8a53f206bb8445949845058d834d9fa7, type: 2}
+  _plateRelease: {fileID: 11400000, guid: 817c9fa0d1240a447a70a02018f26ff0, type: 2}
+  _doorOpen: {fileID: 11400000, guid: af5f64e5816715e41bdb76c4dab6ee3b, type: 2}
+  _doorClose: {fileID: 11400000, guid: 5c25a4752ba478f4aa001a6d12ba07bd, type: 2}
+  _wallCloseToDoorOpenedRight: {fileID: 11400000, guid: 6f1884a44a195c14e8862f46e4e0410b, type: 2}
+  _wallCloseToDoorClosedRight: {fileID: 11400000, guid: 014aacf06ad687c47b713f4e4f4066f0, type: 2}
+  _wallCloseToDoorOpenedLeft: {fileID: 11400000, guid: 6afbdb050d4a68e43874571fb2586bff, type: 2}
+  _wallCloseToDoorClosedLeft: {fileID: 11400000, guid: 5becb1c2696f4574c911b7e53f35fecd, type: 2}
 --- !u!1 &8364790204833203904
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +165,7 @@ Transform:
   m_GameObject: {fileID: 8364790204833203904}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.06, y: 1.01, z: 0.01077715}
+  m_LocalPosition: {x: 2, y: -5.15, z: 0.01077715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

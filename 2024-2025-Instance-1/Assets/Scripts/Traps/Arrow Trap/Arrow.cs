@@ -1,7 +1,8 @@
-using System.Linq;
 using DG.Tweening;
 using Grid;
+using Managers.Audio;
 using Player;
+using System.Linq;
 using UnityEngine;
 
 namespace Traps.Arrow_Trap
@@ -10,9 +11,13 @@ namespace Traps.Arrow_Trap
     {
         public PlayerDirection directionEnum;
         public Vector2 direction;
+        private GridManager _gridManager;
+
+        private bool _movedOnce;
+
+        private Tween _moveTween;
 
         private Transform _transform;
-        private GridManager _gridManager;
 
         private void Awake()
         {
@@ -28,7 +33,8 @@ namespace Traps.Arrow_Trap
 
         public void Interact()
         {
-            EventManager.instance.onDeath?.Invoke();
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.DeathByArrow);
+            EventManager.instance.onDeath?.Invoke(true);
         }
 
         public void StopInteract()
@@ -44,7 +50,13 @@ namespace Traps.Arrow_Trap
 
         public void SetDirection(PlayerDirection directionToSet)
         {
-            transform.rotation = Quaternion.Euler(0, 0, (int)(directionToSet + 1) * 90);
+            switch (directionToSet)
+            {
+                case PlayerDirection.Left: transform.rotation = Quaternion.Euler(0, 0, 180); break;
+                case PlayerDirection.Up: transform.rotation = Quaternion.Euler(0, 0, 90); break;
+                case PlayerDirection.Down: transform.rotation = Quaternion.Euler(0, 0, -90); break;
+                case PlayerDirection.Right: transform.rotation = Quaternion.Euler(0, 0, 0); break;
+            }
 
             directionEnum = directionToSet;
         }
@@ -64,19 +76,25 @@ namespace Traps.Arrow_Trap
 
             Vector2Int nextIndex = _gridManager.GetNextIndex(cellIndex, direction);
 
-            if (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any())
+            if (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(nextIndex)).OfType<ICollisionObject>().Any() ||
+                (_gridManager.GetObjectsOnCell(_gridManager.GetCellPos(cellIndex)).OfType<ICollisionObject>().Any() &&
+                 _movedOnce))
             {
                 EventManager.instance.updateClock.RemoveListener(UpdateClock);
+                _moveTween?.Kill();
                 Destroy(gameObject);
                 _gridManager.RemoveObjectOnCell(cellIndex, this);
                 return;
             }
 
-            _transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime()).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                _gridManager.AddObjectOnCell(nextIndex, this);
-                _gridManager.RemoveObjectOnCell(cellIndex, this);
-            });
+            _moveTween = transform.DOMove(_gridManager.GetCellPos(nextIndex), _gridManager.GetGlobalMoveTime())
+                .SetEase(Ease.Linear)
+                .OnComplete(() =>
+                {
+                    _gridManager.AddObjectOnCell(nextIndex, this);
+                    _gridManager.RemoveObjectOnCell(cellIndex, this);
+                });
+            _movedOnce = true;
         }
     }
 }

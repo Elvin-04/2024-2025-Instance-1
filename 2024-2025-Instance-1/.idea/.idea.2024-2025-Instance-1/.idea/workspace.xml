@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c5dae3c8-57b4-4f13-9a51-cbff5b87e13f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2024-2025-Instance-1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024-2025-Instance-1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runes/Rune.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runes/Rune.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Traps/Arrow Trap/Arrow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Traps/Arrow Trap/Arrow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/StarAnimationManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/StarAnimationManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,16 +32,21 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/28/ed17cacb/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/d4/b42380f8/UnityEvent`1.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/928569c4fa49483180195a15dfaf4a81c400/5c/7a797ed9/Tile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/928569c4fa49483180195a15dfaf4a81c400/6c/bf542701/TileBase.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/928569c4fa49483180195a15dfaf4a81c400/c5/a290d76c/Tilemap.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a4a1bf6bce644bfd8d78641f826f71504c00/76/6dc69708/Grid.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b6a91db3f596460eaf3750fb112fbc888600/0b/dfdb7725/GridPalette.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/b3/b6340dfb/Mathf.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/55/8b89858c/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Audio/ButtonScript/AudioButtonScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/OneDrive - La Horde/B2/Quetes/Q4_Instance/2024-2025-Instance-1/2024-2025-Instance-1/Assets/Scripts/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/OneDrive - La Horde/B2/Quetes/Q4_Instance/2024-2025-Instance-1/2024-2025-Instance-1/Assets/Scripts/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/OneDrive - La Horde/B2/Quetes/Q4_Instance/2024-2025-Instance-1/2024-2025-Instance-1/Assets/Scripts/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/OneDrive - La Horde/B2/Quetes/Q4_Instance/2024-2025-Instance-1/2024-2025-Instance-1/Assets/Scripts/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/OneDrive - La Horde/B2/Quetes/Q4_Instance/2024-2025-Instance-1/2024-2025-Instance-1/Assets/Scripts/Traps/Poison/PoisonTrap.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/OneDrive - La Horde/B2/Quetes/Q4_Instance/2024-2025-Instance-1/2024-2025-Instance-1/Assets/Scripts/Traps/Poison/PoisonTrap.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap.extras/Runtime/Tiles/AnimatedTile/AnimatedTile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap/Editor/TileUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui/Editor/UGUI/UI/GraphicEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="SWEA" />
   </component>
@@ -59,21 +63,23 @@
     "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "XThreadsFramesViewSplitterKey": "0.5011442",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "fix-pressFText",
+    "git-widget-placeholder": "fix-AudioLevel__2",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "rider.code.cleanup.on.save": "true",
-    "settings.editor.selected.configurable": "actions.on.save",
+    "rider.code.cleanup.on.save.profile": "Dodo",
+    "settings.editor.selected.configurable": "CodeLensConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$USER_HOME$/Desktop/Builds/VBla\2024-2025-Instance-1.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../Build/TestMVP\2024-2025-Instance-1.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Dodo\Desktop\Builds\VBla" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -81,7 +87,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.29f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Unity\6000.0.29f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\Dodo\Documents\GitHub\2024-2025-Instance-1\2024-2025-Instance-1 -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Dodo\Documents\GitHub\2024-2025-Instance-1\2024-2025-Instance-1" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -89,7 +95,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.29f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Unity\6000.0.29f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\Dodo\Documents\GitHub\2024-2025-Instance-1\2024-2025-Instance-1 -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Dodo\Documents\GitHub\2024-2025-Instance-1\2024-2025-Instance-1" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -139,12 +145,21 @@
       <workItem from="1733483053563" duration="7996000" />
       <workItem from="1733514403710" duration="11325000" />
       <workItem from="1733529154782" duration="4373000" />
+      <workItem from="1733912746986" duration="585000" />
+      <workItem from="1733913725089" duration="1191000" />
+      <workItem from="1734108382619" duration="1888000" />
+      <workItem from="1734338118760" duration="3353000" />
+      <workItem from="1734344377688" duration="2744000" />
+      <workItem from="1734347163521" duration="2247000" />
+      <workItem from="1734352256364" duration="4790000" />
+      <workItem from="1734439285995" duration="2097000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
     <option name="hasUnityReference" value="true" />
@@ -154,5 +169,9 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

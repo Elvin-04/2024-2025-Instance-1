@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,6 +13,12 @@ namespace Grid
         [field: SerializeField] public Tilemap tilemap { get; private set; }
         [SerializeField] private float _globalMoveTime;
         private readonly Dictionary<(int, int), CellContainer> _cellContainers = new();
+        private int _countX;
+        private int _countY;
+
+        public Action<(int, int), CellObjectBase> onGameObjectInstanced;
+
+        public Vector2Int size => new(_countX, _countY);
 
         private void Awake()
         {
@@ -23,43 +30,39 @@ namespace Grid
             tilemap.gameObject.SetActive(false);
             tilemap = Instantiate(tilemap, tilemap.transform.parent);
             tilemap.gameObject.SetActive(true);
-
-            int indexX = 0;
-            int indexY = 0;
-
-            for (int x = tilemap.origin.x; x < tilemap.origin.x + tilemap.size.x; x++)
+            for (var x = tilemap.origin.x; x < tilemap.origin.x + tilemap.size.x; x++)
             {
-                for (int y = tilemap.origin.y; y < tilemap.origin.y + tilemap.size.y; y++)
+                _countY = 0;
+                for (var y = tilemap.origin.y; y < tilemap.origin.y + tilemap.size.y; y++)
                 {
-                    Vector3Int pos = Vector3Int.zero;
+                    var pos = Vector3Int.zero;
                     pos.Set(x, y, 0);
-                    Cell cell = tilemap.GetTile<Cell>(pos);
+                    var cell = tilemap.GetTile<Cell>(pos);
 
                     if (cell == null)
                     {
-                        indexY++;
+                        _countY++;
                         continue;
                     }
 
-                    Vector3 cellPos = tilemap.GetCellCenterWorld(pos);
+                    var cellPos = tilemap.GetCellCenterWorld(pos);
 
                     //Debug
                     //CreateCellAt(cellPos).name = "x : " + indexX + " y : " + indexY;
 
-                    _cellContainers[(indexX, indexY)] = new CellContainer(cell, cellPos);
+                    _cellContainers[(_countX, _countY)] = new CellContainer(cell, cellPos);
                     if (cell.getPrefab)
                     {
-                        GameObject goInstance = Instantiate(cell.getPrefab, pos, Quaternion.identity,
+                        var goInstance = Instantiate(cell.getPrefab, cellPos, Quaternion.identity,
                             tilemap.transform);
-                        cell.SetInstancedObject(goInstance);
-                        _cellContainers[(indexX, indexY)].AddObject(goInstance.GetComponent<CellObjectBase>());
+                        SetInstancedObject((_countX, _countY), goInstance.GetComponent<CellObjectBase>());
+                        _cellContainers[(_countX, _countY)].AddObject(goInstance.GetComponent<CellObjectBase>());
                     }
 
-                    indexY++;
+                    _countY++;
                 }
 
-                indexX++;
-                indexY = 0;
+                _countX++;
             }
         }
 
@@ -70,6 +73,20 @@ namespace Grid
             EventManager.instance.onResetCell?.AddListener(ResetCell);
             EventManager.instance.onRemoveObjectOnCell.AddListener(OnRemoveObjectOnCell);
             EventManager.instance.stopInteract.AddListener(OnStopInteract);
+        }
+
+        private void SetInstancedObject((int, int) pos, CellObjectBase instancedObjectToSet)
+        {
+            //
+            //("invoke");
+            _cellContainers[(pos.Item1, pos.Item2)]
+                .SetInstancedObject(instancedObjectToSet.GetComponent<CellObjectBase>());
+            onGameObjectInstanced?.Invoke(pos, instancedObjectToSet);
+        }
+
+        public bool IsCellGround(Cell cell)
+        {
+            return cell == _groundCell;
         }
 
         public float GetGlobalMoveTime()
@@ -84,7 +101,7 @@ namespace Grid
 
         private void OnStopInteract(Vector3 pos)
         {
-            List<CellObjectBase> objectsOnCell = GetObjectsOnCell(pos);
+            var objectsOnCell = GetObjectsOnCell(pos);
             if (!objectsOnCell.OfType<IWeight>().Any())
                 objectsOnCell.OfType<IInteractable>().ToList()
                     .ForEach(objectOnCell => objectOnCell.StopInteract());
@@ -104,8 +121,8 @@ namespace Grid
 
         public Vector2Int GetCellIndex(Vector3 position)
         {
-            for (int x = 0; x < tilemap.size.x; x++)
-            for (int y = 0; y < tilemap.size.y; y++)
+            for (var x = 0; x < tilemap.size.x; x++)
+            for (var y = 0; y < tilemap.size.y; y++)
                 if (_cellContainers.ContainsKey((x, y)) &&
                     tilemap.WorldToCell(_cellContainers[(x, y)].cellPos) == tilemap.WorldToCell(position))
                     return new Vector2Int(x, y);
@@ -113,16 +130,23 @@ namespace Grid
             return Vector2Int.zero;
         }
 
+        #region GetCellContainer
+
+        public CellContainer GetCellContainer((int, int) indexes)
+        {
+            return _cellContainers[indexes];
+        }
+
+        #endregion
+
         #region GetNextIndex
 
         public Vector2Int GetNextIndex((int, int) indexes, Vector2 direction)
         {
-            int xMoveDir = direction.x > 0 ? 1 : direction.x < 0 ? -1 : 0;
-            int yMoveDir = direction.y > 0 ? 1 : direction.y < 0 ? -1 : 0;
-            
-            Debug.Log(xMoveDir + " " + yMoveDir);
+            var xMoveDir = direction.x > 0 ? 1 : direction.x < 0 ? -1 : 0;
+            var yMoveDir = direction.y > 0 ? 1 : direction.y < 0 ? -1 : 0;
 
-            (int, int) nextIndex = (indexes.Item1 + xMoveDir, indexes.Item2 + yMoveDir);
+            var nextIndex = (indexes.Item1 + xMoveDir, indexes.Item2 + yMoveDir);
             Vector2Int nextIndexVector = new(nextIndex.Item1, nextIndex.Item2);
             return nextIndexVector;
         }
@@ -149,6 +173,7 @@ namespace Grid
         public void RemoveObjectOnCell((int, int) indexes, CellObjectBase cellObject)
         {
             _cellContainers[indexes].RemoveObject(cellObject);
+            EventManager.instance.onCellChanged?.Invoke(indexes);
         }
 
         //Overload
@@ -175,7 +200,11 @@ namespace Grid
 
         public void AddObjectOnCell((int, int) indexes, CellObjectBase cellObject)
         {
-            _cellContainers[indexes].AddObject(cellObject);
+            if (!_cellContainers[indexes].Contains(cellObject))
+            {
+                _cellContainers[indexes].AddObject(cellObject);
+                EventManager.instance.onCellChanged?.Invoke(indexes);
+            }
         }
 
         public void AddObjectOnCell(int x, int y, CellObjectBase cellObject)
@@ -199,7 +228,7 @@ namespace Grid
 
         public List<CellObjectBase> GetObjectsOnCell((int, int) indexes)
         {
-            return _cellContainers[indexes].objectsOnCell;
+            return _cellContainers.TryGetValue(indexes, out var container) ? container.objectsOnCell : null;
         }
 
         public List<CellObjectBase> GetObjectsOnCell(int x, int y)
@@ -214,7 +243,7 @@ namespace Grid
 
         public List<CellObjectBase> GetObjectsOnCell(Vector3 position)
         {
-            Vector2Int indexes = GetCellIndex(position);
+            var indexes = GetCellIndex(position);
             return _cellContainers[(indexes.x, indexes.y)].objectsOnCell;
         }
 
@@ -225,7 +254,7 @@ namespace Grid
         public bool GetCellObjectsByType<T>((int, int) indexes, out List<T> cellObjects)
         {
             cellObjects = null;
-            if (!_cellContainers.TryGetValue(indexes, out CellContainer cellInfo)) return false;
+            if (!_cellContainers.TryGetValue(indexes, out var cellInfo)) return false;
             cellObjects = _cellContainers[indexes].objectsOnCell.OfType<T>().ToList();
             return cellObjects.Any();
         }
@@ -251,9 +280,9 @@ namespace Grid
 
         public Cell GetCell((int, int) indexes)
         {
-            if (!_cellContainers.TryGetValue(indexes, out CellContainer cellInfo)) return null;
+            if (!_cellContainers.TryGetValue(indexes, out var cellInfo)) return null;
 
-            Cell cell = cellInfo.cell;
+            var cell = cellInfo.cell;
             return cell;
         }
 
@@ -272,7 +301,7 @@ namespace Grid
         //Overload
         public Cell GetCell(Vector3 position)
         {
-            Vector2Int indexes = GetCellIndex(position);
+            var indexes = GetCellIndex(position);
             return GetCell(indexes);
         }
 
@@ -282,8 +311,8 @@ namespace Grid
 
         public Vector3 GetCellPos((int, int) indexes)
         {
-            if (!_cellContainers.TryGetValue(indexes, out CellContainer cellInfo)) return Vector3.zero;
-            Vector3 cellPos = cellInfo.cellPos;
+            if (!_cellContainers.TryGetValue(indexes, out var cellInfo)) return Vector3.zero;
+            var cellPos = cellInfo.cellPos;
             return cellPos;
         }
 
@@ -311,14 +340,37 @@ namespace Grid
 
         public void ChangeCell((int, int) indexes, Cell toCell)
         {
-            Vector3Int pos = tilemap.WorldToCell(_cellContainers[indexes].cellPos);
-            tilemap.SetTile(pos, toCell);
-            Destroy(_cellContainers[indexes].cell.instancedObject);
-            _cellContainers[indexes] = new CellContainer(toCell, _cellContainers[indexes].cellPos);
-            if (toCell.getPrefab == null) return;
+            CellContainer newCellContainer = new(toCell, GetCellPos(indexes));
+            var currentCellContainer = _cellContainers[indexes];
 
-            GameObject goInstance = Instantiate(toCell.getPrefab, pos, Quaternion.identity, tilemap.transform);
-            _cellContainers[indexes].AddObject(goInstance.GetComponent<CellObjectBase>());
+            var pos = tilemap.WorldToCell(currentCellContainer.cellPos);
+            tilemap.SetTile(pos, toCell);
+
+            if (currentCellContainer.instancedObject != null)
+            {
+                var instancedObjectRemoved =
+                    currentCellContainer.RemoveObject(currentCellContainer.instancedObject);
+                Destroy(instancedObjectRemoved.gameObject);
+            }
+
+            newCellContainer.AddObjects(currentCellContainer.objectsOnCell);
+
+            if (toCell.getPrefab != null)
+            {
+                var instancedCell = Instantiate(toCell.getPrefab, GetCellPos(indexes), Quaternion.identity,
+                    tilemap.transform);
+                var instancedCellObject = instancedCell.GetComponent<CellObjectBase>();
+                _cellContainers[indexes] = newCellContainer;
+                SetInstancedObject(indexes, instancedCellObject);
+                newCellContainer.AddObject(instancedCellObject);
+            }
+            else
+            {
+                _cellContainers[indexes] = newCellContainer;
+            }
+
+            _cellContainers[indexes] = newCellContainer;
+            EventManager.instance.onCellChanged?.Invoke(indexes);
         }
 
         //Overload
@@ -345,7 +397,6 @@ namespace Grid
 
         public void ResetCell((int, int) indexes)
         {
-            Debug.Log(indexes);
             ChangeCell(indexes, _groundCell);
         }
 

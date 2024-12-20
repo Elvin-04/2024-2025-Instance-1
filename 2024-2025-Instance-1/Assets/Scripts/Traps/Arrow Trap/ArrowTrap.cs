@@ -33,6 +33,9 @@ namespace Traps.Arrow_Trap
             if (++_currentTick != _fireEveryTicks) return;
             _currentTick = 0;
             ShootArrow();
+
+            //Debug.Log($"EventManager.instance: {EventManager.instance}");
+            //Debug.Log($"transform: {transform}");
         }
 
         private void ShootArrow()

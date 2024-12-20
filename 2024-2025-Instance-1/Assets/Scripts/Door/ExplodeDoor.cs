@@ -1,4 +1,5 @@
 using Grid;
+using Managers.Audio;
 
 namespace Door
 {
@@ -7,6 +8,7 @@ namespace Door
         public void Explode()
         {
             EventManager.instance.onResetCell?.Invoke(transform.position);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.BreakDoor);
         }
     }
 }

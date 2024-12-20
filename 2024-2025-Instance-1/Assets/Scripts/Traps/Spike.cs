@@ -1,4 +1,5 @@
 using Grid;
+using Managers.Audio;
 
 namespace Traps
 {
@@ -6,7 +7,8 @@ namespace Traps
     {
         public void Interact()
         {
-            EventManager.instance.onDeath?.Invoke();
+            EventManager.instance.onDeath?.Invoke(true);
+            EventManager.instance.onPlaySfx?.Invoke(SoundsName.ActivateSpike);
         }
 
         public void StopInteract()

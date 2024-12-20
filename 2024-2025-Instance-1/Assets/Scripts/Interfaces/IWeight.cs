@@ -4,4 +4,10 @@ namespace Grid
     {
         
     }
+
+    public interface IWeightInteractable
+    {
+        public void WeightInteract();
+        public void StopWeightInteract();
+    }
 }
